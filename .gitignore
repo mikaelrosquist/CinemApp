@@ -4,8 +4,6 @@
 
 *.xcuserstate
 
-*.xcodeproj
-
 *.xcodeproj/
 
 DerivedData/
