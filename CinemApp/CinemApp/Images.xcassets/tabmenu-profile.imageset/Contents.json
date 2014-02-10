@@ -2,13 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "film_reel-32.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "film_reel-64.png"
+      "filename" : "tabmenu-profile.png"
     }
   ],
   "info" : {

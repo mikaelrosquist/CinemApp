@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "speech_bubble-32.png"
+      "filename" : "tab-bar_320x49.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "speech_bubble-64.png"
+      "filename" : "tab-bar_640x98.png"
     }
   ],
   "info" : {
