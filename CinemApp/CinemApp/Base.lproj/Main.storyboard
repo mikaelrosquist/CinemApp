@@ -23,26 +23,53 @@
             </objects>
             <point key="canvasLocation" x="653" y="-214"/>
         </scene>
-        <!--View Controller - Explore-->
-        <scene sceneID="X5W-iB-nAM">
+        <!--Navigation Controller - Explore-->
+        <scene sceneID="RxI-iY-qtB">
             <objects>
-                <viewController id="8cR-tM-IfC" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ked-Xq-GD3"/>
-                        <viewControllerLayoutGuide type="bottom" id="Ddj-Xs-Euu"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Z9t-d4-k4L">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Explore" image="menu_explore" id="Qwy-gs-kuo">
+                <navigationController definesPresentationContext="YES" id="qfV-DE-6Gb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Explore" image="menu_explore" id="lxM-Dp-bZO">
                         <inset key="imageInsets" minX="4" minY="3" maxX="4" maxY="3"/>
                     </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Myh-Hy-Ieg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6pm-fo-phf">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vFa-Sb-2eR" kind="relationship" relationship="rootViewController" id="eBo-oT-q8v"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yRh-Sv-tQK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="502"/>
+            <point key="canvasLocation" x="653" y="500"/>
+        </scene>
+        <!--View Controller - Explore-->
+        <scene sceneID="Od2-wF-GUe">
+            <objects>
+                <viewController id="vFa-Sb-2eR" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AWt-WO-afm"/>
+                        <viewControllerLayoutGuide type="bottom" id="18s-36-cEA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xng-ew-eM0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uQ7-0s-aXx">
+                                <rect key="frame" x="0.0" y="64" width="320" height="88"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="yes"/>
+                                <scopeButtonTitles>
+                                    <string>Movies</string>
+                                    <string>Users</string>
+                                </scopeButtonTitles>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Explore" id="WNx-Yj-VDN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hzr-K5-6Wb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1100" y="499"/>
         </scene>
         <!--View Controller - Rate-->
         <scene sceneID="9bQ-3K-xeu">
@@ -386,7 +413,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="QG1-IZ-cTc" kind="relationship" relationship="viewControllers" id="OVH-aj-0Np"/>
-                        <segue destination="8cR-tM-IfC" kind="relationship" relationship="viewControllers" id="csc-5P-7ty"/>
+                        <segue destination="qfV-DE-6Gb" kind="relationship" relationship="viewControllers" id="j4J-8h-MNV"/>
                         <segue destination="V5e-xa-nVy" kind="relationship" relationship="viewControllers" id="VNQ-jP-7OE"/>
                         <segue destination="6jA-eb-QN4" kind="relationship" relationship="viewControllers" id="0G9-4H-nye"/>
                         <segue destination="BCJ-QU-Ux2" kind="relationship" relationship="viewControllers" id="lhh-cS-Xtw"/>
