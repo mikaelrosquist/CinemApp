@@ -84,7 +84,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="iWi-mH-fio">
-                                <rect key="frame" x="18" y="288" width="253" height="34"/>
+                                <rect key="frame" x="18" y="288" width="234" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="rateSlider:" destination="V5e-xa-nVy" eventType="valueChanged" id="FJm-qE-o5F"/>
@@ -179,16 +179,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jwK-5U-AjS">
-                                <rect key="frame" x="244" y="329" width="51" height="31"/>
+                                <rect key="frame" x="251" y="329" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="onTintColor" red="0.9705038265" green="0.23126836980000001" blue="0.25233428930000001" alpha="1" colorSpace="calibratedRGB"/>
                             </switch>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="filled-circle35" translatesAutoresizingMaskIntoConstraints="NO" id="9yl-2y-1Bb">
-                                <rect key="frame" x="271" y="287" width="37" height="34"/>
+                                <rect key="frame" x="263" y="287" width="37" height="34"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orM-yg-SbF">
-                                <rect key="frame" x="278" y="293" width="23" height="21"/>
+                                <rect key="frame" x="270" y="293" width="23" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.98703750940000001" blue="0.94755057170000001" alpha="1" colorSpace="calibratedRGB"/>
