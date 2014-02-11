@@ -3,19 +3,31 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
+<<<<<<< HEAD
       "filename" : "AppIcon58.png",
+=======
+      "filename" : "icon_58x58.png",
+>>>>>>> 0de09ecfd98235d7099d0b03475230ffce6d53f8
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
+<<<<<<< HEAD
       "filename" : "AppIcon80.png",
+=======
+      "filename" : "icon_80x80.png",
+>>>>>>> 0de09ecfd98235d7099d0b03475230ffce6d53f8
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
+<<<<<<< HEAD
       "filename" : "AppIcon120.png",
+=======
+      "filename" : "icon_120x120.png",
+>>>>>>> 0de09ecfd98235d7099d0b03475230ffce6d53f8
       "scale" : "2x"
     }
   ],

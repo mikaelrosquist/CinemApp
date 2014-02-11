@@ -85,10 +85,10 @@
 		736A61DC189AA07B00815FBE = {
 			isa = PBXGroup;
 			children = (
+				736A61EE189AA07B00815FBE /* CinemApp */,
 				736A6210189AA07B00815FBE /* CinemAppTests */,
 				736A61E7189AA07B00815FBE /* Frameworks */,
 				736A61E6189AA07B00815FBE /* Products */,
-				736A61EE189AA07B00815FBE /* CinemApp */,
 			);
 			sourceTree = "<group>";
 		};
