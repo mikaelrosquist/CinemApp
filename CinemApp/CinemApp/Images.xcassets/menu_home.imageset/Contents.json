@@ -2,12 +2,13 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "icon_5701 copy.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "tabmenu-profile.png"
+      "filename" : "icon_5701 copy2.png"
     }
   ],
   "info" : {
