@@ -14,8 +14,6 @@
 		736A61F5189AA07B00815FBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 736A61F4189AA07B00815FBE /* main.m */; };
 		736A61F9189AA07B00815FBE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 736A61F8189AA07B00815FBE /* AppDelegate.m */; };
 		736A61FC189AA07B00815FBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 736A61FA189AA07B00815FBE /* Main.storyboard */; };
-		736A61FF189AA07B00815FBE /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 736A61FE189AA07B00815FBE /* FirstViewController.m */; };
-		736A6202189AA07B00815FBE /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 736A6201189AA07B00815FBE /* SecondViewController.m */; };
 		736A6204189AA07B00815FBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 736A6203189AA07B00815FBE /* Images.xcassets */; };
 		736A620B189AA07B00815FBE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736A620A189AA07B00815FBE /* XCTest.framework */; };
 		736A620C189AA07B00815FBE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736A61E8189AA07B00815FBE /* Foundation.framework */; };
@@ -46,10 +44,6 @@
 		736A61F7189AA07B00815FBE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		736A61F8189AA07B00815FBE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		736A61FB189AA07B00815FBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		736A61FD189AA07B00815FBE /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		736A61FE189AA07B00815FBE /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		736A6200189AA07B00815FBE /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		736A6201189AA07B00815FBE /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		736A6203189AA07B00815FBE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		736A6209189AA07B00815FBE /* CinemAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CinemAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		736A620A189AA07B00815FBE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -82,6 +76,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6FE74D9418AA3ABC00ECDCC9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		736A61DC189AA07B00815FBE = {
 			isa = PBXGroup;
 			children = (
@@ -116,10 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				736A61FA189AA07B00815FBE /* Main.storyboard */,
-				736A61FD189AA07B00815FBE /* FirstViewController.h */,
-				736A61FE189AA07B00815FBE /* FirstViewController.m */,
-				736A6200189AA07B00815FBE /* SecondViewController.h */,
-				736A6201189AA07B00815FBE /* SecondViewController.m */,
+				6FE74D9418AA3ABC00ECDCC9 /* Model */,
 				736A6203189AA07B00815FBE /* Images.xcassets */,
 				736A61EF189AA07B00815FBE /* Supporting Files */,
 			);
@@ -256,9 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				736A6202189AA07B00815FBE /* SecondViewController.m in Sources */,
 				736A61F9189AA07B00815FBE /* AppDelegate.m in Sources */,
-				736A61FF189AA07B00815FBE /* FirstViewController.m in Sources */,
 				736A61F5189AA07B00815FBE /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
