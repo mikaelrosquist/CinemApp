@@ -20,6 +20,7 @@
 		736A620D189AA07B00815FBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736A61EC189AA07B00815FBE /* UIKit.framework */; };
 		736A6215189AA07B00815FBE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 736A6213189AA07B00815FBE /* InfoPlist.strings */; };
 		736A6217189AA07B00815FBE /* CinemAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 736A6216189AA07B00815FBE /* CinemAppTests.m */; };
+		737F063918AA876D00FDB290 /* RateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 737F063818AA876D00FDB290 /* RateViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,8 @@
 		736A6212189AA07B00815FBE /* CinemAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CinemAppTests-Info.plist"; sourceTree = "<group>"; };
 		736A6214189AA07B00815FBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		736A6216189AA07B00815FBE /* CinemAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CinemAppTests.m; sourceTree = "<group>"; };
+		737F063718AA876D00FDB290 /* RateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateViewController.h; sourceTree = "<group>"; };
+		737F063818AA876D00FDB290 /* RateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,8 @@
 		736A61EE189AA07B00815FBE /* CinemApp */ = {
 			isa = PBXGroup;
 			children = (
+				737F063718AA876D00FDB290 /* RateViewController.h */,
+				737F063818AA876D00FDB290 /* RateViewController.m */,
 				736A61FA189AA07B00815FBE /* Main.storyboard */,
 				6FE74D9418AA3ABC00ECDCC9 /* Model */,
 				736A6203189AA07B00815FBE /* Images.xcassets */,
@@ -256,6 +261,7 @@
 			files = (
 				736A61F9189AA07B00815FBE /* AppDelegate.m in Sources */,
 				736A61F5189AA07B00815FBE /* main.m in Sources */,
+				737F063918AA876D00FDB290 /* RateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
