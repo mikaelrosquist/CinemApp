@@ -115,8 +115,6 @@
 		736A61EE189AA07B00815FBE /* CinemApp */ = {
 			isa = PBXGroup;
 			children = (
-				736A61F7189AA07B00815FBE /* AppDelegate.h */,
-				736A61F8189AA07B00815FBE /* AppDelegate.m */,
 				736A61FA189AA07B00815FBE /* Main.storyboard */,
 				736A61FD189AA07B00815FBE /* FirstViewController.h */,
 				736A61FE189AA07B00815FBE /* FirstViewController.m */,
@@ -131,6 +129,8 @@
 		736A61EF189AA07B00815FBE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				736A61F7189AA07B00815FBE /* AppDelegate.h */,
+				736A61F8189AA07B00815FBE /* AppDelegate.m */,
 				736A61F0189AA07B00815FBE /* CinemApp-Info.plist */,
 				736A61F1189AA07B00815FBE /* InfoPlist.strings */,
 				736A61F4189AA07B00815FBE /* main.m */,
@@ -203,6 +203,9 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
+					736A61E4189AA07B00815FBE = {
+						DevelopmentTeam = L2AF42U6B2;
+					};
 					736A6208189AA07B00815FBE = {
 						TestTargetID = 736A61E4189AA07B00815FBE;
 					};
@@ -383,10 +386,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CinemApp/CinemApp-Prefix.pch";
 				INFOPLIST_FILE = "CinemApp/CinemApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -396,10 +402,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CinemApp/CinemApp-Prefix.pch";
 				INFOPLIST_FILE = "CinemApp/CinemApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
