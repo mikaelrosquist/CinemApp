@@ -9,10 +9,19 @@
 #import "RateViewController.h"
 
 @interface RateViewController ()
+@property (weak, nonatomic) IBOutlet UISlider *sliderValue;
+@property (weak, nonatomic) IBOutlet UILabel *rateLabel;
 
 @end
 
 @implementation RateViewController
+@synthesize sliderValue;
+
+- (IBAction)rateSlider:(id)sender {
+    UISlider *slider = (UISlider *)sender;
+    NSInteger val = lround(slider.value);
+    self.rateLabel.text = [NSString stringWithFormat:@"%d",val];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,7 +35,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+	
+    self.sliderValue.minimumValue = 0;
+    self.sliderValue.maximumValue = 10;
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,5 +45,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end
