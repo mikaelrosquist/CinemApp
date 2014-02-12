@@ -196,7 +196,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="onTintColor" red="0.9705038265" green="0.23126836980000001" blue="0.25233428930000001" alpha="1" colorSpace="calibratedRGB"/>
                             </switch>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="filled-circle35" translatesAutoresizingMaskIntoConstraints="NO" id="9yl-2y-1Bb">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="rate_score" translatesAutoresizingMaskIntoConstraints="NO" id="9yl-2y-1Bb">
                                 <rect key="frame" x="263" y="295" width="37" height="34"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </imageView>
@@ -605,13 +605,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="filled-circle35" width="35" height="35"/>
         <image name="menu_bg" width="320" height="49"/>
         <image name="menu_explore" width="30" height="30"/>
         <image name="menu_home" width="30" height="30"/>
         <image name="menu_notification" width="30" height="30"/>
         <image name="menu_profile" width="30" height="30"/>
         <image name="menu_rate" width="30" height="30"/>
+        <image name="rate_score" width="30" height="30"/>
     </resources>
     <color key="tintColor" red="1" green="0.28281314600000002" blue="0.29553044719999999" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
