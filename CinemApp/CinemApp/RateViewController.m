@@ -9,6 +9,7 @@
 #import "RateViewController.h"
 
 @interface RateViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *testLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UISlider *sliderValue;
 @property (weak, nonatomic) IBOutlet UILabel *rateLabel;
@@ -24,7 +25,21 @@
     self.rateLabel.text = [NSString stringWithFormat:@"%d",val];
 }
 - (IBAction)segmentAction:(UISegmentedControl *)sender {
-    
+    switch (self.segmentedControl.selectedSegmentIndex)
+    {
+        case 0:
+            self.testLabel.text =@"Information";
+            break;
+        case 1:
+            self.testLabel.text =@"Rate";
+            //self.testLabel
+            break;
+        case 2:
+            self.testLabel.text =@"Activity";
+            break;
+        default: 
+            break; 
+    }
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
