@@ -584,7 +584,7 @@
                 <tabBarController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="8YX-ce-x5E" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" backgroundImage="menu_bg" itemPositioning="fill" id="JQR-rB-NYL">
+                    <tabBar key="tabBar" contentMode="scaleToFill" backgroundImage="menu_bg_2" itemPositioning="fill" id="JQR-rB-NYL">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" red="1" green="0.97727272727272729" blue="0.97727272727272729" alpha="1" colorSpace="calibratedRGB"/>
@@ -605,7 +605,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="menu_bg" width="320" height="49"/>
+        <image name="menu_bg_2" width="320" height="49"/>
         <image name="menu_explore" width="30" height="30"/>
         <image name="menu_home" width="30" height="30"/>
         <image name="menu_notification" width="30" height="30"/>
