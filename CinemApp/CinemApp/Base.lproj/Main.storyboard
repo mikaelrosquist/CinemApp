@@ -109,6 +109,9 @@
                                     <segment title="Rate"/>
                                     <segment title="Activity"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentAction:" destination="V5e-xa-nVy" eventType="valueChanged" id="u89-LQ-gNj"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Show in feed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cF0-5d-lth">
                                 <rect key="frame" x="20" y="334" width="100" height="21"/>
@@ -117,7 +120,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Comment..." translatesAutoresizingMaskIntoConstraints="NO" id="Cep-kY-XDb">
-                                <rect key="frame" x="20" y="363" width="280" height="98"/>
+                                <rect key="frame" x="20" y="368" width="280" height="98"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -206,6 +209,7 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="rateLabel" destination="orM-yg-SbF" id="0ZI-Fx-YY4"/>
+                        <outlet property="segmentedControl" destination="ONm-En-5Lc" id="XCq-Kq-1BB"/>
                         <outlet property="sliderValue" destination="iWi-mH-fio" id="MTF-Dq-G1J"/>
                     </connections>
                 </viewController>

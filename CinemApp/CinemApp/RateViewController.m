@@ -9,6 +9,7 @@
 #import "RateViewController.h"
 
 @interface RateViewController ()
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UISlider *sliderValue;
 @property (weak, nonatomic) IBOutlet UILabel *rateLabel;
 
@@ -21,6 +22,9 @@
     UISlider *slider = (UISlider *)sender;
     NSInteger val = lround(slider.value);
     self.rateLabel.text = [NSString stringWithFormat:@"%d",val];
+}
+- (IBAction)segmentAction:(UISegmentedControl *)sender {
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
