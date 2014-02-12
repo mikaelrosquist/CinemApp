@@ -70,7 +70,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hzr-K5-6Wb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1100" y="499"/>
+            <point key="canvasLocation" x="1179" y="500"/>
         </scene>
         <!--Rate View Controller-->
         <scene sceneID="9bQ-3K-xeu">
@@ -281,7 +281,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zK-hd-VHr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1105" y="2557"/>
+            <point key="canvasLocation" x="1179" y="2557"/>
         </scene>
         <!--Table View Controller - Push notifications-->
         <scene sceneID="yAe-wk-Piv">
@@ -412,7 +412,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JcL-UT-iex" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2001" y="2557"/>
+            <point key="canvasLocation" x="2209" y="2557"/>
         </scene>
         <!--Table View Controller - Settings-->
         <scene sceneID="iwF-0k-BqS">
@@ -571,7 +571,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bse-kj-p6w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1517" y="2557"/>
+            <point key="canvasLocation" x="1699" y="2557"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vex-rW-GRa">
