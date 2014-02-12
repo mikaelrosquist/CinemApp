@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller - Home-->
+        <!--View Controller-->
         <scene sceneID="SPU-hc-p5C">
             <objects>
                 <viewController id="QG1-IZ-cTc" sceneMemberID="viewController">
@@ -17,18 +17,21 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="menu_home" id="jb8-Ux-891"/>
+                    <tabBarItem key="tabBarItem" title="" image="menu_home" id="jb8-Ux-891">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wyw-Fg-seC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="653" y="-214"/>
         </scene>
-        <!--Navigation Controller - Explore-->
+        <!--Navigation Controller-->
         <scene sceneID="RxI-iY-qtB">
             <objects>
                 <navigationController definesPresentationContext="YES" id="qfV-DE-6Gb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Explore" image="menu_explore" id="lxM-Dp-bZO">
-                        <inset key="imageInsets" minX="4" minY="3" maxX="4" maxY="3"/>
+                    <tabBarItem key="tabBarItem" title="" image="menu_explore" id="lxM-Dp-bZO">
+                        <inset key="imageInsets" minX="4" minY="9" maxX="4" maxY="-3"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6pm-fo-phf">
                         <autoresizingMask key="autoresizingMask"/>
@@ -72,7 +75,7 @@
             </objects>
             <point key="canvasLocation" x="1100" y="499"/>
         </scene>
-        <!--Rate View Controller - Rate-->
+        <!--Rate View Controller-->
         <scene sceneID="9bQ-3K-xeu">
             <objects>
                 <viewController id="V5e-xa-nVy" customClass="RateViewController" sceneMemberID="viewController">
@@ -198,7 +201,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Rate" image="menu_rate" id="kjS-wS-sDB"/>
+                    <tabBarItem key="tabBarItem" title="" image="menu_rate" id="kjS-wS-sDB">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="rateLabel" destination="orM-yg-SbF" id="0ZI-Fx-YY4"/>
                         <outlet property="sliderValue" destination="iWi-mH-fio" id="MTF-Dq-G1J"/>
@@ -208,7 +213,7 @@
             </objects>
             <point key="canvasLocation" x="653" y="1203"/>
         </scene>
-        <!--View Controller - Activity-->
+        <!--View Controller-->
         <scene sceneID="uQf-ga-QUB">
             <objects>
                 <viewController id="6jA-eb-QN4" sceneMemberID="viewController">
@@ -221,17 +226,21 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Activity" image="menu_notification" id="jST-6I-21B"/>
+                    <tabBarItem key="tabBarItem" title="" image="menu_notification" id="jST-6I-21B">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PmE-NE-5s9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="653" y="1879"/>
         </scene>
-        <!--Navigation Controller - Profile-->
+        <!--Navigation Controller-->
         <scene sceneID="gyU-BW-311">
             <objects>
                 <navigationController definesPresentationContext="YES" id="BCJ-QU-Ux2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="menu_profile" id="9KV-Qw-PHd"/>
+                    <tabBarItem key="tabBarItem" title="" image="menu_profile" id="9KV-Qw-PHd">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oi0-Yd-PWT">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
