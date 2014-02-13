@@ -26,7 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //[[UITabBar appearance] setTintColor:[UIColor blueColor]];
 	// Do any additional setup after loading the view.
 }
 
