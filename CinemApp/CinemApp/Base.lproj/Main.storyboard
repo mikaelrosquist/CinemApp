@@ -23,16 +23,21 @@
             </objects>
             <point key="canvasLocation" x="1179" y="-214"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Explore-->
         <scene sceneID="RxI-iY-qtB">
             <objects>
-                <navigationController definesPresentationContext="YES" id="qfV-DE-6Gb" sceneMemberID="viewController">
+                <navigationController title="Explore" definesPresentationContext="YES" id="qfV-DE-6Gb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="menu_explore" id="lxM-Dp-bZO">
-                        <inset key="imageInsets" minX="4" minY="9" maxX="4" maxY="-3"/>
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6pm-fo-phf">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="0vk-Dl-ERz">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.28281314600000002" blue="0.29553044719999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </toolbar>
                     <connections>
                         <segue destination="vFa-Sb-2eR" kind="relationship" relationship="rootViewController" id="eBo-oT-q8v"/>
                     </connections>
@@ -240,10 +245,10 @@
             </objects>
             <point key="canvasLocation" x="1179" y="1879"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Profile-->
         <scene sceneID="gyU-BW-311">
             <objects>
-                <navigationController definesPresentationContext="YES" id="BCJ-QU-Ux2" sceneMemberID="viewController">
+                <navigationController title="Profile" definesPresentationContext="YES" id="BCJ-QU-Ux2" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="menu_profile" id="9KV-Qw-PHd">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -576,10 +581,10 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Vex-rW-GRa">
             <objects>
-                <tabBarController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="8YX-ce-x5E" sceneMemberID="viewController">
+                <tabBarController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="8YX-ce-x5E" customClass="tabBarController" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" backgroundImage="menu_bg_2" itemPositioning="fill" id="JQR-rB-NYL">
+                    <tabBar key="tabBar" contentMode="scaleToFill" restorationIdentifier="tabBar" backgroundImage="tab-bar" itemPositioning="fill" id="JQR-rB-NYL">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" red="1" green="0.97727272727272729" blue="0.97727272727272729" alpha="1" colorSpace="calibratedRGB"/>
@@ -587,6 +592,7 @@
                         <color key="selectedImageTintColor" red="1" green="0.28281314600000002" blue="0.29553044719999999" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
+                        <outlet property="tabBar" destination="JQR-rB-NYL" id="ctS-ya-pbE"/>
                         <segue destination="mei-ip-rSz" kind="relationship" relationship="viewControllers" id="OVH-aj-0Np"/>
                         <segue destination="qfV-DE-6Gb" kind="relationship" relationship="viewControllers" id="j4J-8h-MNV"/>
                         <segue destination="V5e-xa-nVy" kind="relationship" relationship="viewControllers" id="VNQ-jP-7OE"/>
@@ -598,10 +604,10 @@
             </objects>
             <point key="canvasLocation" x="-362" y="1157"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Home-->
         <scene sceneID="7Pj-0j-eed">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mei-ip-rSz" sceneMemberID="viewController">
+                <navigationController title="Home" automaticallyAdjustsScrollViewInsets="NO" id="mei-ip-rSz" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="menu_home" id="jb8-Ux-891">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
@@ -620,11 +626,11 @@
             </objects>
             <point key="canvasLocation" x="653" y="-214"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Notifications-->
         <scene sceneID="x8x-Ti-ZUu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EaM-df-rR7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="menu_notification" id="jST-6I-21B">
+                <navigationController title="Notifications" automaticallyAdjustsScrollViewInsets="NO" id="EaM-df-rR7" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="menu_activity" id="jST-6I-21B">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -643,13 +649,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="menu_bg_2" width="320" height="49"/>
+        <image name="menu_activity" width="30" height="30"/>
         <image name="menu_explore" width="30" height="30"/>
         <image name="menu_home" width="30" height="30"/>
-        <image name="menu_notification" width="30" height="30"/>
         <image name="menu_profile" width="30" height="30"/>
         <image name="menu_rate" width="30" height="30"/>
         <image name="rate_score" width="30" height="30"/>
+        <image name="tab-bar" width="320" height="49"/>
     </resources>
     <color key="tintColor" red="1" green="0.28281314600000002" blue="0.29553044719999999" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
