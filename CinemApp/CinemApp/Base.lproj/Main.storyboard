@@ -49,7 +49,6 @@
         <!--View Controller - Explore-->
         <scene sceneID="Od2-wF-GUe">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hzr-K5-6Wb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="vFa-Sb-2eR" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DSa-bH-cUU"/>
@@ -74,6 +73,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Explore" id="WNx-Yj-VDN"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hzr-K5-6Wb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1179" y="500"/>
         </scene>
@@ -269,9 +269,23 @@
                     <view key="view" contentMode="scaleToFill" id="V95-Fa-rAE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1k1-oI-fOm">
+                                <rect key="frame" x="20" y="91" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="5ug-Lm-bmN">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="aCe-Cg-hRo">
+                            <connections>
+                                <action selector="logOut:" destination="sBf-63-ywQ" id="MPP-FD-f9W"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="h57-ed-iR9">
                             <connections>
                                 <segue destination="A0E-LX-9zd" kind="push" id="T8T-Ct-e98"/>
@@ -279,6 +293,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <connections>
+                        <outlet property="profileName" destination="1k1-oI-fOm" id="dku-R0-vdO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zK-hd-VHr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
