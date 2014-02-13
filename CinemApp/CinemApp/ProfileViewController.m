@@ -19,20 +19,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [PFUser logInWithUsernameInBackground:@"admin" password:@"admin"];
+    [PFUser logInWithUsername:@"admin" password:@"admin"];
     
     if ([PFUser currentUser]) {
         self.profileName.text = [NSString stringWithFormat:@"%@", [[PFUser currentUser] username]];
     } else {
-        self.profileName.text = NSLocalizedString(@"Not logged in", nil);
+        self.profileName.text = @"Not logged in";
     }
 
     
 }
 - (IBAction)logOut:(id)sender {
     [PFUser logOut];
-    self.profileName.text = NSLocalizedString(@"Not logged in", nil);
-
+    [profileName setNeedsDisplay];
 }
 
 - (void)didReceiveMemoryWarning
