@@ -7,18 +7,32 @@
 //
 
 #import "ProfileViewController.h"
+#import <Parse/Parse.h>
 
 @interface ProfileViewController ()
 
 @end
 
 @implementation ProfileViewController
+@synthesize profileName;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.scrollView setScrollEnabled: YES];
-    [self.scrollView setContentSize:CGSizeMake(320, 960)];
+    [PFUser logInWithUsernameInBackground:@"admin" password:@"admin"];
+    
+    if ([PFUser currentUser]) {
+        self.profileName.text = [NSString stringWithFormat:@"%@", [[PFUser currentUser] username]];
+    } else {
+        self.profileName.text = NSLocalizedString(@"Not logged in", nil);
+    }
+
+    
+}
+- (IBAction)logOut:(id)sender {
+    [PFUser logOut];
+    self.profileName.text = NSLocalizedString(@"Not logged in", nil);
+
 }
 
 - (void)didReceiveMemoryWarning
