@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller - CinemApp-->
+        <!--Home View Controller - CinemApp-->
         <scene sceneID="SPU-hc-p5C">
             <objects>
-                <viewController id="QG1-IZ-cTc" sceneMemberID="viewController">
+                <viewController id="QG1-IZ-cTc" customClass="HomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QTJ-FZ-pO4"/>
                         <viewControllerLayoutGuide type="bottom" id="EbV-xl-rKd"/>
@@ -49,6 +49,7 @@
         <!--View Controller - Explore-->
         <scene sceneID="Od2-wF-GUe">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hzr-K5-6Wb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="vFa-Sb-2eR" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AWt-WO-afm"/>
@@ -73,7 +74,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Explore" id="WNx-Yj-VDN"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hzr-K5-6Wb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1179" y="500"/>
         </scene>
@@ -210,7 +210,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.9647059440612793" green="0.95294123888015747" blue="0.93725496530532837" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="menu_rate" id="kjS-wS-sDB">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-5"/>
