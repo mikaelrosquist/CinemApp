@@ -241,7 +241,9 @@
                     <tabBarItem key="tabBarItem" title="" image="menu_profile" id="9KV-Qw-PHd">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oi0-Yd-PWT">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -252,7 +254,7 @@
             </objects>
             <point key="canvasLocation" x="653" y="2557"/>
         </scene>
-        <!--Profile View Controller - Profile-->
+        <!--Profile View Controller - nickname-->
         <scene sceneID="sNC-pG-2m4">
             <objects>
                 <viewController id="sBf-63-ywQ" customClass="ProfileViewController" sceneMemberID="viewController">
@@ -264,31 +266,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1k1-oI-fOm">
-                                <rect key="frame" x="20" y="91" width="280" height="21"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="irw-jW-LiS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="293"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ty0-5V-jGI">
+                                <rect key="frame" x="20" y="84" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lN9-hk-OEf">
+                                <rect key="frame" x="120" y="122" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="5ug-Lm-bmN">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="aCe-Cg-hRo">
-                            <connections>
-                                <action selector="logOut:" destination="sBf-63-ywQ" id="MPP-FD-f9W"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="nickname" id="5ug-Lm-bmN">
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="h57-ed-iR9">
                             <connections>
                                 <segue destination="A0E-LX-9zd" kind="push" id="T8T-Ct-e98"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
-                        <outlet property="profileName" destination="1k1-oI-fOm" id="dku-R0-vdO"/>
+                        <outlet property="profileBackDropImage" destination="irw-jW-LiS" id="CqB-ac-Irq"/>
+                        <outlet property="profileNameLabel" destination="Ty0-5V-jGI" id="RaM-Qx-UZW"/>
+                        <outlet property="profilePlaceHolderImage" destination="lN9-hk-OEf" id="NU3-QR-G6u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7zK-hd-VHr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -580,6 +586,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="5ga-SK-peW"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bse-kj-p6w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
