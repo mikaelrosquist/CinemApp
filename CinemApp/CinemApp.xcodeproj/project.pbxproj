@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6F433F6118AE661500EE20DC /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F433F6018AE661500EE20DC /* UIImage+ImageEffects.m */; };
-		6F433F6318AE663B00EE20DC /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F433F6218AE663B00EE20DC /* Parse.framework */; };
+		6F433F6918AE6D7100EE20DC /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F433F6818AE6D7100EE20DC /* Parse.framework */; };
 		6F45795018AD7E7B00A1E25F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F45794F18AD7E7B00A1E25F /* Security.framework */; };
 		6F45795218AD7E8800A1E25F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F45795118AD7E8800A1E25F /* SystemConfiguration.framework */; };
 		6F45795418AD810C00A1E25F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F45795318AD810C00A1E25F /* AudioToolbox.framework */; };
@@ -49,7 +49,7 @@
 /* Begin PBXFileReference section */
 		6F433F5F18AE661500EE20DC /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		6F433F6018AE661500EE20DC /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		6F433F6218AE663B00EE20DC /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		6F433F6818AE6D7100EE20DC /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		6F45794F18AD7E7B00A1E25F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6F45795118AD7E8800A1E25F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6F45795318AD810C00A1E25F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -95,7 +95,7 @@
 				6F45795A18AD812400A1E25F /* libz.dylib in Frameworks */,
 				6F45795818AD811D00A1E25F /* CoreLocation.framework in Frameworks */,
 				736A61EB189AA07B00815FBE /* CoreGraphics.framework in Frameworks */,
-				6F433F6318AE663B00EE20DC /* Parse.framework in Frameworks */,
+				6F433F6918AE6D7100EE20DC /* Parse.framework in Frameworks */,
 				6F45795618AD811100A1E25F /* CFNetwork.framework in Frameworks */,
 				6F45795418AD810C00A1E25F /* AudioToolbox.framework in Frameworks */,
 				6F45795218AD7E8800A1E25F /* SystemConfiguration.framework in Frameworks */,
@@ -160,7 +160,7 @@
 		736A61E7189AA07B00815FBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6F433F6218AE663B00EE20DC /* Parse.framework */,
+				6F433F6818AE6D7100EE20DC /* Parse.framework */,
 				6F45795F18AD813300A1E25F /* StoreKit.framework */,
 				6F45795D18AD812E00A1E25F /* QuartzCore.framework */,
 				6F45795B18AD812900A1E25F /* MobileCoreServices.framework */,
@@ -457,11 +457,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
+					"./**",
 					"$(inherited)",
-					/Users/teodorostlund/Downloads,
-					/Users/teodorostlund/Documents/Skola/Examensarbete/CinemApp/CinemApp,
-					/Users/teodorostlund/Dropbox/Documents/Skola/Examensarbete/CinemApp/CinemApp,
-					/Users/teodorostlund/Dropbox/Documents/Skola/Examensarbete/CinemApp,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CinemApp/CinemApp-Prefix.pch";
@@ -480,11 +477,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
+					"./**",
 					"$(inherited)",
-					/Users/teodorostlund/Downloads,
-					/Users/teodorostlund/Documents/Skola/Examensarbete/CinemApp/CinemApp,
-					/Users/teodorostlund/Dropbox/Documents/Skola/Examensarbete/CinemApp/CinemApp,
-					/Users/teodorostlund/Dropbox/Documents/Skola/Examensarbete/CinemApp,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CinemApp/CinemApp-Prefix.pch";
