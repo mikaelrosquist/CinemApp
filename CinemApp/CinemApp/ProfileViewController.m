@@ -31,7 +31,7 @@
 }
 - (IBAction)logOut:(id)sender {
     [PFUser logOut];
-    [profileName setNeedsDisplay];
+    self.profileName.text = @"Not logged in";
 }
 
 - (void)didReceiveMemoryWarning
