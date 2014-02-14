@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6F1BCD8218AE1E8D0030B5FA /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1BCD8118AE1E8D0030B5FA /* Parse.framework */; };
+		6F1BCD8918AE53FB0030B5FA /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1BCD8818AE53FB0030B5FA /* UIImage+ImageEffects.m */; };
 		6F45795018AD7E7B00A1E25F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F45794F18AD7E7B00A1E25F /* Security.framework */; };
 		6F45795218AD7E8800A1E25F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F45795118AD7E8800A1E25F /* SystemConfiguration.framework */; };
 		6F45795418AD810C00A1E25F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F45795318AD810C00A1E25F /* AudioToolbox.framework */; };
@@ -47,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		6F1BCD8118AE1E8D0030B5FA /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../../Dropbox/Documents/Skola/Examensarbete/CinemApp/CinemApp/Parse.framework; sourceTree = "<group>"; };
+		6F1BCD8718AE53FB0030B5FA /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "../../../../Dropbox/Documents/Skola/Examensarbete/Resurser/UIImageEffects/UIImageEffects/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		6F1BCD8818AE53FB0030B5FA /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "../../../../Dropbox/Documents/Skola/Examensarbete/Resurser/UIImageEffects/UIImageEffects/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		6F45794F18AD7E7B00A1E25F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6F45795118AD7E8800A1E25F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6F45795318AD810C00A1E25F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -179,6 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				736A61FA189AA07B00815FBE /* Main.storyboard */,
+				6F1BCD8718AE53FB0030B5FA /* UIImage+ImageEffects.h */,
+				6F1BCD8818AE53FB0030B5FA /* UIImage+ImageEffects.m */,
 				6F1BCD8318AE1EB60030B5FA /* Controllers */,
 				6FE74D9418AA3ABC00ECDCC9 /* Model */,
 				736A61EF189AA07B00815FBE /* Supporting Files */,
@@ -319,6 +324,7 @@
 			files = (
 				736A61F9189AA07B00815FBE /* AppDelegate.m in Sources */,
 				6F55872718ABE97C0004E456 /* TabBarController.m in Sources */,
+				6F1BCD8918AE53FB0030B5FA /* UIImage+ImageEffects.m in Sources */,
 				736A61F5189AA07B00815FBE /* main.m in Sources */,
 				737F063918AA876D00FDB290 /* RateViewController.m in Sources */,
 				6F55872D18AD2EF50004E456 /* ProfileViewController.m in Sources */,
