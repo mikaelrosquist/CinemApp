@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F433F6118AE661500EE20DC /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F433F6018AE661500EE20DC /* UIImage+ImageEffects.m */; };
+		6F433F6318AE663B00EE20DC /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F433F6218AE663B00EE20DC /* Parse.framework */; };
 		6F45795018AD7E7B00A1E25F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F45794F18AD7E7B00A1E25F /* Security.framework */; };
 		6F45795218AD7E8800A1E25F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F45795118AD7E8800A1E25F /* SystemConfiguration.framework */; };
 		6F45795418AD810C00A1E25F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F45795318AD810C00A1E25F /* AudioToolbox.framework */; };
@@ -18,7 +20,6 @@
 		6F45796018AD813300A1E25F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F45795F18AD813300A1E25F /* StoreKit.framework */; };
 		6F55872718ABE97C0004E456 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F55872618ABE97C0004E456 /* TabBarController.m */; };
 		6F55872D18AD2EF50004E456 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F55872C18AD2EF50004E456 /* ProfileViewController.m */; };
-		73602D0518AE64830081D827 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73602D0418AE64830081D827 /* Parse.framework */; };
 		736A61E9189AA07B00815FBE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736A61E8189AA07B00815FBE /* Foundation.framework */; };
 		736A61EB189AA07B00815FBE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736A61EA189AA07B00815FBE /* CoreGraphics.framework */; };
 		736A61ED189AA07B00815FBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736A61EC189AA07B00815FBE /* UIKit.framework */; };
@@ -46,6 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F433F5F18AE661500EE20DC /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		6F433F6018AE661500EE20DC /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		6F433F6218AE663B00EE20DC /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		6F45794F18AD7E7B00A1E25F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6F45795118AD7E8800A1E25F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6F45795318AD810C00A1E25F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -59,7 +63,6 @@
 		6F55872618ABE97C0004E456 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		6F55872B18AD2EF50004E456 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		6F55872C18AD2EF50004E456 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		73602D0418AE64830081D827 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		736A61E5189AA07B00815FBE /* CinemApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CinemApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		736A61E8189AA07B00815FBE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		736A61EA189AA07B00815FBE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -92,7 +95,7 @@
 				6F45795A18AD812400A1E25F /* libz.dylib in Frameworks */,
 				6F45795818AD811D00A1E25F /* CoreLocation.framework in Frameworks */,
 				736A61EB189AA07B00815FBE /* CoreGraphics.framework in Frameworks */,
-				73602D0518AE64830081D827 /* Parse.framework in Frameworks */,
+				6F433F6318AE663B00EE20DC /* Parse.framework in Frameworks */,
 				6F45795618AD811100A1E25F /* CFNetwork.framework in Frameworks */,
 				6F45795418AD810C00A1E25F /* AudioToolbox.framework in Frameworks */,
 				6F45795218AD7E8800A1E25F /* SystemConfiguration.framework in Frameworks */,
@@ -115,6 +118,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F1BCD8318AE1EB60030B5FA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				737F063718AA876D00FDB290 /* RateViewController.h */,
+				737F063818AA876D00FDB290 /* RateViewController.m */,
+				6F55872518ABE97C0004E456 /* TabBarController.h */,
+				6F55872618ABE97C0004E456 /* TabBarController.m */,
+				6F55872B18AD2EF50004E456 /* ProfileViewController.h */,
+				6F55872C18AD2EF50004E456 /* ProfileViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		6FE74D9418AA3ABC00ECDCC9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,7 +160,7 @@
 		736A61E7189AA07B00815FBE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				73602D0418AE64830081D827 /* Parse.framework */,
+				6F433F6218AE663B00EE20DC /* Parse.framework */,
 				6F45795F18AD813300A1E25F /* StoreKit.framework */,
 				6F45795D18AD812E00A1E25F /* QuartzCore.framework */,
 				6F45795B18AD812900A1E25F /* MobileCoreServices.framework */,
@@ -165,16 +181,13 @@
 		736A61EE189AA07B00815FBE /* CinemApp */ = {
 			isa = PBXGroup;
 			children = (
-				737F063718AA876D00FDB290 /* RateViewController.h */,
-				737F063818AA876D00FDB290 /* RateViewController.m */,
-				6F55872518ABE97C0004E456 /* TabBarController.h */,
-				6F55872618ABE97C0004E456 /* TabBarController.m */,
 				736A61FA189AA07B00815FBE /* Main.storyboard */,
-				6F55872B18AD2EF50004E456 /* ProfileViewController.h */,
-				6F55872C18AD2EF50004E456 /* ProfileViewController.m */,
+				6F433F5F18AE661500EE20DC /* UIImage+ImageEffects.h */,
+				6F433F6018AE661500EE20DC /* UIImage+ImageEffects.m */,
+				6F1BCD8318AE1EB60030B5FA /* Controllers */,
 				6FE74D9418AA3ABC00ECDCC9 /* Model */,
-				736A6203189AA07B00815FBE /* Images.xcassets */,
 				736A61EF189AA07B00815FBE /* Supporting Files */,
+				736A6203189AA07B00815FBE /* Images.xcassets */,
 			);
 			path = CinemApp;
 			sourceTree = "<group>";
@@ -311,6 +324,7 @@
 			files = (
 				736A61F9189AA07B00815FBE /* AppDelegate.m in Sources */,
 				6F55872718ABE97C0004E456 /* TabBarController.m in Sources */,
+				6F433F6118AE661500EE20DC /* UIImage+ImageEffects.m in Sources */,
 				736A61F5189AA07B00815FBE /* main.m in Sources */,
 				737F063918AA876D00FDB290 /* RateViewController.m in Sources */,
 				6F55872D18AD2EF50004E456 /* ProfileViewController.m in Sources */,
@@ -446,7 +460,8 @@
 					"$(inherited)",
 					/Users/teodorostlund/Downloads,
 					/Users/teodorostlund/Documents/Skola/Examensarbete/CinemApp/CinemApp,
-					"/Users/mikaelrosquist/Documents/Mikael/Plugg/Year\\ III/Examensarbete/CinemApp/CinemApp",
+					/Users/teodorostlund/Dropbox/Documents/Skola/Examensarbete/CinemApp/CinemApp,
+					/Users/teodorostlund/Dropbox/Documents/Skola/Examensarbete/CinemApp,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CinemApp/CinemApp-Prefix.pch";
@@ -468,7 +483,8 @@
 					"$(inherited)",
 					/Users/teodorostlund/Downloads,
 					/Users/teodorostlund/Documents/Skola/Examensarbete/CinemApp/CinemApp,
-					"/Users/mikaelrosquist/Documents/Mikael/Plugg/Year\\ III/Examensarbete/CinemApp/CinemApp",
+					/Users/teodorostlund/Dropbox/Documents/Skola/Examensarbete/CinemApp/CinemApp,
+					/Users/teodorostlund/Dropbox/Documents/Skola/Examensarbete/CinemApp,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CinemApp/CinemApp-Prefix.pch";
