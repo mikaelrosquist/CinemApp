@@ -457,11 +457,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
+					"./**",
 					"$(inherited)",
-					/Users/teodorostlund/Downloads,
-					/Users/teodorostlund/Documents/Skola/Examensarbete/CinemApp/CinemApp,
-					/Users/teodorostlund/Dropbox/Documents/Skola/Examensarbete/CinemApp/CinemApp,
-					/Users/teodorostlund/Dropbox/Documents/Skola/Examensarbete/CinemApp,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CinemApp/CinemApp-Prefix.pch";
@@ -480,11 +477,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
+					"./**",
 					"$(inherited)",
-					/Users/teodorostlund/Downloads,
-					/Users/teodorostlund/Documents/Skola/Examensarbete/CinemApp/CinemApp,
-					/Users/teodorostlund/Dropbox/Documents/Skola/Examensarbete/CinemApp/CinemApp,
-					/Users/teodorostlund/Dropbox/Documents/Skola/Examensarbete/CinemApp,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CinemApp/CinemApp-Prefix.pch";
