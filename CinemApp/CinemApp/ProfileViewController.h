@@ -8,13 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : UIViewController<UIScrollViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *profileBackDropImage;
-@property (weak, nonatomic) IBOutlet UILabel *profileNameLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *profilePlaceHolderImage;
-
-@property (nonatomic) UIImage *image;
-@property (nonatomic) UIImage *profilePictureImage;
+@property (nonatomic, retain) UIImageView *imgProfile;
+@property (nonatomic, retain) UIScrollView *scrollView;
 
 @end
