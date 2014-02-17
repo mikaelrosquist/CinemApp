@@ -8,22 +8,25 @@
 
 #import "FollowersViewController.h"
 
-@interface FollowersViewController ()
 
+@interface FollowersViewController ()
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) UIImage *image;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @end
 
 @implementation FollowersViewController
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.scrollView.contentSize = CGSizeMake(1000,3000);
+    [self.scrollView addSubview:self.imageView];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

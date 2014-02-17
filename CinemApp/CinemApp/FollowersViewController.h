@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FollowersViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIScrollView *topScrollView;
 
 @end
