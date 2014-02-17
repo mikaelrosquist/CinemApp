@@ -782,29 +782,60 @@
         <scene sceneID="eyu-HI-fe3">
             <objects>
                 <tableViewController id="2BN-bg-ciu" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="154" sectionHeaderHeight="22" sectionFooterHeight="22" id="ISL-0G-JoZ">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="160" sectionHeaderHeight="22" sectionFooterHeight="22" id="ISL-0G-JoZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
-                            <tableViewSection id="3ga-bS-CMH">
+                            <tableViewSection id="W13-Ua-SV5">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="nsf-Cm-RRA">
-                                        <rect key="frame" x="0.0" y="64" width="320" height="154"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="nsf-Cm-RRA">
+                                        <rect key="frame" x="0.0" y="64" width="320" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nsf-Cm-RRA" id="4mg-aC-nmH">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="154"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Steve Jobs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ey-2M-6lp">
-                                                    <rect key="frame" x="37" y="9" width="111" height="21"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hnb-SQ-fwj">
+                                                    <rect key="frame" x="80" y="57" width="232" height="79"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore.</string>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gravity" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46h-cN-4Pu">
+                                                    <rect key="frame" x="83" y="48" width="56" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Steve Jobs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCg-2r-UlR">
+                                                    <rect key="frame" x="65" y="13" width="88" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="menu_profile_black" translatesAutoresizingMaskIntoConstraints="NO" id="XlI-zt-Svf">
+                                                    <rect key="frame" x="20" y="7" width="37" height="33"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2 days ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wo1-gx-msj">
+                                                    <rect key="frame" x="227" y="18" width="85" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gravity poster small" translatesAutoresizingMaskIntoConstraints="NO" id="gO4-c3-oDD">
+                                                    <rect key="frame" x="10" y="51" width="62" height="97"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -815,6 +846,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="feed" id="8LB-2N-sDh"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="OH0-9a-KwC">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Omx-vO-TU3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1180,6 +1214,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gravity poster small" width="92" height="139"/>
         <image name="menu_activity" width="30" height="30"/>
         <image name="menu_explore" width="30" height="30"/>
         <image name="menu_home" width="30" height="30"/>
