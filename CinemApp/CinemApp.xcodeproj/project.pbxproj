@@ -20,6 +20,7 @@
 		6F45796018AD813300A1E25F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F45795F18AD813300A1E25F /* StoreKit.framework */; };
 		6F55872718ABE97C0004E456 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F55872618ABE97C0004E456 /* TabBarController.m */; };
 		6F55872D18AD2EF50004E456 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F55872C18AD2EF50004E456 /* ProfileViewController.m */; };
+		6FFA12DC18B2316F0058978C /* FollowersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA12DB18B2316F0058978C /* FollowersViewController.m */; };
 		736A61E9189AA07B00815FBE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736A61E8189AA07B00815FBE /* Foundation.framework */; };
 		736A61EB189AA07B00815FBE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736A61EA189AA07B00815FBE /* CoreGraphics.framework */; };
 		736A61ED189AA07B00815FBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 736A61EC189AA07B00815FBE /* UIKit.framework */; };
@@ -64,6 +65,8 @@
 		6F55872618ABE97C0004E456 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		6F55872B18AD2EF50004E456 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		6F55872C18AD2EF50004E456 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		6FFA12DA18B2316F0058978C /* FollowersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowersViewController.h; sourceTree = "<group>"; };
+		6FFA12DB18B2316F0058978C /* FollowersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowersViewController.m; sourceTree = "<group>"; };
 		736A61E5189AA07B00815FBE /* CinemApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CinemApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		736A61E8189AA07B00815FBE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		736A61EA189AA07B00815FBE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -124,8 +127,13 @@
 		6F1BCD8318AE1EB60030B5FA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				73B0CD0618B23B780000DAD8 /* FeedTableViewController.h */,
 				73B0CD0718B23B780000DAD8 /* FeedTableViewController.m */,
+=======
+				6FFA12DA18B2316F0058978C /* FollowersViewController.h */,
+				6FFA12DB18B2316F0058978C /* FollowersViewController.m */,
+>>>>>>> 1f54e6c4a4728f827c723962205290f4479dada3
 				737F063718AA876D00FDB290 /* RateViewController.h */,
 				737F063818AA876D00FDB290 /* RateViewController.m */,
 				6F55872518ABE97C0004E456 /* TabBarController.h */,
@@ -139,6 +147,8 @@
 		6FE74D9418AA3ABC00ECDCC9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6F433F5F18AE661500EE20DC /* UIImage+ImageEffects.h */,
+				6F433F6018AE661500EE20DC /* UIImage+ImageEffects.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -187,8 +197,6 @@
 			isa = PBXGroup;
 			children = (
 				736A61FA189AA07B00815FBE /* Main.storyboard */,
-				6F433F5F18AE661500EE20DC /* UIImage+ImageEffects.h */,
-				6F433F6018AE661500EE20DC /* UIImage+ImageEffects.m */,
 				6F1BCD8318AE1EB60030B5FA /* Controllers */,
 				6FE74D9418AA3ABC00ECDCC9 /* Model */,
 				736A61EF189AA07B00815FBE /* Supporting Files */,
@@ -327,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FFA12DC18B2316F0058978C /* FollowersViewController.m in Sources */,
 				736A61F9189AA07B00815FBE /* AppDelegate.m in Sources */,
 				6F55872718ABE97C0004E456 /* TabBarController.m in Sources */,
 				6F433F6118AE661500EE20DC /* UIImage+ImageEffects.m in Sources */,
