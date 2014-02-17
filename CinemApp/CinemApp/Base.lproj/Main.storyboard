@@ -4,25 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller - CinemApp-->
-        <scene sceneID="SPU-hc-p5C">
-            <objects>
-                <viewController id="QG1-IZ-cTc" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="uBM-rV-jwe"/>
-                        <viewControllerLayoutGuide type="bottom" id="Wfy-VW-yfc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4pu-8Z-hs1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="CinemApp" id="WuO-T7-4EG"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wyw-Fg-seC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1179" y="-214"/>
-        </scene>
         <!--Navigation Controller - Explore-->
         <scene sceneID="RxI-iY-qtB">
             <objects>
@@ -790,12 +771,54 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="QG1-IZ-cTc" kind="relationship" relationship="rootViewController" id="7rC-ZH-ywz"/>
+                        <segue destination="2BN-bg-ciu" kind="relationship" relationship="rootViewController" id="azB-2l-hx3"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eZw-Nz-JlE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="653" y="-214"/>
+        </scene>
+        <!--Table View Controller - feed-->
+        <scene sceneID="eyu-HI-fe3">
+            <objects>
+                <tableViewController id="2BN-bg-ciu" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="154" sectionHeaderHeight="22" sectionFooterHeight="22" id="ISL-0G-JoZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="3ga-bS-CMH">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="nsf-Cm-RRA">
+                                        <rect key="frame" x="0.0" y="64" width="320" height="154"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nsf-Cm-RRA" id="4mg-aC-nmH">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="154"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Steve Jobs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ey-2M-6lp">
+                                                    <rect key="frame" x="37" y="9" width="111" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="2BN-bg-ciu" id="G25-Qi-d7u"/>
+                            <outlet property="delegate" destination="2BN-bg-ciu" id="2CI-HH-hgl"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="feed" id="8LB-2N-sDh"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Omx-vO-TU3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1126" y="-214"/>
         </scene>
         <!--Navigation Controller - Notifications-->
         <scene sceneID="x8x-Ti-ZUu">
