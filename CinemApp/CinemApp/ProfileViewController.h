@@ -10,4 +10,11 @@
 
 @interface ProfileViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *profileBackDropImage;
+@property (weak, nonatomic) IBOutlet UILabel *profileNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePlaceHolderImage;
+
+@property (nonatomic) UIImage *image;
+@property (nonatomic) UIImage *profilePictureImage;
+
 @end
