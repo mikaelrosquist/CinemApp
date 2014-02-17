@@ -34,6 +34,7 @@
 		736A6215189AA07B00815FBE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 736A6213189AA07B00815FBE /* InfoPlist.strings */; };
 		736A6217189AA07B00815FBE /* CinemAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 736A6216189AA07B00815FBE /* CinemAppTests.m */; };
 		737F063918AA876D00FDB290 /* RateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 737F063818AA876D00FDB290 /* RateViewController.m */; };
+		73B0CD0818B23B780000DAD8 /* FeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B0CD0718B23B780000DAD8 /* FeedTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,8 @@
 		736A6216189AA07B00815FBE /* CinemAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CinemAppTests.m; sourceTree = "<group>"; };
 		737F063718AA876D00FDB290 /* RateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateViewController.h; sourceTree = "<group>"; };
 		737F063818AA876D00FDB290 /* RateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateViewController.m; sourceTree = "<group>"; };
+		73B0CD0618B23B780000DAD8 /* FeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedTableViewController.h; sourceTree = "<group>"; };
+		73B0CD0718B23B780000DAD8 /* FeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,8 @@
 		6F1BCD8318AE1EB60030B5FA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				73B0CD0618B23B780000DAD8 /* FeedTableViewController.h */,
+				73B0CD0718B23B780000DAD8 /* FeedTableViewController.m */,
 				737F063718AA876D00FDB290 /* RateViewController.h */,
 				737F063818AA876D00FDB290 /* RateViewController.m */,
 				6F55872518ABE97C0004E456 /* TabBarController.h */,
@@ -325,6 +330,7 @@
 				736A61F9189AA07B00815FBE /* AppDelegate.m in Sources */,
 				6F55872718ABE97C0004E456 /* TabBarController.m in Sources */,
 				6F433F6118AE661500EE20DC /* UIImage+ImageEffects.m in Sources */,
+				73B0CD0818B23B780000DAD8 /* FeedTableViewController.m in Sources */,
 				736A61F5189AA07B00815FBE /* main.m in Sources */,
 				737F063918AA876D00FDB290 /* RateViewController.m in Sources */,
 				6F55872D18AD2EF50004E456 /* ProfileViewController.m in Sources */,
