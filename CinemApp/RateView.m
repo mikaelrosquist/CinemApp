@@ -14,6 +14,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        UISlider *slider = [[UISlider alloc] initWithFrame:frame];
+        //[slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
+        //[slider setBackgroundColor:[UIColor clearColor]];
+        
         // Initialization code
     }
     return self;
