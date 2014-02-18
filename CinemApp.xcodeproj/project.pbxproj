@@ -25,6 +25,7 @@
 		6F0CAA4718B3709200AE42F9 /* RateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA3F18B3709200AE42F9 /* RateViewController.m */; };
 		6F0CAA4818B3709200AE42F9 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */; };
 		6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */; };
+		73C7E73118B37A1A00453123 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C7E73018B37A1A00453123 /* RateView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		6F0CAA4218B3709200AE42F9 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		73C7E72F18B37A1A00453123 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
+		73C7E73018B37A1A00453123 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,8 @@
 				6F0CAA3C18B3709200AE42F9 /* ExploreViewController.h */,
 				6F0CAA3D18B3709200AE42F9 /* ExploreViewController.m */,
 				6F0CAA3E18B3709200AE42F9 /* RateViewController.h */,
+				73C7E72F18B37A1A00453123 /* RateView.h */,
+				73C7E73018B37A1A00453123 /* RateView.m */,
 				6F0CAA3F18B3709200AE42F9 /* RateViewController.m */,
 				6F0CAA4018B3709200AE42F9 /* ActivityViewController.h */,
 				6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */,
@@ -271,6 +276,7 @@
 			files = (
 				6F0CAA4618B3709200AE42F9 /* ExploreViewController.m in Sources */,
 				6F0CAA4418B3709200AE42F9 /* ImageEffects.m in Sources */,
+				73C7E73118B37A1A00453123 /* RateView.m in Sources */,
 				6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */,
 				6F0CAA4718B3709200AE42F9 /* RateViewController.m in Sources */,
 				6F0CAA1A18B3705400AE42F9 /* AppDelegate.m in Sources */,
