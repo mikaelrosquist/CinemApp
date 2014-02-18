@@ -477,6 +477,7 @@
 				6F0CAA3418B3705500AE42F9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6F0CAA3518B3705500AE42F9 /* Build configuration list for PBXNativeTarget "CinemAppTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +486,7 @@
 				6F0CAA3718B3705500AE42F9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
