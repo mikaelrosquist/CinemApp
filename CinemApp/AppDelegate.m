@@ -15,7 +15,8 @@
 
 @implementation AppDelegate
 
-@synthesize tabBarController;
+@synthesize tabBarController = _tabBarController;
+@synthesize window = _window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -25,7 +26,7 @@
     self.window.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     [self.window makeKeyAndVisible];
     
-    tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController = [[UITabBarController alloc] init];
     
     HomeViewController* home = [[HomeViewController alloc] init];
     ExploreViewController* explore = [[ExploreViewController alloc] init];
@@ -33,10 +34,16 @@
     ActivityViewController* activity = [[ActivityViewController alloc] init];
     ProfileViewController* profile = [[ProfileViewController alloc] init];
     
-    NSArray* controllers = [NSArray arrayWithObjects:home, explore, rate, activity, profile, nil];
-    tabBarController.viewControllers = controllers;
+    UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController:home];
+    UINavigationController *exploreNav = [[UINavigationController alloc] initWithRootViewController:explore];
+    UINavigationController *rateNav = [[UINavigationController alloc] initWithRootViewController:rate];
+    UINavigationController *activityNav = [[UINavigationController alloc] initWithRootViewController:activity];
+    UINavigationController *profileNav = [[UINavigationController alloc] initWithRootViewController:profile];
     
-    UITabBar *tabBar = tabBarController.tabBar;
+    NSArray* controllers = [NSArray arrayWithObjects:homeNav, exploreNav, rateNav, activityNav, profileNav, nil];
+    self.tabBarController.viewControllers = controllers;
+    
+    UITabBar *tabBar = self.tabBarController.tabBar;
     UITabBarItem *homeTabBarItem = [tabBar.items objectAtIndex:0];
     UITabBarItem *exploreTabBarItem = [tabBar.items objectAtIndex:1];
     UITabBarItem *rateTabBarItem = [tabBar.items objectAtIndex:2];
@@ -72,7 +79,7 @@
     [tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar_selected"]];
     [tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar"]];
     
-    self.window.rootViewController = tabBarController;
+    self.window.rootViewController = self.tabBarController;
     
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];

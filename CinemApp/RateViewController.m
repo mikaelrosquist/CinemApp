@@ -19,16 +19,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"rate";
     }
     return self;
 }
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+
     RateView *rv = [[RateView alloc] init];
     [self.view addSubview:rv];
 }

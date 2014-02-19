@@ -64,6 +64,7 @@ static CGFloat ImageWidth  = 320.0;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.title = @"username";
         
         image = [UIImage imageNamed:@"kitten"];
         imageWithBlur = [UIImage imageNamed:@"kitten"];

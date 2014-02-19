@@ -17,8 +17,8 @@
         
         UIButton *testButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [testButton addTarget:self
-                   action:@selector(callSuperMethod)
-         forControlEvents:UIControlEventTouchDown];
+                       action:@selector(callSuperMethod)
+             forControlEvents:UIControlEventTouchDown];
         [testButton setTitle:@"Button" forState:UIControlStateNormal];
         testButton.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
         [self addSubview:testButton];
