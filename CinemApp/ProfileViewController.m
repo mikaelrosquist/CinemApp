@@ -108,7 +108,7 @@ static CGFloat ImageWidth  = 320.0;
         self.scrollView.contentSize = CGSizeMake(320, frame.size.height+ImageHeight);
         
         UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Recent ratings", @"Highest ratings", nil]];
-        segmentedControl.frame = CGRectMake(10, 290, 300, 29);
+        segmentedControl.frame = CGRectMake(10, ImageHeight+10, 300, 29);
         segmentedControl.selectedSegmentIndex = 0;
         segmentedControl.tintColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
         [segmentedControl addTarget:self action:@selector(valueChanged:) forControlEvents: UIControlEventValueChanged];
@@ -157,7 +157,7 @@ static CGFloat ImageWidth  = 320.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    tV = [[TestView alloc]initWithFrame:CGRectMake(0, 300, 320, 200)];
+    tV = [[TestView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
 }
 
 - (void)didReceiveMemoryWarning
