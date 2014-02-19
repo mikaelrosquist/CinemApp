@@ -137,7 +137,7 @@
 				6F0CAA3918B3709200AE42F9 /* ImageEffects.m */,
 				73C7E73218B37A4F00453123 /* Views */,
 				73C7E73318B37A6400453123 /* Controllers */,
-				73C7E73418B37A9500453123 /* Model */,
+				73C7E73418B37A9500453123 /* Models */,
 				6F0CAA1B18B3705400AE42F9 /* Images.xcassets */,
 				6F0CAA1018B3705400AE42F9 /* Supporting Files */,
 			);
@@ -201,11 +201,11 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		73C7E73418B37A9500453123 /* Model */ = {
+		73C7E73418B37A9500453123 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
