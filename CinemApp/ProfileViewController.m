@@ -65,7 +65,7 @@ static CGFloat ImageWidth  = 320.0;
         self.scrollView = [[UIScrollView alloc] init];
 		self.scrollView.delegate = self;
         self.scrollView.backgroundColor = [UIColor clearColor];
-        self.scrollView.contentSize = CGSizeMake(320, tV.frame.size.height+ImageHeight);
+        self.scrollView.contentSize = CGSizeMake(320, tV.frame.size.height+ImageHeight+100);
         
         [self.view addSubview:self.imgProfile];
         [self.view addSubview:self.imgWithBlur];
