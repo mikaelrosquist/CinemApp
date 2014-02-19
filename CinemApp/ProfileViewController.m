@@ -77,7 +77,7 @@ static CGFloat ImageWidth  = 320.0;
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor=[UIColor whiteColor];
         label.text = @"Firstname Lastname";
-        [label setFont:[UIFont fontWithName: @"HelveticaNeue-Thin" size: 20.0f]];
+        [label setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 20.0f]];
         
         self.imgProfile = [[UIImageView alloc] initWithImage:image];
 		self.imgProfile.frame = CGRectMake(0, 0, ImageWidth, ImageHeight);
