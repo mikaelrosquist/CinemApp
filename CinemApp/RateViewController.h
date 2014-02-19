@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RateView.h"
 
 @interface RateViewController : UIViewController
+
+@property (nonatomic, strong) RateView *rv;
+
 
 @end

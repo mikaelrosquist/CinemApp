@@ -28,18 +28,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 320, 100)];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor=[UIColor blackColor];
-    label.text = @"Rate";
-    [self.view addSubview:label];
+	
+    RateView *rv = [[RateView alloc] init];
+    [self.view addSubview:rv];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)buttonPressed{
+    NSLog(@"button pressed");
+    //label.text = @"Button pressed";
 }
 
 @end
