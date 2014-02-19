@@ -157,8 +157,15 @@ static CGFloat ImageWidth  = 320.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]init];
+    [settingsButton setTitle:@"Settings"];
+    self.navigationItem.rightBarButtonItem = settingsButton;
+    
 }
-
+-(void)settingsView{
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
