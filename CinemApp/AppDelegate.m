@@ -74,6 +74,11 @@
     
     self.window.rootViewController = tabBarController;
     
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+
+    
     return YES;
 }
 

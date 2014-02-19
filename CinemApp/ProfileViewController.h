@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TestView.h"
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : UIViewController<UIScrollViewDelegate>
 
-@property (strong, nonatomic) TestView *tV;
+@property (nonatomic, retain) UIScrollView *scrollView;
+@property (nonatomic, retain) UIImageView *imgProfile;
+@property (nonatomic, retain) UIImageView *imgWithBlur;
+@property (nonatomic, retain) UIImageView *profilePictureImageView;
 
 @end

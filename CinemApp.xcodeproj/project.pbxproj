@@ -25,7 +25,6 @@
 		6F0CAA4718B3709200AE42F9 /* RateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA3F18B3709200AE42F9 /* RateViewController.m */; };
 		6F0CAA4818B3709200AE42F9 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */; };
 		6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */; };
-		6F955AFE18B38E31004C4B70 /* ProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955AFD18B38E31004C4B70 /* ProfileView.m */; };
 		6F955B0118B397A7004C4B70 /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* TestView.m */; };
 		73C7E73118B37A1A00453123 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C7E73018B37A1A00453123 /* RateView.m */; };
 /* End PBXBuildFile section */
@@ -69,8 +68,6 @@
 		6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		6F0CAA4218B3709200AE42F9 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		6F955AFC18B38E31004C4B70 /* ProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileView.h; sourceTree = "<group>"; };
-		6F955AFD18B38E31004C4B70 /* ProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileView.m; sourceTree = "<group>"; };
 		6F955AFF18B397A7004C4B70 /* TestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestView.h; sourceTree = "<group>"; };
 		6F955B0018B397A7004C4B70 /* TestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestView.m; sourceTree = "<group>"; };
 		73C7E72F18B37A1A00453123 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
@@ -183,8 +180,6 @@
 				73C7E73018B37A1A00453123 /* RateView.m */,
 				6F955AFF18B397A7004C4B70 /* TestView.h */,
 				6F955B0018B397A7004C4B70 /* TestView.m */,
-				6F955AFC18B38E31004C4B70 /* ProfileView.h */,
-				6F955AFD18B38E31004C4B70 /* ProfileView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -308,7 +303,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F955AFE18B38E31004C4B70 /* ProfileView.m in Sources */,
 				6F0CAA4618B3709200AE42F9 /* ExploreViewController.m in Sources */,
 				6F0CAA4418B3709200AE42F9 /* ImageEffects.m in Sources */,
 				73C7E73118B37A1A00453123 /* RateView.m in Sources */,
