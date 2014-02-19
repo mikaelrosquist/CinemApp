@@ -9,11 +9,11 @@
 #import "ProfileViewController.h"
 #import "ImageEffects.h"
 
-static CGFloat ImageHeight  = 280.0;
+static CGFloat ImageHeight  = 250.0;
 static CGFloat ImageWidth  = 320.0;
 
 @interface ProfileViewController ()
-    
+
 @end
 
 @implementation ProfileViewController{
@@ -21,7 +21,11 @@ static CGFloat ImageWidth  = 320.0;
     UIImage *imageWithBlur;
     UIImage *profilePictureImage;
     UILabel *label;
+    UIButton *settingsButton;
+    TestView *tV;
 }
+
+@synthesize settingsButton;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat yOffset = self.scrollView.contentOffset.y;
@@ -35,6 +39,7 @@ static CGFloat ImageWidth  = 320.0;
         self.imgWithBlur.alpha = percent;
         self.profilePictureImageView.alpha = percent;
         label.alpha = percent;
+        settingsButton.alpha = percent;
         NSLog(@"YOFFSET: %f", yOffset);
         NSLog(@"BLUR ALPHA: %f", percent);
         
@@ -48,16 +53,10 @@ static CGFloat ImageWidth  = 320.0;
         self.imgWithBlur.alpha = 1;
         self.profilePictureImageView.alpha = 1;
         label.alpha = 1;
-        
+        settingsButton.alpha = 1;
         NSLog(@"YOFFSET: %f", yOffset);
     }
-    CGRect p = self.profilePictureImageView.frame;
     
-    p.origin.y = 80-yOffset;
-    self.profilePictureImageView.frame = p;
-    CGRect l = label.frame;
-    l.origin.y = 30-yOffset;
-    label.frame = l;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -65,16 +64,15 @@ static CGFloat ImageWidth  = 320.0;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"username";
-        
         image = [UIImage imageNamed:@"kitten"];
         imageWithBlur = [UIImage imageNamed:@"kitten"];
         profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
         
         self.profilePictureImageView = [[UIImageView alloc] initWithImage:profilePictureImage];
-        self.profilePictureImageView.frame = CGRectMake(120, 80, 80, 80);
+        self.profilePictureImageView.frame = CGRectMake(120, 60, 80, 80);
         
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 320, 40)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 320, 40)];
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor=[UIColor whiteColor];
         label.text = @"Firstname Lastname";
@@ -89,7 +87,12 @@ static CGFloat ImageWidth  = 320.0;
         self.imgWithBlur.contentMode = UIViewContentModeScaleAspectFill;
         
         
-        self.imgWithBlur.image = [image applyBlurWithRadius:30 tintColor:[UIColor colorWithWhite:1.0 alpha:0.3] saturationDeltaFactor:1.8 maskImage:nil];
+        self.imgWithBlur.image = [image applyDarkEffect];
+        
+        settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        settingsButton.frame = CGRectMake(283, 36, 25, 25);
+        
+        [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings_icon"]forState:UIControlStateNormal];
         
         UIView *fakeView = [[UIView alloc] init];
         
@@ -114,9 +117,11 @@ static CGFloat ImageWidth  = 320.0;
         
         [self.view addSubview:self.imgProfile];
         [self.view addSubview:self.imgWithBlur];
-        [self.view addSubview:self.profilePictureImageView];
-        [self.view addSubview:label];
+        [self.scrollView addSubview:self.profilePictureImageView];
+        [self.scrollView addSubview:label];
+        [self.scrollView addSubview:settingsButton];
         [self.view addSubview:self.scrollView];
+        [self.scrollView addSubview:tV];
         
         [self.scrollView addSubview:segmentedControl];
         
@@ -134,9 +139,9 @@ static CGFloat ImageWidth  = 320.0;
 - (void)valueChanged:(UISegmentedControl *)segment {
     
     if(segment.selectedSegmentIndex == 0) {
-        //action for the first button (All)
+        tV.hidden = FALSE;
     }else if(segment.selectedSegmentIndex == 1){
-        //action for the second button (Present)
+        tV.hidden = TRUE;
     }else if(segment.selectedSegmentIndex == 2){
         //action for the third button (Missing)
     }
@@ -152,8 +157,7 @@ static CGFloat ImageWidth  = 320.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    //create your view where u want
+    tV = [[TestView alloc]initWithFrame:CGRectMake(0, 300, 320, 200)];
 }
 
 - (void)didReceiveMemoryWarning

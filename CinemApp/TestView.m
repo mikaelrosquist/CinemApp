@@ -2,15 +2,8 @@
 #import "TestView.h"
 #import "ImageEffects.h"
 
-static CGFloat ImageHeight  = 280.0;
-static CGFloat ImageWidth  = 320.0;
 
-@implementation TestView{
-    UIImage *image;
-    UIImage *imageWithBlur;
-    UIImage *profilePictureImage;
-    UILabel *label;
-}
+@implementation TestView
 
 - (id)initWithFrame:(CGRect)frame
 {
