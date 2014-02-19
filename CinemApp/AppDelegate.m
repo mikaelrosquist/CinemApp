@@ -39,7 +39,7 @@
     UINavigationController *rateNav = [[UINavigationController alloc] initWithRootViewController:rate];
     UINavigationController *activityNav = [[UINavigationController alloc] initWithRootViewController:activity];
     UINavigationController *profileNav = [[UINavigationController alloc] initWithRootViewController:profile];
-    
+
     NSArray* controllers = [NSArray arrayWithObjects:homeNav, exploreNav, rateNav, activityNav, profileNav, nil];
     self.tabBarController.viewControllers = controllers;
     

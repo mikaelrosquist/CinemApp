@@ -19,7 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"notifications";
+        self.title = @"Notifications";
     }
     return self;
 }
@@ -28,11 +28,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 320, 100)];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor=[UIColor blackColor];
-    label.text = @"Notifications";
-    [self.view addSubview:label];
 }
 
 - (void)didReceiveMemoryWarning

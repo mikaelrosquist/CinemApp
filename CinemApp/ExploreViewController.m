@@ -19,7 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"explore";
+        self.title = @"Explore";
     }
     return self;
 }
@@ -27,11 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 320, 100)];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor=[UIColor blackColor];
-    label.text = @"Explore";
-    [self.view addSubview:label];}
+}
 
 - (void)didReceiveMemoryWarning
 {

@@ -19,7 +19,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"home";
+        self.title = @"CinemApp";
+
+        
+
     }
     return self;
 }
@@ -27,11 +30,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 320, 100)];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor=[UIColor blackColor];
-    label.text = @"Home";
-    [self.view addSubview:label];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
+
 }
 
 - (void)didReceiveMemoryWarning
