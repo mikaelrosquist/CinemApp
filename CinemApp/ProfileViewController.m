@@ -9,21 +9,13 @@
 #import "ProfileViewController.h"
 #import "ImageEffects.h"
 
-static CGFloat ImageHeight  = 280.0;
-static CGFloat ImageWidth  = 320.0;
-
 @interface ProfileViewController ()
 
 @end
 
-@implementation ProfileViewController{
-    UIImage *image;
-    UIImage *imageWithBlur;
-    UIImage *profilePictureImage;
-    UILabel *label;
-}
+@implementation ProfileViewController
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+/*- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat yOffset = self.scrollView.contentOffset.y;
     
     if (yOffset < 0) {
@@ -59,68 +51,14 @@ static CGFloat ImageWidth  = 320.0;
     l.origin.y = 30-yOffset;
     label.frame = l;
 }
-
+*/
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
-        image = [UIImage imageNamed:@"kitten"];
-        imageWithBlur = [UIImage imageNamed:@"kitten"];
-        profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
-        
-        self.profilePictureImageView = [[UIImageView alloc] initWithImage:profilePictureImage];
-        self.profilePictureImageView.frame = CGRectMake(120, 80, 80, 80);
-        
-        
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 320, 40)];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor=[UIColor blackColor];
-        label.text = @"Firstname Lastname";
-        [label setFont:[UIFont fontWithName: @"HelveticaNeue-Thin" size: 20.0f]];
-        
-        self.imgProfile = [[UIImageView alloc] initWithImage:image];
-		self.imgProfile.frame = CGRectMake(0, 0, ImageWidth, ImageHeight);
-        self.imgProfile.contentMode = UIViewContentModeScaleAspectFill;
-        
-        self.imgWithBlur = [[UIImageView alloc] initWithImage:imageWithBlur];
-		self.imgWithBlur.frame = CGRectMake(0, 0, ImageWidth, ImageHeight);
-        self.imgWithBlur.contentMode = UIViewContentModeScaleAspectFill;
-        
-        
-        self.imgWithBlur.image = [image applyBlurWithRadius:30 tintColor:[UIColor colorWithWhite:1.0 alpha:0.3] saturationDeltaFactor:1.8 maskImage:nil];
-        
-        UIView *fakeView = [[UIView alloc] init];
-        
-        CGRect frame = fakeView.frame;
-        frame.size.width = 320;
-        frame.size.height = 400;
-        frame.origin.y = ImageHeight;
-        fakeView.frame = frame;
-
-        self.scrollView = [[UIScrollView alloc] init];
-		self.scrollView.delegate = self;
-        self.scrollView.backgroundColor = [UIColor clearColor];
-        self.scrollView.contentSize = CGSizeMake(320, frame.size.height+ImageHeight);
-        
-        [self setEdgesForExtendedLayout:UIRectEdgeNone];
-        [self setAutomaticallyAdjustsScrollViewInsets:NO];
-        
-        UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Recent ratings", @"Highest ratings", nil]];
-        segmentedControl.frame = CGRectMake(10, 290, 300, 29);
-        segmentedControl.selectedSegmentIndex = 0;
-        segmentedControl.tintColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
-        [segmentedControl addTarget:self action:@selector(valueChanged:) forControlEvents: UIControlEventValueChanged];
-        
-        [self.scrollView addSubview:fakeView];
-        
-        [self.view addSubview:self.imgProfile];
-        [self.view addSubview:self.imgWithBlur];
-        [self.view addSubview:self.profilePictureImageView];
-        [self.view addSubview:label];
-        [self.view addSubview:self.scrollView];
-        
-        [self.scrollView addSubview:segmentedControl];
+//        [self setEdgesForExtendedLayout:UIRectEdgeNone];
+//        [self setAutomaticallyAdjustsScrollViewInsets:NO];
         
     }
     return self;
@@ -140,14 +78,17 @@ static CGFloat ImageWidth  = 320.0;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    CGRect bounds = self.view.bounds;
-    self.scrollView.frame = bounds;
+    //CGRect bounds = self.view.bounds;
+    //self.scrollView.frame = bounds;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view, typically from a nib.
+    //create your view where u want
+    TestView *tV = [[TestView alloc]init]; //creat an instance of your custom view
+    [self.view addSubview:tV]; // add to your main view
 }
 
 - (void)didReceiveMemoryWarning

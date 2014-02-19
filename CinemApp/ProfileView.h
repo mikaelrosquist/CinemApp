@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfileView : UIView
+@interface ProfileView : UIView<UIScrollViewDelegate>
+
+@property (nonatomic, retain) UIScrollView *scrollView;
+@property (nonatomic, retain) UIImageView *imgProfile;
+@property (nonatomic, retain) UIImageView *imgWithBlur;
+@property (nonatomic, retain) UIImageView *profilePictureImageView;
 
 @end
