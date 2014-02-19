@@ -21,11 +21,10 @@ static CGFloat ImageWidth  = 320.0;
     UIImage *imageWithBlur;
     UIImage *profilePictureImage;
     UILabel *label;
-    UIButton *settingsButton;
     TestView *tV;
 }
 
-@synthesize settingsButton, tV;
+@synthesize tV;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,41 +56,24 @@ static CGFloat ImageWidth  = 320.0;
         
         self.imgWithBlur.image = [image applyDarkEffect];
         
-        /*
-        settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        settingsButton.frame = CGRectMake(283, 36, 25, 25);
-        
-        [settingsButton setBackgroundImage:[UIImage imageNamed:@"settings_icon"]forState:UIControlStateNormal];
-        */
-        
         UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Recent ratings", @"Highest ratings", nil]];
         segmentedControl.frame = CGRectMake(10, ImageHeight+10, 300, 29);
         segmentedControl.selectedSegmentIndex = 0;
         segmentedControl.tintColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
         [segmentedControl addTarget:self action:@selector(valueChanged:) forControlEvents: UIControlEventValueChanged];
-
-        UIView *fakeView = [[UIView alloc] init];
-        
-        CGRect frame = fakeView.frame;
-        frame.size.width = 320;
-        frame.size.height = tV.frame.size.height;
-        frame.origin.y = ImageHeight;
-        fakeView.frame = frame;
         
         self.scrollView = [[UIScrollView alloc] init];
 		self.scrollView.delegate = self;
         self.scrollView.backgroundColor = [UIColor clearColor];
-        self.scrollView.contentSize = CGSizeMake(320, frame.size.height+ImageHeight);
+        self.scrollView.contentSize = CGSizeMake(320, tV.frame.size.height+ImageHeight);
         
-        [self.scrollView addSubview:fakeView];
         [self.view addSubview:self.imgProfile];
         [self.view addSubview:self.imgWithBlur];
         [self.scrollView addSubview:self.profilePictureImageView];
         [self.scrollView addSubview:label];
-        [self.scrollView addSubview:settingsButton];
-        [self.view addSubview:self.scrollView];
         [self.scrollView addSubview:tV];
         [self.scrollView addSubview:segmentedControl];
+        [self.view addSubview:self.scrollView];
         
         [self setEdgesForExtendedLayout:UIRectEdgeNone];
         [self setAutomaticallyAdjustsScrollViewInsets:NO];
@@ -116,7 +98,6 @@ static CGFloat ImageWidth  = 320.0;
         self.imgWithBlur.alpha = percent;
         self.profilePictureImageView.alpha = percent;
         label.alpha = percent;
-        settingsButton.alpha = percent;
         NSLog(@"YOFFSET: %f", yOffset);
         NSLog(@"BLUR ALPHA: %f", percent);
         
@@ -130,7 +111,6 @@ static CGFloat ImageWidth  = 320.0;
         self.imgWithBlur.alpha = 1;
         self.profilePictureImageView.alpha = 1;
         label.alpha = 1;
-        settingsButton.alpha = 1;
         NSLog(@"YOFFSET: %f", yOffset);
     }
     
