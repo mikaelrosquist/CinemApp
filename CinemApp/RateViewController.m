@@ -138,6 +138,8 @@ static CGFloat ImageWidth  = 320.0;
         self.imgWithBlur.alpha = percent;
         self.profilePictureImageView.alpha = percent;
         movieTitleLabel.alpha = percent;
+        movieRuntimeLabel.alpha = percent;
+        movieGenresLabel.alpha = percent;
         NSLog(@"YOFFSET: %f", yOffset);
         NSLog(@"BLUR ALPHA: %f", percent);
         
@@ -151,6 +153,8 @@ static CGFloat ImageWidth  = 320.0;
         self.imgWithBlur.alpha = 1;
         self.profilePictureImageView.alpha = 1;
         movieTitleLabel.alpha = 1;
+        movieGenresLabel.alpha = 1;
+        movieRuntimeLabel.alpha = 1;
         NSLog(@"YOFFSET: %f", yOffset);
     }
 }
