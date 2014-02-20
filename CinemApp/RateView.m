@@ -14,28 +14,36 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        //rateLabel
+        UILabel *rateLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 30, 100, 44)];
+        rateLabel.text = @"Rating";
+        [self addSubview:rateLabel];
         
-        UIButton *testButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [testButton addTarget:self
-                       action:@selector(callSuperMethod)
-             forControlEvents:UIControlEventTouchDown];
-        [testButton setTitle:@"Button" forState:UIControlStateNormal];
-        testButton.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
-        [self addSubview:testButton];
+        //Slider
+        CGRect frame = CGRectMake(20, 80, 240.0, 15);
+        UISlider *slider = [[UISlider alloc] initWithFrame:frame];
+       // Vad som händer när man SLAJDAR
+       // [slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
+        [slider setBackgroundColor:[UIColor clearColor]];
+        [slider setTintColor:[UIColor redColor]];
+        [self addSubview:slider];
         
+        //commentLabel
+        UILabel *commentLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 110, 100, 44)];
+        commentLabel.text = @"Comment";
+        [self addSubview:commentLabel];
         
-        //UISlider *slider = [[UISlider alloc] initWithFrame:frame];
-        //[slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
-        //[slider setBackgroundColor:[UIColor clearColor]];
-        
-        // Initialization code
+        //commentField
+        UITextField * commentField = [[UITextField alloc]initWithFrame:CGRectMake(20, 120, 280, 200)];
+        commentField.placeholder = @"How was it? Leave a note...";
+        commentField.borderStyle = UITextBorderStyleRoundedRect;
+      //  commentField.textAlignment =
+        [self addSubview:commentField];
+       
     }
     return self;
 }
 
-- (void) callSuperMethod{
-    //[ buttonPressed];
-}
 
 /*
 // Only override drawRect: if you perform custom drawing.

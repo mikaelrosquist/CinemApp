@@ -14,7 +14,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        
+        UILabel *label1 = [[UILabel alloc]initWithFrame:CGRectMake(20,30, 200, 44)];
+        label1.text = @"Här är aktiviteter";
+        [self addSubview:label1]; //add label1 to your custom view
+        
     }
     return self;
 }

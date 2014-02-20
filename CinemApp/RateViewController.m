@@ -21,9 +21,11 @@ static CGFloat ImageWidth  = 320.0;
     UIImage *imageWithBlur;
     UIImage *profilePictureImage;
     UILabel *label;
-    MovieView *movieView;
 }
 
+@synthesize movieView = _movieView;
+@synthesize rateView = _rateView;
+@synthesize activityView = _activityView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,7 +34,9 @@ static CGFloat ImageWidth  = 320.0;
         
         self.title = @"Rate";
         
-        movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
+        _movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
+        _rateView = [[RateView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
+        _activityView = [[ActivityView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
         
         self.title = @"Movie";
         
@@ -59,7 +63,7 @@ static CGFloat ImageWidth  = 320.0;
         
         self.imgWithBlur.image = [image applyDarkEffect];
         
-        UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Recent ratings", @"Highest ratings", nil]];
+        UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Information", @"Rate", @"Activity", nil]];
         segmentedControl.frame = CGRectMake(10, ImageHeight+10, 300, 29);
         segmentedControl.selectedSegmentIndex = 0;
         segmentedControl.tintColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
@@ -68,14 +72,18 @@ static CGFloat ImageWidth  = 320.0;
         self.scrollView = [[UIScrollView alloc] init];
 		self.scrollView.delegate = self;
         self.scrollView.backgroundColor = [UIColor clearColor];
-        self.scrollView.contentSize = CGSizeMake(320, movieView.frame.size.height+ImageHeight);
+        self.scrollView.contentSize = CGSizeMake(320, _movieView.frame.size.height+ImageHeight);
+        self.scrollView.contentSize = CGSizeMake(320, _rateView.frame.size.height+ImageHeight);
+        self.scrollView.contentSize = CGSizeMake(320, _activityView.frame.size.height+ImageHeight);
         self.scrollView.alwaysBounceVertical = YES;
         
         [self.view addSubview:self.imgProfile];
         [self.view addSubview:self.imgWithBlur];
         [self.scrollView addSubview:self.profilePictureImageView];
         [self.view addSubview:label];
-        [self.scrollView addSubview:movieView];
+        [self.scrollView addSubview:_movieView];
+        [self.scrollView addSubview:_rateView];
+        [self.scrollView addSubview:_activityView];
         [self.scrollView addSubview:segmentedControl];
         [self.view addSubview:self.scrollView];
         
@@ -119,11 +127,17 @@ static CGFloat ImageWidth  = 320.0;
 - (void)valueChanged:(UISegmentedControl *)segment {
     
     if(segment.selectedSegmentIndex == 0) {
-        movieView.hidden = FALSE;
+        _movieView.hidden = FALSE;
+        _rateView.hidden = TRUE;
+        _activityView.hidden = TRUE;
     }else if(segment.selectedSegmentIndex == 1){
-        movieView.hidden = TRUE;
+        _movieView.hidden = TRUE;
+        _rateView.hidden = FALSE;
+        _activityView.hidden = TRUE;
     }else if(segment.selectedSegmentIndex == 2){
-        //action for the third button (Missing)
+        _movieView.hidden = TRUE;
+        _rateView.hidden = TRUE;
+        _activityView.hidden = FALSE;
     }
 }
 
@@ -137,9 +151,9 @@ static CGFloat ImageWidth  = 320.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    RateView *rv = [[RateView alloc] init];
-    [self.view addSubview:rv];
+    
+    _rateView.hidden = TRUE;
+    _activityView.hidden = TRUE;
 }
 
 - (void)didReceiveMemoryWarning

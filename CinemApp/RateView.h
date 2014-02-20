@@ -10,6 +10,4 @@
 
 @interface RateView : UIView
 
-@property (nonatomic, retain) UIButton *testButton;
-
 @end
