@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestView : UIView
+@interface MovieView : UIView
 
 @end
