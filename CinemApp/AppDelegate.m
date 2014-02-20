@@ -34,12 +34,14 @@
     ActivityViewController* activity = [[ActivityViewController alloc] init];
     ProfileViewController* profile = [[ProfileViewController alloc] init];
     
+    //NavigationControllers till alla viewControllers
     UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController:home];
     UINavigationController *exploreNav = [[UINavigationController alloc] initWithRootViewController:explore];
     UINavigationController *rateNav = [[UINavigationController alloc] initWithRootViewController:rate];
     UINavigationController *activityNav = [[UINavigationController alloc] initWithRootViewController:activity];
     UINavigationController *profileNav = [[UINavigationController alloc] initWithRootViewController:profile];
     
+    //Transparent navigationBar
     [profileNav.navigationBar setBackgroundImage:[UIImage new]
                                    forBarMetrics:UIBarMetricsDefault];
     profileNav.navigationBar.shadowImage = [UIImage new];
