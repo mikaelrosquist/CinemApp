@@ -32,16 +32,16 @@ static CGFloat ImageWidth  = 320.0;
         
         movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
         
-        self.title = @"username";
+        //self.title = @"username";
         
         image = [UIImage imageNamed:@"kitten"];
         imageWithBlur = [UIImage imageNamed:@"kitten"];
         profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
         
         self.profilePictureImageView = [[UIImageView alloc] initWithImage:profilePictureImage];
-        self.profilePictureImageView.frame = CGRectMake(120, 60, 80, 80);
+        self.profilePictureImageView.frame = CGRectMake(120, 75, 80, 80);
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 320, 40)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 320, 40)];
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor=[UIColor whiteColor];
         label.text = @"Firstname Lastname";
@@ -68,16 +68,15 @@ static CGFloat ImageWidth  = 320.0;
         self.scrollView.backgroundColor = [UIColor clearColor];
         self.scrollView.contentSize = CGSizeMake(320, movieView.frame.size.height+ImageHeight);
         self.scrollView.alwaysBounceVertical = YES;
-        
         [self.view addSubview:self.imgProfile];
         [self.view addSubview:self.imgWithBlur];
         [self.scrollView addSubview:self.profilePictureImageView];
-        [self.view addSubview:label];
+        [self.scrollView addSubview:label];
         [self.scrollView addSubview:movieView];
         [self.scrollView addSubview:segmentedControl];
         [self.view addSubview:self.scrollView];
         
-        [self setEdgesForExtendedLayout:UIRectEdgeNone];
+        //[self setEdgesForExtendedLayout:UIRectEdgeNone];
         [self setAutomaticallyAdjustsScrollViewInsets:NO];
         
     }
@@ -91,7 +90,7 @@ static CGFloat ImageWidth  = 320.0;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat yOffset = self.scrollView.contentOffset.y;
     
-    if (yOffset < 0) {
+    if (yOffset < 0.1) {
         CGFloat factor = ((ABS(yOffset)+ImageHeight)*ImageWidth)/ImageHeight;
         CGRect f = CGRectMake(-(factor-ImageWidth)/2, 0, factor, ImageHeight+ABS(yOffset));
         self.imgProfile.frame = f;
@@ -102,6 +101,9 @@ static CGFloat ImageWidth  = 320.0;
         label.alpha = percent;
         NSLog(@"YOFFSET: %f", yOffset);
         NSLog(@"BLUR ALPHA: %f", percent);
+
+        [self.navigationController setNavigationBarHidden: NO animated:YES];
+
         
     } else {
         CGRect f = self.imgProfile.frame;
@@ -112,8 +114,10 @@ static CGFloat ImageWidth  = 320.0;
         
         self.imgWithBlur.alpha = 1;
         self.profilePictureImageView.alpha = 1;
-        label.alpha = 1;
+
         NSLog(@"YOFFSET: %f", yOffset);
+
+        [self.navigationController setNavigationBarHidden: YES animated:YES];
     }
     
 }
@@ -124,8 +128,6 @@ static CGFloat ImageWidth  = 320.0;
         movieView.hidden = FALSE;
     }else if(segment.selectedSegmentIndex == 1){
         movieView.hidden = TRUE;
-    }else if(segment.selectedSegmentIndex == 2){
-        //action for the third button (Missing)
     }
 }
 
@@ -134,6 +136,8 @@ static CGFloat ImageWidth  = 320.0;
     
     CGRect bounds = self.view.bounds;
     self.scrollView.frame = bounds;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+
 }
 
 - (void)viewDidLoad
@@ -141,10 +145,10 @@ static CGFloat ImageWidth  = 320.0;
     [super viewDidLoad];
     
     UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]
-                                    initWithTitle:@"Settings"
-                                    style:UIBarButtonItemStyleBordered
-                                    target:self
-                                    action:@selector(pushMyNewViewController:)];
+                                     initWithImage:[[UIImage imageNamed:@"settings_icon"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                       style:UIBarButtonItemStyleBordered
+                                       target:self
+                                       action:@selector(pushMyNewViewController:)];
     
     //[self setNeedsStatusBarAppearanceUpdate];
 
@@ -155,7 +159,6 @@ static CGFloat ImageWidth  = 320.0;
 
 -(void)pushMyNewViewController:(id)sender {
     
-
     [self.navigationController pushViewController:settingsView animated:YES];
 
 }

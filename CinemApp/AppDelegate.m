@@ -54,8 +54,7 @@
     rateNav.view.backgroundColor = [UIColor clearColor];
     rateNav.navigationBar.barStyle = UIBarStyleBlack;
     
-    
-    
+        
     NSArray* controllers = [NSArray arrayWithObjects:homeNav, exploreNav, rateNav, activityNav, profileNav, nil];
     self.tabBarController.viewControllers = controllers;
     
