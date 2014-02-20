@@ -167,9 +167,5 @@ static CGFloat ImageWidth  = 320.0;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)buttonPressed{
-    NSLog(@"button pressed");
-    //label.text = @"Button pressed";
-}
 
 @end

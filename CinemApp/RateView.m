@@ -9,9 +9,9 @@
 #import "RateView.h"
 
 @implementation RateView{
-UILabel *sliderLabel;
-UISlider *slider;
-    
+    UILabel *sliderLabel;
+    UISlider *slider;
+    UITextField *commentField;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -55,11 +55,18 @@ UISlider *slider;
         [self addSubview:commentLabel];
         
         //commentField
-        UITextField * commentField = [[UITextField alloc]initWithFrame:CGRectMake(20, 120, 280, 120)];
+        commentField = [[UITextField alloc]initWithFrame:CGRectMake(20, 120, 280, 120)];
         commentField.placeholder = @"How was it? Leave a note...";
         commentField.borderStyle = UITextBorderStyleRoundedRect;
         commentField.textAlignment = 0;
         [self addSubview:commentField];
+        
+        //Gömmer tangentbordet om man klickar någon annanstans i den här vyn
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                       initWithTarget:self
+                                       action:@selector(dismissKeyboard)];
+        
+        [self addGestureRecognizer:tap];
        
     }
     return self;
@@ -70,6 +77,9 @@ UISlider *slider;
     sliderLabel.text = [NSString stringWithFormat:@"%d",val];
 }
 
+-(void)dismissKeyboard {
+    [commentField resignFirstResponder];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
