@@ -27,6 +27,7 @@
 		6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */; };
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
 		6F99044418B604D500EDF07F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F99044318B604D500EDF07F /* SettingsViewController.m */; };
+		731BE8E818B61EAC0009D8FE /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 731BE8E718B61EAC0009D8FE /* ActivityView.m */; };
 		73C7E73118B37A1A00453123 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C7E73018B37A1A00453123 /* RateView.m */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,8 @@
 		6F955B0018B397A7004C4B70 /* MovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieView.m; sourceTree = "<group>"; };
 		6F99044218B604D500EDF07F /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = ../SettingsViewController.h; sourceTree = "<group>"; };
 		6F99044318B604D500EDF07F /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = ../SettingsViewController.m; sourceTree = "<group>"; };
+		731BE8E618B61EAC0009D8FE /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
+		731BE8E718B61EAC0009D8FE /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
 		73C7E72F18B37A1A00453123 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
 		73C7E73018B37A1A00453123 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,6 +182,8 @@
 		73C7E73218B37A4F00453123 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				731BE8E618B61EAC0009D8FE /* ActivityView.h */,
+				731BE8E718B61EAC0009D8FE /* ActivityView.m */,
 				73C7E72F18B37A1A00453123 /* RateView.h */,
 				73C7E73018B37A1A00453123 /* RateView.m */,
 				6F955AFF18B397A7004C4B70 /* MovieView.h */,
@@ -313,6 +318,7 @@
 				73C7E73118B37A1A00453123 /* RateView.m in Sources */,
 				6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */,
 				6F0CAA4718B3709200AE42F9 /* RateViewController.m in Sources */,
+				731BE8E818B61EAC0009D8FE /* ActivityView.m in Sources */,
 				6F955B0118B397A7004C4B70 /* MovieView.m in Sources */,
 				6F0CAA1A18B3705400AE42F9 /* AppDelegate.m in Sources */,
 				6F0CAA1618B3705400AE42F9 /* main.m in Sources */,
