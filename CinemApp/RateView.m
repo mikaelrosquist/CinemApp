@@ -8,12 +8,17 @@
 
 #import "RateView.h"
 
-@implementation RateView
+@implementation RateView{
+UILabel *sliderLabel;
+UISlider *slider;
+    
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         //rateLabel
         UILabel *rateLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 30, 100, 44)];
         rateLabel.text = @"Rating";
@@ -21,9 +26,11 @@
         
         //slider
         CGRect frame = CGRectMake(20, 80, 240.0, 15);
-        UISlider *slider = [[UISlider alloc] initWithFrame:frame];
-       // Vad som händer när man SLAJDAR
-       // [slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
+        slider = [[UISlider alloc] initWithFrame:frame];
+        slider.minimumValue = 0;
+        slider.maximumValue = 10;
+        //Vad som händer när man SLAJDAR
+        [slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
         [slider setBackgroundColor:[UIColor clearColor]];
         [slider setTintColor:[UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1]];
         [self addSubview:slider];
@@ -35,9 +42,10 @@
         [self addSubview:self.sliderLabelBGView];
         
         //sliderLabel
-        UILabel *sliderLabel = [[UILabel alloc]initWithFrame:CGRectMake(285, 65, 15, 44)];
+        sliderLabel = [[UILabel alloc]initWithFrame:CGRectMake(280, 65, 20, 44)];
         sliderLabel.text = @"0";
         sliderLabel.textColor = [UIColor whiteColor];
+        sliderLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:sliderLabel];
         
         //commentLabel
@@ -46,16 +54,21 @@
         [self addSubview:commentLabel];
         
         //commentField
-        UITextField * commentField = [[UITextField alloc]initWithFrame:CGRectMake(20, 120, 280, 200)];
+        UITextField * commentField = [[UITextField alloc]initWithFrame:CGRectMake(20, 120, 280, 120)];
         commentField.placeholder = @"How was it? Leave a note...";
         commentField.borderStyle = UITextBorderStyleRoundedRect;
-      //  commentField.textAlignment =
+        commentField.textAlignment = 0;
         [self addSubview:commentField];
        
     }
     return self;
 }
 
+- (void)sliderAction:(id)sender {
+    UISlider *tmpSlider = (UISlider *)sender;
+    NSInteger val = (tmpSlider.value);
+    sliderLabel.text = [NSString stringWithFormat:@"%d",val];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

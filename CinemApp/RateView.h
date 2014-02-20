@@ -10,6 +10,7 @@
 
 @interface RateView : UIView
 
+//@property (nonatomic, weak) UILabel *sliderLabel;
 @property (nonatomic, retain) UIImageView *sliderLabelBGView;
 
 @end
