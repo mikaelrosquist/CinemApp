@@ -113,9 +113,9 @@ static CGFloat ImageWidth  = 320.0;
         NSLog(@"BLUR ALPHA: %f", percent);
         
     } else {
-        CGRect f = self.imgProfile.frame;
-        f.origin.y = -yOffset;
         
+        CGRect f = CGRectMake(0, -yOffset, ImageWidth, ImageHeight);
+
         self.imgProfile.frame = f;
         self.imgWithBlur.frame = f;
         
