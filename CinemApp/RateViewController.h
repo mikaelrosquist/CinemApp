@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "RateView.h"
+#import "MovieView.h"
 
-@interface RateViewController : UIViewController
+@interface RateViewController : UIViewController<UIScrollViewDelegate>
 
-@property (nonatomic, strong) RateView *rv;
+//@property (nonatomic, strong) RateView *rv;
+
+@property (nonatomic, retain) UIScrollView *scrollView;
+@property (nonatomic, retain) UIImageView *imgProfile;
+@property (nonatomic, retain) UIImageView *imgWithBlur;
+@property (nonatomic, retain) UIImageView *profilePictureImageView;
+@property (nonatomic, strong) MovieView *movieView;
 
 
 @end

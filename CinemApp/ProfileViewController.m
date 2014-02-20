@@ -148,7 +148,7 @@ static CGFloat ImageWidth  = 320.0;
                                     target:self
                                     action:@selector(pushMyNewViewController:)];
     
-    [self setNeedsStatusBarAppearanceUpdate];
+    //[self setNeedsStatusBarAppearanceUpdate];
 
     self.navigationItem.rightBarButtonItem = settingsButton;
     settingsView = [[SettingsViewController alloc] init];
@@ -157,7 +157,7 @@ static CGFloat ImageWidth  = 320.0;
 
 -(void)pushMyNewViewController:(id)sender {
     
-    
+
     [self.navigationController pushViewController:settingsView animated:YES];
 
 }
