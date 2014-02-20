@@ -46,7 +46,7 @@
     profileNav.navigationBar.translucent = YES;
     profileNav.view.backgroundColor = [UIColor clearColor];
     profileNav.navigationBar.barStyle = UIBarStyleBlack;
-
+    
     NSArray* controllers = [NSArray arrayWithObjects:homeNav, exploreNav, rateNav, activityNav, profileNav, nil];
     self.tabBarController.viewControllers = controllers;
     

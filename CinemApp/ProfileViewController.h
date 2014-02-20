@@ -19,4 +19,5 @@
 @property (nonatomic, strong) MovieView *movieView;
 @property (nonatomic, strong) SettingsViewController *settingsView;
 
+
 @end
