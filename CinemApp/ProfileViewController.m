@@ -22,6 +22,7 @@ static CGFloat ImageWidth  = 320.0;
     UIImage *profilePictureImage;
     UILabel *label;
     MovieView *movieView;
+    UITableViewController *settingsView;
 }
 
 @synthesize movieView;
@@ -139,14 +140,24 @@ static CGFloat ImageWidth  = 320.0;
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]init];
-    [settingsButton setTitle:@"Settings"];
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]
+                                    initWithTitle:@"Settings"
+                                    style:UIBarButtonItemStyleBordered
+                                    target:self
+                                    action:@selector(pushMyNewViewController:)];
+    
     self.navigationItem.rightBarButtonItem = settingsButton;
+    settingsView = [[SettingsViewController alloc] init];
     
 }
--(void)settingsView{
+
+-(void)pushMyNewViewController:(id)sender {
     
+    
+    [self.navigationController pushViewController:settingsView animated:YES];
+
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
