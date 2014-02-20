@@ -12,5 +12,6 @@
 
 //@property (nonatomic, weak) UILabel *sliderLabel;
 @property (nonatomic, retain) UIImageView *sliderLabelBGView;
+@property (nonatomic, strong) UITextField *commentField;
 
 @end

@@ -49,7 +49,7 @@ static CGFloat ImageWidth  = 320.0;
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 120, 310, 60)];
         label.textAlignment = NSTextAlignmentLeft;
         label.textColor=[UIColor whiteColor];
-        label.text = @"A very very very long movie title with a lot of characters.";
+        label.text = @"Jurassic Park (1994)";
         label.numberOfLines = 3;
         label.lineBreakMode = NSLineBreakByWordWrapping;
         
@@ -167,9 +167,5 @@ static CGFloat ImageWidth  = 320.0;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)buttonPressed{
-    NSLog(@"button pressed");
-    //label.text = @"Button pressed";
-}
 
 @end

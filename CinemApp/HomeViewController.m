@@ -31,23 +31,10 @@
 {
     [super viewDidLoad];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [button addTarget:self
-               action:@selector(aMethod:)
-     forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"Show View" forState:UIControlStateNormal];
-    button.frame = CGRectMake(10.0, 100.0, 300.0, 20.0);
-    [self.view addSubview:button];
-
-    
-    //Nedan kod byter färg på navBar om vi vill
+    //Byter färg på navigationBar
     //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
+}
 
-}
-- (void)aMethod:(UIButton*)button
-{
-    NSLog(@"Button  clicked.");
-}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
