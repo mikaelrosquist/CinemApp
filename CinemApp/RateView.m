@@ -81,6 +81,8 @@
                                        initWithTarget:self
                                        action:@selector(dismissKeyboard)];
         [self addGestureRecognizer:tap];
+        
+        [self setBackgroundColor:[UIColor whiteColor]];
 
     }
     return self;

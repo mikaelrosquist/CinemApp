@@ -28,6 +28,7 @@
         [self addSubview:castLabel];
         
         //loopa igenom top-cast och skriv ut dem på nåt sätt.
+
     
     }
     return self;

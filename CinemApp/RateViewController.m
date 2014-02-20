@@ -41,11 +41,6 @@ static CGFloat ImageWidth  = 320.0;
         image = [UIImage imageNamed:@"movie"];
         imageWithBlur = [UIImage imageNamed:@"movie"];
         
-        //Kommentera bort raderna nedan om vi vill ha en movieposter
-        //profilePictureImage = [UIImage imageNamed:@"movieposter"];
-        //self.profilePictureImageView = [[UIImageView alloc] initWithImage:profilePictureImage];
-        //self.profilePictureImageView.frame = CGRectMake(120, 10, 80, 100);
-        
         label = [[UILabel alloc] initWithFrame:CGRectMake(10, 120, 310, 60)];
         label.textAlignment = NSTextAlignmentLeft;
         label.textColor=[UIColor whiteColor];
@@ -64,7 +59,7 @@ static CGFloat ImageWidth  = 320.0;
 		self.imgWithBlur.frame = CGRectMake(0, 0, ImageWidth, ImageHeight);
         self.imgWithBlur.contentMode = UIViewContentModeScaleAspectFill;
         
-        self.imgWithBlur.image = [image applyDarkEffectWithBlurIntensity:(2)];
+        self.imgWithBlur.image = [image applyDarkEffectWithIntensity:0 darkness:0.5];
         
         UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Information", @"Rate", @"Activity", nil]];
         segmentedControl.frame = CGRectMake(10, ImageHeight+10, 300, 29);
@@ -80,13 +75,16 @@ static CGFloat ImageWidth  = 320.0;
         
         [self.view addSubview:self.imgProfile];
         [self.view addSubview:self.imgWithBlur];
-        //[self.scrollView addSubview:self.profilePictureImageView];
         [self.scrollView addSubview:label];
         [self.scrollView addSubview:_movieView];
         [self.scrollView addSubview:_rateView];
         [self.scrollView addSubview:_activityView];
         [self.scrollView addSubview:segmentedControl];
         [self.view addSubview:self.scrollView];
+        
+        //Ska göra det enklare att använda slidern, vet ej om det funkar
+        self.scrollView.canCancelContentTouches = YES;
+        self.scrollView.delaysContentTouches = YES;
         
         //Kommentera bort raden nedan om vi vill att bakgrundsbildend ska ligga nedanför navBar
         //[self setEdgesForExtendedLayout:UIRectEdgeNone];
@@ -159,6 +157,8 @@ static CGFloat ImageWidth  = 320.0;
     
     _rateView.hidden = TRUE;
     _activityView.hidden = TRUE;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

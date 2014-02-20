@@ -21,8 +21,10 @@ static CGFloat backdropImageWidth  = 320.0;
     UIImage *backdropWithBlurImage;
     UILabel *nameLabel;
     MovieView *movieView;
-    UITableViewController *settingsView;
+    SettingsViewController *settingsView;
 }
+
+@synthesize movieView, settingsView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

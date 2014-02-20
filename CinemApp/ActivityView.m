@@ -19,6 +19,8 @@
         label1.text = @"Här är aktiviteter";
         [self addSubview:label1]; //add label1 to your custom view
         
+        [self setBackgroundColor:[UIColor whiteColor]];
+        
     }
     return self;
 }
