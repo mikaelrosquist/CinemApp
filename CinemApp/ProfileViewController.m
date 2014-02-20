@@ -21,17 +21,21 @@ static CGFloat ImageWidth  = 320.0;
     UIImage *imageWithBlur;
     UIImage *profilePictureImage;
     UILabel *label;
-    TestView *tV;
+    MovieView *movieView;
 }
 
-@synthesize tV;
+@synthesize movieView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+<<<<<<< HEAD
         tV = [[TestView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
         
+=======
+        movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
+>>>>>>> 25fc21b190af108facd9674be17d6fbd4ca0565e
         self.title = @"username";
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                       forBarMetrics:UIBarMetricsDefault];
@@ -71,14 +75,14 @@ static CGFloat ImageWidth  = 320.0;
         self.scrollView = [[UIScrollView alloc] init];
 		self.scrollView.delegate = self;
         self.scrollView.backgroundColor = [UIColor clearColor];
-        self.scrollView.contentSize = CGSizeMake(320, tV.frame.size.height+ImageHeight);
+        self.scrollView.contentSize = CGSizeMake(320, movieView.frame.size.height+ImageHeight);
         self.scrollView.alwaysBounceVertical = YES;
         
         [self.view addSubview:self.imgProfile];
         [self.view addSubview:self.imgWithBlur];
         [self.scrollView addSubview:self.profilePictureImageView];
         [self.scrollView addSubview:label];
-        [self.scrollView addSubview:tV];
+        [self.scrollView addSubview:movieView];
         [self.scrollView addSubview:segmentedControl];
         [self.view addSubview:self.scrollView];
         
@@ -126,9 +130,9 @@ static CGFloat ImageWidth  = 320.0;
 - (void)valueChanged:(UISegmentedControl *)segment {
     
     if(segment.selectedSegmentIndex == 0) {
-        tV.hidden = FALSE;
+        movieView.hidden = FALSE;
     }else if(segment.selectedSegmentIndex == 1){
-        tV.hidden = TRUE;
+        movieView.hidden = TRUE;
     }else if(segment.selectedSegmentIndex == 2){
         //action for the third button (Missing)
     }
