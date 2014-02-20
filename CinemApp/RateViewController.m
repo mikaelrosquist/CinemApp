@@ -17,39 +17,42 @@ static CGFloat ImageWidth  = 320.0;
 @end
 
 @implementation RateViewController{
-    UIImage *image;
-    UIImage *imageWithBlur;
-    UIImage *profilePictureImage;
-    UILabel *label;
+    UIImage *image, *imageWithBlur, *profilePictureImage;
+    UILabel *movieTitleLabel, *movieReleaseLabel;
 }
 
-@synthesize movieView = _movieView;
-@synthesize rateView = _rateView;
-@synthesize activityView = _activityView;
+@synthesize movieView, rateView, activityView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
-        _movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
-        _rateView = [[RateView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 400)];
-        _activityView = [[ActivityView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
+        movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
+        rateView = [[RateView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 400)];
+        activityView = [[ActivityView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
         
         self.title = @"";
         
-        image = [UIImage imageNamed:@"movie"];
-        imageWithBlur = [UIImage imageNamed:@"movie"];
+        image = [UIImage imageNamed:@"drstrangelove"];
+        imageWithBlur = [UIImage imageNamed:@"drstrangelove"];
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 120, 310, 60)];
-        label.textAlignment = NSTextAlignmentLeft;
-        label.textColor=[UIColor whiteColor];
-        label.text = @"Jurassic Park (1994)";
-        label.numberOfLines = 3;
-        label.lineBreakMode = NSLineBreakByWordWrapping;
+        NSString *movieTitle = @"Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb";
+        NSString *movieRelease = @"(1964)";
         
-        [label setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 22.0]];
-        [label sizeToFit];
+        movieTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 115, 310, 60)];
+        movieTitleLabel.text = [NSString stringWithFormat:@"%@ %@", movieTitle, movieRelease];
+        movieTitleLabel.textColor=[UIColor whiteColor];
+        movieTitleLabel.numberOfLines = 0;
+        movieTitleLabel.textAlignment = NSTextAlignmentLeft;
+        movieTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        [movieTitleLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 22.0]];
+        [movieTitleLabel sizeToFit];
+        
+        NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: movieTitleLabel.attributedText];
+        [text addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([movieTitle length]+1, 6)];
+        [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 16.0] range: NSMakeRange([movieTitle length]+1, 6)];
+        [movieTitleLabel setAttributedText: text];
         
         self.imgProfile = [[UIImageView alloc] initWithImage:image];
 		self.imgProfile.frame = CGRectMake(0, 0, ImageWidth, ImageHeight);
@@ -70,15 +73,16 @@ static CGFloat ImageWidth  = 320.0;
         self.scrollView = [[UIScrollView alloc] init];
 		self.scrollView.delegate = self;
         self.scrollView.backgroundColor = [UIColor clearColor];
-        self.scrollView.contentSize = CGSizeMake(320, _movieView.frame.size.height+ImageHeight);
+        self.scrollView.contentSize = CGSizeMake(320, movieView.frame.size.height+ImageHeight);
         self.scrollView.alwaysBounceVertical = YES;
         
         [self.view addSubview:self.imgProfile];
         [self.view addSubview:self.imgWithBlur];
-        [self.scrollView addSubview:label];
-        [self.scrollView addSubview:_movieView];
-        [self.scrollView addSubview:_rateView];
-        [self.scrollView addSubview:_activityView];
+        [self.scrollView addSubview:movieTitleLabel];
+        [self.scrollView addSubview:movieReleaseLabel];
+        [self.scrollView addSubview:movieView];
+        [self.scrollView addSubview:rateView];
+        [self.scrollView addSubview:activityView];
         [self.scrollView addSubview:segmentedControl];
         [self.view addSubview:self.scrollView];
         
@@ -106,7 +110,7 @@ static CGFloat ImageWidth  = 320.0;
         float percent = (yOffset/70.0)+1.1;
         self.imgWithBlur.alpha = percent;
         self.profilePictureImageView.alpha = percent;
-        label.alpha = percent;
+        movieTitleLabel.alpha = percent;
         NSLog(@"YOFFSET: %f", yOffset);
         NSLog(@"BLUR ALPHA: %f", percent);
         
@@ -119,7 +123,7 @@ static CGFloat ImageWidth  = 320.0;
         
         self.imgWithBlur.alpha = 1;
         self.profilePictureImageView.alpha = 1;
-        label.alpha = 1;
+        movieTitleLabel.alpha = 1;
         NSLog(@"YOFFSET: %f", yOffset);
     }
 }
@@ -127,20 +131,20 @@ static CGFloat ImageWidth  = 320.0;
 - (void)valueChanged:(UISegmentedControl *)segment {
     
     if(segment.selectedSegmentIndex == 0) {
-        _movieView.hidden = FALSE;
-        _rateView.hidden = TRUE;
-        _activityView.hidden = TRUE;
-        self.scrollView.contentSize = CGSizeMake(320, _movieView.frame.size.height+ImageHeight);
+        movieView.hidden = FALSE;
+        rateView.hidden = TRUE;
+        activityView.hidden = TRUE;
+        self.scrollView.contentSize = CGSizeMake(320, movieView.frame.size.height+ImageHeight);
     }else if(segment.selectedSegmentIndex == 1){
-        _movieView.hidden = TRUE;
-        _rateView.hidden = FALSE;
-        _activityView.hidden = TRUE;
-        self.scrollView.contentSize = CGSizeMake(320, _rateView.frame.size.height+ImageHeight);
+        movieView.hidden = TRUE;
+        rateView.hidden = FALSE;
+        activityView.hidden = TRUE;
+        self.scrollView.contentSize = CGSizeMake(320, rateView.frame.size.height+ImageHeight);
     }else if(segment.selectedSegmentIndex == 2){
-        _movieView.hidden = TRUE;
-        _rateView.hidden = TRUE;
-        _activityView.hidden = FALSE;
-        self.scrollView.contentSize = CGSizeMake(320, _activityView.frame.size.height+ImageHeight);
+        movieView.hidden = TRUE;
+        rateView.hidden = TRUE;
+        activityView.hidden = FALSE;
+        self.scrollView.contentSize = CGSizeMake(320, activityView.frame.size.height+ImageHeight);
     }
 }
 
@@ -155,10 +159,8 @@ static CGFloat ImageWidth  = 320.0;
 {
     [super viewDidLoad];
     
-    _rateView.hidden = TRUE;
-    _activityView.hidden = TRUE;
-    
-    
+    rateView.hidden = TRUE;
+    activityView.hidden = TRUE;
 }
 
 - (void)didReceiveMemoryWarning
