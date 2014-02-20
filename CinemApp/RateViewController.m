@@ -18,7 +18,7 @@ static CGFloat ImageWidth  = 320.0;
 
 @implementation RateViewController{
     UIImage *image, *imageWithBlur, *profilePictureImage;
-    UILabel *movieTitleLabel, *movieReleaseLabel;
+    UILabel *movieTitleLabel, *movieGenresLabel, *movieRuntimeLabel;
 }
 
 @synthesize movieView, rateView, activityView;
@@ -34,25 +34,51 @@ static CGFloat ImageWidth  = 320.0;
         
         self.title = @"";
         
-        image = [UIImage imageNamed:@"drstrangelove"];
-        imageWithBlur = [UIImage imageNamed:@"drstrangelove"];
+        image = [UIImage imageNamed:@"movie"];
+        imageWithBlur = [UIImage imageNamed:@"movie"];
         
-        NSString *movieTitle = @"Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb";
-        NSString *movieRelease = @"(1964)";
+        NSString *movieTitle = @"Jurassic Park";
+        NSString *movieRelease = @"(1994)";
+        NSString *movieGenres = @"Adventure, Sci-Fi";
+        NSString *movieRuntime = @"127 min";
         
-        movieTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 115, 310, 60)];
-        movieTitleLabel.text = [NSString stringWithFormat:@"%@ %@", movieTitle, movieRelease];
+        //Om titeln är för lång så kortas den ned
+        if (movieTitle.length > 65) {
+            movieTitle = [[movieTitle substringToIndex:65] stringByAppendingString:@"..."];
+        }
+        
+        movieTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 140, 300, 60)];
+        
+        //stringByPaddingToLength nedan utökar strängen så att den alltid är 100 tecken, annars hamnar texten på olika ställen beroende på längden på titeln.
+        movieTitleLabel.text = [[NSString stringWithFormat:@"%@ %@ ", movieTitle, movieRelease] stringByPaddingToLength: 100 withString: @"  " startingAtIndex:0];
         movieTitleLabel.textColor=[UIColor whiteColor];
-        movieTitleLabel.numberOfLines = 0;
+        movieTitleLabel.numberOfLines = 3;
         movieTitleLabel.textAlignment = NSTextAlignmentLeft;
         movieTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [movieTitleLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 22.0]];
         [movieTitleLabel sizeToFit];
         
+        //Flyttar movieTitleLabel beroende på hur hög den är (alltså hur många rader), eftersom vi vill få plats med runtime och annat under.
+        movieTitleLabel.frame = CGRectMake(10, 140-movieTitleLabel.frame.size.height+20, 300, movieTitleLabel.frame.size.height);
+
         NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: movieTitleLabel.attributedText];
-        [text addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([movieTitle length]+1, 6)];
+        [text addAttribute: NSForegroundColorAttributeName value: [UIColor lightGrayColor] range: NSMakeRange([movieTitle length]+1, 6)];
         [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 16.0] range: NSMakeRange([movieTitle length]+1, 6)];
         [movieTitleLabel setAttributedText: text];
+        
+        movieGenresLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, movieTitleLabel.frame.origin.y+movieTitleLabel.frame.size.height+3, 140, 20)];
+        movieGenresLabel.text = movieGenres;
+        movieGenresLabel.textColor=[UIColor lightGrayColor];
+        movieGenresLabel.textAlignment = NSTextAlignmentLeft;
+        [movieGenresLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 11.0]];
+        [movieGenresLabel sizeToFit];
+        
+        movieRuntimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, movieGenresLabel.frame.origin.y+movieGenresLabel.frame.size.height+3, 140, 20)];
+        movieRuntimeLabel.text = movieRuntime;
+        movieRuntimeLabel.textColor=[UIColor lightGrayColor];
+        movieRuntimeLabel.textAlignment = NSTextAlignmentLeft;
+        [movieRuntimeLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 11.0]];
+        [movieRuntimeLabel sizeToFit];
         
         self.imgProfile = [[UIImageView alloc] initWithImage:image];
 		self.imgProfile.frame = CGRectMake(0, 0, ImageWidth, ImageHeight);
@@ -67,7 +93,7 @@ static CGFloat ImageWidth  = 320.0;
         UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Information", @"Rate", @"Activity", nil]];
         segmentedControl.frame = CGRectMake(10, ImageHeight+10, 300, 29);
         segmentedControl.selectedSegmentIndex = 0;
-        segmentedControl.tintColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
+        segmentedControl.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
         [segmentedControl addTarget:self action:@selector(valueChanged:) forControlEvents: UIControlEventValueChanged];
         
         self.scrollView = [[UIScrollView alloc] init];
@@ -79,7 +105,8 @@ static CGFloat ImageWidth  = 320.0;
         [self.view addSubview:self.imgProfile];
         [self.view addSubview:self.imgWithBlur];
         [self.scrollView addSubview:movieTitleLabel];
-        [self.scrollView addSubview:movieReleaseLabel];
+        [self.scrollView addSubview:movieGenresLabel];
+        [self.scrollView addSubview:movieRuntimeLabel];
         [self.scrollView addSubview:movieView];
         [self.scrollView addSubview:rateView];
         [self.scrollView addSubview:activityView];

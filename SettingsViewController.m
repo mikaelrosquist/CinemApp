@@ -35,7 +35,7 @@
     [super viewDidLoad];
     
     //Sätter knapparna i navigationBar till röda
-    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1]];
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
     
     //Gömmer "Back"-texten i navBar.
     //self.navigationController.navigationBar.topItem.title = @" ";

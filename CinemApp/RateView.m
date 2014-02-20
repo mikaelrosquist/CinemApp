@@ -33,7 +33,7 @@
         //Vad som händer när man SLAJDAR
         [slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
         [slider setBackgroundColor:[UIColor clearColor]];
-        [slider setTintColor:[UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1]];
+        [slider setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
         [self addSubview:slider];
         
         //sliderLabelBG
@@ -69,7 +69,7 @@
         rateButton.tintColor = [UIColor whiteColor];
         //normal state
         [rateButton setTitleColor:rateButton.tintColor forState:UIControlStateNormal];
-        rateButton.backgroundColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
+        rateButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
         //selected state
         //Fixa så att knappen blir mörkare när den markeras
         rateButton.showsTouchWhenHighlighted = YES;

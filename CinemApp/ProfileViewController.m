@@ -62,7 +62,7 @@ static CGFloat backdropImageWidth  = 320.0;
         UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Recent ratings", @"Highest ratings", nil]];
         segmentedControl.frame = CGRectMake(10, backdropImageHeight+10, 300, 29);
         segmentedControl.selectedSegmentIndex = 0;
-        segmentedControl.tintColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
+        segmentedControl.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
         [segmentedControl addTarget:self action:@selector(valueChanged:) forControlEvents: UIControlEventValueChanged];
         
         self.scrollView = [[UIScrollView alloc] init];
