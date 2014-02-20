@@ -9,7 +9,7 @@
 #import "RateViewController.h"
 #import "ImageEffects.h"
 
-static CGFloat ImageHeight  = 250.0;
+static CGFloat ImageHeight  = 200.0;
 static CGFloat ImageWidth  = 320.0;
 
 @interface RateViewController ()
@@ -36,20 +36,25 @@ static CGFloat ImageWidth  = 320.0;
         _rateView = [[RateView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 400)];
         _activityView = [[ActivityView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
         
-        self.title = @"Movie";
+        self.title = @"";
         
-        image = [UIImage imageNamed:@"kitten"];
-        imageWithBlur = [UIImage imageNamed:@"kitten"];
-        profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
+        image = [UIImage imageNamed:@"movie"];
+        imageWithBlur = [UIImage imageNamed:@"movie"];
         
-        self.profilePictureImageView = [[UIImageView alloc] initWithImage:profilePictureImage];
-        self.profilePictureImageView.frame = CGRectMake(120, 60, 80, 80);
+        //Kommentera bort raderna nedan om vi vill ha en movieposter
+        //profilePictureImage = [UIImage imageNamed:@"movieposter"];
+        //self.profilePictureImageView = [[UIImageView alloc] initWithImage:profilePictureImage];
+        //self.profilePictureImageView.frame = CGRectMake(120, 10, 80, 100);
         
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 320, 40)];
-        label.textAlignment = NSTextAlignmentCenter;
+        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 120, 310, 60)];
+        label.textAlignment = NSTextAlignmentLeft;
         label.textColor=[UIColor whiteColor];
-        label.text = @"Movie Title";
-        [label setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 20.0f]];
+        label.text = @"A very very very long movie title with a lot of characters.";
+        label.numberOfLines = 3;
+        label.lineBreakMode = NSLineBreakByWordWrapping;
+        
+        [label setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 22.0]];
+        [label sizeToFit];
         
         self.imgProfile = [[UIImageView alloc] initWithImage:image];
 		self.imgProfile.frame = CGRectMake(0, 0, ImageWidth, ImageHeight);
@@ -59,7 +64,7 @@ static CGFloat ImageWidth  = 320.0;
 		self.imgWithBlur.frame = CGRectMake(0, 0, ImageWidth, ImageHeight);
         self.imgWithBlur.contentMode = UIViewContentModeScaleAspectFill;
         
-        self.imgWithBlur.image = [image applyDarkEffect];
+        self.imgWithBlur.image = [image applyDarkEffectWithBlurIntensity:(2)];
         
         UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Information", @"Rate", @"Activity", nil]];
         segmentedControl.frame = CGRectMake(10, ImageHeight+10, 300, 29);
@@ -75,15 +80,16 @@ static CGFloat ImageWidth  = 320.0;
         
         [self.view addSubview:self.imgProfile];
         [self.view addSubview:self.imgWithBlur];
-        [self.scrollView addSubview:self.profilePictureImageView];
-        [self.view addSubview:label];
+        //[self.scrollView addSubview:self.profilePictureImageView];
+        [self.scrollView addSubview:label];
         [self.scrollView addSubview:_movieView];
         [self.scrollView addSubview:_rateView];
         [self.scrollView addSubview:_activityView];
         [self.scrollView addSubview:segmentedControl];
         [self.view addSubview:self.scrollView];
         
-        [self setEdgesForExtendedLayout:UIRectEdgeNone];
+        //Kommentera bort raden nedan om vi vill att bakgrundsbildend ska ligga nedanför navBar
+        //[self setEdgesForExtendedLayout:UIRectEdgeNone];
         [self setAutomaticallyAdjustsScrollViewInsets:NO];
 
         

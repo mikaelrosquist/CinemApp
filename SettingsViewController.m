@@ -33,14 +33,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    //Kommentera bort radend nedan om vi vill gömma "Back"-texten i navBar.
+    //self.navigationController.navigationBar.topItem.title = @" ";
     
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1]];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    //Kommentera bort nedan rader om vi vill ha en "spara"-knapp
+    //UIBarButtonItem* saveBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:nil];
+    //self.navigationItem.rightBarButtonItem = saveBarButton;
 }
 
 - (void)didReceiveMemoryWarning

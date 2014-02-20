@@ -76,6 +76,7 @@ static CGFloat ImageWidth  = 320.0;
         [self.scrollView addSubview:segmentedControl];
         [self.view addSubview:self.scrollView];
         
+        //Kommentera bort raden nedan om vi vill att bakgrundsbildend ska ligga nedanför navBar
         //[self setEdgesForExtendedLayout:UIRectEdgeNone];
         [self setAutomaticallyAdjustsScrollViewInsets:NO];
         
