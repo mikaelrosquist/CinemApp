@@ -20,12 +20,12 @@ UISlider *slider;
     if (self) {
         
         //rateLabel
-        UILabel *rateLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 30, 100, 44)];
+        UILabel *rateLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 100, 44)];
         rateLabel.text = @"Rating";
         [self addSubview:rateLabel];
         
         //slider
-        CGRect frame = CGRectMake(20, 80, 240.0, 15);
+        CGRect frame = CGRectMake(10, 80, 260, 15);
         slider = [[UISlider alloc] initWithFrame:frame];
         slider.minimumValue = 0;
         slider.maximumValue = 10;
@@ -39,27 +39,40 @@ UISlider *slider;
         //sliderLabelBG
         UIImage *sliderLabelBG = [UIImage imageNamed:@"rate-score"];
         self.sliderLabelBGView = [[UIImageView alloc] initWithImage:sliderLabelBG];
-        self.sliderLabelBGView.frame = CGRectMake(275, 72, 30, 30);
+        self.sliderLabelBGView.frame = CGRectMake(280, 72, 30, 30);
         [self addSubview:self.sliderLabelBGView];
         
         //sliderLabel
-        sliderLabel = [[UILabel alloc]initWithFrame:CGRectMake(280, 65, 20, 44)];
+        sliderLabel = [[UILabel alloc]initWithFrame:CGRectMake(285, 65, 20, 44)];
         sliderLabel.text = @"5";
         sliderLabel.textColor = [UIColor whiteColor];
         sliderLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:sliderLabel];
         
         //commentLabel
-        UILabel *commentLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 110, 100, 44)];
+        UILabel *commentLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 100, 100, 44)];
         commentLabel.text = @"Comment";
         [self addSubview:commentLabel];
         
         //commentField
-        UITextField * commentField = [[UITextField alloc]initWithFrame:CGRectMake(20, 120, 280, 120)];
+        UITextField * commentField = [[UITextField alloc]initWithFrame:CGRectMake(10, 145, 300, 120)];
         commentField.placeholder = @"How was it? Leave a note...";
         commentField.borderStyle = UITextBorderStyleRoundedRect;
         commentField.textAlignment = 0;
         [self addSubview:commentField];
+        
+        //rateButton
+        UIButton *rateButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 280, 300, 40)];
+        [rateButton setTitle:@"Rate" forState:UIControlStateNormal];
+        rateButton.layer.cornerRadius = 5.0f;
+        rateButton.tintColor = [UIColor whiteColor];
+        //normal state
+        [rateButton setTitleColor:rateButton.tintColor forState:UIControlStateNormal];
+        rateButton.backgroundColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
+        //selected state
+        //Fixa så att knappen blir mörkare när den markeras
+        
+        [self addSubview:rateButton];
        
     }
     return self;
