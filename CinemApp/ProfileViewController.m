@@ -31,14 +31,20 @@ static CGFloat ImageWidth  = 320.0;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         tV = [[TestView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
+        
         self.title = @"username";
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                      forBarMetrics:UIBarMetricsDefault];
+        self.navigationController.navigationBar.shadowImage = [UIImage new];
+        self.navigationController.navigationBar.translucent = YES;
+        self.navigationController.view.backgroundColor = [UIColor clearColor];
+        
         image = [UIImage imageNamed:@"kitten"];
         imageWithBlur = [UIImage imageNamed:@"kitten"];
         profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
         
         self.profilePictureImageView = [[UIImageView alloc] initWithImage:profilePictureImage];
         self.profilePictureImageView.frame = CGRectMake(120, 60, 80, 80);
-        
         
         label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 320, 40)];
         label.textAlignment = NSTextAlignmentCenter;
