@@ -72,6 +72,7 @@
         rateButton.backgroundColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
         //selected state
         //Fixa så att knappen blir mörkare när den markeras
+        rateButton.showsTouchWhenHighlighted = YES;
         
         [self addSubview:rateButton];
 
@@ -79,10 +80,8 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                        initWithTarget:self
                                        action:@selector(dismissKeyboard)];
-        
         [self addGestureRecognizer:tap];
 
-       
     }
     return self;
 }

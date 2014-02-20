@@ -9,12 +9,27 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        // initilize all your UIView components
-        UILabel *label1 = [[UILabel alloc]initWithFrame:CGRectMake(20,30, 200, 44)];
-        label1.text = @"Här kommer alla filmer vara";
-        [self addSubview:label1]; //add label1 to your custom view
-        }
+        
+        //plotLabel
+        UILabel *plotLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 100, 44)];
+        plotLabel.text = @"Plot";
+        [self addSubview:plotLabel];
+        
+        //plotField
+        UITextField *plotField = [[UITextField alloc]initWithFrame:CGRectMake(10, 70, 300, 100)];
+        plotField.text = @"Plot text";
+        plotField.borderStyle = UITextBorderStyleRoundedRect;
+        plotField.textAlignment = 0;
+        [self addSubview:plotField];
+        
+        //castLabel
+        UILabel *castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 170, 100, 44)];
+        castLabel.text = @"Cast";
+        [self addSubview:castLabel];
+        
+        //loopa igenom top-cast och skriv ut dem på nåt sätt.
+    
+    }
     return self;
 }
 @end
