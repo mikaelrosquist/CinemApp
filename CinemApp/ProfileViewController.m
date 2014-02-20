@@ -30,12 +30,9 @@ static CGFloat ImageWidth  = 320.0;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-<<<<<<< HEAD
-        tV = [[TestView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
         
-=======
         movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
->>>>>>> 25fc21b190af108facd9674be17d6fbd4ca0565e
+
         self.title = @"username";
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                       forBarMetrics:UIBarMetricsDefault];
