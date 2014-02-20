@@ -121,11 +121,11 @@
 }
 
 
-- (UIImage *)applyDarkEffectWithBlurIntensity:(CGFloat)intensity
+- (UIImage *)applyDarkEffectWithIntensity:(CGFloat)blur darkness:(CGFloat)darkness
 {
     
-    UIColor *tintColor = [UIColor colorWithWhite:0.0 alpha:0.3];
-    return [self applyBlurWithRadius:intensity tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    UIColor *tintColor = [UIColor colorWithWhite:0.0 alpha:darkness];
+    return [self applyBlurWithRadius:blur tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 
