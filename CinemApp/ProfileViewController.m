@@ -32,13 +32,8 @@ static CGFloat ImageWidth  = 320.0;
     if (self) {
         
         movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
-
+        
         self.title = @"username";
-        [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                      forBarMetrics:UIBarMetricsDefault];
-        self.navigationController.navigationBar.shadowImage = [UIImage new];
-        self.navigationController.navigationBar.translucent = YES;
-        self.navigationController.view.backgroundColor = [UIColor clearColor];
         
         image = [UIImage imageNamed:@"kitten"];
         imageWithBlur = [UIImage imageNamed:@"kitten"];
@@ -78,7 +73,7 @@ static CGFloat ImageWidth  = 320.0;
         [self.view addSubview:self.imgProfile];
         [self.view addSubview:self.imgWithBlur];
         [self.scrollView addSubview:self.profilePictureImageView];
-        [self.scrollView addSubview:label];
+        [self.view addSubview:label];
         [self.scrollView addSubview:movieView];
         [self.scrollView addSubview:segmentedControl];
         [self.view addSubview:self.scrollView];
@@ -90,7 +85,7 @@ static CGFloat ImageWidth  = 320.0;
     return self;
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
+-(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }
 
@@ -145,6 +140,8 @@ static CGFloat ImageWidth  = 320.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self setNeedsStatusBarAppearanceUpdate];
     
     UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]init];
     [settingsButton setTitle:@"Settings"];

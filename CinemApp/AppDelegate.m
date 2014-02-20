@@ -39,6 +39,13 @@
     UINavigationController *rateNav = [[UINavigationController alloc] initWithRootViewController:rate];
     UINavigationController *activityNav = [[UINavigationController alloc] initWithRootViewController:activity];
     UINavigationController *profileNav = [[UINavigationController alloc] initWithRootViewController:profile];
+    
+    [profileNav.navigationBar setBackgroundImage:[UIImage new]
+                                   forBarMetrics:UIBarMetricsDefault];
+    profileNav.navigationBar.shadowImage = [UIImage new];
+    profileNav.navigationBar.translucent = YES;
+    profileNav.view.backgroundColor = [UIColor clearColor];
+    profileNav.navigationBar.barStyle = UIBarStyleBlack;
 
     NSArray* controllers = [NSArray arrayWithObjects:homeNav, exploreNav, rateNav, activityNav, profileNav, nil];
     self.tabBarController.viewControllers = controllers;
