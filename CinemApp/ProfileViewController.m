@@ -31,15 +31,17 @@ static CGFloat ImageWidth  = 320.0;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
         movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
+        
         self.title = @"username";
+        
         image = [UIImage imageNamed:@"kitten"];
         imageWithBlur = [UIImage imageNamed:@"kitten"];
         profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
         
         self.profilePictureImageView = [[UIImageView alloc] initWithImage:profilePictureImage];
         self.profilePictureImageView.frame = CGRectMake(120, 60, 80, 80);
-        
         
         label = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, 320, 40)];
         label.textAlignment = NSTextAlignmentCenter;
@@ -72,7 +74,7 @@ static CGFloat ImageWidth  = 320.0;
         [self.view addSubview:self.imgProfile];
         [self.view addSubview:self.imgWithBlur];
         [self.scrollView addSubview:self.profilePictureImageView];
-        [self.scrollView addSubview:label];
+        [self.view addSubview:label];
         [self.scrollView addSubview:movieView];
         [self.scrollView addSubview:segmentedControl];
         [self.view addSubview:self.scrollView];
@@ -84,7 +86,7 @@ static CGFloat ImageWidth  = 320.0;
     return self;
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
+-(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }
 
@@ -146,6 +148,8 @@ static CGFloat ImageWidth  = 320.0;
                                     target:self
                                     action:@selector(pushMyNewViewController:)];
     
+    [self setNeedsStatusBarAppearanceUpdate];
+
     self.navigationItem.rightBarButtonItem = settingsButton;
     settingsView = [[SettingsViewController alloc] init];
     
