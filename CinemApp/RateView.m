@@ -29,6 +29,7 @@ UISlider *slider;
         slider = [[UISlider alloc] initWithFrame:frame];
         slider.minimumValue = 0;
         slider.maximumValue = 10;
+        slider.value = 5;
         //Vad som händer när man SLAJDAR
         [slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
         [slider setBackgroundColor:[UIColor clearColor]];
@@ -43,7 +44,7 @@ UISlider *slider;
         
         //sliderLabel
         sliderLabel = [[UILabel alloc]initWithFrame:CGRectMake(280, 65, 20, 44)];
-        sliderLabel.text = @"0";
+        sliderLabel.text = @"5";
         sliderLabel.textColor = [UIColor whiteColor];
         sliderLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:sliderLabel];
@@ -65,10 +66,10 @@ UISlider *slider;
 }
 
 - (void)sliderAction:(id)sender {
-    UISlider *tmpSlider = (UISlider *)sender;
-    NSInteger val = (tmpSlider.value);
+    NSInteger val = (slider.value);
     sliderLabel.text = [NSString stringWithFormat:@"%d",val];
 }
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

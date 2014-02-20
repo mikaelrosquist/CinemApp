@@ -104,7 +104,6 @@ static CGFloat ImageWidth  = 320.0;
         NSLog(@"BLUR ALPHA: %f", percent);
 
         [self.navigationController setNavigationBarHidden: NO animated:YES];
-
         
     } else {
         CGRect f = CGRectMake(0, -yOffset, ImageWidth, ImageHeight);
@@ -116,8 +115,9 @@ static CGFloat ImageWidth  = 320.0;
         self.profilePictureImageView.alpha = 1;
 
         NSLog(@"YOFFSET: %f", yOffset);
-
+        
         [self.navigationController setNavigationBarHidden: YES animated:YES];
+    
     }
     
 }
