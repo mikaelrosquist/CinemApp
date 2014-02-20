@@ -25,8 +25,6 @@ static CGFloat ImageWidth  = 320.0;
     UITableViewController *settingsView;
 }
 
-@synthesize movieView;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

@@ -32,10 +32,8 @@ static CGFloat ImageWidth  = 320.0;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
-        self.title = @"Rate";
-        
         _movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
-        _rateView = [[RateView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
+        _rateView = [[RateView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 400)];
         _activityView = [[ActivityView alloc]initWithFrame:CGRectMake(0, ImageHeight+10, 320, 200)];
         
         self.title = @"Movie";
@@ -73,8 +71,6 @@ static CGFloat ImageWidth  = 320.0;
 		self.scrollView.delegate = self;
         self.scrollView.backgroundColor = [UIColor clearColor];
         self.scrollView.contentSize = CGSizeMake(320, _movieView.frame.size.height+ImageHeight);
-        self.scrollView.contentSize = CGSizeMake(320, _rateView.frame.size.height+ImageHeight);
-        self.scrollView.contentSize = CGSizeMake(320, _activityView.frame.size.height+ImageHeight);
         self.scrollView.alwaysBounceVertical = YES;
         
         [self.view addSubview:self.imgProfile];
@@ -130,14 +126,17 @@ static CGFloat ImageWidth  = 320.0;
         _movieView.hidden = FALSE;
         _rateView.hidden = TRUE;
         _activityView.hidden = TRUE;
+        self.scrollView.contentSize = CGSizeMake(320, _movieView.frame.size.height+ImageHeight);
     }else if(segment.selectedSegmentIndex == 1){
         _movieView.hidden = TRUE;
         _rateView.hidden = FALSE;
         _activityView.hidden = TRUE;
+        self.scrollView.contentSize = CGSizeMake(320, _rateView.frame.size.height+ImageHeight);
     }else if(segment.selectedSegmentIndex == 2){
         _movieView.hidden = TRUE;
         _rateView.hidden = TRUE;
         _activityView.hidden = FALSE;
+        self.scrollView.contentSize = CGSizeMake(320, _activityView.frame.size.height+ImageHeight);
     }
 }
 

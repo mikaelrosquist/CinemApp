@@ -19,14 +19,26 @@
         rateLabel.text = @"Rating";
         [self addSubview:rateLabel];
         
-        //Slider
+        //slider
         CGRect frame = CGRectMake(20, 80, 240.0, 15);
         UISlider *slider = [[UISlider alloc] initWithFrame:frame];
        // Vad som händer när man SLAJDAR
        // [slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
         [slider setBackgroundColor:[UIColor clearColor]];
-        [slider setTintColor:[UIColor redColor]];
+        [slider setTintColor:[UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1]];
         [self addSubview:slider];
+        
+        //sliderLabelBG
+        UIImage *sliderLabelBG = [UIImage imageNamed:@"rate-score"];
+        self.sliderLabelBGView = [[UIImageView alloc] initWithImage:sliderLabelBG];
+        self.sliderLabelBGView.frame = CGRectMake(275, 72, 30, 30);
+        [self addSubview:self.sliderLabelBGView];
+        
+        //sliderLabel
+        UILabel *sliderLabel = [[UILabel alloc]initWithFrame:CGRectMake(285, 65, 15, 44)];
+        sliderLabel.text = @"0";
+        sliderLabel.textColor = [UIColor whiteColor];
+        [self addSubview:sliderLabel];
         
         //commentLabel
         UILabel *commentLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 110, 100, 44)];
