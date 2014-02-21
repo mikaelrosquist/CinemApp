@@ -85,6 +85,7 @@ static CGFloat backdropImageWidth  = 320.0;
     return UIStatusBarStyleLightContent;
 }
 
+//SCROLLVIEW
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGRect f;
     CGFloat yOffset = self.scrollView.contentOffset.y;
@@ -113,6 +114,7 @@ static CGFloat backdropImageWidth  = 320.0;
     NSLog(@"BLUR ALPHA: %f", blurAlpha);
 }
 
+//SEGMENTED CONTROLL
 - (void)valueChanged:(UISegmentedControl *)segment {
     if(segment.selectedSegmentIndex == 0) {
         //visar recent

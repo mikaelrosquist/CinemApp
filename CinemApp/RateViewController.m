@@ -88,7 +88,7 @@ static CGFloat backdropImageWidth  = 320.0;
         self.backdropWithBlurImageView = [[UIImageView alloc] initWithImage:movieBackground];
 		self.backdropWithBlurImageView.frame = CGRectMake(0, 0, backdropImageWidth, backdropImageHeight);
         self.backdropWithBlurImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.backdropWithBlurImageView.image = [movieBackground applyDarkEffectWithIntensity:0 darkness:0.5];
+        self.backdropWithBlurImageView.image = [movieBackground applyDarkEffectWithIntensity:0 darkness:0.6];
         
         //Skapar segmented control-menyn
         UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Information", @"Rate", @"Activity", nil]];
