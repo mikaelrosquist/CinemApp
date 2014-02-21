@@ -10,7 +10,7 @@
 #import "ImageEffects.h"
 
 //Sätter backgrundsbildens höjd och bredd till statiska värden
-static CGFloat backdropImageHeight  = 200.0;
+static CGFloat backdropImageHeight  = 250.0;
 static CGFloat backdropImageWidth  = 320.0;
 
 @interface RateViewController ()
@@ -50,7 +50,7 @@ static CGFloat backdropImageWidth  = 320.0;
          Vi flyttar sedan movieTitleLabel.frame till rätt höjd beroende på hur hög labeln är (alltså hur många rader). Detta gör vi eftersom vi vill få plats med runtime och genre under.
          De fyra sista raderna tar movieTitleLabel och gör om fonten på de sista bokstäverna eftersom det som sagt är årtalet och vi vill att årtalets typsnitt ska vara mindre och ha annan färg.
          */
-        movieTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 140, 300, 60)];
+        movieTitleLabel = [[UILabel alloc] init];
         movieTitleLabel.text = [[NSString stringWithFormat:@"%@ %@ ", movieTitle, movieRelease] stringByPaddingToLength: 100 withString: @"  " startingAtIndex:0];
         movieTitleLabel.textColor=[UIColor whiteColor];
         movieTitleLabel.numberOfLines = 3;
@@ -58,26 +58,26 @@ static CGFloat backdropImageWidth  = 320.0;
         movieTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [movieTitleLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 22.0]];
         [movieTitleLabel sizeToFit];
-        movieTitleLabel.frame = CGRectMake(10, 140-movieTitleLabel.frame.size.height+20, 300, movieTitleLabel.frame.size.height);
+        movieTitleLabel.frame = CGRectMake(10, backdropImageHeight-movieTitleLabel.frame.size.height-70, 300, movieTitleLabel.frame.size.height);
         NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: movieTitleLabel.attributedText];
         [text addAttribute: NSForegroundColorAttributeName value: [UIColor lightGrayColor] range: NSMakeRange([movieTitle length]+1, 6)];
         [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 16.0] range: NSMakeRange([movieTitle length]+1, 6)];
         [movieTitleLabel setAttributedText: text];
         
         //Genre label
-        movieGenresLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, movieTitleLabel.frame.origin.y+movieTitleLabel.frame.size.height+3, 140, 20)];
+        movieGenresLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, movieTitleLabel.frame.origin.y+movieTitleLabel.frame.size.height+4, 140, 20)];
         movieGenresLabel.text = movieGenres;
         movieGenresLabel.textColor=[UIColor lightGrayColor];
         movieGenresLabel.textAlignment = NSTextAlignmentLeft;
-        [movieGenresLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 11.0]];
+        [movieGenresLabel setFont:[UIFont fontWithName: @"HelveticaNeue" size: 13.0]];
         [movieGenresLabel sizeToFit];
         
         //Runtime label
-        movieRuntimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, movieGenresLabel.frame.origin.y+movieGenresLabel.frame.size.height+3, 140, 20)];
+        movieRuntimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, movieGenresLabel.frame.origin.y+movieGenresLabel.frame.size.height+2, 140, 20)];
         movieRuntimeLabel.text = movieRuntime;
         movieRuntimeLabel.textColor=[UIColor lightGrayColor];
         movieRuntimeLabel.textAlignment = NSTextAlignmentLeft;
-        [movieRuntimeLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 11.0]];
+        [movieRuntimeLabel setFont:[UIFont fontWithName: @"HelveticaNeue" size: 13.0]];
         [movieRuntimeLabel sizeToFit];
         
         //Filmens bakgrundsbild
