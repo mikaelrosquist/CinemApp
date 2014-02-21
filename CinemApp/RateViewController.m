@@ -36,13 +36,13 @@ static CGFloat backdropImageWidth  = 320.0;
         //Filminfo
         NSString *movieTitle = @"Jurassic Park";
         NSString *movieRelease = @"(1994)";
-        NSString *movieGenres = @"Adventure, Sci-Fi";
+        NSString *movieGenres = @"Adventure | Sci-Fi";
         NSString *movieRuntime = @"127 min";
         UIImage *movieBackground = [UIImage imageNamed:@"movie"];
         
         //Om titeln är för lång så kortas den ned
-        if (movieTitle.length > 70)
-            movieTitle = [[movieTitle substringToIndex:70] stringByAppendingString:@"..."];
+        if (movieTitle.length > 110)
+            movieTitle = [[movieTitle substringToIndex:110] stringByAppendingString:@"..."];
         
         /*
          Denna sektion skapar filmtitelns label. Vi lägger dessutom in filmens releasedatum i samma label eftersom den alltid ska ligga precis efter filmtiteln.
@@ -50,10 +50,9 @@ static CGFloat backdropImageWidth  = 320.0;
          Vi flyttar sedan movieTitleLabel.frame till rätt höjd beroende på hur hög labeln är (alltså hur många rader). Detta gör vi eftersom vi vill få plats med runtime och genre under.
          De fyra sista raderna tar movieTitleLabel och gör om fonten på de sista bokstäverna eftersom det som sagt är årtalet och vi vill att årtalets typsnitt ska vara mindre och ha annan färg.
          */
-        movieTitleLabel = [[UILabel alloc] init];
-        movieTitleLabel.text = [[NSString stringWithFormat:@"%@ %@ ", movieTitle, movieRelease] stringByPaddingToLength: 100 withString: @"  " startingAtIndex:0];
-        movieTitleLabel.textColor=[UIColor whiteColor];
-        movieTitleLabel.numberOfLines = 3;
+        movieTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 140, 300, 60)];
+        movieTitleLabel.text = [NSString stringWithFormat:@"%@ %@ ", movieTitle, movieRelease];        movieTitleLabel.textColor=[UIColor whiteColor];
+        movieTitleLabel.numberOfLines = 4;
         movieTitleLabel.textAlignment = NSTextAlignmentLeft;
         movieTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [movieTitleLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 22.0]];
