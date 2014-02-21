@@ -16,7 +16,6 @@
 @property (nonatomic, retain) UIImageView *backdropImageView;
 @property (nonatomic, retain) UIImageView *backdropWithBlurImageView;
 @property (nonatomic, retain) UIImageView *profilePictureImageView;
-@property (nonatomic, strong) MovieView *movieView;
 @property (nonatomic, strong) SettingsViewController *settingsView;
 
 

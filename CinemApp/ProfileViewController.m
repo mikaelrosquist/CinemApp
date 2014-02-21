@@ -19,19 +19,14 @@ static CGFloat backdropImageWidth  = 320.0;
 
 @implementation ProfileViewController{
     UILabel *nameLabel;
-    MovieView *movieView;
-    SettingsViewController *settingsView;
 }
 
-@synthesize movieView, settingsView;
+@synthesize settingsView = _settingsView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
-        //Allokerar och initierar movieView
-        movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 200)];
         
         //Profilinfo
         nameLabel.text = @"Firstname Lastname";
@@ -70,7 +65,6 @@ static CGFloat backdropImageWidth  = 320.0;
         self.scrollView = [[UIScrollView alloc] init];
 		self.scrollView.delegate = self;
         self.scrollView.backgroundColor = [UIColor clearColor];
-        self.scrollView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
         self.scrollView.alwaysBounceVertical = YES;
         
         //Lägger till alla subviews i vår vy
@@ -78,7 +72,6 @@ static CGFloat backdropImageWidth  = 320.0;
         [self.view addSubview:self.backdropWithBlurImageView];
         [self.scrollView addSubview:self.profilePictureImageView];
         [self.scrollView addSubview:nameLabel];
-        [self.scrollView addSubview:movieView];
         [self.scrollView addSubview:segmentedControl];
         [self.view addSubview:self.scrollView];
         
@@ -122,9 +115,9 @@ static CGFloat backdropImageWidth  = 320.0;
 
 - (void)valueChanged:(UISegmentedControl *)segment {
     if(segment.selectedSegmentIndex == 0) {
-        movieView.hidden = FALSE;
+        //visar recent
     }else if(segment.selectedSegmentIndex == 1){
-        movieView.hidden = TRUE;
+        //visar top rated
     }
 }
 
@@ -151,11 +144,11 @@ static CGFloat backdropImageWidth  = 320.0;
     
     //Lägger till "Settings"-knapp i navigationBar
     self.navigationItem.rightBarButtonItem = settingsButton;
-    settingsView = [[SettingsViewController alloc] init];
+    _settingsView = [[SettingsViewController alloc] init];
 }
 
 -(void)pushMyNewViewController:(id)sender {
-    [self.navigationController pushViewController:settingsView animated:YES];
+    [self.navigationController pushViewController:_settingsView animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

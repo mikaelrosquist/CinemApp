@@ -11,8 +11,9 @@
 @implementation RateView{
     UILabel *sliderLabel;
     UISlider *slider;
-    UITextField *commentField;
 }
+
+@synthesize commentField = _commentField;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -55,11 +56,11 @@
         [self addSubview:commentLabel];
         
         //commentField
-        commentField = [[UITextField alloc]initWithFrame:CGRectMake(10, 145, 300, 120)];
-        commentField.placeholder = @"How was it? Leave a note...";
-        commentField.borderStyle = UITextBorderStyleRoundedRect;
-        commentField.textAlignment = 0;
-        [self addSubview:commentField];
+        _commentField = [[UITextField alloc]initWithFrame:CGRectMake(10, 145, 300, 120)];
+        _commentField.placeholder = @"How was it? Leave a note...";
+        _commentField.borderStyle = UITextBorderStyleRoundedRect;
+        _commentField.textAlignment = 0;
+        [self addSubview:_commentField];
         
 
         //rateButton
@@ -94,7 +95,7 @@
 }
 
 -(void)dismissKeyboard {
-    [commentField resignFirstResponder];
+    [_commentField resignFirstResponder];
 }
 
 /*
