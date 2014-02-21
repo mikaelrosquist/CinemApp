@@ -1,3 +1,4 @@
+
 //
 //  SettingsViewController.m
 //  CinemApp
@@ -13,6 +14,9 @@
 @end
 
 @implementation SettingsViewController
+{
+    NSArray *tableData;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -33,6 +37,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    tableData = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
+
     
     //Sätter knapparna i navigationBar till röda
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
