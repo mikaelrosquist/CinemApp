@@ -1,5 +1,5 @@
 //
-//  ActivityView.h
+//  FilmActivityView.h
 //  CinemApp
 //
 //  Created by mikael on 20/02/14.
@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ActivityTableView.h"
 
-@interface ActivityView : UIView
+@interface FilmActivityView : ActivityTableView
 
 @end

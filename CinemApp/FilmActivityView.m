@@ -1,14 +1,14 @@
 //
-//  ActivityView.m
+//  FilmActivityView.m
 //  CinemApp
 //
 //  Created by mikael on 20/02/14.
 //  Copyright (c) 2014 Rosquist Östlund. All rights reserved.
 //
 
-#import "ActivityView.h"
+#import "FilmActivityView.h"
 
-@implementation ActivityView
+@implementation FilmActivityView
 
 - (id)initWithFrame:(CGRect)frame
 {

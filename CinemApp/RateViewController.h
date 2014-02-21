@@ -10,6 +10,7 @@
 #import "RateView.h"
 #import "MovieView.h"
 #import "ActivityView.h"
+#import "FilmActivityView.h"
 
 @interface RateViewController : UIViewController<UIScrollViewDelegate>
 
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) MovieView *movieView;
 @property (nonatomic, strong) RateView *rateView;
 @property (nonatomic, strong) ActivityView *activityView;
+@property (nonatomic, strong) FilmActivityView *activityView;
 
 
 @end

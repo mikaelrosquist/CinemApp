@@ -32,6 +32,7 @@ static CGFloat backdropImageWidth  = 320.0;
         movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 200)];
         rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 400)];
         activityView = [[ActivityView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 200)];
+        activityView = [[FilmActivityView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 200)];
         
         //Filminfo
         NSString *movieTitle = @"Jurassic Park";

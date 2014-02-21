@@ -28,6 +28,8 @@
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
 		6FC0C82B18B6D59300F737EC /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C82A18B6D59300F737EC /* SettingsViewController.m */; };
 		731BE8E818B61EAC0009D8FE /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 731BE8E718B61EAC0009D8FE /* ActivityView.m */; };
+		7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7308FDE618B76D0000F93344 /* ActivityTableView.m */; };
+		731BE8E818B61EAC0009D8FE /* FilmActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 731BE8E718B61EAC0009D8FE /* FilmActivityView.m */; };
 		73C7E73118B37A1A00453123 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C7E73018B37A1A00453123 /* RateView.m */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,10 @@
 		6FC0C82A18B6D59300F737EC /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		731BE8E618B61EAC0009D8FE /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
 		731BE8E718B61EAC0009D8FE /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
+		7308FDE518B76D0000F93344 /* ActivityTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableView.h; sourceTree = "<group>"; };
+		7308FDE618B76D0000F93344 /* ActivityTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableView.m; sourceTree = "<group>"; };
+		731BE8E618B61EAC0009D8FE /* FilmActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmActivityView.h; sourceTree = "<group>"; };
+		731BE8E718B61EAC0009D8FE /* FilmActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmActivityView.m; sourceTree = "<group>"; };
 		73C7E72F18B37A1A00453123 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
 		73C7E73018B37A1A00453123 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,6 +190,10 @@
 			children = (
 				731BE8E618B61EAC0009D8FE /* ActivityView.h */,
 				731BE8E718B61EAC0009D8FE /* ActivityView.m */,
+				7308FDE518B76D0000F93344 /* ActivityTableView.h */,
+				7308FDE618B76D0000F93344 /* ActivityTableView.m */,
+				731BE8E618B61EAC0009D8FE /* FilmActivityView.h */,
+				731BE8E718B61EAC0009D8FE /* FilmActivityView.m */,
 				73C7E72F18B37A1A00453123 /* RateView.h */,
 				73C7E73018B37A1A00453123 /* RateView.m */,
 				6F955AFF18B397A7004C4B70 /* MovieView.h */,
@@ -320,6 +330,8 @@
 				6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */,
 				6F0CAA4718B3709200AE42F9 /* RateViewController.m in Sources */,
 				731BE8E818B61EAC0009D8FE /* ActivityView.m in Sources */,
+				731BE8E818B61EAC0009D8FE /* FilmActivityView.m in Sources */,
+				7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */,
 				6F955B0118B397A7004C4B70 /* MovieView.m in Sources */,
 				6F0CAA1A18B3705400AE42F9 /* AppDelegate.m in Sources */,
 				6F0CAA1618B3705400AE42F9 /* main.m in Sources */,
