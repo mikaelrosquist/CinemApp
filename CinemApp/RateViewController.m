@@ -41,9 +41,8 @@ static CGFloat backdropImageWidth  = 320.0;
         UIImage *movieBackground = [UIImage imageNamed:@"movie"];
         
         //Om titeln är för lång så kortas den ned
-        if (movieTitle.length > 70) {
+        if (movieTitle.length > 70)
             movieTitle = [[movieTitle substringToIndex:70] stringByAppendingString:@"..."];
-        }
         
         /*
          Denna sektion skapar filmtitelns label. Vi lägger dessutom in filmens releasedatum i samma label eftersom den alltid ska ligga precis efter filmtiteln.
