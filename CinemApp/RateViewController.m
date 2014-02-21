@@ -134,11 +134,10 @@ static CGFloat backdropImageWidth  = 320.0;
     float blurAlpha = (yOffset/70.0)+1.1;
     
     //Om man scrollar UP eller NER så ändras bakgrundbildens storlek och position
-    if (yOffset < 0) {
+    if (yOffset < 0)
         f = CGRectMake(-(enlargmentFactor-backdropImageWidth)/2, 0, enlargmentFactor, backdropImageHeight+ABS(yOffset));
-    } else {
+    else
         f = CGRectMake(0, -yOffset, backdropImageWidth, backdropImageHeight);
-    }
     
     self.backdropImageView.frame = f;
     self.backdropWithBlurImageView.frame = f;
