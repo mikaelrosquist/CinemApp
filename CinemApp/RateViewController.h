@@ -9,16 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "RateView.h"
 #import "MovieView.h"
-#import "FilmActivityView.h"
+#import "ActivityTableView.h"
 
-@interface RateViewController : UIViewController<UIScrollViewDelegate>
+@interface RateViewController : UIViewController<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) UIImageView *backdropImageView;
 @property (nonatomic, retain) UIImageView *backdropWithBlurImageView;
 @property (nonatomic, strong) MovieView *movieView;
 @property (nonatomic, strong) RateView *rateView;
-@property (nonatomic, strong) FilmActivityView *activityView;
+@property (nonatomic, strong) ActivityTableView *activityView;
 
 
 @end

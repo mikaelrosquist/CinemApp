@@ -10,4 +10,5 @@
 
 @interface ActivityTableView : UITableView
 
+
 @end

@@ -19,19 +19,49 @@ static CGFloat backdropImageWidth  = 320.0;
 
 @implementation RateViewController{
     UILabel *movieTitleLabel, *movieGenresLabel, *movieRuntimeLabel;
+    //UITableViewCell *cell;
 }
 
 @synthesize movieView, rateView, activityView;
+
+//Returnerar höjden för en cell
+-(CGFloat)tableView : (UITableView*)tableView heightForRowAtIndexPath: (NSIndexPath*) indexPath{
+    
+    return [indexPath row] * 20;
+    
+   /* if (indexPath.row == 0)
+        return 10;
+    else
+        return 40; */
+}
+
+//Returnerar en cell
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [activityView dequeueReusableCellWithIdentifier:@"cell"];
+    if(!cell){
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"cell"];
+    }
+    return cell;
+}
+
+//antal rader per sektion, vi använder bara en sektion men metoden måste finnas med.
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
+        //Gör denna controller till delegate för ActivityTableView
+        self.activityView.delegate = self;
+        self.activityView.dataSource = self;
+        
         //Allokerar och initierar vyerna för segmented control
         movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 200)];
         rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 400)];
-        activityView = [[FilmActivityView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 200)];
+        activityView = [[ActivityTableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
         
         //Filminfo
         NSString *movieTitle = @"Jurassic Park";

@@ -10,11 +10,13 @@
 
 @implementation ActivityTableView
 
+float height = 80;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        
     }
     return self;
 }
