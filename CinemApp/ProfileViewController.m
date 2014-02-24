@@ -21,7 +21,7 @@ static CGFloat backdropImageWidth  = 320.0;
     UILabel *nameLabel;
 }
 
-@synthesize settingsView = _settingsView;
+@synthesize settingsView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,12 +29,13 @@ static CGFloat backdropImageWidth  = 320.0;
     if (self) {
         
         //Profilinfo
-        nameLabel.text = @"Firstname Lastname";
+        
         UIImage *profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
         UIImage *profileBackgroundImage = [UIImage imageNamed:@"kitten"];
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 320, 40)];
         
         //Allokerar, initierar och konfiguerar profilens namn
-        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 320, 40)];
+        nameLabel.text = @"Firstname Lastname";
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.textColor=[UIColor whiteColor];
         [nameLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 20.0f]];
@@ -146,11 +147,11 @@ static CGFloat backdropImageWidth  = 320.0;
     
     //Lägger till "Settings"-knapp i navigationBar
     self.navigationItem.rightBarButtonItem = settingsButton;
-    _settingsView = [[SettingsViewController alloc] init];
+    settingsView = [[SettingsViewController alloc] init];
 }
 
 -(void)pushMyNewViewController:(id)sender {
-    [self.navigationController pushViewController:_settingsView animated:YES];
+    [self.navigationController pushViewController:settingsView animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
