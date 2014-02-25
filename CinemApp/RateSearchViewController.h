@@ -10,12 +10,12 @@
 #import "Movie.h"
 #import "RateViewController.h"
 
-@interface RateSearchViewController : UIViewController
+@interface RateSearchViewController : UITableViewController
 <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSDictionary * json;
 @property (nonatomic, strong) NSMutableArray * resultArray;
-@property (nonatomic, strong) NSDictionary * dict;
+//@property (nonatomic, strong) NSDictionary * dict;
 @property (nonatomic, strong) NSMutableArray* latestLoans;
 
 @property (strong, nonatomic) UITableView *mainTableView;

@@ -17,7 +17,6 @@
 @property (nonatomic, strong) NSString * movieRuntime;
 @property (nonatomic, strong) NSString * movieBackgroundImageURL;
 
-
 //Methods
 - (id) initWithMovieID: (NSString *) mID andMovieName: (NSString *) mName andMovieRelease: (NSString *) mRelease andMovieGenre: (NSString *) mGenre andMovieRuntime: (NSString *) mRuntime andMovieBackgroundImageURL: (NSString *) mBackground;
 

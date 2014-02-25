@@ -149,12 +149,9 @@
 		6F0CAA0F18B3705400AE42F9 /* CinemApp */ = {
 			isa = PBXGroup;
 			children = (
-				6FC18B1F18BC273C005B226F /* Movie.h */,
-				6FC18B2018BC273C005B226F /* Movie.m */,
 				6F0CAA1818B3705400AE42F9 /* AppDelegate.h */,
 				6F0CAA1918B3705400AE42F9 /* AppDelegate.m */,
-				6F0CAA3818B3709200AE42F9 /* ImageEffects.h */,
-				6F0CAA3918B3709200AE42F9 /* ImageEffects.m */,
+				6F68D7BA18BCC38000457BA4 /* Model */,
 				73C7E73218B37A4F00453123 /* Views */,
 				73C7E73318B37A6400453123 /* Controllers */,
 				73C7E73418B37A9500453123 /* Models */,
@@ -191,6 +188,17 @@
 				6F0CAA2B18B3705500AE42F9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6F68D7BA18BCC38000457BA4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6FC18B1F18BC273C005B226F /* Movie.h */,
+				6FC18B2018BC273C005B226F /* Movie.m */,
+				6F0CAA3818B3709200AE42F9 /* ImageEffects.h */,
+				6F0CAA3918B3709200AE42F9 /* ImageEffects.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		73C7E73218B37A4F00453123 /* Views */ = {

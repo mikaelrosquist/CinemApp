@@ -13,10 +13,10 @@
 @end
 
 #define getDataURL @"http://api.themoviedb.org/3/search/movie?api_key=2da45d86a9897bdf7e7eab86aa0485e3&query="
-#define searchQuery @"12+years+a+slave"
+#define searchQuery @"star+wars"
 
 @implementation RateSearchViewController
-@synthesize json, resultArray, mainTableView, dict, latestLoans;
+@synthesize json, resultArray, mainTableView, latestLoans;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,8 +33,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor whiteColor];
-
     [self retrieveData];
+    [self.mainTableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -43,12 +43,6 @@
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UITableView Datasource
@@ -75,6 +69,7 @@
     //Retrieve the current city object for use with this indexPath.row
     Movie * selectedMovie = [resultArray objectAtIndex:indexPath.row];
     
+    //cell.textLabel.text = resultArray[indexPath.row];
     cell.textLabel.text = selectedMovie.movieName;
     cell.detailTextLabel.text = selectedMovie.movieRelease;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -86,10 +81,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     RateViewController * dvc = [[RateViewController alloc]init];
     
     //Retrieve the current selected city
+    
     Movie* selectedMovie = [resultArray objectAtIndex:indexPath.row];
+    dvc.movieID = selectedMovie.movieID;
     dvc.movieName = selectedMovie.movieName;
     dvc.movieRelease = selectedMovie.movieRelease;
     dvc.movieName = selectedMovie.movieName;
@@ -100,6 +98,7 @@
     NSLog(@"%@", selectedMovie.movieName);
     
     [self.navigationController pushViewController:dvc animated:YES];
+    
 }
 
 
@@ -114,12 +113,8 @@
     resultArray = [[NSMutableArray alloc]init];
     latestLoans = [[NSMutableArray alloc] init];
     latestLoans = [json objectForKey:@"results"];
-    
-    dict = [[NSDictionary alloc] init];
-    dict = [latestLoans valueForKey:@"original_title"];
-    
+
     NSLog(@"%@", latestLoans);
-    NSLog(@"There are %d objects in the array latestLoan", [latestLoans count]);
     
     for (int i = 0; i < latestLoans.count; i++)
     {
@@ -133,10 +128,9 @@
         Movie* myCity = [[Movie alloc]initWithMovieID:mID andMovieName: mName andMovieRelease:mRelease andMovieGenre:mGenre andMovieRuntime:mRuntime andMovieBackgroundImageURL:mBackground];
         //Add our city object to our cities array
         [resultArray addObject:myCity];
-        
-        NSLog(@"%@", resultArray);
     }
     
+    NSLog(@"%@", resultArray);
     
     [self.mainTableView reloadData];
     

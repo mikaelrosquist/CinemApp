@@ -8,6 +8,9 @@
 
 #import "RateViewController.h"
 
+#define getDataURL @"api.themoviedb.org/3/movie/"
+#define api_key @"2da45d86a9897bdf7e7eab86aa0485e3"
+
 //Sätter backgrundsbildens höjd och bredd till statiska värden
 static CGFloat backdropImageHeight  = 250.0;
 static CGFloat backdropImageWidth  = 320.0;
@@ -21,7 +24,7 @@ static CGFloat backdropImageWidth  = 320.0;
     //UITableViewCell *cell;
 }
 
-@synthesize movieView, rateView, activityView, movieName, movieRelease, movieGenre, movieRuntime, movieBackground;
+@synthesize movieView, rateView, activityView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, json;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -156,6 +159,7 @@ static CGFloat backdropImageWidth  = 320.0;
     //Gömmer de vyer som inte ska synnas i Segmented Control vid load
     rateView.hidden = TRUE;
     activityView.hidden = TRUE;
+
 }
 
 //Returnerar höjden för en cell
@@ -230,4 +234,8 @@ static CGFloat backdropImageWidth  = 320.0;
         self.scrollView.contentSize = CGSizeMake(320, activityView.frame.size.height+backdropImageHeight);
     }
 }
+
+
+
+
 @end
