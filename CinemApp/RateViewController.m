@@ -150,6 +150,9 @@ static CGFloat backdropImageWidth  = 320.0;
     CGRect bounds = self.view.bounds;
     self.scrollView.frame = bounds;
     
+    rateView.hidden = TRUE;
+    activityView.hidden = TRUE;
+    
 }
 
 - (void)viewDidLoad
@@ -157,8 +160,6 @@ static CGFloat backdropImageWidth  = 320.0;
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     //Gömmer de vyer som inte ska synnas i Segmented Control vid load
-    rateView.hidden = TRUE;
-    activityView.hidden = TRUE;
 
 }
 
