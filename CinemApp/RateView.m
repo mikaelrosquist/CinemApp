@@ -83,7 +83,7 @@
                                        action:@selector(dismissKeyboard)];
         [self addGestureRecognizer:tap];
         
-        [self setBackgroundColor:[UIColor whiteColor]];
+        [self setBackgroundColor:[UIColor clearColor]];
 
     }
     return self;

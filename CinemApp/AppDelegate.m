@@ -12,17 +12,17 @@
 #import "RateViewController.h"
 #import "ActivityViewController.h"
 #import "ProfileViewController.h"
+#import "RateSearchViewController.h"
 
 @implementation AppDelegate
 
-@synthesize tabBarController = _tabBarController;
-@synthesize window = _window;
+@synthesize tabBarController;
+@synthesize window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     [self.window makeKeyAndVisible];
     
@@ -30,13 +30,14 @@
     
     HomeViewController* home = [[HomeViewController alloc] init];
     ExploreViewController* explore = [[ExploreViewController alloc] init];
+    RateSearchViewController* rateSearch = [[RateSearchViewController alloc] init];
     RateViewController* rate = [[RateViewController alloc] init];
     ActivityViewController* activity = [[ActivityViewController alloc] init];
     ProfileViewController* profile = [[ProfileViewController alloc] init];
     
     UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController:home];
     UINavigationController *exploreNav = [[UINavigationController alloc] initWithRootViewController:explore];
-    UINavigationController *rateNav = [[UINavigationController alloc] initWithRootViewController:rate];
+    UINavigationController *rateNav = [[UINavigationController alloc] initWithRootViewController:rateSearch];
     UINavigationController *activityNav = [[UINavigationController alloc] initWithRootViewController:activity];
     UINavigationController *profileNav = [[UINavigationController alloc] initWithRootViewController:profile];
     
@@ -53,7 +54,6 @@
     rateNav.navigationBar.translucent = YES;
     rateNav.view.backgroundColor = [UIColor clearColor];
     rateNav.navigationBar.barStyle = UIBarStyleBlack;
-    
         
     NSArray* controllers = [NSArray arrayWithObjects:homeNav, exploreNav, rateNav, activityNav, profileNav, nil];
     self.tabBarController.viewControllers = controllers;

@@ -25,9 +25,11 @@
 		6F0CAA4718B3709200AE42F9 /* RateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA3F18B3709200AE42F9 /* RateViewController.m */; };
 		6F0CAA4818B3709200AE42F9 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */; };
 		6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */; };
+		6F16175E18BBBA4800754A10 /* RateSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F16175C18BBBA4800754A10 /* RateSearchViewController.m */; };
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
 		6F9F75A918B79D7B00B69308 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F75A818B79D7B00B69308 /* LogInViewController.m */; };
 		6FC0C82B18B6D59300F737EC /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C82A18B6D59300F737EC /* SettingsViewController.m */; };
+		6FC18B2118BC273C005B226F /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC18B2018BC273C005B226F /* Movie.m */; };
 		7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7308FDE618B76D0000F93344 /* ActivityTableView.m */; };
 		731BE8E818B61EAC0009D8FE /* FilmActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 731BE8E718B61EAC0009D8FE /* FilmActivityView.m */; };
 		73C7E73118B37A1A00453123 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C7E73018B37A1A00453123 /* RateView.m */; };
@@ -72,12 +74,16 @@
 		6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		6F0CAA4218B3709200AE42F9 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		6F16175B18BBBA4800754A10 /* RateSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateSearchViewController.h; sourceTree = "<group>"; };
+		6F16175C18BBBA4800754A10 /* RateSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateSearchViewController.m; sourceTree = "<group>"; };
 		6F955AFF18B397A7004C4B70 /* MovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieView.h; sourceTree = "<group>"; };
 		6F955B0018B397A7004C4B70 /* MovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieView.m; sourceTree = "<group>"; };
 		6F9F75A718B79D7B00B69308 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		6F9F75A818B79D7B00B69308 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		6FC0C82918B6D59300F737EC /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		6FC0C82A18B6D59300F737EC /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		6FC18B1F18BC273C005B226F /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
+		6FC18B2018BC273C005B226F /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
 		7308FDE518B76D0000F93344 /* ActivityTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableView.h; sourceTree = "<group>"; };
 		7308FDE618B76D0000F93344 /* ActivityTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableView.m; sourceTree = "<group>"; };
 		731BE8E618B61EAC0009D8FE /* FilmActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmActivityView.h; sourceTree = "<group>"; };
@@ -143,6 +149,8 @@
 		6F0CAA0F18B3705400AE42F9 /* CinemApp */ = {
 			isa = PBXGroup;
 			children = (
+				6FC18B1F18BC273C005B226F /* Movie.h */,
+				6FC18B2018BC273C005B226F /* Movie.m */,
 				6F0CAA1818B3705400AE42F9 /* AppDelegate.h */,
 				6F0CAA1918B3705400AE42F9 /* AppDelegate.m */,
 				6F0CAA3818B3709200AE42F9 /* ImageEffects.h */,
@@ -211,6 +219,8 @@
 				6F0CAA3D18B3709200AE42F9 /* ExploreViewController.m */,
 				6F0CAA3E18B3709200AE42F9 /* RateViewController.h */,
 				6F0CAA3F18B3709200AE42F9 /* RateViewController.m */,
+				6F16175B18BBBA4800754A10 /* RateSearchViewController.h */,
+				6F16175C18BBBA4800754A10 /* RateSearchViewController.m */,
 				6F0CAA4018B3709200AE42F9 /* ActivityViewController.h */,
 				6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */,
 				6F0CAA4218B3709200AE42F9 /* ProfileViewController.h */,
@@ -325,10 +335,12 @@
 			files = (
 				6F0CAA4618B3709200AE42F9 /* ExploreViewController.m in Sources */,
 				6F0CAA4418B3709200AE42F9 /* ImageEffects.m in Sources */,
+				6FC18B2118BC273C005B226F /* Movie.m in Sources */,
 				6F9F75A918B79D7B00B69308 /* LogInViewController.m in Sources */,
 				73C7E73118B37A1A00453123 /* RateView.m in Sources */,
 				6FC0C82B18B6D59300F737EC /* SettingsViewController.m in Sources */,
 				6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */,
+				6F16175E18BBBA4800754A10 /* RateSearchViewController.m in Sources */,
 				6F0CAA4718B3709200AE42F9 /* RateViewController.m in Sources */,
 				731BE8E818B61EAC0009D8FE /* FilmActivityView.m in Sources */,
 				7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */,
