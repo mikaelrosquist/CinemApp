@@ -12,7 +12,8 @@
 
 @end
 
-#define getDataURL @"http://api.themoviedb.org/3/search/movie?api_key=2da45d86a9897bdf7e7eab86aa0485e3&query=jurassic+park"
+#define getDataURL @"http://api.themoviedb.org/3/search/movie?api_key=2da45d86a9897bdf7e7eab86aa0485e3&query="
+#define searchQuery @"12+years+a+slave"
 
 @implementation RateSearchViewController
 @synthesize json, resultArray, mainTableView, dict, latestLoans;
@@ -22,10 +23,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.title = @"jurassic park";
-        
-        
-        
+        self.title = searchQuery;
     }
     return self;
 }
@@ -35,7 +33,16 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor whiteColor];
+
     [self retrieveData];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    //Färg på navigationBaren
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,9 +73,10 @@
     //cell.textLabel.text = [NSString stringWithFormat:@"Cell %d", indexPath.row];
     
     //Retrieve the current city object for use with this indexPath.row
-    Movie * currentCity = [resultArray objectAtIndex:indexPath.row];
+    Movie * selectedMovie = [resultArray objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = currentCity.movieName;
+    cell.textLabel.text = selectedMovie.movieName;
+    cell.detailTextLabel.text = selectedMovie.movieRelease;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
@@ -98,7 +106,7 @@
 #pragma mark - Methods
 - (void) retrieveData
 {
-    NSURL * url = [NSURL URLWithString:getDataURL];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", getDataURL, searchQuery]];
     NSData * data = [NSData dataWithContentsOfURL:url];
     
     json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];

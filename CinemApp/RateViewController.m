@@ -97,7 +97,7 @@ static CGFloat backdropImageWidth  = 320.0;
     self.backdropWithBlurImageView = [[UIImageView alloc] initWithImage:movieBackgroundString];
     self.backdropWithBlurImageView.frame = CGRectMake(0, 0, backdropImageWidth, backdropImageHeight);
     self.backdropWithBlurImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.backdropWithBlurImageView.image = [movieBackgroundString applyDarkEffectWithIntensity:0 darkness:0.6];
+    self.backdropWithBlurImageView.image = [movieBackgroundString applyDarkEffectWithIntensity:0 darkness:0.5];
     [self.backdropWithBlurImageView setClipsToBounds:YES];
     
     
@@ -132,6 +132,17 @@ static CGFloat backdropImageWidth  = 320.0;
     
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
+    //Färg på navigationBaren
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
+    self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+
+    self.navigationController.navigationBar.topItem.backBarButtonItem = [[UIBarButtonItem alloc]
+                                                                         initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     //Sätter ramen för scrollView
     CGRect bounds = self.view.bounds;
     self.scrollView.frame = bounds;

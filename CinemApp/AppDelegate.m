@@ -47,14 +47,14 @@
     profileNav.navigationBar.translucent = YES;
     profileNav.view.backgroundColor = [UIColor clearColor];
     profileNav.navigationBar.barStyle = UIBarStyleBlack;
-
+/*
     [rateNav.navigationBar setBackgroundImage:[UIImage new]
                                    forBarMetrics:UIBarMetricsDefault];
     rateNav.navigationBar.shadowImage = [UIImage new];
     rateNav.navigationBar.translucent = YES;
     rateNav.view.backgroundColor = [UIColor clearColor];
     rateNav.navigationBar.barStyle = UIBarStyleBlack;
-        
+  */      
     NSArray* controllers = [NSArray arrayWithObjects:homeNav, exploreNav, rateNav, activityNav, profileNav, nil];
     self.tabBarController.viewControllers = controllers;
     
