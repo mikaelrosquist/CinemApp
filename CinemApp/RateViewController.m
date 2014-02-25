@@ -38,6 +38,10 @@ static CGFloat backdropImageWidth  = 320.0;
     rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 400)];
     activityView = [[ActivityTableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
     
+    //Om det inte finns något årtal
+    if([movieRelease isEqualToString:@""])
+        movieRelease = @"xxxx-xx-xx";
+    
     //Filminfo
     NSString *movieTitle = movieName;
     NSString *movieReleaseString = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];

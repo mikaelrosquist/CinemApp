@@ -13,7 +13,7 @@
 @end
 
 #define getDataURL @"http://api.themoviedb.org/3/search/movie?api_key=2da45d86a9897bdf7e7eab86aa0485e3&query="
-#define searchQuery @"Indiana+Jones"
+#define searchQuery @"12+years"
 
 @implementation RateSearchViewController
 @synthesize json, resultArray, mainTableView, latestLoans;
