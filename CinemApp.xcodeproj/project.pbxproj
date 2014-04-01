@@ -151,10 +151,9 @@
 			children = (
 				6F0CAA1818B3705400AE42F9 /* AppDelegate.h */,
 				6F0CAA1918B3705400AE42F9 /* AppDelegate.m */,
-				6F68D7BA18BCC38000457BA4 /* Model */,
+				6F68D7BA18BCC38000457BA4 /* Models */,
 				73C7E73218B37A4F00453123 /* Views */,
 				73C7E73318B37A6400453123 /* Controllers */,
-				73C7E73418B37A9500453123 /* Models */,
 				6F0CAA1B18B3705400AE42F9 /* Images.xcassets */,
 				6F0CAA1018B3705400AE42F9 /* Supporting Files */,
 			);
@@ -190,7 +189,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6F68D7BA18BCC38000457BA4 /* Model */ = {
+		6F68D7BA18BCC38000457BA4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				6FC18B1F18BC273C005B226F /* Movie.h */,
@@ -198,7 +197,7 @@
 				6F0CAA3818B3709200AE42F9 /* ImageEffects.h */,
 				6F0CAA3918B3709200AE42F9 /* ImageEffects.m */,
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
 		73C7E73218B37A4F00453123 /* Views */ = {
@@ -237,13 +236,6 @@
 				6FC0C82A18B6D59300F737EC /* SettingsViewController.m */,
 			);
 			name = Controllers;
-			sourceTree = "<group>";
-		};
-		73C7E73418B37A9500453123 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
