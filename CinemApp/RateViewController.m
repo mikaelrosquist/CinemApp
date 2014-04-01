@@ -32,7 +32,7 @@ static CGFloat backdropImageWidth  = 320.0;
     //Allokerar och initierar vyerna för segmented control
 
     movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 200)];
-    rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 350)];
+    rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 400)];
     tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
     
     //Om det inte finns något årtal
