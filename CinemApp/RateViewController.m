@@ -24,19 +24,15 @@ static CGFloat backdropImageWidth  = 320.0;
     //UITableViewCell *cell;
 }
 
-@synthesize movieView, rateView, activityView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, json;
+@synthesize movieView, rateView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, json, tableView;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //Gör denna controller till delegate för ActivityTableView
-    self.activityView.delegate = self;
-    self.activityView.dataSource = self;
-    
     //Allokerar och initierar vyerna för segmented control
     movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 200)];
-    rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 400)];
-    activityView = [[ActivityTableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
+    rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 350)];
+    tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
     
     //Filminfo
     NSString *movieTitle = movieName;
@@ -117,6 +113,11 @@ static CGFloat backdropImageWidth  = 320.0;
     self.scrollView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
     self.scrollView.alwaysBounceVertical = YES;
     
+    //skapar tableView
+    self.tableView = [[UITableView alloc] init];
+    self.tableView.delegate = self;
+    self.tableView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
+    
     //Lägger till alla subviews i den här vyn
     [self.view addSubview:self.backdropImageView];
     [self.view addSubview:self.backdropWithBlurImageView];
@@ -125,9 +126,9 @@ static CGFloat backdropImageWidth  = 320.0;
     [self.scrollView addSubview:movieRuntimeLabel];
     [self.scrollView addSubview:movieView];
     [self.scrollView addSubview:rateView];
-    [self.scrollView addSubview:activityView];
     [self.scrollView addSubview:segmentedControl];
     [self.view addSubview:self.scrollView];
+    [self.view addSubview:self.tableView];
     
     //Ska göra det enklare att använda slidern, vet ej om det funkar
     self.scrollView.canCancelContentTouches = YES;
@@ -151,7 +152,7 @@ static CGFloat backdropImageWidth  = 320.0;
     self.scrollView.frame = bounds;
     
     rateView.hidden = TRUE;
-    activityView.hidden = TRUE;
+    tableView.hidden = TRUE;
     
 }
 
@@ -163,30 +164,6 @@ static CGFloat backdropImageWidth  = 320.0;
 
 }
 
-//Returnerar höjden för en cell
--(CGFloat)tableView : (UITableView*)tableView heightForRowAtIndexPath: (NSIndexPath*) indexPath{
-    
-    return [indexPath row] * 20;
-    
-   /* if (indexPath.row == 0)
-        return 10;
-    else
-        return 40; */
-}
-
-//Returnerar en cell
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [activityView dequeueReusableCellWithIdentifier:@"cell"];
-    if(!cell){
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"cell"];
-    }
-    return cell;
-}
-
-//antal rader per sektion, vi använder bara en sektion men metoden måste finnas med.
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
-}
 
 //SCROLLVIEW
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -215,28 +192,24 @@ static CGFloat backdropImageWidth  = 320.0;
     NSLog(@"BLUR ALPHA: %f", blurAlpha);
 }
 
-
 //SEGMENTED CONTROL
 - (void)valueChanged:(UISegmentedControl *)segment {
     if(segment.selectedSegmentIndex == 0) {
         movieView.hidden = FALSE;
         rateView.hidden = TRUE;
-        activityView.hidden = TRUE;
+        tableView.hidden = TRUE;
         self.scrollView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
     }else if(segment.selectedSegmentIndex == 1){
         movieView.hidden = TRUE;
         rateView.hidden = FALSE;
-        activityView.hidden = TRUE;
+        tableView.hidden = TRUE;
         self.scrollView.contentSize = CGSizeMake(320, rateView.frame.size.height+backdropImageHeight);
     }else if(segment.selectedSegmentIndex == 2){
         movieView.hidden = TRUE;
         rateView.hidden = TRUE;
-        activityView.hidden = FALSE;
-        self.scrollView.contentSize = CGSizeMake(320, activityView.frame.size.height+backdropImageHeight);
+        tableView.hidden = FALSE;
+        self.scrollView.contentSize = CGSizeMake(320, tableView.frame.size.height+backdropImageHeight);
     }
 }
-
-
-
 
 @end

@@ -12,14 +12,14 @@
 #import "ActivityTableView.h"
 #import "ImageEffects.h"
 
-@interface RateViewController : UIViewController<UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface RateViewController : UIViewController<UIScrollViewDelegate, UITableViewDelegate>
 
 @property (nonatomic, retain) UIScrollView *scrollView;
+@property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIImageView *backdropImageView;
 @property (nonatomic, retain) UIImageView *backdropWithBlurImageView;
 @property (nonatomic, strong) MovieView *movieView;
 @property (nonatomic, strong) RateView *rateView;
-@property (nonatomic, strong) ActivityTableView *activityView;
 
 @property (nonatomic, strong) NSString *movieID;
 @property (nonatomic, strong) NSString *movieName;

@@ -2,6 +2,8 @@
 #import "MovieView.h"
 #import "ImageEffects.h"
 
+#define getDataURL @"api.themoviedb.org/3/movie/"
+#define api_key @"2da45d86a9897bdf7e7eab86aa0485e3"
 
 @implementation MovieView
 
