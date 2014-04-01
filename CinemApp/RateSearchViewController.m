@@ -13,7 +13,7 @@
 @end
 
 #define getDataURL @"http://api.themoviedb.org/3/search/movie?api_key=2da45d86a9897bdf7e7eab86aa0485e3&query="
-#define searchQuery @"star+wars"
+#define searchQuery @"12+years"
 
 @implementation RateSearchViewController
 @synthesize json, resultArray, mainTableView, latestLoans;
@@ -40,7 +40,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     //Färg på navigationBaren
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 
 }

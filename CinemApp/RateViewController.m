@@ -30,9 +30,19 @@ static CGFloat backdropImageWidth  = 320.0;
     [super viewWillAppear:animated];
     
     //Allokerar och initierar vyerna för segmented control
+<<<<<<< HEAD
     movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 200)];
     rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 350)];
     tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
+=======
+    movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
+    rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 400)];
+    activityView = [[ActivityTableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
+>>>>>>> 0454de579714f59d93416527222aa5bf3e67ac7b
+    
+    //Om det inte finns något årtal
+    if([movieRelease isEqualToString:@""])
+        movieRelease = @"xxxx-xx-xx";
     
     //Filminfo
     NSString *movieTitle = movieName;
@@ -145,12 +155,16 @@ static CGFloat backdropImageWidth  = 320.0;
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 
+    //Tar bort "Back"-texten på filmsidorna
     self.navigationController.navigationBar.topItem.backBarButtonItem = [[UIBarButtonItem alloc]
                                                                          initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     //Sätter ramen för scrollView
     CGRect bounds = self.view.bounds;
+    bounds.size.height = self.view.frame.size.height+15;
     self.scrollView.frame = bounds;
     
+    
+    //Gömmer de vyer som inte ska synnas i Segmented Control vid load
     rateView.hidden = TRUE;
     tableView.hidden = TRUE;
     
@@ -160,8 +174,6 @@ static CGFloat backdropImageWidth  = 320.0;
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
-    //Gömmer de vyer som inte ska synnas i Segmented Control vid load
-
 }
 
 
