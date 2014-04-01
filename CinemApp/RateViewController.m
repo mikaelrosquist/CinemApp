@@ -30,15 +30,10 @@ static CGFloat backdropImageWidth  = 320.0;
     [super viewWillAppear:animated];
     
     //Allokerar och initierar vyerna för segmented control
-<<<<<<< HEAD
+
     movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 200)];
     rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 350)];
     tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
-=======
-    movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
-    rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 400)];
-    activityView = [[ActivityTableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
->>>>>>> 0454de579714f59d93416527222aa5bf3e67ac7b
     
     //Om det inte finns något årtal
     if([movieRelease isEqualToString:@""])
