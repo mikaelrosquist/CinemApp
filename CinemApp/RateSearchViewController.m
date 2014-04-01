@@ -32,15 +32,8 @@
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     //[self refresh];
 
-    
-    //[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [self retrieveData];
-    //[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    
     //self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     //self.activityIndicatorView.hidesWhenStopped = YES;
-    
-    [self.mainTableView reloadData];
     
 }
 
@@ -51,7 +44,7 @@
 }
 
 -(void)refresh {
-    // do something here to refresh.
+    [mainTableView reloadData];
     [self.refreshControl endRefreshing];
 }
 
@@ -68,8 +61,10 @@
 	[self.searchBar resignFirstResponder];
 	[self.searchBar setShowsCancelButton:NO animated:YES];
     searchQuery = self.searchBar.text;
+    //[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self retrieveData];
-    [self.mainTableView reloadData];
+    //[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [mainTableView reloadData];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
 	[self.searchBar resignFirstResponder];
@@ -99,8 +94,11 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"]);
+
     
     return cell;
+    
+    
     
 }
 
@@ -129,33 +127,17 @@
 //HÄMTA DATA
 - (void) retrieveData
 {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", getDataURL, @"indiana+jones"]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", getDataURL, searchQuery]];
     NSData * data = [NSData dataWithContentsOfURL:url];
     
     json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     
-    resultArray = [[NSMutableArray alloc]init];
     moviesArray = [[NSMutableArray alloc] init];
     moviesArray = [json objectForKey:@"results"];
     
     NSLog(@"%@", [[moviesArray objectAtIndex:1] valueForKey:@"original_title"]);
     
-    /*
-    for (int i = 0; i < movieArray.count; i++)
-    {
-        //Create movie object
-        NSString * mID = [[movieArray objectAtIndex:i] valueForKey:@"id"];
-        NSString * mName = [[movieArray objectAtIndex:i] valueForKey:@"original_title"];
-        NSString * mRelease = [[movieArray objectAtIndex:i] valueForKey:@"release_date"];
-        NSString * mGenre = @"N/A";
-        NSString * mRuntime = @"N/A";
-        NSString * mBackground = [[movieArray objectAtIndex:i] valueForKey:@"backdrop_path"];
-        Movie* movie = [[Movie alloc]initWithMovieID:mID andMovieName: mName andMovieRelease:mRelease andMovieGenre:mGenre andMovieRuntime:mRuntime andMovieBackgroundImageURL:mBackground];
-        //Add our city object to our cities array
-        [resultArray addObject:movie];
-    }*/
-    
-    [self.mainTableView reloadData];
+    [mainTableView reloadData];
 }
 
 @end
