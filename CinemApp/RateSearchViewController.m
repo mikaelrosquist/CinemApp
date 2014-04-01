@@ -145,7 +145,7 @@
 
     NSLog(@"%@", movieArray);
     
-    /*
+    
     for (int i = 0; i < movieArray.count; i++)
     {
         //Create movie object
@@ -159,7 +159,7 @@
         //Add our city object to our cities array
         [resultArray addObject:movie];
     }
-    */
+    
      
     NSLog(@"%@", resultArray);
     
