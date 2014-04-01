@@ -1,52 +1,85 @@
-//
-//  ViewController.m
-//  JSONiOS
-//
-//  Created by Kurup, Vishal on 4/14/13.
-//  Copyright (c) 2013 conkave. All rights reserved.
-//
-
 #import "RateSearchViewController.h"
 
 @interface RateSearchViewController ()
 
+
+
 @end
 
 #define getDataURL @"http://api.themoviedb.org/3/search/movie?api_key=2da45d86a9897bdf7e7eab86aa0485e3&query="
-#define searchQuery @"12+years"
 
-@implementation RateSearchViewController
-@synthesize json, resultArray, mainTableView, latestLoans;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        self.title = searchQuery;
-    }
-    return self;
+@implementation RateSearchViewController{
+    
+    NSString *searchQuery;
+   
+    
 }
+
+@synthesize json, resultArray, mainTableView, movieArray, activityIndicatorView;
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
+    [searchBar setDelegate:self];
+    [searchBar setShowsCancelButton:NO];
+    [[self navigationItem] setTitleView:searchBar];
+    searchBar.placeholder = @"Search";
+    searchBar.barTintColor = [UIColor lightGrayColor];
+    searchBar.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    //[self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    //[self refresh];
+
+    
+    /*
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 41.0)];
+	[self.view addSubview:searchBar];
+    searchBar.showsCancelButton = NO;
+    searchBar.placeholder = @"Search";
+    [searchBar setDelegate:self];
+    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
+    searchBar.barTintColor = [UIColor lightGrayColor];
+    searchBar.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
+     */
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [self retrieveData];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.activityIndicatorView.hidesWhenStopped = YES;
+    
+    [self.mainTableView reloadData];
+
+    }
+
+//SÖK DELEGATE METHODS
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+	[searchBar becomeFirstResponder];
+	[searchBar setShowsCancelButton:YES animated:YES];
+}
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+	[searchBar resignFirstResponder];
+	[searchBar setShowsCancelButton:NO animated:YES];
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+	[searchBar resignFirstResponder];
+	[searchBar setShowsCancelButton:NO animated:YES];
+    searchQuery = searchBar.text;
     [self retrieveData];
     [self.mainTableView reloadData];
 }
-
-- (void)viewWillAppear:(BOOL)animated{
-    //Färg på navigationBaren
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
+	[searchBar resignFirstResponder];
+	[searchBar setShowsCancelButton:NO animated:YES];
 }
 
-#pragma mark - UITableView Datasource
-
+//TABLE
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -77,15 +110,13 @@
     return cell;
 }
 
-#pragma mark - UITableView Delegate methods
-
+//TABLE DELEGATE METHODS
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     RateViewController * dvc = [[RateViewController alloc]init];
     
-    //Retrieve the current selected city
-    
+    //Retrieve the current selected movie
     Movie* selectedMovie = [resultArray objectAtIndex:indexPath.row];
     dvc.movieID = selectedMovie.movieID;
     dvc.movieName = selectedMovie.movieName;
@@ -98,43 +129,41 @@
     NSLog(@"%@", selectedMovie.movieName);
     
     [self.navigationController pushViewController:dvc animated:YES];
-    
 }
 
-
-#pragma mark - Methods
+//HÄMTA DATA
 - (void) retrieveData
 {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", getDataURL, searchQuery]];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", getDataURL, @"indiana+jones"]];
     NSData * data = [NSData dataWithContentsOfURL:url];
     
     json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     
     resultArray = [[NSMutableArray alloc]init];
-    latestLoans = [[NSMutableArray alloc] init];
-    latestLoans = [json objectForKey:@"results"];
+    movieArray = [[NSMutableArray alloc] init];
+    movieArray = [json objectForKey:@"results"];
 
-    NSLog(@"%@", latestLoans);
+    NSLog(@"%@", movieArray);
     
-    for (int i = 0; i < latestLoans.count; i++)
+    /*
+    for (int i = 0; i < movieArray.count; i++)
     {
-        //Create city object
-        NSString * mID = [[latestLoans objectAtIndex:i] valueForKey:@"id"];
-        NSString * mName = [[latestLoans objectAtIndex:i] valueForKey:@"original_title"];
-        NSString * mRelease = [[latestLoans objectAtIndex:i] valueForKey:@"release_date"];
+        //Create movie object
+        NSString * mID = [[movieArray objectAtIndex:i] valueForKey:@"id"];
+        NSString * mName = [[movieArray objectAtIndex:i] valueForKey:@"original_title"];
+        NSString * mRelease = [[movieArray objectAtIndex:i] valueForKey:@"release_date"];
         NSString * mGenre = @"N/A";
         NSString * mRuntime = @"N/A";
-        NSString * mBackground = [[latestLoans objectAtIndex:i] valueForKey:@"backdrop_path"];
-        Movie* myCity = [[Movie alloc]initWithMovieID:mID andMovieName: mName andMovieRelease:mRelease andMovieGenre:mGenre andMovieRuntime:mRuntime andMovieBackgroundImageURL:mBackground];
+        NSString * mBackground = [[movieArray objectAtIndex:i] valueForKey:@"backdrop_path"];
+        Movie* movie = [[Movie alloc]initWithMovieID:mID andMovieName: mName andMovieRelease:mRelease andMovieGenre:mGenre andMovieRuntime:mRuntime andMovieBackgroundImageURL:mBackground];
         //Add our city object to our cities array
-        [resultArray addObject:myCity];
+        [resultArray addObject:movie];
     }
-    
+    */
+     
     NSLog(@"%@", resultArray);
     
     [self.mainTableView reloadData];
-    
-    
 }
 
 @end

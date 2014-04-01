@@ -26,8 +26,8 @@ static CGFloat backdropImageWidth  = 320.0;
 
 @synthesize movieView, rateView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, json, tableView;
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
     //Allokerar och initierar vyerna för segmented control
 
@@ -163,12 +163,14 @@ static CGFloat backdropImageWidth  = 320.0;
     rateView.hidden = TRUE;
     tableView.hidden = TRUE;
     
+    self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
+    
 }
 
-- (void)viewDidLoad
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
+    [super viewDidAppear:animated];
+    
 }
 
 
