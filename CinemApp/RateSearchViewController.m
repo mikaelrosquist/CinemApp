@@ -9,13 +9,10 @@
 #define getDataURL @"http://api.themoviedb.org/3/search/movie?api_key=2da45d86a9897bdf7e7eab86aa0485e3&query="
 
 @implementation RateSearchViewController{
-    
     NSString *searchQuery;
-   
-    
 }
 
-@synthesize json, resultArray, mainTableView, movieArray, activityIndicatorView;
+@synthesize json, resultArray, mainTableView, moviesArray, activityIndicatorView, searchBar;
 
 
 - (void)viewDidLoad
@@ -23,7 +20,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
+    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
     [searchBar setDelegate:self];
     [searchBar setShowsCancelButton:NO];
     [[self navigationItem] setTitleView:searchBar];
@@ -32,51 +29,51 @@
     searchBar.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
-    //[self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     //[self refresh];
 
     
-    /*
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 41.0)];
-	[self.view addSubview:searchBar];
-    searchBar.showsCancelButton = NO;
-    searchBar.placeholder = @"Search";
-    [searchBar setDelegate:self];
-    self.searchDisplayController.displaysSearchBarInNavigationBar = YES;
-    searchBar.barTintColor = [UIColor lightGrayColor];
-    searchBar.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
-     */
-    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    //[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self retrieveData];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    //[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
-    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    self.activityIndicatorView.hidesWhenStopped = YES;
+    //self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    //self.activityIndicatorView.hidesWhenStopped = YES;
     
     [self.mainTableView reloadData];
+    
+}
 
-    }
+- (void)viewDidAppear:(BOOL)animated
+{
+    [searchBar becomeFirstResponder];
+    [super viewWillAppear:animated];
+}
+
+-(void)refresh {
+    // do something here to refresh.
+    [self.refreshControl endRefreshing];
+}
 
 //SÖK DELEGATE METHODS
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-	[searchBar becomeFirstResponder];
-	[searchBar setShowsCancelButton:YES animated:YES];
+	[self.searchBar becomeFirstResponder];
+	[self.searchBar setShowsCancelButton:YES animated:YES];
 }
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-	[searchBar resignFirstResponder];
-	[searchBar setShowsCancelButton:NO animated:YES];
+	[self.searchBar resignFirstResponder];
+	[self.searchBar setShowsCancelButton:NO animated:YES];
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-	[searchBar resignFirstResponder];
-	[searchBar setShowsCancelButton:NO animated:YES];
-    searchQuery = searchBar.text;
+	[self.searchBar resignFirstResponder];
+	[self.searchBar setShowsCancelButton:NO animated:YES];
+    searchQuery = self.searchBar.text;
     [self retrieveData];
     [self.mainTableView reloadData];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
-	[searchBar resignFirstResponder];
-	[searchBar setShowsCancelButton:NO animated:YES];
+	[self.searchBar resignFirstResponder];
+	[self.searchBar setShowsCancelButton:NO animated:YES];
 }
 
 //TABLE
@@ -85,7 +82,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return resultArray.count;
+    return moviesArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,17 +94,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     
-    //cell.textLabel.text = [NSString stringWithFormat:@"Cell %d", indexPath.row];
-    
-    //Retrieve the current city object for use with this indexPath.row
-    Movie * selectedMovie = [resultArray objectAtIndex:indexPath.row];
-    
-    //cell.textLabel.text = resultArray[indexPath.row];
-    cell.textLabel.text = selectedMovie.movieName;
-    cell.detailTextLabel.text = selectedMovie.movieRelease;
+    cell.textLabel.text = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
+    cell.detailTextLabel.text = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
+    NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"]);
+    
     return cell;
+    
 }
 
 //TABLE DELEGATE METHODS
@@ -117,18 +111,19 @@
     RateViewController * dvc = [[RateViewController alloc]init];
     
     //Retrieve the current selected movie
-    Movie* selectedMovie = [resultArray objectAtIndex:indexPath.row];
-    dvc.movieID = selectedMovie.movieID;
-    dvc.movieName = selectedMovie.movieName;
-    dvc.movieRelease = selectedMovie.movieRelease;
-    dvc.movieName = selectedMovie.movieName;
-    dvc.movieGenre = selectedMovie.movieGenre;
-    dvc.movieRuntime = selectedMovie.movieRuntime;
-    dvc.movieBackground = selectedMovie.movieBackgroundImageURL;
+    //Movie* selectedMovie = [resultArray objectAtIndex:indexPath.row];
+    dvc.movieID = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
+    dvc.movieName = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
+    dvc.movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
+    //dvc.movieName = selectedMovie.movieName;
+    //dvc.movieGenre = selectedMovie.movieGenre;
+    //dvc.movieRuntime = selectedMovie.movieRuntime;
+    dvc.movieBackground = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"backdrop_path"];
 
-    NSLog(@"%@", selectedMovie.movieName);
+    NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"]);
     
     [self.navigationController pushViewController:dvc animated:YES];
+
 }
 
 //HÄMTA DATA
@@ -140,12 +135,12 @@
     json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     
     resultArray = [[NSMutableArray alloc]init];
-    movieArray = [[NSMutableArray alloc] init];
-    movieArray = [json objectForKey:@"results"];
-
-    NSLog(@"%@", movieArray);
+    moviesArray = [[NSMutableArray alloc] init];
+    moviesArray = [json objectForKey:@"results"];
     
+    NSLog(@"%@", [[moviesArray objectAtIndex:1] valueForKey:@"original_title"]);
     
+    /*
     for (int i = 0; i < movieArray.count; i++)
     {
         //Create movie object
@@ -158,10 +153,7 @@
         Movie* movie = [[Movie alloc]initWithMovieID:mID andMovieName: mName andMovieRelease:mRelease andMovieGenre:mGenre andMovieRuntime:mRuntime andMovieBackgroundImageURL:mBackground];
         //Add our city object to our cities array
         [resultArray addObject:movie];
-    }
-    
-     
-    NSLog(@"%@", resultArray);
+    }*/
     
     [self.mainTableView reloadData];
 }
