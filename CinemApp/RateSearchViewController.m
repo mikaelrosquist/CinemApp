@@ -44,7 +44,6 @@
 }
 
 -(void)refresh {
-    [mainTableView reloadData];
     [self.refreshControl endRefreshing];
 }
 
@@ -64,7 +63,6 @@
     //[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self retrieveData];
     //[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    [mainTableView reloadData];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
 	[self.searchBar resignFirstResponder];
@@ -77,7 +75,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return moviesArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -130,7 +128,7 @@
     for (int i = 0; i<moviesArray.count; i++)
         NSLog(@"%@", [[moviesArray objectAtIndex:i] valueForKey:@"original_title"]);
     
-    [mainTableView reloadData];
+    [[self tableView] reloadData];
 }
 
 @end
