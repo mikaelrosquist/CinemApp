@@ -33,7 +33,7 @@
     HomeViewController* home = [[HomeViewController alloc] init];
     ExploreViewController* explore = [[ExploreViewController alloc] init];
     RateSearchViewController* rateSearch = [[RateSearchViewController alloc] init];
-    RateViewController* rate = [[RateViewController alloc] init];
+    //RateViewController* rate = [[RateViewController alloc] init];
     ActivityViewController* activity = [[ActivityViewController alloc] init];
     ProfileViewController* profile = [[ProfileViewController alloc] init];
     

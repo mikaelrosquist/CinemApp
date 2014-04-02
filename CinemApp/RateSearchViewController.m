@@ -2,8 +2,6 @@
 
 @interface RateSearchViewController ()
 
-
-
 @end
 
 #define getDataURL @"http://api.themoviedb.org/3/search/movie?include_adault=false&search_type=phrase&api_key=2da45d86a9897bdf7e7eab86aa0485e3&query="
@@ -13,7 +11,6 @@
 }
 
 @synthesize json, resultArray, mainTableView, moviesArray, activityIndicatorView, searchBar;
-
 
 - (void)viewDidLoad
 {
@@ -25,22 +22,26 @@
     [searchBar setShowsCancelButton:NO];
     [[self navigationItem] setTitleView:searchBar];
     searchBar.placeholder = @"Search";
-    searchBar.barTintColor = [UIColor lightGrayColor];
     searchBar.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
-    //[self refresh];
+    //self.refreshControl = [[UIRefreshControl alloc] init];
+    //[self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
 
-    //self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    //self.activityIndicatorView.hidesWhenStopped = YES;
-    
+    //[self refresh];
+    //[searchBar becomeFirstResponder];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [searchBar becomeFirstResponder];
+    //Färg på navigationBaren
+    UIImage *_defaultImage;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
     [super viewWillAppear:animated];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
 }
 
 -(void)refresh {
@@ -60,9 +61,8 @@
 	[self.searchBar resignFirstResponder];
 	[self.searchBar setShowsCancelButton:NO animated:YES];
     searchQuery = self.searchBar.text;
-    //[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self retrieveData];
-    //[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
 	[self.searchBar resignFirstResponder];
@@ -117,21 +117,28 @@
 //HÄMTA DATA
 - (void) retrieveData
 {
-    NSString *parsedSearchQuery;
-    parsedSearchQuery = [searchQuery stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        NSString *parsedSearchQuery;
+        parsedSearchQuery = [searchQuery stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     
-    NSURL *url = [NSURL URLWithString:[[NSString stringWithFormat:@"%@%@", getDataURL, parsedSearchQuery]stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
-    NSData *data = [NSData dataWithContentsOfURL:url];
+        NSURL *url = [NSURL URLWithString:[[NSString stringWithFormat:@"%@%@", getDataURL, parsedSearchQuery]   stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+        NSData *data = [NSData dataWithContentsOfURL:url];
     
-    json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     
-    moviesArray = [[NSMutableArray alloc] init];
-    moviesArray = [json objectForKey:@"results"];
+        moviesArray = [[NSMutableArray alloc] init];
+        moviesArray = [json objectForKey:@"results"];
     
-    for (int i = 0; i<moviesArray.count; i++)
-        NSLog(@"%@", [[moviesArray objectAtIndex:i] valueForKey:@"original_title"]);
-    
-    [[self tableView] reloadData];
+        for (int i = 0; i<moviesArray.count; i++)
+            NSLog(@"%@", [[moviesArray objectAtIndex:i] valueForKey:@"original_title"]);
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self tableView] reloadData];
+        });
+    });
+        
 }
 
 @end
