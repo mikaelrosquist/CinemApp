@@ -6,7 +6,7 @@
 
 @end
 
-#define getDataURL @"http://api.themoviedb.org/3/search/movie?api_key=2da45d86a9897bdf7e7eab86aa0485e3&query="
+#define getDataURL @"http://api.themoviedb.org/3/search/movie?include_adault=false&search_type=phrase&api_key=2da45d86a9897bdf7e7eab86aa0485e3&query="
 
 @implementation RateSearchViewController{
     NSString *searchQuery;
@@ -77,7 +77,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return moviesArray.count;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -95,47 +95,39 @@
     
     NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"]);
 
-    
     return cell;
-    
-    
-    
 }
 
 //TABLE DELEGATE METHODS
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     RateViewController * dvc = [[RateViewController alloc]init];
     
     //Retrieve the current selected movie
-    //Movie* selectedMovie = [resultArray objectAtIndex:indexPath.row];
     dvc.movieID = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
     dvc.movieName = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
     dvc.movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
-    //dvc.movieName = selectedMovie.movieName;
-    //dvc.movieGenre = selectedMovie.movieGenre;
-    //dvc.movieRuntime = selectedMovie.movieRuntime;
+    dvc.movieGenre = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
+    dvc.movieRuntime = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"runtime"];
     dvc.movieBackground = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"backdrop_path"];
 
     NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"]);
     
     [self.navigationController pushViewController:dvc animated:YES];
-
 }
 
 //HÄMTA DATA
 - (void) retrieveData
 {
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", getDataURL, searchQuery]];
-    NSData * data = [NSData dataWithContentsOfURL:url];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", getDataURL, searchQuery]];
+    NSData *data = [NSData dataWithContentsOfURL:url];
     
     json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     
     moviesArray = [[NSMutableArray alloc] init];
     moviesArray = [json objectForKey:@"results"];
     
-    NSLog(@"%@", [[moviesArray objectAtIndex:1] valueForKey:@"original_title"]);
+    NSLog(@"%@", moviesArray);
     
     [mainTableView reloadData];
 }

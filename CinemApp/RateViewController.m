@@ -9,6 +9,7 @@
 #import "RateViewController.h"
 
 #define getDataURL @"api.themoviedb.org/3/movie/"
+#define test @"http://api.themoviedb.org/3/movie/109445?api_key=2da45d86a9897bdf7e7eab86aa0485e3"
 #define api_key @"2da45d86a9897bdf7e7eab86aa0485e3"
 
 //Sätter backgrundsbildens höjd och bredd till statiska värden
@@ -31,7 +32,7 @@ static CGFloat backdropImageWidth  = 320.0;
     
     //Allokerar och initierar vyerna för segmented control
 
-    movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 200)];
+    movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 450)];
     rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 400)];
     tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
     
@@ -42,8 +43,8 @@ static CGFloat backdropImageWidth  = 320.0;
     //Filminfo
     NSString *movieTitle = movieName;
     NSString *movieReleaseString = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
-    NSString *movieGenreString = movieGenre;
-    NSString *movieRuntimeString = movieRuntime;
+    NSString *movieGenreString = @"Action";
+    NSString *movieRuntimeString = [movieRuntime stringByAppendingString:@" min"];
     
     NSString *backDropURL = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w780/%@", movieBackground];
     
@@ -165,14 +166,9 @@ static CGFloat backdropImageWidth  = 320.0;
     
     self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+    [self retrieveData];
     
 }
-
 
 //SCROLLVIEW
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -219,6 +215,16 @@ static CGFloat backdropImageWidth  = 320.0;
         tableView.hidden = FALSE;
         self.scrollView.contentSize = CGSizeMake(320, tableView.frame.size.height+backdropImageHeight);
     }
+}
+
+- (void) retrieveData
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", test]];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    
+    NSLog(@"%@", json);
 }
 
 @end
