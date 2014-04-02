@@ -8,7 +8,7 @@
 
 #import "RateViewController.h"
 
-#define getDataURL @"api.themoviedb.org/3/movie/"
+#define getDataURL @"http://api.themoviedb.org/3/movie/"
 #define api_key @"?api_key=2da45d86a9897bdf7e7eab86aa0485e3"
 
 //Sätter backgrundsbildens höjd och bredd till statiska värden

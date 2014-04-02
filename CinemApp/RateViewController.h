@@ -30,4 +30,7 @@
 
 @property (nonatomic, strong) NSDictionary * json;
 
+#pragma mark - Methods
+- (void) retrieveData;
+
 @end

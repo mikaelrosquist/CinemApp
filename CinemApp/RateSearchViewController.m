@@ -127,7 +127,8 @@
     moviesArray = [[NSMutableArray alloc] init];
     moviesArray = [json objectForKey:@"results"];
     
-    NSLog(@"%@", moviesArray);
+    for (int i = 0; i<moviesArray.count; i++)
+        NSLog(@"%@", [[moviesArray objectAtIndex:i] valueForKey:@"original_title"]);
     
     [mainTableView reloadData];
 }
