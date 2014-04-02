@@ -117,7 +117,10 @@
 //HÄMTA DATA
 - (void) retrieveData
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", getDataURL, searchQuery]];
+    NSString *parsedSearchQuery;
+    parsedSearchQuery = [searchQuery stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    
+    NSURL *url = [NSURL URLWithString:[[NSString stringWithFormat:@"%@%@", getDataURL, parsedSearchQuery]stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
     NSData *data = [NSData dataWithContentsOfURL:url];
     
     json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
