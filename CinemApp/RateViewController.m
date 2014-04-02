@@ -9,8 +9,7 @@
 #import "RateViewController.h"
 
 #define getDataURL @"api.themoviedb.org/3/movie/"
-#define test @"http://api.themoviedb.org/3/movie/109445?api_key=2da45d86a9897bdf7e7eab86aa0485e3"
-#define api_key @"2da45d86a9897bdf7e7eab86aa0485e3"
+#define api_key @"?api_key=2da45d86a9897bdf7e7eab86aa0485e3"
 
 //Sätter backgrundsbildens höjd och bredd till statiska värden
 static CGFloat backdropImageHeight  = 250.0;
@@ -219,7 +218,7 @@ static CGFloat backdropImageWidth  = 320.0;
 
 - (void) retrieveData
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", test]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, movieID, api_key]];
     NSData *data = [NSData dataWithContentsOfURL:url];
     
     json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
