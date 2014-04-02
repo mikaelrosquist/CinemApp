@@ -4,9 +4,9 @@
 
 *.xcuserstate
 
-CinemApp.xcodeproj/
+*.xcodeproj/
 
-CinemApp.xcodeproj
+*.xcodeproj
 
 DerivedData/
 
@@ -35,7 +35,6 @@ profile
 DerivedData
 *.hmap
 *.ipa
-
 
 
 Game.xcodeproj*
