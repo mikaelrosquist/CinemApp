@@ -4,9 +4,9 @@
 
 *.xcuserstate
 
-*.xcodeproj/
+CinemApp.xcodeproj/
 
-*.xcodeproj
+CinemApp.xcodeproj
 
 DerivedData/
 
