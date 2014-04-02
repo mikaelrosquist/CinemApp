@@ -13,6 +13,7 @@
 #import "ActivityViewController.h"
 #import "ProfileViewController.h"
 #import "RateSearchViewController.h"
+#import <JLTMDbClient.h>
 
 @implementation AppDelegate
 
@@ -21,6 +22,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[JLTMDbClient sharedAPIInstance] setAPIKey:@"2da45d86a9897bdf7e7eab86aa0485e3"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];

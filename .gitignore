@@ -36,8 +36,7 @@ DerivedData
 *.hmap
 *.ipa
 
-# CocoaPods
-Pods
+
 
 Game.xcodeproj*
 Game.xcodeproj/*
