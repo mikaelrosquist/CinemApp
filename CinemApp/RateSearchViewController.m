@@ -49,20 +49,43 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
 	[self.searchBar becomeFirstResponder];
 	[self.searchBar setShowsCancelButton:YES animated:YES];
-}
+    if([self.searchBar.text isEqualToString: @""]){
+        moviesArray = nil;
+        [self.tableView reloadData];
+        [self.tableView setHidden:YES];
+    }
+    }
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
 	[self.searchBar resignFirstResponder];
 	[self.searchBar setShowsCancelButton:NO animated:YES];
+    if([self.searchBar.text isEqualToString: @""]){
+        moviesArray = nil;
+        [self.tableView reloadData];
+        [self.tableView setHidden:YES];
+    }
 }
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if ([self.searchBar.text length] > 4){
+        searchQuery = self.searchBar.text;
+        [self retrieveData];
+    }
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 	[self.searchBar resignFirstResponder];
 	[self.searchBar setShowsCancelButton:NO animated:YES];
     searchQuery = self.searchBar.text;
     [self retrieveData];
 }
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
 	[self.searchBar resignFirstResponder];
-	[self.searchBar setShowsCancelButton:NO animated:YES];
+    [self.searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [searchBar resignFirstResponder];
 }
 
 //TABLE
@@ -95,8 +118,8 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", movieTitle, movieRelease];
         //cell.detailTextLabel.text = nil;
         NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: cell.textLabel.attributedText];
-        [text addAttribute: NSForegroundColorAttributeName value: [UIColor lightGrayColor] range: NSMakeRange([movieTitle length]+1, 6)];
-        [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 12.0] range: NSMakeRange([movieTitle length]+1, 6)];
+        [text addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([movieTitle length]+1, 6)];
+        [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 13.0] range: NSMakeRange([movieTitle length]+1, 6)];
         
         [cell.textLabel setAttributedText: text];
     }
@@ -105,8 +128,6 @@
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"]);
 
     return cell;
 }
@@ -120,8 +141,6 @@
     dvc.movieID = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
     dvc.movieName = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
     dvc.movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
-    dvc.movieGenre = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
-    dvc.movieRuntime = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"runtime"];
     dvc.movieBackground = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"backdrop_path"];
 
     [self.navigationController pushViewController:dvc animated:YES];

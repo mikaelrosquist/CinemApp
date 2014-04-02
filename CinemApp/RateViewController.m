@@ -44,7 +44,7 @@ static CGFloat backdropImageWidth  = 320.0;
     NSString *movieTitle = movieName;
     NSString *movieReleaseString = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
     NSString *movieGenreString = @"Action";
-    NSString *movieRuntimeString = [movieRuntime stringByAppendingString:@" min"];
+    NSString *movieRuntimeString =  @"139 min"; //[movieRuntime stringByAppendingString:@" min"];
     
     if([movieBackground isEqual: [NSNull null]]){
        movieBackgroundString = [UIImage imageNamed:@"moviebackdropplaceholder"];
