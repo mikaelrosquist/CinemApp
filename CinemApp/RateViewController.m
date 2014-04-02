@@ -21,6 +21,7 @@ static CGFloat backdropImageWidth  = 320.0;
 
 @implementation RateViewController{
     UILabel *movieTitleLabel, *movieGenresLabel, *movieRuntimeLabel;
+    UIImage *movieBackgroundString;
     //UITableViewCell *cell;
 }
 
@@ -43,14 +44,17 @@ static CGFloat backdropImageWidth  = 320.0;
     NSString *movieTitle = movieName;
     NSString *movieReleaseString = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
     NSString *movieGenreString = @"Action";
-    NSString *movieRuntimeString = [movieRuntime stringByAppendingString:@" min"];
+    NSString *movieRuntimeString =  @"139 min"; //[movieRuntime stringByAppendingString:@" min"];
     
-    NSString *backDropURL = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w780/%@", movieBackground];
-    
-    NSURL *imageURL = [NSURL URLWithString:backDropURL];
-    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-    UIImage *movieBackgroundString = [UIImage imageWithData:imageData];
-        
+    if([movieBackground isEqual: [NSNull null]]){
+       movieBackgroundString = [UIImage imageNamed:@"moviebackdropplaceholder"];
+    }else{
+        NSString *backDropURL = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w780/%@", movieBackground];
+        NSURL *imageURL = [NSURL URLWithString:backDropURL];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        movieBackgroundString = [UIImage imageWithData:imageData];
+    }
+
     //Om titeln är för lång så kortas den ned
     if (movieTitle.length > 110)
         movieTitle = [[movieTitle substringToIndex:110] stringByAppendingString:@"..."];
@@ -142,14 +146,13 @@ static CGFloat backdropImageWidth  = 320.0;
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     //Färg på navigationBaren
+    
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
-    self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     self.navigationController.navigationBar.translucent = YES;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-
+    
     //Tar bort "Back"-texten på filmsidorna
     self.navigationController.navigationBar.topItem.backBarButtonItem = [[UIBarButtonItem alloc]
                                                                          initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -222,8 +225,6 @@ static CGFloat backdropImageWidth  = 320.0;
     NSData *data = [NSData dataWithContentsOfURL:url];
     
     json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-    
-    NSLog(@"%@", json);
 }
 
 @end

@@ -2,8 +2,6 @@
 
 @interface RateSearchViewController ()
 
-
-
 @end
 
 #define getDataURL @"http://api.themoviedb.org/3/search/movie?include_adault=false&search_type=phrase&api_key=2da45d86a9897bdf7e7eab86aa0485e3&query="
@@ -13,7 +11,6 @@
 }
 
 @synthesize json, resultArray, mainTableView, moviesArray, activityIndicatorView, searchBar;
-
 
 - (void)viewDidLoad
 {
@@ -25,26 +22,26 @@
     [searchBar setShowsCancelButton:NO];
     [[self navigationItem] setTitleView:searchBar];
     searchBar.placeholder = @"Search";
-    searchBar.barTintColor = [UIColor lightGrayColor];
     searchBar.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
-    //[self refresh];
-
-    //self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    //self.activityIndicatorView.hidesWhenStopped = YES;
-    
+    [self.tableView setHidden:YES];
+    [searchBar becomeFirstResponder];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [searchBar becomeFirstResponder];
+    //Färg på navigationBaren
+    UIImage *_defaultImage;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
     [super viewWillAppear:animated];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
+}
+
 -(void)refresh {
-    [mainTableView reloadData];
     [self.refreshControl endRefreshing];
 }
 
@@ -52,23 +49,43 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
 	[self.searchBar becomeFirstResponder];
 	[self.searchBar setShowsCancelButton:YES animated:YES];
-}
+    if([self.searchBar.text isEqualToString: @""]){
+        moviesArray = nil;
+        [self.tableView reloadData];
+        [self.tableView setHidden:YES];
+    }
+    }
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
 	[self.searchBar resignFirstResponder];
 	[self.searchBar setShowsCancelButton:NO animated:YES];
+    if([self.searchBar.text isEqualToString: @""]){
+        moviesArray = nil;
+        [self.tableView reloadData];
+        [self.tableView setHidden:YES];
+    }
 }
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if ([self.searchBar.text length] > 4){
+        searchQuery = self.searchBar.text;
+        [self retrieveData];
+    }
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 	[self.searchBar resignFirstResponder];
 	[self.searchBar setShowsCancelButton:NO animated:YES];
     searchQuery = self.searchBar.text;
-    //[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self retrieveData];
-    //[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    [mainTableView reloadData];
 }
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
 	[self.searchBar resignFirstResponder];
-	[self.searchBar setShowsCancelButton:NO animated:YES];
+    [self.searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [searchBar resignFirstResponder];
 }
 
 //TABLE
@@ -77,7 +94,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return moviesArray.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -89,11 +110,24 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     
-    cell.textLabel.text = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
-    cell.detailTextLabel.text = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    NSString *movieTitle = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
+    NSString *movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
+    [cell.textLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Regular" size: 14.0]];
+    if(![movieRelease isEqualToString:@""]){
+        movieRelease = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", movieTitle, movieRelease];
+        //cell.detailTextLabel.text = nil;
+        NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: cell.textLabel.attributedText];
+        [text addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([movieTitle length]+1, 6)];
+        [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 13.0] range: NSMakeRange([movieTitle length]+1, 6)];
+        
+        [cell.textLabel setAttributedText: text];
+    }
     
-    NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"]);
+    cell.textLabel.numberOfLines = 2;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     return cell;
 }
@@ -109,32 +143,42 @@
     dvc.movieID = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
     dvc.movieName = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
     dvc.movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
-    dvc.movieGenre = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
-    dvc.movieRuntime = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"runtime"];
     dvc.movieBackground = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"backdrop_path"];
 
+<<<<<<< HEAD
     NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"original_title"]);
     NSLog(@"OVERVIEW:");
     NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"overview"]);
     
+=======
+>>>>>>> FETCH_HEAD
     [self.navigationController pushViewController:dvc animated:YES];
 }
 
 //HÄMTA DATA
 - (void) retrieveData
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", getDataURL, searchQuery]];
-    NSData *data = [NSData dataWithContentsOfURL:url];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        NSString *parsedSearchQuery;
+        parsedSearchQuery = [searchQuery stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     
-    json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        NSURL *url = [NSURL URLWithString:[[NSString stringWithFormat:@"%@%@", getDataURL, parsedSearchQuery]   stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+        NSData *data = [NSData dataWithContentsOfURL:url];
     
-    moviesArray = [[NSMutableArray alloc] init];
-    moviesArray = [json objectForKey:@"results"];
+        json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     
-    for (int i = 0; i<moviesArray.count; i++)
-        NSLog(@"%@", [[moviesArray objectAtIndex:i] valueForKey:@"original_title"]);
+        moviesArray = [[NSMutableArray alloc] init];
+        moviesArray = [json objectForKey:@"results"];
     
-    [mainTableView reloadData];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self tableView] reloadData];
+            [self.tableView setHidden:NO];
+        });
+    });
+        
 }
 
 @end
