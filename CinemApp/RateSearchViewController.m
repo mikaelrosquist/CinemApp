@@ -24,11 +24,8 @@
     searchBar.placeholder = @"Search";
     searchBar.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     
-    //self.refreshControl = [[UIRefreshControl alloc] init];
-    //[self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
-
-    //[self refresh];
-    //[searchBar becomeFirstResponder];
+    [self.tableView setHidden:YES];
+    [searchBar becomeFirstResponder];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -62,7 +59,6 @@
 	[self.searchBar setShowsCancelButton:NO animated:YES];
     searchQuery = self.searchBar.text;
     [self retrieveData];
-
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
 	[self.searchBar resignFirstResponder];
@@ -78,6 +74,10 @@
     return moviesArray.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60.0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"Cell";
     
@@ -87,8 +87,23 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     
-    cell.textLabel.text = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
-    cell.detailTextLabel.text = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];;
+    NSString *movieTitle = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
+    NSString *movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
+    [cell.textLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Regular" size: 14.0]];
+    if(![movieRelease isEqualToString:@""]){
+        movieRelease = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", movieTitle, movieRelease];
+        //cell.detailTextLabel.text = nil;
+        NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: cell.textLabel.attributedText];
+        [text addAttribute: NSForegroundColorAttributeName value: [UIColor lightGrayColor] range: NSMakeRange([movieTitle length]+1, 6)];
+        [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 12.0] range: NSMakeRange([movieTitle length]+1, 6)];
+        
+        [cell.textLabel setAttributedText: text];
+    }
+    
+    cell.textLabel.numberOfLines = 2;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"]);
@@ -109,8 +124,6 @@
     dvc.movieRuntime = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"runtime"];
     dvc.movieBackground = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"backdrop_path"];
 
-    NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"]);
-    
     [self.navigationController pushViewController:dvc animated:YES];
 }
 
@@ -130,12 +143,11 @@
         moviesArray = [[NSMutableArray alloc] init];
         moviesArray = [json objectForKey:@"results"];
     
-        for (int i = 0; i<moviesArray.count; i++)
-            NSLog(@"%@", [[moviesArray objectAtIndex:i] valueForKey:@"original_title"]);
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [[self tableView] reloadData];
+            [self.tableView setHidden:NO];
         });
     });
         
