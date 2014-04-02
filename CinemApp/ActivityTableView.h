@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ActivityTableView : UITableView
+@interface ActivityTableView : UITableViewCell
 
 
 @end

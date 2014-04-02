@@ -102,7 +102,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RateViewController * dvc = [[RateViewController alloc]init];
+    //MovieView *mv = [[MovieView alloc] init];
     
+    dvc.movieView.plotText = @"hej hopp";
     //Retrieve the current selected movie
     dvc.movieID = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
     dvc.movieName = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
@@ -111,7 +113,9 @@
     dvc.movieRuntime = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"runtime"];
     dvc.movieBackground = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"backdrop_path"];
 
-    NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"]);
+    NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"original_title"]);
+    NSLog(@"OVERVIEW:");
+    NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"overview"]);
     
     [self.navigationController pushViewController:dvc animated:YES];
 }

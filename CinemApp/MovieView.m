@@ -7,6 +7,9 @@
 
 @implementation MovieView
 
+@synthesize plotText = _plotText;
+@synthesize plotField;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -18,9 +21,10 @@
         [self addSubview:plotLabel];
         
         //plotField
-        UITextField *plotField = [[UITextField alloc]initWithFrame:CGRectMake(10, 70, 300, 100)];
+        plotField = [[UITextField alloc]initWithFrame:CGRectMake(10, 70, 300, 100)];
         plotField.enabled = NO;
-        plotField.text = @"Plot text";
+        plotField.text = _plotText;
+        NSLog(@"plotText satt!");
         plotField.borderStyle = UITextBorderStyleRoundedRect;
         plotField.textAlignment = 0;
         [self addSubview:plotField];
@@ -36,4 +40,5 @@
     }
     return self;
 }
+
 @end

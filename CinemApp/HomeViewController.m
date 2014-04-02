@@ -21,8 +21,6 @@
         // Custom initialization
         self.title = @"CinemApp";
 
-        
-
     }
     return self;
 }

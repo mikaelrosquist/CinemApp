@@ -11,4 +11,7 @@
 
 @interface MovieView : UIView
 
+@property (nonatomic, strong) NSString *plotText;
+@property (nonatomic, strong) UITextField *plotField;
+
 @end
