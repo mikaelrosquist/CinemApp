@@ -1,4 +1,5 @@
 #import "RateSearchViewController.h"
+#import "SearchResult.h"
 
 @interface RateSearchViewController ()
 
@@ -50,11 +51,11 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
 	[self.searchBar becomeFirstResponder];
 	[self.searchBar setShowsCancelButton:YES animated:YES];
-    if([self.searchBar.text isEqualToString: @""]){
-        moviesArray = nil;
-        [self.tableView reloadData];
-        [self.tableView setHidden:YES];
-    }
+        if([self.searchBar.text isEqualToString: @""]){
+            moviesArray = nil;
+            [self.tableView reloadData];
+            [self.tableView setHidden:YES];
+        }
     }
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
 	[self.searchBar resignFirstResponder];
@@ -66,12 +67,17 @@
     }
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    //int times = [[self.searchBar.text componentsSeparatedByString:@" "] count]-1;
     
     if ([self.searchBar.text length] > 2){
         searchQuery = self.searchBar.text;
         [self retrieveData];
     }
+    else if ([self.searchBar.text length] < 3){
+        moviesArray = nil;
+        [self.tableView reloadData];
+        [self.tableView setHidden:YES];
+    }
+
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -100,50 +106,35 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"Cell";
     
+    static NSString *cellIdentifier = @"Cell";
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     
-    NSString *movieTitle = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
-    NSString *movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
-    NSString *moviePoster = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"poster_path"];
+    if(moviesArray.count != 0){
     
-    [cell.textLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Regular" size: 14.0]];
-    if(![movieRelease isEqualToString:@""]){
-        movieRelease = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", movieTitle, movieRelease];
-        //cell.detailTextLabel.text = nil;
-        NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: cell.textLabel.attributedText];
-        [text addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([movieTitle length]+1, 6)];
-        [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 13.0] range: NSMakeRange([movieTitle length]+1, 6)];
-        
-        [cell.textLabel setAttributedText: text];
-    }
-    /*
-        if(![moviePoster isEqual: [NSNull null]]){
-
-
-                NSString *backDropURL = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w90%@", moviePoster];
-                NSURL *imageURL = [NSURL URLWithString:backDropURL];
-                NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-            cell.imageView.image = [UIImage imageWithData:imageData];
-        }else{
-            
-            cell.imageView.image = [UIImage imageNamed:@"Placeholder.png"];
+        NSString *movieTitle = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
+        NSString *movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
+    
+        [cell.textLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Regular" size: 14.0]];
+        if(![movieRelease isEqualToString:@""]){
+            movieRelease = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", movieTitle, movieRelease];
+            NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: cell.textLabel.attributedText];
+            [text addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([movieTitle length]+1, 6)];
+            [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 13.0] range: NSMakeRange([movieTitle length]+1, 6)];
+            [cell.textLabel setAttributedText: text];
         }
-*/
-    
-    
-    cell.textLabel.numberOfLines = 2;
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
+        cell.textLabel.numberOfLines = 2;
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     return cell;
+
 }
 
 //TABLE DELEGATE METHODS
@@ -158,7 +149,6 @@
     dvc.movieName = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
     dvc.movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
     dvc.movieBackground = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"backdrop_path"];
-    dvc.moviePlot = [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"overview"];
 
     NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"original_title"]);
     
@@ -188,7 +178,6 @@
             [self.tableView setHidden:NO];
         });
     });
-        
 }
 
 @end

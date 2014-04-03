@@ -14,6 +14,9 @@
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 @property (nonatomic, strong) UISearchBar *searchBar;
 
+@property (nonatomic, strong) NSArray *entries;
+
+
 
 #pragma mark - Methods
 - (void) retrieveData;

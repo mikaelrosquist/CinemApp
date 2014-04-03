@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface SearchResult : NSObject
-
+    @property (nonatomic, strong) NSString *movieTitle;
+    @property (nonatomic, strong) NSString *movieReleaseDate;
+    @property (nonatomic, strong) UIImage *moviePoster;
 @end
