@@ -69,7 +69,7 @@ BOOL plotEnlarged = NO;
         [self addSubview:posterView];
         
         //castLabel
-        UILabel *castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.contentSize.height+100, 100, 44)];
+        UILabel *castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.contentSize.height+150, 100, 44)];
         castLabel.text = @"Cast";
         [self addSubview:castLabel];
     }
