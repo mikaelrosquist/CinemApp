@@ -27,7 +27,8 @@ static CGFloat backdropImageWidth  = 320.0;
 
 @synthesize movieView, rateView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, moviePlot, json, tableView;
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     [self retrieveData];
@@ -40,9 +41,7 @@ static CGFloat backdropImageWidth  = 320.0;
     NSData *moviePoster = [NSData dataWithContentsOfURL:posterURL];
     
     //Allokerar och initierar vyerna för segmented control
-    movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 450)
-                                                    :moviePoster
-                                                    :moviePlot];
+    movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 450):moviePoster:moviePlot];
     rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 410)];
     tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
     
@@ -228,10 +227,10 @@ static CGFloat backdropImageWidth  = 320.0;
 
 - (void) retrieveData
 {
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, movieID, api_key]];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        NSLog(@"%@", json);
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, movieID, api_key]];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    NSLog(@"%@", json);
     
 }
 
