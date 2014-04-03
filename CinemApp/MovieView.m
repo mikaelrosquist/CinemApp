@@ -7,8 +7,7 @@
 
 @implementation MovieView
 
-@synthesize plotText = _plotText;
-@synthesize plotField = _plotField;
+@synthesize plotText, plotView;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -20,14 +19,11 @@
         plotLabel.text = @"Plot";
         [self addSubview:plotLabel];
         
-        //plotField
-        _plotField = [[UITextField alloc]initWithFrame:CGRectMake(10, 70, 300, 100)];
-        _plotField.enabled = NO;
-        _plotField.text = _plotText;
-        NSLog(@"plotText satt!");
-        _plotField.borderStyle = UITextBorderStyleRoundedRect;
-        _plotField.textAlignment = 0;
-        [self addSubview:_plotField];
+        //plotView
+        plotView = [[UITextView alloc]initWithFrame:CGRectMake(10, 70, 300, 100)];
+        plotView.text = plotText;
+        plotView.textAlignment = 0;
+        [self addSubview:plotView];
         
         //castLabel
         UILabel *castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 170, 100, 44)];
@@ -46,20 +42,15 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.plotText = moviePlot;
+        //plotView
+        plotView = [[UITextView alloc]initWithFrame:CGRectMake(80, 40, 230, 130)];
+        plotView.text = moviePlot;
+        [plotView setFont:[UIFont systemFontOfSize:12]];
+        plotView.textAlignment = 0;
+        [self addSubview:plotView];
         
-        //plotLabel
-        UILabel *plotLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 100, 44)];
-        plotLabel.text = @"Plot";
-        [self addSubview:plotLabel];
+        //Poster
         
-        //plotField
-        _plotField = [[UITextField alloc]initWithFrame:CGRectMake(10, 70, 300, 100)];
-        _plotField.enabled = NO;
-        _plotField.text = moviePlot;
-        NSLog(@"plotText satt!");
-        _plotField.borderStyle = UITextBorderStyleRoundedRect;
-        _plotField.textAlignment = 0;
-        [self addSubview:_plotField];
         
         //castLabel
         UILabel *castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 170, 100, 44)];

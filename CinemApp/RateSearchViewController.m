@@ -144,7 +144,6 @@
     dvc.moviePlot = [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"overview"];
 
     NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"original_title"]);
-    NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"overview"]);
     
     [self.navigationController pushViewController:dvc animated:YES];
 }
