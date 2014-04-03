@@ -32,11 +32,18 @@ static CGFloat backdropImageWidth  = 320.0;
     
     [self retrieveData];
     
+    //Parsar filminfo till movieView
     moviePlot = [json valueForKey:@"overview"];
+    NSString *posterPath = [json valueForKey:@"poster_path"];
+    NSString *posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w185%@", posterPath];
+    NSURL *posterURL = [NSURL URLWithString:posterString];
+    NSData *moviePoster = [NSData dataWithContentsOfURL:posterURL];
     
     //Allokerar och initierar vyerna för segmented control
-    movieView = [[MovieView alloc] initWithMovieInfo:moviePlot :CGRectMake(0, backdropImageHeight+10, 320, 450)];
-    rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 400)];
+    movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 450)
+                                                    :moviePoster
+                                                    :moviePlot];
+    rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 410)];
     tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
     
     //Om det inte finns något årtal
@@ -224,8 +231,8 @@ static CGFloat backdropImageWidth  = 320.0;
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, movieID, api_key]];
         NSData *data = [NSData dataWithContentsOfURL:url];
         json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-    
         NSLog(@"%@", json);
+    
 }
 
 @end

@@ -37,23 +37,37 @@
     return self;
 }
 
--(id)initWithMovieInfo:(NSString *)moviePlot :(CGRect)frame
+-(id)initWithMovieInfo:(CGRect)frame :(NSData*)posterImage :(NSString *)moviePlot
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.plotText = moviePlot;
         //plotView
-        plotView = [[UITextView alloc]initWithFrame:CGRectMake(80, 40, 230, 130)];
+        plotView = [[UITextView alloc]initWithFrame:CGRectMake(10, 40, 300, 133)];
         plotView.text = moviePlot;
-        [plotView setFont:[UIFont systemFontOfSize:12]];
+        [plotView setFont:[UIFont systemFontOfSize:14]];
         plotView.textAlignment = 0;
+        [plotView setUserInteractionEnabled:NO];
+        plotView.backgroundColor = [UIColor clearColor];
+        [plotView setContentInset:UIEdgeInsetsMake(-10, -5, 10, 5)];
+        UIBezierPath * imgRect = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 97, 133)];
+        self.plotView.textContainer.exclusionPaths = @[imgRect];
         [self addSubview:plotView];
         
-        //Poster
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                              action:@selector(tappedPlotView)];
+        [plotView addGestureRecognizer:tap];
+        [plotView setEditable:NO];
+        [plotView setUserInteractionEnabled:YES];
+        //[tap release];
         
+        //Poster
+        UIImageView *posterView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 40, 90, 133)];
+        posterView.image =[UIImage imageWithData:posterImage];
+        [self addSubview:posterView];
         
         //castLabel
-        UILabel *castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 170, 100, 44)];
+        UILabel *castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.contentSize.height+100, 100, 44)];
         castLabel.text = @"Cast";
         [self addSubview:castLabel];
         
@@ -62,5 +76,20 @@
     return self;
 }
 
+- (void)textViewDidChange:(UITextView *)textView
+{
+    CGFloat fixedWidth = textView.frame.size.width;
+    CGSize newSize = [textView sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    CGRect newFrame = textView.frame;
+    newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    textView.frame = newFrame;
+}
+
+- (void)tappedPlotView
+{
+    [self textViewDidChange:plotView];
+    
+    
+}
 
 @end
