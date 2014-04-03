@@ -221,17 +221,12 @@ static CGFloat backdropImageWidth  = 320.0;
 
 - (void) retrieveData
 {
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, movieID, api_key]];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-    
-<<<<<<< HEAD
-        NSLog(@"%@", json);
-=======
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, movieID, api_key]];
+    NSData *data = [NSData dataWithContentsOfURL:url];
     json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     
     NSLog(@"%@", json);
->>>>>>> FETCH_HEAD
+    
 }
 
 @end
