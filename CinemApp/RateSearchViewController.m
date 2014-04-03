@@ -138,20 +138,16 @@
     RateViewController * dvc = [[RateViewController alloc]init];
     //MovieView *mv = [[MovieView alloc] init];
     
-    dvc.movieView.plotText = @"hej hopp";
+    dvc.movieView.plotField.text = @"hej hopp";
     //Retrieve the current selected movie
     dvc.movieID = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
     dvc.movieName = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
     dvc.movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
     dvc.movieBackground = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"backdrop_path"];
 
-<<<<<<< HEAD
     NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"original_title"]);
-    NSLog(@"OVERVIEW:");
     NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"overview"]);
     
-=======
->>>>>>> FETCH_HEAD
     [self.navigationController pushViewController:dvc animated:YES];
 }
 
@@ -170,7 +166,7 @@
     
         moviesArray = [[NSMutableArray alloc] init];
         moviesArray = [json objectForKey:@"results"];
-    
+
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         dispatch_async(dispatch_get_main_queue(), ^{
