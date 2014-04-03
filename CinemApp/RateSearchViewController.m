@@ -4,7 +4,7 @@
 
 @end
 
-#define getDataURL @"http://api.themoviedb.org/3/search/movie?include_adault=false&search_type=phrase&api_key=2da45d86a9897bdf7e7eab86aa0485e3&query="
+#define getDataURL @"http://api.themoviedb.org/3/search/movie?include_adault=false&search_type=ngram&api_key=2da45d86a9897bdf7e7eab86aa0485e3&query="
 
 @implementation RateSearchViewController{
     NSString *searchQuery;
@@ -65,6 +65,8 @@
     }
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    //int times = [[self.searchBar.text componentsSeparatedByString:@" "] count]-1;
+    
     if ([self.searchBar.text length] > 4){
         searchQuery = self.searchBar.text;
         [self retrieveData];
@@ -81,11 +83,6 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
 	[self.searchBar resignFirstResponder];
     [self.searchBar setShowsCancelButton:NO animated:YES];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [searchBar resignFirstResponder];
 }
 
 //TABLE
@@ -135,6 +132,8 @@
 //TABLE DELEGATE METHODS
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.searchBar resignFirstResponder];
+    
     RateViewController * dvc = [[RateViewController alloc]init];
     //MovieView *mv = [[MovieView alloc] init];
     
