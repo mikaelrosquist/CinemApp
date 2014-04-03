@@ -8,6 +8,7 @@
 
 @implementation RateSearchViewController{
     NSString *searchQuery;
+    UIImage *moviePosterString;
 }
 
 @synthesize json, resultArray, mainTableView, moviesArray, activityIndicatorView, searchBar;
@@ -100,6 +101,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"Cell";
+    static NSString *PlaceholderCellIdentifier = @"PlaceholderCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
@@ -109,6 +111,8 @@
     
     NSString *movieTitle = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
     NSString *movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
+    NSString *moviePoster = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"poster_path"];
+    
     [cell.textLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Regular" size: 14.0]];
     if(![movieRelease isEqualToString:@""]){
         movieRelease = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
@@ -120,6 +124,32 @@
         
         [cell.textLabel setAttributedText: text];
     }
+    /*
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+
+        NSString *backDropURL = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w90%@", moviePoster];
+        NSURL *imageURL = [NSURL URLWithString:backDropURL];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            cell.imageView.image = [UIImage imageWithData:imageData];
+        });
+    });
+    */
+    
+    /*
+    NSUInteger nodeCount = [self.moviesArray count];
+    
+    if (nodeCount == 0 && indexPath.row == 0)
+    {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:PlaceholderCellIdentifier];
+        
+        cell.detailTextLabel.text = @"Loading…";
+        
+        return cell;
+    }
+    */
+    cell.imageView.frame = CGRectMake(0,0,32,32);
     
     cell.textLabel.numberOfLines = 2;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
