@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) NSString *plotText;
 @property (nonatomic, strong) UITextView *plotView;
+@property (nonatomic, strong) UIImageView *posterView;
 @property (nonatomic, strong) NSData *posterImage;
 
 - (void)textViewDidChange:(UITextView *)textView;
