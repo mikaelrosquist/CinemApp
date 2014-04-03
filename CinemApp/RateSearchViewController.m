@@ -67,7 +67,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     //int times = [[self.searchBar.text componentsSeparatedByString:@" "] count]-1;
     
-    if ([self.searchBar.text length] > 4){
+    if ([self.searchBar.text length] > 2){
         searchQuery = self.searchBar.text;
         [self retrieveData];
     }
