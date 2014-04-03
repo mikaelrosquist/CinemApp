@@ -135,14 +135,13 @@
     [self.searchBar resignFirstResponder];
     
     RateViewController * dvc = [[RateViewController alloc]init];
-    //MovieView *mv = [[MovieView alloc] init];
     
-    dvc.movieView.plotField.text = @"hej hopp";
     //Retrieve the current selected movie
     dvc.movieID = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"id"];
     dvc.movieName = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
     dvc.movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
     dvc.movieBackground = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"backdrop_path"];
+    dvc.moviePlot = [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"overview"];
 
     NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"original_title"]);
     NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"overview"]);

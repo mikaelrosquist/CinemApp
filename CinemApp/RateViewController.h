@@ -27,6 +27,7 @@
 @property (nonatomic, strong) NSString *movieGenre;
 @property (nonatomic, strong) NSString *movieRuntime;
 @property (nonatomic, strong) NSString *movieBackground;
+@property (nonatomic, strong) NSString *moviePlot;
 
 @property (nonatomic, strong) NSDictionary * json;
 

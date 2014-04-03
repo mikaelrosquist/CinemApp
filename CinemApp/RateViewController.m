@@ -30,9 +30,11 @@ static CGFloat backdropImageWidth  = 320.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self retrieveData];
+    
+    
     //Allokerar och initierar vyerna för segmented control
-
-    movieView = [[MovieView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 450)];
+    movieView = [[MovieView alloc] initWithMovieInfo:_moviePlot :CGRectMake(0, backdropImageHeight+10, 320, 450)];
     rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 400)];
     tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
     
@@ -166,8 +168,6 @@ static CGFloat backdropImageWidth  = 320.0;
     tableView.hidden = TRUE;
     
     self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
-    
-    [self retrieveData];
     
 }
 

@@ -11,6 +11,8 @@
 
 @interface MovieView : UIView
 
+-(id)initWithMovieInfo:(NSString *)moviePlot :(CGRect)frame;
+
 @property (nonatomic, strong) NSString *plotText;
 @property (nonatomic, strong) UITextField *plotField;
 
