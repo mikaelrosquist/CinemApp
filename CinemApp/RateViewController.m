@@ -21,7 +21,7 @@ static CGFloat backdropImageWidth  = 320.0;
 
 @implementation RateViewController{
     UILabel *movieTitleLabel, *movieGenresLabel, *movieRuntimeLabel;
-    UIImage *movieBackgroundString;
+    UIImage *movieBackgroundImage;
     //UITableViewCell *cell;
 }
 
@@ -53,16 +53,16 @@ static CGFloat backdropImageWidth  = 320.0;
     //Filminfo
     NSString *movieTitle = movieName;
     NSString *movieReleaseString = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
-    NSString *movieGenreString = @"Action";
+    NSString *movieGenreString = @"Action | Drama";
     NSString *movieRuntimeString =  @"139 min"; //[movieRuntime stringByAppendingString:@" min"];
     
     if([movieBackground isEqual: [NSNull null]]){
-       movieBackgroundString = [UIImage imageNamed:@"moviebackdropplaceholder"];
+       movieBackgroundImage = [UIImage imageNamed:@"moviebackdropplaceholder"];
     }else{
         NSString *backDropURL = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w780/%@", movieBackground];
         NSURL *imageURL = [NSURL URLWithString:backDropURL];
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        movieBackgroundString = [UIImage imageWithData:imageData];
+        movieBackgroundImage = [UIImage imageWithData:imageData];
     }
 
     //Om titeln är för lång så kortas den ned
@@ -106,16 +106,16 @@ static CGFloat backdropImageWidth  = 320.0;
     [movieRuntimeLabel sizeToFit];
     
     //Filmens bakgrundsbild
-    self.backdropImageView = [[UIImageView alloc] initWithImage:movieBackgroundString];
+    self.backdropImageView = [[UIImageView alloc] initWithImage:movieBackgroundImage];
     self.backdropImageView.frame = CGRectMake(0, 0, backdropImageWidth, backdropImageHeight);
     self.backdropImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.backdropImageView setClipsToBounds:YES];
     
     //Filmens bakgrundbild med mörker
-    self.backdropWithBlurImageView = [[UIImageView alloc] initWithImage:movieBackgroundString];
+    self.backdropWithBlurImageView = [[UIImageView alloc] initWithImage:movieBackgroundImage];
     self.backdropWithBlurImageView.frame = CGRectMake(0, 0, backdropImageWidth, backdropImageHeight);
     self.backdropWithBlurImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.backdropWithBlurImageView.image = [movieBackgroundString applyDarkEffectWithIntensity:0 darkness:0.6];
+    self.backdropWithBlurImageView.image = [movieBackgroundImage applyDarkEffectWithIntensity:0 darkness:0.6];
     [self.backdropWithBlurImageView setClipsToBounds:YES];
     
     
