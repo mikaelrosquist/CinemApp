@@ -1,7 +1,9 @@
 #import "RateSearchViewController.h"
-#import "SearchResult.h"
+#import "Reachability.h"
 
-@interface RateSearchViewController ()
+@interface RateSearchViewController (private)
+
+-(void)reachabilityChanged:(NSNotification*)note;
 
 @end
 
@@ -13,6 +15,12 @@
 }
 
 @synthesize json, resultArray, mainTableView, moviesArray, activityIndicatorView, searchBar;
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Release any cached data, images, etc that aren't in use.
+}
 
 - (void)viewDidLoad
 {
@@ -27,7 +35,11 @@
     searchBar.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     
     [self.tableView setHidden:YES];
+    
     [searchBar becomeFirstResponder];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -44,6 +56,8 @@
 }
 
 -(void)refresh {
+    if(![self.searchBar.text isEqualToString: @""])
+        [self retrieveData];
     [self.refreshControl endRefreshing];
 }
 
@@ -159,25 +173,57 @@
 - (void) retrieveData
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        NSString *parsedSearchQuery;
-        parsedSearchQuery = [searchQuery stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    
-        NSURL *url = [NSURL URLWithString:[[NSString stringWithFormat:@"%@%@", getDataURL, parsedSearchQuery]   stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-    
-        json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-    
-        moviesArray = [[NSMutableArray alloc] init];
-        moviesArray = [json objectForKey:@"results"];
 
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        if([self reachable])
+        {
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[self tableView] reloadData];
-            [self.tableView setHidden:NO];
-        });
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+            NSString *parsedSearchQuery;
+            parsedSearchQuery = [searchQuery stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    
+            NSURL *url = [NSURL URLWithString:[[NSString stringWithFormat:@"%@%@", getDataURL, parsedSearchQuery]   stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+    
+            json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+            
+            moviesArray = [[NSMutableArray alloc] init];
+            moviesArray = [json objectForKey:@"results"];
+
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[self tableView] reloadData];
+                [self.tableView setHidden:NO];
+                NSLog(@"Connected");
+            });
+
+        
+        }else{
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"Not connected");
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ops!"
+                                                                message:@"Ain't no network connection available"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                
+                [alert show];
+                
+            });
+        };
+
     });
+}
+
+-(BOOL)reachable {
+    Reachability *r = [Reachability reachabilityWithHostname:@"www.google.com"];
+    NetworkStatus internetStatus = [r currentReachabilityStatus];
+    if(internetStatus == NotReachable) {
+        return NO;
+    }
+    return YES;
 }
 
 @end

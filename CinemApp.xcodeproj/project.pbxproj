@@ -26,6 +26,7 @@
 		6F0CAA4818B3709200AE42F9 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */; };
 		6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */; };
 		6F16175E18BBBA4800754A10 /* RateSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F16175C18BBBA4800754A10 /* RateSearchViewController.m */; };
+		6F39372918F29AD10026AB4C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F39372818F29AD10026AB4C /* Reachability.m */; };
 		6F416B5018ED80C900C2F777 /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F416B4F18ED80C900C2F777 /* SearchResult.m */; };
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
 		6F9F75A918B79D7B00B69308 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F75A818B79D7B00B69308 /* LogInViewController.m */; };
@@ -78,6 +79,8 @@
 		6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		6F16175B18BBBA4800754A10 /* RateSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateSearchViewController.h; sourceTree = "<group>"; };
 		6F16175C18BBBA4800754A10 /* RateSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateSearchViewController.m; sourceTree = "<group>"; };
+		6F39372718F29AD10026AB4C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		6F39372818F29AD10026AB4C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		6F416B4E18ED80C900C2F777 /* SearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResult.h; sourceTree = "<group>"; };
 		6F416B4F18ED80C900C2F777 /* SearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResult.m; sourceTree = "<group>"; };
 		6F955AFF18B397A7004C4B70 /* MovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieView.h; sourceTree = "<group>"; };
@@ -205,6 +208,8 @@
 				6FC18B2018BC273C005B226F /* Movie.m */,
 				6F0CAA3818B3709200AE42F9 /* ImageEffects.h */,
 				6F0CAA3918B3709200AE42F9 /* ImageEffects.m */,
+				6F39372718F29AD10026AB4C /* Reachability.h */,
+				6F39372818F29AD10026AB4C /* Reachability.m */,
 				6F416B4E18ED80C900C2F777 /* SearchResult.h */,
 				6F416B4F18ED80C900C2F777 /* SearchResult.m */,
 			);
@@ -395,6 +400,7 @@
 				6F0CAA1A18B3705400AE42F9 /* AppDelegate.m in Sources */,
 				6F0CAA1618B3705400AE42F9 /* main.m in Sources */,
 				6F0CAA4818B3709200AE42F9 /* ActivityViewController.m in Sources */,
+				6F39372918F29AD10026AB4C /* Reachability.m in Sources */,
 				6F0CAA4518B3709200AE42F9 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
