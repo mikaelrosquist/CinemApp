@@ -167,7 +167,7 @@
     dvc.movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
     dvc.movieBackground = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"backdrop_path"];
 
-    NSLog(@"%@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"original_title"]);
+    NSLog(@"VALD FILM: %@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"original_title"]);
     
     [self.navigationController pushViewController:dvc animated:YES];
 }

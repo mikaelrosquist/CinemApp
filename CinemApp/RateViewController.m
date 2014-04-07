@@ -31,7 +31,12 @@ static CGFloat backdropImageWidth  = 320.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"HÄMTAT: RateViewController");
+    NSLog(@"LADDAT: RateViewController");
+
+    //Skapar scollView
+    self.scrollView = [[UIScrollView alloc] init];
+    self.scrollView.delegate = self;
+    self.scrollView.alwaysBounceVertical = YES;
 
     NSLog(@"LADDAR: Filmdata från TMDb");
     [self retrieveData];
@@ -70,12 +75,7 @@ static CGFloat backdropImageWidth  = 320.0;
         if (i < [genreArray count]-1)
             movieGenreString = [movieGenreString stringByAppendingString: @" | "];
     }
-    //[[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
-    
-    //Castar runtime till runTimeString och sätter sedan movieRuntimeString
-    NSString *runTimeString = [[json objectForKey:@"runtime"] stringValue];
-    NSString *movieRuntimeString = [runTimeString stringByAppendingString:@" min"];
-    
+
     //Filmens bakgrundsbild
     self.backdropImageView = [[UIImageView alloc] init];
     self.backdropImageView.backgroundColor = [UIColor darkGrayColor];
@@ -93,10 +93,12 @@ static CGFloat backdropImageWidth  = 320.0;
     [activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [activityIndicator startAnimating];
     [self.backdropImageView addSubview:activityIndicator];
+    
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     self.view.userInteractionEnabled = NO;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+    dispatch_queue_t queue = dispatch_queue_create("myqueue", NULL);
+    dispatch_async(queue, ^{
         
         NSLog(@"LADDAR: Backdrop från: %@", movieBackground);
         NSString *backDropURL = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w780/%@", movieBackground];
@@ -105,10 +107,73 @@ static CGFloat backdropImageWidth  = 320.0;
         UIImage *img = [UIImage imageWithData:imageData];
         NSLog(@"HÄMTAT: Backdrop från: %@", movieBackground);
         
+        NSLog(@"LADDAR: Filmdata från TMDb");
+        [self retrieveData];
+        NSLog(@"HÄMTAT: Filmdata från TMDb");
         
+        //Parsar filminfo till movieView
+        moviePlot = [json valueForKey:@"overview"];
+        NSString *posterPath = [json valueForKey:@"poster_path"];
+        NSString *posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w185%@", posterPath];
+        NSURL *posterURL = [NSURL URLWithString:posterString];
+        NSData *moviePoster = [NSData dataWithContentsOfURL:posterURL];
+ 
+        //Cast
+        NSMutableArray *castArray = [creditsJson objectForKey:@"cast"];
         
-        // Now the image will have been loaded and decoded and is ready to rock for the main thread
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        //Formaterar stringen efter antal genrar
+        NSArray *genreArray = [json objectForKey:@"genres"];
+        
+        //Castar runtime till runTimeString och sätter sedan movieRuntimeString
+        NSString *runTimeString = [[json objectForKey:@"runtime"] stringValue];
+        NSString *movieRuntimeString = [runTimeString stringByAppendingString:@" min"];
+
+        // Perform on main thread/queue
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            //Allokerar och initierar vyerna för segmented control
+            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 450):moviePoster:moviePlot:castArray];
+            rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 410)];
+            tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
+            
+            NSString *movieGenreString = @"";
+            for (int i = 0; i < [genreArray count]; i++) {
+                NSString *tmp = [[genreArray objectAtIndex:i] objectForKey:@"name"];
+                movieGenreString = [movieGenreString stringByAppendingString:tmp];
+                if (i < [genreArray count]-1)
+                    movieGenreString = [movieGenreString stringByAppendingString: @" | "];
+            }
+            
+            //Genre label
+            NSLog(@"LADDAR: Genre");
+            movieGenresLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, movieTitleLabel.frame.origin.y+movieTitleLabel.frame.size.height+4, 140, 20)];
+            movieGenresLabel.text = movieGenreString;
+            movieGenresLabel.textColor=[UIColor lightGrayColor];
+            movieGenresLabel.textAlignment = NSTextAlignmentLeft;
+            [movieGenresLabel setFont:[UIFont fontWithName: @"HelveticaNeue" size: 13.0]];
+            [movieGenresLabel sizeToFit];
+            NSLog(@"HÄMTAT: Genre");
+            
+            //Runtime label
+            NSLog(@"LADDAR: Runtime");
+            movieRuntimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, movieGenresLabel.frame.origin.y+movieGenresLabel.frame.size.height+2, 140, 20)];
+            movieRuntimeLabel.text = movieRuntimeString;
+            movieRuntimeLabel.textColor=[UIColor lightGrayColor];
+            movieRuntimeLabel.textAlignment = NSTextAlignmentLeft;
+            [movieRuntimeLabel setFont:[UIFont fontWithName: @"HelveticaNeue" size: 13.0]];
+            [movieRuntimeLabel sizeToFit];
+            NSLog(@"HÄMTAT: Runtime");
+            
+            self.scrollView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
+            [self.scrollView addSubview:movieView];
+            [self.scrollView addSubview:rateView];
+            [self.scrollView addSubview:movieGenresLabel];
+            [self.scrollView addSubview:movieRuntimeLabel];
+            
+            //Gömmer de vyer som inte ska synnas i Segmented Control vid load
+            rateView.hidden = TRUE;
+            tableView.hidden = TRUE;
+            
             if([movieBackground isEqual: [NSNull null]]){
                 [self.backdropImageView setImage: [UIImage imageNamed:@"moviebackdropplaceholder"]];
                 [self.backdropWithBlurImageView setImage: [[UIImage imageNamed:@"moviebackdropplaceholder"]applyDarkEffectWithIntensity:0 darkness:0.6]];
@@ -120,8 +185,27 @@ static CGFloat backdropImageWidth  = 320.0;
             [activityIndicator stopAnimating];
             [activityIndicator removeFromSuperview];
             self.view.userInteractionEnabled = YES;
+            
+            //Skapar segmented control-menyn
+            UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Information", @"Rate", @"Activity", nil]];
+            segmentedControl.frame = CGRectMake(10, backdropImageHeight+10, 300, 29);
+            segmentedControl.selectedSegmentIndex = 0;
+            segmentedControl.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
+            [segmentedControl addTarget:self action:@selector(valueChanged:) forControlEvents: UIControlEventValueChanged];
+            
+            [self.scrollView addSubview:movieTitleLabel];
+            [self.scrollView addSubview:segmentedControl];
+            [self.view addSubview:self.scrollView];
         });
     });
+    
+    //Om det inte finns något årtal
+    if([movieRelease isEqualToString:@""])
+        movieRelease = @"xxxx-xx-xx";
+    
+    //Filminfo
+    //NSString *movieTitle = movieName;
+    //NSString *movieReleaseString = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
 
     //Om titeln är för lång så kortas den ned
     if (movieTitle.length > 110)
@@ -147,34 +231,7 @@ static CGFloat backdropImageWidth  = 320.0;
     [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 16.0] range: NSMakeRange([movieTitle length]+1, 6)];
     [movieTitleLabel setAttributedText: text];
     
-    //Genre label
-    movieGenresLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, movieTitleLabel.frame.origin.y+movieTitleLabel.frame.size.height+4, 140, 20)];
-    movieGenresLabel.text = movieGenreString;
-    movieGenresLabel.textColor=[UIColor lightGrayColor];
-    movieGenresLabel.textAlignment = NSTextAlignmentLeft;
-    [movieGenresLabel setFont:[UIFont fontWithName: @"HelveticaNeue" size: 13.0]];
-    [movieGenresLabel sizeToFit];
     
-    //Runtime label
-    movieRuntimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, movieGenresLabel.frame.origin.y+movieGenresLabel.frame.size.height+2, 140, 20)];
-    movieRuntimeLabel.text = movieRuntimeString;
-    movieRuntimeLabel.textColor=[UIColor lightGrayColor];
-    movieRuntimeLabel.textAlignment = NSTextAlignmentLeft;
-    [movieRuntimeLabel setFont:[UIFont fontWithName: @"HelveticaNeue" size: 13.0]];
-    [movieRuntimeLabel sizeToFit];
-    
-    //Skapar segmented control-menyn
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Information", @"Rate", @"Activity", nil]];
-    segmentedControl.frame = CGRectMake(10, backdropImageHeight+10, 300, 29);
-    segmentedControl.selectedSegmentIndex = 0;
-    segmentedControl.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
-    [segmentedControl addTarget:self action:@selector(valueChanged:) forControlEvents: UIControlEventValueChanged];
-    
-    //Skapar scollView
-    self.scrollView = [[UIScrollView alloc] init];
-    self.scrollView.delegate = self;
-    self.scrollView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
-    self.scrollView.alwaysBounceVertical = YES;
     
     //skapar tableView
     self.tableView = [[UITableView alloc] init];
@@ -184,14 +241,7 @@ static CGFloat backdropImageWidth  = 320.0;
     //Lägger till alla subviews i den här vyn
     [self.view addSubview:self.backdropImageView];
     [self.view addSubview:self.backdropWithBlurImageView];
-    [self.scrollView addSubview:movieTitleLabel];
-    [self.scrollView addSubview:movieGenresLabel];
-    [self.scrollView addSubview:movieRuntimeLabel];
-    [self.scrollView addSubview:movieView];
-    [self.scrollView addSubview:rateView];
-    [self.scrollView addSubview:segmentedControl];
-    [self.view addSubview:self.scrollView];
-    [self.view addSubview:self.tableView];
+       [self.view addSubview:self.tableView];
     
     //Ska göra det enklare att använda slidern, vet ej om det funkar
     self.scrollView.canCancelContentTouches = YES;
@@ -213,11 +263,6 @@ static CGFloat backdropImageWidth  = 320.0;
     CGRect bounds = self.view.bounds;
     bounds.size.height = self.view.frame.size.height+15;
     self.scrollView.frame = bounds;
-    
-    
-    //Gömmer de vyer som inte ska synnas i Segmented Control vid load
-    rateView.hidden = TRUE;
-    tableView.hidden = TRUE;
     
     self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     
