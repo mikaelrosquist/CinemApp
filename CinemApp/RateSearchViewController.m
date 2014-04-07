@@ -40,6 +40,8 @@
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -71,6 +73,7 @@
             [self.tableView setHidden:YES];
         }
     }
+
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
 	[self.searchBar resignFirstResponder];
 	[self.searchBar setShowsCancelButton:NO animated:YES];
@@ -173,11 +176,9 @@
 - (void) retrieveData
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
-
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         if([self reachable])
         {
-        
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
             NSString *parsedSearchQuery;
             parsedSearchQuery = [searchQuery stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     

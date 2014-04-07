@@ -30,8 +30,11 @@ static CGFloat backdropImageWidth  = 320.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    NSLog(@"HÄMTAT: RateViewController");
+
+    NSLog(@"LADDAR: Filmdata från TMDb");
     [self retrieveData];
+    NSLog(@"HÄMTAT: Filmdata från TMDb");
     
     //Parsar filminfo till movieView
     moviePlot = [json valueForKey:@"overview"];
@@ -55,14 +58,52 @@ static CGFloat backdropImageWidth  = 320.0;
     NSString *movieGenreString = @"Action | Drama";
     NSString *movieRuntimeString =  @"139 min"; //[movieRuntime stringByAppendingString:@" min"];
     
-    if([movieBackground isEqual: [NSNull null]]){
-       movieBackgroundImage = [UIImage imageNamed:@"moviebackdropplaceholder"];
-    }else{
+    //Filmens bakgrundsbild
+    self.backdropImageView = [[UIImageView alloc] init];
+    self.backdropImageView.backgroundColor = [UIColor darkGrayColor];
+    self.backdropImageView.frame = CGRectMake(0, 0, backdropImageWidth, backdropImageHeight);
+    self.backdropImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.backdropImageView setClipsToBounds:YES];
+    
+    self.backdropWithBlurImageView = [[UIImageView alloc] init];
+    self.backdropWithBlurImageView.frame = CGRectMake(0, 0, backdropImageWidth, backdropImageHeight);
+    self.backdropWithBlurImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.backdropWithBlurImageView setClipsToBounds:YES];
+    
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator.frame = CGRectMake(0, 0, backdropImageWidth, backdropImageHeight-50);
+    [activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [activityIndicator startAnimating];
+    [self.backdropImageView addSubview:activityIndicator];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    self.view.userInteractionEnabled = NO;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        NSLog(@"LADDAR: Backdrop från: %@", movieBackground);
         NSString *backDropURL = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w780/%@", movieBackground];
         NSURL *imageURL = [NSURL URLWithString:backDropURL];
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        movieBackgroundImage = [UIImage imageWithData:imageData];
-    }
+        UIImage *img = [UIImage imageWithData:imageData];
+        NSLog(@"HÄMTAT: Backdrop från: %@", movieBackground);
+        
+        
+        
+        // Now the image will have been loaded and decoded and is ready to rock for the main thread
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if([movieBackground isEqual: [NSNull null]]){
+                [self.backdropImageView setImage: [UIImage imageNamed:@"moviebackdropplaceholder"]];
+                [self.backdropWithBlurImageView setImage: [[UIImage imageNamed:@"moviebackdropplaceholder"]applyDarkEffectWithIntensity:0 darkness:0.6]];
+            }else{
+                [self.backdropImageView setImage: img];
+                [self.backdropWithBlurImageView setImage: [img applyDarkEffectWithIntensity:0 darkness:0.6]];
+            }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            [activityIndicator stopAnimating];
+            [activityIndicator removeFromSuperview];
+            self.view.userInteractionEnabled = YES;
+        });
+    });
 
     //Om titeln är för lång så kortas den ned
     if (movieTitle.length > 110)
@@ -103,20 +144,6 @@ static CGFloat backdropImageWidth  = 320.0;
     movieRuntimeLabel.textAlignment = NSTextAlignmentLeft;
     [movieRuntimeLabel setFont:[UIFont fontWithName: @"HelveticaNeue" size: 13.0]];
     [movieRuntimeLabel sizeToFit];
-    
-    //Filmens bakgrundsbild
-    self.backdropImageView = [[UIImageView alloc] initWithImage:movieBackgroundImage];
-    self.backdropImageView.frame = CGRectMake(0, 0, backdropImageWidth, backdropImageHeight);
-    self.backdropImageView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.backdropImageView setClipsToBounds:YES];
-    
-    //Filmens bakgrundbild med mörker
-    self.backdropWithBlurImageView = [[UIImageView alloc] initWithImage:movieBackgroundImage];
-    self.backdropWithBlurImageView.frame = CGRectMake(0, 0, backdropImageWidth, backdropImageHeight);
-    self.backdropWithBlurImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.backdropWithBlurImageView.image = [movieBackgroundImage applyDarkEffectWithIntensity:0 darkness:0.6];
-    [self.backdropWithBlurImageView setClipsToBounds:YES];
-    
     
     //Skapar segmented control-menyn
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Information", @"Rate", @"Activity", nil]];
@@ -227,11 +254,14 @@ static CGFloat backdropImageWidth  = 320.0;
 
 - (void) retrieveData
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, movieID, api_key]];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-    NSLog(@"%@", json);
-    
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, movieID, api_key]];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        
+     //   dispatch_async(dispatch_get_main_queue(), ^{
+      //  });
+    //});
 }
 
 @end
