@@ -7,7 +7,7 @@
 
 @implementation MovieView
 
-@synthesize plotText, plotView, posterView, castLabel;
+@synthesize plotText, plotView, posterView, castLabel, personView;
 
 BOOL plotEnlarged = NO;
 
@@ -60,6 +60,7 @@ BOOL plotEnlarged = NO;
                                                                               action:@selector(tappedPlotView)];
         [plotView addGestureRecognizer:tap];
         plotView.editable = NO;
+        plotView.selectable = NO; //så man inte kan markera/kopiera text
         plotView.scrollEnabled = NO;
         plotView.userInteractionEnabled = YES;
         
@@ -69,19 +70,33 @@ BOOL plotEnlarged = NO;
         [self addSubview:posterView];
         
         //castLabel
-        //castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+20, 100, 44)];
-        //castLabel.text = @"Cast";
-        //[self addSubview:castLabel];
+        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+25, 100, 44)];
+        castLabel.text = @"Cast";
+        [self addSubview:castLabel];
         
         //cast
         NSLog(@"CastArray: %@", castArray);
+        double y = 0.2;
         for (int i=0; i < 6; i++) {
             NSString *nameStr = [[castArray objectAtIndex:i] objectForKey:@"name"];
             NSString *charStr = [[castArray objectAtIndex:i] objectForKey:@"character"];
-            UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, plotView.frame.size.height+20+i*20, 130, 44)];
+            //profile pics
+            NSString *imagePath = [[castArray objectAtIndex:i] objectForKey:@"profile_path"];
+            NSString *imageString = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w90%@", imagePath];
+            NSURL *imageURL = [NSURL URLWithString:imageString];
+            NSData *personImage = [NSData dataWithContentsOfURL:imageURL];
+            personView = [[UIImageView alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+65 +i*90, 59, 87)];
+            personView.image = [UIImage imageWithData:personImage];
+            [self addSubview:personView];
+            
+
+            UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, plotView.frame.size.height+75 +i*90, 150, 44)];
             nameLabel.text = nameStr;
-            UILabel *charLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+20+i*20, 200, 44)];
+            UILabel *charLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, plotView.frame.size.height+75 +y*90, 150, 44)];
+            charLabel.font = [charLabel.font fontWithSize:12];
+            charLabel.textColor = [UIColor grayColor];
             charLabel.text = charStr;
+            y++;
             [self addSubview:nameLabel];
             [self addSubview:charLabel];
         }

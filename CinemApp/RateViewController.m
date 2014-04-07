@@ -32,7 +32,7 @@ static CGFloat backdropImageWidth  = 320.0;
 {
     [super viewDidLoad];
     NSLog(@"LADDAT: RateViewController");
-
+    
     //Skapar scollView
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.delegate = self;
@@ -55,7 +55,7 @@ static CGFloat backdropImageWidth  = 320.0;
         if (i < [genreArray count]-1)
             movieGenreString = [movieGenreString stringByAppendingString: @" | "];
     }
-
+    
     //Filmens bakgrundsbild
     self.backdropImageView = [[UIImageView alloc] init];
     self.backdropImageView.backgroundColor = [UIColor darkGrayColor];
@@ -92,30 +92,33 @@ static CGFloat backdropImageWidth  = 320.0;
         NSLog(@"HÄMTAT: Filmdata från TMDb");
         
         //Parsar filminfo till movieView
+            //Plot
         moviePlot = [json valueForKey:@"overview"];
+            //Poster
         NSString *posterPath = [json valueForKey:@"poster_path"];
         NSString *posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w185%@", posterPath];
         NSURL *posterURL = [NSURL URLWithString:posterString];
         NSData *moviePoster = [NSData dataWithContentsOfURL:posterURL];
- 
-        //Cast
+        
+        //Lägger cast i en array
         NSMutableArray *castArray = [creditsJson objectForKey:@"cast"];
         
-        //Formaterar stringen efter antal genrar
+        //Lägger genrar i en array
         NSArray *genreArray = [json objectForKey:@"genres"];
         
         //Castar runtime till runTimeString och sätter sedan movieRuntimeString
         NSString *runTimeString = [[json objectForKey:@"runtime"] stringValue];
         NSString *movieRuntimeString = [runTimeString stringByAppendingString:@" min"];
-
+        
         // Perform on main thread/queue
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Allokerar och initierar vyerna för segmented control
-            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 450):moviePoster:moviePlot:castArray];
+            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 830):moviePoster:moviePlot:castArray];
             rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 410)];
             tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
             
+            //Formaterar en sträng med genrar
             NSString *movieGenreString = @"";
             for (int i = 0; i < [genreArray count]; i++) {
                 NSString *tmp = [[genreArray objectAtIndex:i] objectForKey:@"name"];
@@ -186,7 +189,7 @@ static CGFloat backdropImageWidth  = 320.0;
     //Filminfo
     //NSString *movieTitle = movieName;
     //NSString *movieReleaseString = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
-
+    
     //Om titeln är för lång så kortas den ned
     if (movieTitle.length > 110)
         movieTitle = [[movieTitle substringToIndex:110] stringByAppendingString:@"..."];
@@ -221,7 +224,7 @@ static CGFloat backdropImageWidth  = 320.0;
     //Lägger till alla subviews i den här vyn
     [self.view addSubview:self.backdropImageView];
     [self.view addSubview:self.backdropWithBlurImageView];
-       [self.view addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     
     //Ska göra det enklare att använda slidern, vet ej om det funkar
     self.scrollView.canCancelContentTouches = YES;
