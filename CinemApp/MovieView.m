@@ -7,7 +7,7 @@
 
 @implementation MovieView
 
-@synthesize plotText, plotView, posterView;
+@synthesize plotText, plotView, posterView, castLabel;
 
 BOOL plotEnlarged = NO;
 
@@ -28,7 +28,7 @@ BOOL plotEnlarged = NO;
         [self addSubview:plotView];
         
         //castLabel
-        UILabel *castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 170, 100, 44)];
+        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 170, 100, 44)];
         castLabel.text = @"Cast";
         [self addSubview:castLabel];
         
@@ -45,7 +45,7 @@ BOOL plotEnlarged = NO;
     if (self) {
         self.plotText = moviePlot;
         //plotView
-        plotView = [[UITextView alloc]initWithFrame:CGRectMake(10, 40, 300, 133)];
+        plotView = [[UITextView alloc]initWithFrame:CGRectMake(10, 40, 300, 150)];
         plotView.text = moviePlot;
         [plotView setFont:[UIFont systemFontOfSize:14]];
         plotView.textAlignment = 0;
@@ -59,21 +59,29 @@ BOOL plotEnlarged = NO;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                               action:@selector(tappedPlotView)];
         [plotView addGestureRecognizer:tap];
-        [plotView setEditable:NO];
-        //[plotView setScrollEnabled:NO];
-        [plotView setUserInteractionEnabled:YES];
+        plotView.editable = NO;
+        plotView.scrollEnabled = NO;
+        plotView.userInteractionEnabled = YES;
         
         //Poster
-        posterView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 40, 90, 133)];
+        posterView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 40, 90, 130)];
         posterView.image = [UIImage imageWithData:posterImage];
         [self addSubview:posterView];
         
         //castLabel
-        UILabel *castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.contentSize.height+150, 100, 44)];
+        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+20, 100, 44)];
+        
+        NSLog(@"%f", plotView.frame.size.height);
+        
         castLabel.text = @"Cast";
         [self addSubview:castLabel];
     }
     return self;
+}
+
+- (void)tappedPlotView
+{
+    [self textViewDidChange:plotView];
 }
 
 - (void)textViewDidChange:(UITextView *)textView
@@ -83,7 +91,7 @@ BOOL plotEnlarged = NO;
     
     if (plotEnlarged){
         [UIView beginAnimations:nil context:nil];
-        [textView setFrame:CGRectMake(10, 40, 300, posterView.frame.size.height)];
+        [textView setFrame:CGRectMake(10, 40, 300, 150)];
         [UIView commitAnimations];
         plotEnlarged = NO;
     }
@@ -99,10 +107,8 @@ BOOL plotEnlarged = NO;
         [UIView commitAnimations];
     }
     
-}
-
-- (void)tappedPlotView
-{
-        [self textViewDidChange:plotView];
+    //placerar castLabel vertikalt, beroende på plotView
+    [self.castLabel setFrame:CGRectMake(10, textView.frame.size.height+20, 100, 44)];
+    
 }
 @end
