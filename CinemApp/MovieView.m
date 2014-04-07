@@ -39,7 +39,7 @@ BOOL plotEnlarged = NO;
     return self;
 }
 
--(id)initWithMovieInfo:(CGRect)frame :(NSData*)posterImage :(NSString *)moviePlot
+-(id)initWithMovieInfo:(CGRect)frame :(NSData*)posterImage :(NSString *)moviePlot :(NSArray *)castArray
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -70,20 +70,23 @@ BOOL plotEnlarged = NO;
         
         //castLabel
         castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+20, 100, 44)];
-        
-        NSLog(@"%f", plotView.frame.size.height);
-        
         castLabel.text = @"Cast";
         [self addSubview:castLabel];
+        
+        //cast
+        
     }
     return self;
 }
 
+//Gör bara ett anrop för att minska eller förstora plot-texten
 - (void)tappedPlotView
 {
     [self textViewDidChange:plotView];
 }
 
+
+//förstorar och förminskar plot-texten.
 - (void)textViewDidChange:(UITextView *)textView
 {
     NSLog(@"%f", plotView.contentSize.height);

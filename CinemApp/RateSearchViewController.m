@@ -197,14 +197,13 @@
                 [self.tableView setHidden:NO];
                 NSLog(@"Connected");
             });
-
         
         }else{
 
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"Not connected");
                 
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ops!"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!"
                                                                 message:@"Ain't no network connection available"
                                                                delegate:self
                                                       cancelButtonTitle:@"OK"

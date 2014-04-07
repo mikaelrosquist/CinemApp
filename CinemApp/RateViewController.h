@@ -30,6 +30,7 @@
 @property (nonatomic, strong) NSString *moviePlot;
 
 @property (nonatomic, strong) NSDictionary * json;
+@property (nonatomic, strong) NSDictionary *creditsJson;
 
 #pragma mark - Methods
 - (void) retrieveData;
