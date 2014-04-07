@@ -10,6 +10,7 @@
 
 #define getDataURL @"http://api.themoviedb.org/3/movie/"
 #define api_key @"?api_key=2da45d86a9897bdf7e7eab86aa0485e3"
+#define getCreditsURL @"/credits"
 
 //Sätter backgrundsbildens höjd och bredd till statiska värden
 static CGFloat backdropImageHeight  = 250.0;
@@ -25,7 +26,7 @@ static CGFloat backdropImageWidth  = 320.0;
     //UITableViewCell *cell;
 }
 
-@synthesize movieView, rateView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, moviePlot, json, tableView;
+@synthesize movieView, rateView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, moviePlot, json, creditsJson, tableView;
 
 - (void)viewDidLoad
 {
@@ -52,8 +53,21 @@ static CGFloat backdropImageWidth  = 320.0;
     //Filminfo
     NSString *movieTitle = movieName;
     NSString *movieReleaseString = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
-    NSString *movieGenreString = @"Action | Drama";
-    NSString *movieRuntimeString =  @"139 min"; //[movieRuntime stringByAppendingString:@" min"];
+    
+    //Formaterar stringen efter antal genrar
+    NSString *movieGenreString = @"";
+    NSArray *genreArray = [json objectForKey:@"genres"];
+    for (int i = 0; i < [genreArray count]; i++) {
+        NSString *tmp = [[genreArray objectAtIndex:i] objectForKey:@"name"];
+        movieGenreString = [movieGenreString stringByAppendingString:tmp];
+        if (i < [genreArray count]-1)
+            movieGenreString = [movieGenreString stringByAppendingString: @" | "];
+    }
+    //[[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
+    
+    //Castar runtime till runTimeString och sätter sedan movieRuntimeString
+    NSString *runTimeString = [[json objectForKey:@"runtime"] stringValue];
+    NSString *movieRuntimeString = [runTimeString stringByAppendingString:@" min"];
     
     if([movieBackground isEqual: [NSNull null]]){
        movieBackgroundImage = [UIImage imageNamed:@"moviebackdropplaceholder"];
@@ -230,8 +244,12 @@ static CGFloat backdropImageWidth  = 320.0;
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, movieID, api_key]];
     NSData *data = [NSData dataWithContentsOfURL:url];
     json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-    NSLog(@"%@", json);
+    //NSLog(@"%@", json);
     
+    NSURL *creditsURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", getDataURL, movieID, getCreditsURL, api_key]];
+    NSData *creditsData = [NSData dataWithContentsOfURL:creditsURL];
+    creditsJson = [NSJSONSerialization JSONObjectWithData:creditsData options:kNilOptions error:nil];
+    NSLog(@"%@", creditsJson);
 }
 
 @end

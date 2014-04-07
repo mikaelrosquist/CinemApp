@@ -13,7 +13,8 @@
 
 -(id)initWithMovieInfo:(CGRect)frame
                       :(NSData*)posterImage
-                      :(NSString *)moviePlot;
+                      :(NSString *)moviePlot
+                      :(NSArray *)castArray;
 
 @property (nonatomic, strong) NSString *plotText;
 @property (nonatomic, strong) UITextView *plotView;
