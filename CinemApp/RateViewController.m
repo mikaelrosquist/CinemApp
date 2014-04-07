@@ -38,14 +38,18 @@ static CGFloat backdropImageWidth  = 320.0;
     NSLog(@"HÄMTAT: Filmdata från TMDb");
     
     //Parsar filminfo till movieView
+        //Plot
     moviePlot = [json valueForKey:@"overview"];
+        //Poster
     NSString *posterPath = [json valueForKey:@"poster_path"];
     NSString *posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w185%@", posterPath];
     NSURL *posterURL = [NSURL URLWithString:posterString];
     NSData *moviePoster = [NSData dataWithContentsOfURL:posterURL];
+        //Cast
+    NSMutableArray *castArray = [creditsJson objectForKey:@"cast"];
     
     //Allokerar och initierar vyerna för segmented control
-    movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 450):moviePoster:moviePlot];
+    movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 450):moviePoster:moviePlot:castArray];
     rateView = [[RateView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 410)];
     tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
     

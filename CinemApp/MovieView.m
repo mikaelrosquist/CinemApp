@@ -69,12 +69,22 @@ BOOL plotEnlarged = NO;
         [self addSubview:posterView];
         
         //castLabel
-        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+20, 100, 44)];
-        castLabel.text = @"Cast";
-        [self addSubview:castLabel];
+        //castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+20, 100, 44)];
+        //castLabel.text = @"Cast";
+        //[self addSubview:castLabel];
         
         //cast
-        
+        NSLog(@"CastArray: %@", castArray);
+        for (int i=0; i < 6; i++) {
+            NSString *nameStr = [[castArray objectAtIndex:i] objectForKey:@"name"];
+            NSString *charStr = [[castArray objectAtIndex:i] objectForKey:@"character"];
+            UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, plotView.frame.size.height+20+i*20, 130, 44)];
+            nameLabel.text = nameStr;
+            UILabel *charLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+20+i*20, 200, 44)];
+            charLabel.text = charStr;
+            [self addSubview:nameLabel];
+            [self addSubview:charLabel];
+        }
     }
     return self;
 }
