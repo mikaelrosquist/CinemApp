@@ -77,6 +77,7 @@ BOOL plotEnlarged = NO;
         //cast
         NSLog(@"CastArray: %@", castArray);
         double y = 0.2;
+        if(!castArray.count < 1){
         for (int i=0; i < 6; i++) {
             NSString *nameStr = [[castArray objectAtIndex:i] objectForKey:@"name"];
             NSString *charStr = [[castArray objectAtIndex:i] objectForKey:@"character"];
@@ -99,6 +100,7 @@ BOOL plotEnlarged = NO;
             y++;
             [self addSubview:nameLabel];
             [self addSubview:charLabel];
+        }
         }
     }
     return self;
