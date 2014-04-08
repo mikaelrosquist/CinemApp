@@ -36,6 +36,8 @@
 		7315839B20B24CCB9354FBC0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0503F7E37414EF9911FF6EE /* libPods.a */; };
 		731BE8E818B61EAC0009D8FE /* FilmActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 731BE8E718B61EAC0009D8FE /* FilmActivityView.m */; };
 		73C7E73118B37A1A00453123 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C7E73018B37A1A00453123 /* RateView.m */; };
+		73C8444118F3FE8C0022AF1E /* MovieTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C8444018F3FE8C0022AF1E /* MovieTableView.m */; };
+		73C8444418F401060022AF1E /* MovieTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C8444318F401060022AF1E /* MovieTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,10 @@
 		731BE8E718B61EAC0009D8FE /* FilmActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmActivityView.m; sourceTree = "<group>"; };
 		73C7E72F18B37A1A00453123 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
 		73C7E73018B37A1A00453123 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
+		73C8443F18F3FE8C0022AF1E /* MovieTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieTableView.h; sourceTree = "<group>"; };
+		73C8444018F3FE8C0022AF1E /* MovieTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieTableView.m; sourceTree = "<group>"; };
+		73C8444218F401060022AF1E /* MovieTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieTableViewController.h; sourceTree = "<group>"; };
+		73C8444318F401060022AF1E /* MovieTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieTableViewController.m; sourceTree = "<group>"; };
 		A0503F7E37414EF9911FF6EE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED5665886EE44C019112E5BC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -227,6 +233,8 @@
 				73C7E73018B37A1A00453123 /* RateView.m */,
 				6F955AFF18B397A7004C4B70 /* MovieView.h */,
 				6F955B0018B397A7004C4B70 /* MovieView.m */,
+				73C8443F18F3FE8C0022AF1E /* MovieTableView.h */,
+				73C8444018F3FE8C0022AF1E /* MovieTableView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -234,6 +242,8 @@
 		73C7E73318B37A6400453123 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				73C8444218F401060022AF1E /* MovieTableViewController.h */,
+				73C8444318F401060022AF1E /* MovieTableViewController.m */,
 				6F9F75A718B79D7B00B69308 /* LogInViewController.h */,
 				6F9F75A818B79D7B00B69308 /* LogInViewController.m */,
 				6F0CAA3A18B3709200AE42F9 /* HomeViewController.h */,
@@ -392,9 +402,11 @@
 				6F416B5018ED80C900C2F777 /* SearchResult.m in Sources */,
 				6FC0C82B18B6D59300F737EC /* SettingsViewController.m in Sources */,
 				6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */,
+				73C8444118F3FE8C0022AF1E /* MovieTableView.m in Sources */,
 				6F16175E18BBBA4800754A10 /* RateSearchViewController.m in Sources */,
 				6F0CAA4718B3709200AE42F9 /* RateViewController.m in Sources */,
 				731BE8E818B61EAC0009D8FE /* FilmActivityView.m in Sources */,
+				73C8444418F401060022AF1E /* MovieTableViewController.m in Sources */,
 				7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */,
 				6F955B0118B397A7004C4B70 /* MovieView.m in Sources */,
 				6F0CAA1A18B3705400AE42F9 /* AppDelegate.m in Sources */,

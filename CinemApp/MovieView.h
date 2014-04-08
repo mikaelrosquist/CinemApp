@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MovieTableView.h"
 //#import <JLTMDbClient.h>
 
 @interface MovieView : UIView

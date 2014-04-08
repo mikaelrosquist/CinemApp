@@ -10,6 +10,7 @@
 @synthesize plotText, plotView, posterView, castLabel, personView;
 
 BOOL plotEnlarged = NO;
+MovieTableView *castTable;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -33,7 +34,6 @@ BOOL plotEnlarged = NO;
         [self addSubview:castLabel];
         
         //loopa igenom top-cast och skriv ut dem på nåt sätt.
-        
         
     }
     return self;
@@ -70,36 +70,42 @@ BOOL plotEnlarged = NO;
         [self addSubview:posterView];
         
         //castLabel
-        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+25, 100, 44)];
+        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+20, 100, 44)];
         castLabel.text = @"Cast";
         [self addSubview:castLabel];
         
+        //castTable
+        castTable = [[MovieTableView alloc]initWithFrame:CGRectMake(0, plotView.frame.size.height+60, 320, 400)];
+        [self addSubview:castTable];
+        
         //cast
         NSLog(@"CastArray: %@", castArray);
-        double y = 0.2;
-        for (int i=0; i < 6; i++) {
-            NSString *nameStr = [[castArray objectAtIndex:i] objectForKey:@"name"];
-            NSString *charStr = [[castArray objectAtIndex:i] objectForKey:@"character"];
-            //profile pics
-            NSString *imagePath = [[castArray objectAtIndex:i] objectForKey:@"profile_path"];
-            NSString *imageString = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w90%@", imagePath];
-            NSURL *imageURL = [NSURL URLWithString:imageString];
-            NSData *personImage = [NSData dataWithContentsOfURL:imageURL];
-            personView = [[UIImageView alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+65 +i*90, 59, 87)];
-            personView.image = [UIImage imageWithData:personImage];
-            [self addSubview:personView];
-            
-
-            UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, plotView.frame.size.height+75 +i*90, 150, 44)];
-            nameLabel.text = nameStr;
-            UILabel *charLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, plotView.frame.size.height+75 +y*90, 150, 44)];
-            charLabel.font = [charLabel.font fontWithSize:12];
-            charLabel.textColor = [UIColor grayColor];
-            charLabel.text = charStr;
-            y++;
-            [self addSubview:nameLabel];
-            [self addSubview:charLabel];
-        }
+        
+        /*double y = 0.2;
+         if (![castArray count] < 1) {
+         for (int i=0; i < 5; i++) {
+         NSString *nameStr = [[castArray objectAtIndex:i] objectForKey:@"name"];
+         NSString *charStr = [[castArray objectAtIndex:i] objectForKey:@"character"];
+         //profile pics
+         NSString *imagePath = [[castArray objectAtIndex:i] objectForKey:@"profile_path"];
+         NSString *imageString = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w90%@", imagePath];
+         NSURL *imageURL = [NSURL URLWithString:imageString];
+         NSData *personImage = [NSData dataWithContentsOfURL:imageURL];
+         personView = [[UIImageView alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+65 +i*90, 59, 87)];
+         personView.image = [UIImage imageWithData:personImage];
+         [self addSubview:personView];
+         
+         UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, plotView.frame.size.height+75 +i*90, 150, 44)];
+         nameLabel.text = nameStr;
+         UILabel *charLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, plotView.frame.size.height+75 +y*90, 150, 44)];
+         charLabel.font = [charLabel.font fontWithSize:12];
+         charLabel.textColor = [UIColor grayColor];
+         charLabel.text = charStr;
+         y++;
+         [self addSubview:nameLabel];
+         [self addSubview:charLabel];
+         }
+         }*/
     }
     return self;
 }
@@ -114,29 +120,26 @@ BOOL plotEnlarged = NO;
 //förstorar och förminskar plot-texten.
 - (void)textViewDidChange:(UITextView *)textView
 {
-    NSLog(@"%f", plotView.contentSize.height);
-    NSLog(@"%f", posterView.frame.size.height);
+    NSLog(@"Plot content: %f", plotView.contentSize.height);
+    NSLog(@"Plot frame: %f", plotView.frame.size.height);
+    NSLog(@"Poster: %f", posterView.frame.size.height);
     
-    if (plotEnlarged){
-        [UIView beginAnimations:nil context:nil];
-        [textView setFrame:CGRectMake(10, 40, 300, 150)];
-        [UIView commitAnimations];
+    CGFloat fixedWidth = textView.frame.size.width;
+    CGSize newSize = [textView sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+    CGRect newFrame = textView.frame;
+    newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+    
+    if(newFrame.size.height < 150 || plotEnlarged){
+        newFrame = CGRectMake(10, 40, 300, 150);
         plotEnlarged = NO;
     }
-    else if(plotView.contentSize.height > posterView.frame.size.height){
+    else
         plotEnlarged = YES;
-        CGFloat fixedWidth = textView.frame.size.width;
-        CGSize newSize = [textView sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
-        CGRect newFrame = textView.frame;
-        newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
-        
-        [UIView beginAnimations:nil context:nil];
-        textView.frame = newFrame;
-        [UIView commitAnimations];
-    }
     
-    //placerar castLabel vertikalt, beroende på plotView
+    [UIView beginAnimations:nil context:nil];
+    textView.frame = newFrame;
     [self.castLabel setFrame:CGRectMake(10, textView.frame.size.height+20, 100, 44)];
-    
+    [castTable setFrame:CGRectMake(0, textView.frame.size.height+60, 320, 400)];
+    [UIView commitAnimations];
 }
 @end
