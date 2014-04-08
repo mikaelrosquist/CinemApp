@@ -71,7 +71,7 @@ MovieTableView *castTable;
         
         //castLabel
         castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+20, 100, 44)];
-        castLabel.text = @"Cast";
+        castLabel.text = @"Top Cast";
         [self addSubview:castLabel];
         
         //castTable
