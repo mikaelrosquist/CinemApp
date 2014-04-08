@@ -13,7 +13,7 @@
 #define getCreditsURL @"/credits"
 
 //Sätter backgrundsbildens höjd och bredd till statiska värden
-static CGFloat backdropImageHeight  = 250.0;
+static CGFloat backdropImageHeight  = 220.0;
 static CGFloat backdropImageWidth  = 320.0;
 
 @interface RateViewController ()

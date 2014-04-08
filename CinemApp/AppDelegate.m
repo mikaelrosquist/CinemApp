@@ -33,6 +33,7 @@
     [self.window makeKeyAndVisible];
     
     self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.delegate = self;
     
     HomeViewController* home = [[HomeViewController alloc] init];
     ExploreViewController* explore = [[ExploreViewController alloc] init];
@@ -97,7 +98,9 @@
     profileTabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     
     
-    [tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar_selected"]];
+    
+
+    
     [tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar"]];
     
     self.window.rootViewController = self.tabBarController;
@@ -108,6 +111,14 @@
 
     
     return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    if (self.tabBarController.selectedIndex==2) {
+        [self.tabBarController.tabBar setSelectionIndicatorImage:nil];
+    } else {
+        [self.tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar_selected"]];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
