@@ -170,7 +170,7 @@ static CGFloat backdropImageWidth  = 320.0;
             self.view.userInteractionEnabled = YES;
             
             //Skapar segmented control-menyn
-            UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Information", @"Rate", @"Activity", nil]];
+            UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Movie details", @"Rate movie", @"Friend activity", nil]];
             segmentedControl.frame = CGRectMake(10, backdropImageHeight+10, 300, 29);
             segmentedControl.selectedSegmentIndex = 0;
             segmentedControl.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
