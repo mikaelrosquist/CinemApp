@@ -106,6 +106,7 @@ MovieTableView *castTable;
          [self addSubview:charLabel];
          }
          }*/
+
     }
     return self;
 }

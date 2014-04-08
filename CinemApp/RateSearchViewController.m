@@ -138,17 +138,20 @@
         NSString *movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
     
         [cell.textLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Regular" size: 14.0]];
-        if(![movieRelease isEqualToString:@""]){
+        if(![movieRelease isEqualToString:@""] && movieRelease != nil){
             movieRelease = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
             cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", movieTitle, movieRelease];
             NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: cell.textLabel.attributedText];
             [text addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([movieTitle length]+1, 6)];
             [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 13.0] range: NSMakeRange([movieTitle length]+1, 6)];
             [cell.textLabel setAttributedText: text];
+        }else{
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", movieTitle];
         }
         cell.textLabel.numberOfLines = 2;
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
     }
     return cell;
 
@@ -189,6 +192,8 @@
             
             moviesArray = [[NSMutableArray alloc] init];
             moviesArray = [json objectForKey:@"results"];
+            
+            NSLog(@"%@", moviesArray);
 
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             
