@@ -10,8 +10,14 @@
 
 @interface RateView : UIView
 
+-(id)initWithMovieID:(CGRect)frame
+                    :(NSString *)movieID;
+
 //@property (nonatomic, weak) UILabel *sliderLabel;
 @property (nonatomic, retain) UIImageView *sliderLabelBGView;
 @property (nonatomic, strong) UITextField *commentField;
+@property (nonatomic, strong) NSString *movieID;
+
+
 
 @end

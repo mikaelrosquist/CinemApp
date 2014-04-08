@@ -14,13 +14,12 @@
     UISlider *slider;
 }
 
-@synthesize commentField = _commentField;
+@synthesize commentField, movieID;
 
-- (id)initWithFrame:(CGRect)frame
+-(id)initWithMovieID:(CGRect)frame :(NSString *)movieID
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
         //rateLabel
         UILabel *rateLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 100, 44)];
         rateLabel.text = @"Rating";
@@ -57,11 +56,11 @@
         [self addSubview:commentLabel];
         
         //commentField
-        _commentField = [[UITextField alloc]initWithFrame:CGRectMake(10, 145, 300, 120)];
-        _commentField.placeholder = @"How was it? Leave a note...";
-        _commentField.borderStyle = UITextBorderStyleRoundedRect;
-        _commentField.textAlignment = 0;
-        [self addSubview:_commentField];
+        commentField = [[UITextField alloc]initWithFrame:CGRectMake(10, 145, 300, 120)];
+        commentField.placeholder = @"How was it? Leave a note...";
+        commentField.borderStyle = UITextBorderStyleRoundedRect;
+        commentField.textAlignment = 0;
+        [self addSubview:commentField];
         
 
         //rateButton
@@ -86,28 +85,25 @@
         
         [self setBackgroundColor:[UIColor clearColor]];
         
-        /*
+        
         PFUser *currentUser = [PFUser currentUser];
         if (currentUser) {
-             NSLog(@"Inloggad!");
+            NSLog(@"Inloggad!");
             
-        
+            NSString *test = [NSString stringWithFormat:@"%@",movieID];
+            
             PFQuery *query = [PFQuery queryWithClassName:@"Rating"];
             [query whereKey:@"user" equalTo:currentUser.username];
+            [query whereKey:@"movieId" equalTo:test];
             [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
                 if (!error) {
                     // The count request succeeded. Log the count
-                    NSLog(@"Sean has played %d games", count);
+                    NSLog(@"Den här filmen har betygsatts %d gånger av den här personen", count);
                 } else {
                     // The request failed
                 }
             }];
-            
-        }else{
-            NSLog(@"Ej inloggad!");
         }
-         */
-        
     }
     return self;
 }
@@ -118,7 +114,7 @@
 }
 
 -(void)dismissKeyboard {
-    [_commentField resignFirstResponder];
+    [commentField resignFirstResponder];
 }
 
 /*
