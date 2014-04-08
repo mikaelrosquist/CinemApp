@@ -46,15 +46,32 @@ static CGFloat backdropImageWidth  = 320.0;
     NSString *movieTitle = movieName;
     NSString *movieReleaseString = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
     
-    //Formaterar stringen efter antal genrar
-    NSString *movieGenreString = @"";
-    NSArray *genreArray = [json objectForKey:@"genres"];
-    for (int i = 0; i < [genreArray count]; i++) {
-        NSString *tmp = [[genreArray objectAtIndex:i] objectForKey:@"name"];
-        movieGenreString = [movieGenreString stringByAppendingString:tmp];
-        if (i < [genreArray count]-1)
-            movieGenreString = [movieGenreString stringByAppendingString: @" | "];
-    }
+    //Om titeln är för lång så kortas den ned
+    if (movieTitle.length > 110)
+        movieTitle = [[movieTitle substringToIndex:110] stringByAppendingString:@"..."];
+    
+    /*
+     Denna sektion skapar filmtitelns label. Vi lägger dessutom in filmens releasedatum i samma label eftersom den alltid ska ligga precis efter filmtiteln.
+     Metoden "stringByPaddingToLength" utökar sedan strängen så att den alltid är 100 tecken, annars hamnar texten på olika höjd beroende på längden på titeln.
+     Vi flyttar sedan movieTitleLabel.frame till rätt höjd beroende på hur hög labeln är (alltså hur många rader). Detta gör vi eftersom vi vill få plats med runtime och genre under.
+     De fyra sista raderna tar movieTitleLabel och gör om fonten på de sista bokstäverna eftersom det som sagt är årtalet och vi vill att årtalets typsnitt ska vara mindre och ha annan färg.
+     */
+    
+   
+    
+    movieTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 140, 300, 60)];
+    movieTitleLabel.text = [NSString stringWithFormat:@"%@ %@ ", movieTitle, movieReleaseString];
+    movieTitleLabel.textColor=[UIColor whiteColor];
+    movieTitleLabel.numberOfLines = 4;
+    movieTitleLabel.textAlignment = NSTextAlignmentLeft;
+    movieTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    [movieTitleLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 22.0]];
+    [movieTitleLabel sizeToFit];
+    movieTitleLabel.frame = CGRectMake(10, backdropImageHeight-movieTitleLabel.frame.size.height-50, 300, movieTitleLabel.frame.size.height);
+    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: movieTitleLabel.attributedText];
+    [text addAttribute: NSForegroundColorAttributeName value: [UIColor lightGrayColor] range: NSMakeRange([movieTitle length]+1, 6)];
+    [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 16.0] range: NSMakeRange([movieTitle length]+1, 6)];
+    [movieTitleLabel setAttributedText: text];
     
     //Filmens bakgrundsbild
     self.backdropImageView = [[UIImageView alloc] init];
@@ -77,6 +94,7 @@ static CGFloat backdropImageWidth  = 320.0;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     self.view.userInteractionEnabled = NO;
     
+    //SKAPAR NY TRÅD FÖR INLADDNING AV DATA
     dispatch_queue_t queue = dispatch_queue_create("myqueue", NULL);
     dispatch_async(queue, ^{
         
@@ -122,6 +140,8 @@ static CGFloat backdropImageWidth  = 320.0;
             NSString *movieGenreString = @"";
             for (int i = 0; i < [genreArray count]; i++) {
                 NSString *tmp = [[genreArray objectAtIndex:i] objectForKey:@"name"];
+                if([tmp isEqualToString:@"Science Fiction"])
+                    tmp = @"Sci-Fi";
                 movieGenreString = [movieGenreString stringByAppendingString:tmp];
                 if (i < [genreArray count]-1)
                     movieGenreString = [movieGenreString stringByAppendingString: @" | "];
@@ -162,7 +182,7 @@ static CGFloat backdropImageWidth  = 320.0;
                 [self.backdropWithBlurImageView setImage: [[UIImage imageNamed:@"moviebackdropplaceholder"]applyDarkEffectWithIntensity:0 darkness:0.6]];
             }else{
                 [self.backdropImageView setImage: img];
-                [self.backdropWithBlurImageView setImage: [img applyDarkEffectWithIntensity:0 darkness:0.6]];
+                [self.backdropWithBlurImageView setImage: [img applyDarkEffectWithIntensity:0 darkness:0.7]];
             }
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             [activityIndicator stopAnimating];
@@ -181,40 +201,6 @@ static CGFloat backdropImageWidth  = 320.0;
             [self.view addSubview:self.scrollView];
         });
     });
-    
-    //Om det inte finns något årtal
-    if([movieRelease isEqualToString:@""])
-        movieRelease = @"xxxx-xx-xx";
-    
-    //Filminfo
-    //NSString *movieTitle = movieName;
-    //NSString *movieReleaseString = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
-    
-    //Om titeln är för lång så kortas den ned
-    if (movieTitle.length > 110)
-        movieTitle = [[movieTitle substringToIndex:110] stringByAppendingString:@"..."];
-    
-    /*
-     Denna sektion skapar filmtitelns label. Vi lägger dessutom in filmens releasedatum i samma label eftersom den alltid ska ligga precis efter filmtiteln.
-     Metoden "stringByPaddingToLength" utökar sedan strängen så att den alltid är 100 tecken, annars hamnar texten på olika höjd beroende på längden på titeln.
-     Vi flyttar sedan movieTitleLabel.frame till rätt höjd beroende på hur hög labeln är (alltså hur många rader). Detta gör vi eftersom vi vill få plats med runtime och genre under.
-     De fyra sista raderna tar movieTitleLabel och gör om fonten på de sista bokstäverna eftersom det som sagt är årtalet och vi vill att årtalets typsnitt ska vara mindre och ha annan färg.
-     */
-    movieTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 140, 300, 60)];
-    movieTitleLabel.text = [NSString stringWithFormat:@"%@ %@ ", movieTitle, movieReleaseString];
-    movieTitleLabel.textColor=[UIColor whiteColor];
-    movieTitleLabel.numberOfLines = 4;
-    movieTitleLabel.textAlignment = NSTextAlignmentLeft;
-    movieTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    [movieTitleLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 22.0]];
-    [movieTitleLabel sizeToFit];
-    movieTitleLabel.frame = CGRectMake(10, backdropImageHeight-movieTitleLabel.frame.size.height-70, 300, movieTitleLabel.frame.size.height);
-    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: movieTitleLabel.attributedText];
-    [text addAttribute: NSForegroundColorAttributeName value: [UIColor lightGrayColor] range: NSMakeRange([movieTitle length]+1, 6)];
-    [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 16.0] range: NSMakeRange([movieTitle length]+1, 6)];
-    [movieTitleLabel setAttributedText: text];
-    
-    
     
     //skapar tableView
     self.tableView = [[UITableView alloc] init];
@@ -274,8 +260,8 @@ static CGFloat backdropImageWidth  = 320.0;
     movieGenresLabel.alpha = blurAlpha;
     
     //Log för debug
-    NSLog(@"YOFFSET: %f", yOffset);
-    NSLog(@"BLUR ALPHA: %f", blurAlpha);
+    //NSLog(@"YOFFSET: %f", yOffset);
+    //NSLog(@"BLUR ALPHA: %f", blurAlpha);
 }
 
 //SEGMENTED CONTROL
