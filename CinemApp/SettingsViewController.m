@@ -8,6 +8,7 @@
 //
 
 #import "SettingsViewController.h"
+#import "Parse/Parse.h"
 
 @interface SettingsViewController ()
 
@@ -29,7 +30,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [PFUser logOut];
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     
 }

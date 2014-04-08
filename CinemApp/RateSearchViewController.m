@@ -60,7 +60,6 @@
 -(void)refresh {
     if(![self.searchBar.text isEqualToString: @""])
         [self retrieveData];
-    [self.refreshControl endRefreshing];
 }
 
 //SÖK DELEGATE METHODS
@@ -199,6 +198,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[self tableView] reloadData];
+                [self.refreshControl endRefreshing];
                 [self.tableView setHidden:NO];
                 NSLog(@"Connected");
             });

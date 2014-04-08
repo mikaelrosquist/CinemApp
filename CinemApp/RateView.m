@@ -7,6 +7,7 @@
 //
 
 #import "RateView.h"
+#import "Parse/Parse.h"
 
 @implementation RateView{
     UILabel *sliderLabel;
@@ -84,7 +85,29 @@
         [self addGestureRecognizer:tap];
         
         [self setBackgroundColor:[UIColor clearColor]];
-
+        
+        /*
+        PFUser *currentUser = [PFUser currentUser];
+        if (currentUser) {
+             NSLog(@"Inloggad!");
+            
+        
+            PFQuery *query = [PFQuery queryWithClassName:@"Rating"];
+            [query whereKey:@"user" equalTo:currentUser.username];
+            [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
+                if (!error) {
+                    // The count request succeeded. Log the count
+                    NSLog(@"Sean has played %d games", count);
+                } else {
+                    // The request failed
+                }
+            }];
+            
+        }else{
+            NSLog(@"Ej inloggad!");
+        }
+         */
+        
     }
     return self;
 }

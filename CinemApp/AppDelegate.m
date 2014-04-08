@@ -13,6 +13,7 @@
 #import "ActivityViewController.h"
 #import "ProfileViewController.h"
 #import "RateSearchViewController.h"
+#import "Parse/Parse.h"
 #import <JLTMDbClient.h>
 
 @implementation AppDelegate
@@ -22,6 +23,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Parse setApplicationId:@"LkmDnlPFo5EMB1o30VRxUaUwFG9q891pic8oobsp"
+                  clientKey:@"zpwuevUaEySDKdFuSf1mQ5b30J8wrrj2xl8Ndkce"];
+    
     [[JLTMDbClient sharedAPIInstance] setAPIKey:@"2da45d86a9897bdf7e7eab86aa0485e3"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

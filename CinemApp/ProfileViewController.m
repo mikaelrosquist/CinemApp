@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 #import "ImageEffects.h"
+#import "Parse/Parse.h"
 
 //Sätter backgrundsbildens höjd och bredd till statiska värden
 static CGFloat backdropImageHeight  = 250.0;
@@ -29,13 +30,18 @@ static CGFloat backdropImageWidth  = 320.0;
     if (self) {
         
         //Profilinfo
-        
         UIImage *profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
         UIImage *profileBackgroundImage = [UIImage imageNamed:@"kitten"];
         nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 320, 40)];
         
         //Allokerar, initierar och konfiguerar profilens namn
-        nameLabel.text = @"Firstname Lastname";
+        //PFUser *currentUser = [PFUser currentUser];
+        //if (currentUser) {
+        //    nameLabel.text = [NSString stringWithFormat:@"%@", currentUser.username];
+        //} else {
+            nameLabel.text = @"Laddar...";
+        //}
+        
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.textColor=[UIColor whiteColor];
         [nameLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 20.0f]];
@@ -127,6 +133,22 @@ static CGFloat backdropImageWidth  = 320.0;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    if (![PFUser currentUser]) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        [PFUser logInWithUsernameInBackground:@"admin" password:@"admin"
+                                    block:^(PFUser *user, NSError *error) {
+                                        if (user) {
+                                            NSLog(@"Inloggning lyckades!");
+                                            nameLabel.text = [NSString stringWithFormat:@"%@", user.username];
+                                        } else {
+                                            NSLog(@"Inloggning misslyckades!");
+                                            nameLabel.text = @"nickname";
+                                        }
+                                    }];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    }else{
+        nameLabel.text = [NSString stringWithFormat:@"%@", [PFUser currentUser].username];
+    }
     //Sätter ramen för scrollView
     CGRect bounds = self.view.bounds;
     self.scrollView.frame = bounds;
