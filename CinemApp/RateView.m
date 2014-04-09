@@ -56,9 +56,9 @@
         [self addSubview:commentLabel];
         
         //commentField
-        commentField = [[UITextField alloc]initWithFrame:CGRectMake(10, 145, 300, 120)];
-        commentField.placeholder = @"How was it? Leave a note...\n\n\n";
-        commentField.borderStyle = UITextBorderStyleRoundedRect;
+        commentField = [[UITextView alloc]initWithFrame:CGRectMake(10, 145, 300, 120)];
+        commentField.text = @"How was it? Leave a note...\n\n\n";
+        //commentField.borderStyle = UITextBorderStyleRoundedRect;
         commentField.textAlignment = 0;
         [self addSubview:commentField];
         
