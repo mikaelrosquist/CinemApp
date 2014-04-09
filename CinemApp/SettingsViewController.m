@@ -52,7 +52,7 @@
 {
     [super viewDidLoad];
     
-    [self setTitle:@"Table View"];
+    [self setTitle:@"Settings"];
 	
 	self.accountSection = @[@"Change email", @"Change password", @"Privacy"];
     
