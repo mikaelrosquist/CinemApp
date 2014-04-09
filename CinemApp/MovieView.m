@@ -75,13 +75,13 @@ MovieTableView *castTable;
         [self addSubview:castLabel];
         
         //castTable
-       // castTable = [[MovieTableView alloc]initWithFrame:CGRectMake(0, plotView.frame.size.height+60, 320, 400)];
-       // [self addSubview:castTable];
+        castTable = [[MovieTableView alloc]initWithData:CGRectMake(0, plotView.frame.size.height+60, 320, 400):castArray];
+        [self addSubview:castTable];
         
         //cast
         //NSLog(@"CastArray: %@", castArray);
         
-        double y = 0.2;
+      /*  double y = 0.2;
         if (![castArray count] < 1) {
             for (int i=0; i < 5; i++) {
                 NSString *nameStr = [[castArray objectAtIndex:i] objectForKey:@"name"];
@@ -105,7 +105,7 @@ MovieTableView *castTable;
                 [self addSubview:nameLabel];
                 [self addSubview:charLabel];
             }
-        }
+        } */
         
     }
     return self;
@@ -140,7 +140,7 @@ MovieTableView *castTable;
     [UIView beginAnimations:nil context:nil];
     textView.frame = newFrame;
     [self.castLabel setFrame:CGRectMake(10, textView.frame.size.height+20, 100, 44)];
-    //[castTable setFrame:CGRectMake(0, textView.frame.size.height+60, 320, 400)];
+    [castTable setFrame:CGRectMake(0, textView.frame.size.height+60, 320, 400)];
     [UIView commitAnimations];
 }
 @end
