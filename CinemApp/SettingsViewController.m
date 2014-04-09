@@ -129,6 +129,7 @@
     }
     else if(indexPath.section == 1){
         cell.textLabel.text = self.generalSection[indexPath.row];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if(indexPath.section == 2){
         cell.textLabel.text = self.aboutSection[indexPath.row];
@@ -167,12 +168,28 @@
     {
         if(indexPath.row==0)
         {
-            [PFUser logOut];
-            [self.navigationController popViewControllerAnimated:YES];
-            NSLog(@"Användaren utloggad");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logout"
+                                                            message:@"Are you sure you want to logout?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"OK", nil];
+            
+            [alert show];
         }
     }
     
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [PFUser logOut];
+        [self.navigationController popViewControllerAnimated:YES];
+        NSLog(@"Användaren utloggad");
+    }
+    else if (buttonIndex == 0) {
+        // this is cancel button
+    }
 }
 
 @end
