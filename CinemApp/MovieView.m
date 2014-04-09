@@ -75,38 +75,38 @@ MovieTableView *castTable;
         [self addSubview:castLabel];
         
         //castTable
-        castTable = [[MovieTableView alloc]initWithFrame:CGRectMake(0, plotView.frame.size.height+60, 320, 400)];
-        [self addSubview:castTable];
+       // castTable = [[MovieTableView alloc]initWithFrame:CGRectMake(0, plotView.frame.size.height+60, 320, 400)];
+       // [self addSubview:castTable];
         
         //cast
         NSLog(@"CastArray: %@", castArray);
         
-        /*double y = 0.2;
-         if (![castArray count] < 1) {
-         for (int i=0; i < 5; i++) {
-         NSString *nameStr = [[castArray objectAtIndex:i] objectForKey:@"name"];
-         NSString *charStr = [[castArray objectAtIndex:i] objectForKey:@"character"];
-         //profile pics
-         NSString *imagePath = [[castArray objectAtIndex:i] objectForKey:@"profile_path"];
-         NSString *imageString = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w90%@", imagePath];
-         NSURL *imageURL = [NSURL URLWithString:imageString];
-         NSData *personImage = [NSData dataWithContentsOfURL:imageURL];
-         personView = [[UIImageView alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+65 +i*90, 59, 87)];
-         personView.image = [UIImage imageWithData:personImage];
-         [self addSubview:personView];
-         
-         UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, plotView.frame.size.height+75 +i*90, 150, 44)];
-         nameLabel.text = nameStr;
-         UILabel *charLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, plotView.frame.size.height+75 +y*90, 150, 44)];
-         charLabel.font = [charLabel.font fontWithSize:12];
-         charLabel.textColor = [UIColor grayColor];
-         charLabel.text = charStr;
-         y++;
-         [self addSubview:nameLabel];
-         [self addSubview:charLabel];
-         }
-         }*/
-
+        double y = 0.2;
+        if (![castArray count] < 1) {
+            for (int i=0; i < 5; i++) {
+                NSString *nameStr = [[castArray objectAtIndex:i] objectForKey:@"name"];
+                NSString *charStr = [[castArray objectAtIndex:i] objectForKey:@"character"];
+                //profile pics
+                NSString *imagePath = [[castArray objectAtIndex:i] objectForKey:@"profile_path"];
+                NSString *imageString = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w90%@", imagePath];
+                NSURL *imageURL = [NSURL URLWithString:imageString];
+                NSData *personImage = [NSData dataWithContentsOfURL:imageURL];
+                personView = [[UIImageView alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+65 +i*90, 59, 87)];
+                personView.image = [UIImage imageWithData:personImage];
+                [self addSubview:personView];
+                
+                UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, plotView.frame.size.height+75 +i*90, 200, 44)];
+                nameLabel.text = nameStr;
+                UILabel *charLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, plotView.frame.size.height+75 +y*90, 200, 44)];
+                charLabel.font = [charLabel.font fontWithSize:12];
+                charLabel.textColor = [UIColor grayColor];
+                charLabel.text = charStr;
+                y++;
+                [self addSubview:nameLabel];
+                [self addSubview:charLabel];
+            }
+        }
+        
     }
     return self;
 }
@@ -140,7 +140,7 @@ MovieTableView *castTable;
     [UIView beginAnimations:nil context:nil];
     textView.frame = newFrame;
     [self.castLabel setFrame:CGRectMake(10, textView.frame.size.height+20, 100, 44)];
-    [castTable setFrame:CGRectMake(0, textView.frame.size.height+60, 320, 400)];
+    //[castTable setFrame:CGRectMake(0, textView.frame.size.height+60, 320, 400)];
     [UIView commitAnimations];
 }
 @end
