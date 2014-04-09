@@ -119,6 +119,7 @@ static CGFloat backdropImageWidth  = 320.0;
         settingsView = [[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
         [self.navigationController pushViewController:settingsView animated:YES];
         [self.navigationController setNavigationBarHidden:YES animated:YES];
+
     }
 }
 
@@ -127,22 +128,10 @@ static CGFloat backdropImageWidth  = 320.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    /*
-    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]
-                                     initWithImage:[[UIImage imageNamed:@"settings_icon"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                       style:UIBarButtonItemStyleBordered
-                                       target:self
-                                       action:@selector(pushMyNewViewController:)];
-     
-    //Lägger till "Settings"-knapp i navigationBar
-    self.navigationItem.rightBarButtonItem = settingsButton;
-    */
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
     if (![PFUser currentUser]) {
         nameLabel.text = @"Laddar...";
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -165,22 +154,18 @@ static CGFloat backdropImageWidth  = 320.0;
     CGRect bounds = self.view.bounds;
     self.scrollView.frame = bounds;
     
-    //Sätter statusbar till VIT
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    self.navigationController.navigationBar.translucent = YES;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 -(void)pushMyNewViewController:(id)sender {
     settingsView = [[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self.navigationController pushViewController:settingsView animated:YES];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 @end

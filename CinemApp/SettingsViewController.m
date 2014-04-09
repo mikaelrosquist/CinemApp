@@ -27,25 +27,20 @@
     return self;
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     //Färg på navigationBaren
     UIImage *_defaultImage;
-    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
     [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
-    [super viewWillAppear:animated];
-
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewDidLoad
@@ -54,7 +49,7 @@
     
     [self setTitle:@"Settings"];
 	
-	self.accountSection = @[@"Change email", @"Change password", @"Privacy"];
+	self.accountSection = @[@"Profile settings", @"Change email", @"Change password"];
     
     self.generalSection = @[@"Push notifications"];
     
@@ -66,17 +61,6 @@
     
     //Sätter knapparna i navigationBar till röda
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
-    
-    //Gömmer "Back"-texten i navBar.
-    //self.navigationController.navigationBar.topItem.title = @" ";
-    
-    //Skapar en "Save"-knapp
-    //UIBarButtonItem* saveBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:nil];
-    //self.navigationItem.rightBarButtonItem = saveBarButton;
-}
-
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleDefault;
 }
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
@@ -126,6 +110,8 @@
 	
     if(indexPath.section == 0){
         cell.textLabel.text = self.accountSection[indexPath.row];
+        if(indexPath.row == 0)
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if(indexPath.section == 1){
         cell.textLabel.text = self.generalSection[indexPath.row];
