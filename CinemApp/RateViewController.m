@@ -56,9 +56,6 @@ static CGFloat backdropImageWidth  = 320.0;
      Vi flyttar sedan movieTitleLabel.frame till rätt höjd beroende på hur hög labeln är (alltså hur många rader). Detta gör vi eftersom vi vill få plats med runtime och genre under.
      De fyra sista raderna tar movieTitleLabel och gör om fonten på de sista bokstäverna eftersom det som sagt är årtalet och vi vill att årtalets typsnitt ska vara mindre och ha annan färg.
      */
-    
-   
-    
     movieTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 140, 300, 60)];
     movieTitleLabel.text = [NSString stringWithFormat:@"%@ %@ ", movieTitle, movieReleaseString];
     movieTitleLabel.textColor=[UIColor whiteColor];
@@ -182,7 +179,7 @@ static CGFloat backdropImageWidth  = 320.0;
                 [self.backdropWithBlurImageView setImage: [[UIImage imageNamed:@"moviebackdropplaceholder"]applyDarkEffectWithIntensity:0 darkness:0.6]];
             }else{
                 [self.backdropImageView setImage: img];
-                [self.backdropWithBlurImageView setImage: [img applyDarkEffectWithIntensity:0 darkness:0.7]];
+                [self.backdropWithBlurImageView setImage: [img applyDarkEffectWithIntensity:0 darkness:0.6]];
             }
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             [activityIndicator stopAnimating];

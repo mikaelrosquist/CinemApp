@@ -79,7 +79,7 @@ MovieTableView *castTable;
        // [self addSubview:castTable];
         
         //cast
-        NSLog(@"CastArray: %@", castArray);
+        //NSLog(@"CastArray: %@", castArray);
         
         double y = 0.2;
         if (![castArray count] < 1) {

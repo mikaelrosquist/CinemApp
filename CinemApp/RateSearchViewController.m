@@ -130,7 +130,6 @@
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
-    
     if(moviesArray.count != 0){
     
         NSString *movieTitle = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
@@ -153,7 +152,6 @@
             
     }
     return cell;
-
 }
 
 //TABLE DELEGATE METHODS
@@ -181,18 +179,31 @@
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         if([self reachable])
         {
+            
+            //Någonstans här får vi ibland 'NSInvalidArgumentException', reason: 'data parameter is nil'
             NSString *parsedSearchQuery;
             parsedSearchQuery = [searchQuery stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     
             NSURL *url = [NSURL URLWithString:[[NSString stringWithFormat:@"%@%@", getDataURL, parsedSearchQuery]   stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
             NSData *data = [NSData dataWithContentsOfURL:url];
-    
-            json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
             
-            moviesArray = [[NSMutableArray alloc] init];
-            moviesArray = [json objectForKey:@"results"];
+            //NSLog(@"%@", data);
+            if(data != nil){
+                json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
             
-            NSLog(@"%@", moviesArray);
+                moviesArray = [[NSMutableArray alloc] init];
+                moviesArray = [json objectForKey:@"results"];
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:@"Something went wrong"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+
+            }
+            
+            //NSLog(@"%@", moviesArray);
 
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             
@@ -200,13 +211,13 @@
                 [[self tableView] reloadData];
                 [self.refreshControl endRefreshing];
                 [self.tableView setHidden:NO];
-                NSLog(@"Connected");
+                NSLog(@"HÄMTAT: Sökresultat för %@", parsedSearchQuery);
             });
         
         }else{
 
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"Not connected");
+                NSLog(@"Not connected to internet");
                 
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops!"
                                                                 message:@"Ain't no network connection available"
@@ -218,7 +229,6 @@
                 
             });
         };
-
     });
 }
 
