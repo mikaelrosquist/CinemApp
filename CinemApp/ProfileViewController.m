@@ -34,14 +34,6 @@ static CGFloat backdropImageWidth  = 320.0;
         UIImage *profileBackgroundImage = [UIImage imageNamed:@"kitten"];
         nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 320, 40)];
         
-        //Allokerar, initierar och konfiguerar profilens namn
-        //PFUser *currentUser = [PFUser currentUser];
-        //if (currentUser) {
-        //    nameLabel.text = [NSString stringWithFormat:@"%@", currentUser.username];
-        //} else {
-            nameLabel.text = @"Laddar...";
-        //}
-        
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.textColor=[UIColor whiteColor];
         [nameLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 20.0f]];
@@ -62,7 +54,7 @@ static CGFloat backdropImageWidth  = 320.0;
         self.backdropWithBlurImageView.image = [profileBackgroundImage applyDarkEffect];
         
         //Allokerar, initierar och konfiguerar segmented kontroll
-        UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Recent ratings", @"Highest ratings", nil]];
+        UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Most recent ratings", @"Highest ratings", nil]];
         segmentedControl.frame = CGRectMake(10, backdropImageHeight+10, 300, 29);
         segmentedControl.selectedSegmentIndex = 0;
         segmentedControl.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
@@ -102,10 +94,8 @@ static CGFloat backdropImageWidth  = 320.0;
     //Om man scrollar UP eller NER så ändras bakgrundbildens storlek och position
     if (yOffset < 0.1) {
         f = CGRectMake(-(enlargmentFactor-backdropImageWidth)/2, 0, enlargmentFactor, backdropImageHeight+ABS(yOffset));
-        [self.navigationController setNavigationBarHidden: NO animated:YES];
     } else {
         f = CGRectMake(0, -yOffset, backdropImageWidth, backdropImageHeight);
-        [self.navigationController setNavigationBarHidden: YES animated:YES];
     }
     
     self.backdropImageView.frame = f;
@@ -117,8 +107,8 @@ static CGFloat backdropImageWidth  = 320.0;
     nameLabel.alpha = blurAlpha;
     
     //Log för debug
-    NSLog(@"YOFFSET: %f", yOffset);
-    NSLog(@"BLUR ALPHA: %f", blurAlpha);
+    //NSLog(@"YOFFSET: %f", yOffset);
+    //NSLog(@"BLUR ALPHA: %f", blurAlpha);
 }
 
 //SEGMENTED CONTROLL
@@ -126,54 +116,66 @@ static CGFloat backdropImageWidth  = 320.0;
     if(segment.selectedSegmentIndex == 0) {
         //visar recent
     }else if(segment.selectedSegmentIndex == 1){
-        //visar top rated
+        settingsView = [[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        [self.navigationController pushViewController:settingsView animated:YES];
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    /*
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]
+                                     initWithImage:[[UIImage imageNamed:@"settings_icon"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                       style:UIBarButtonItemStyleBordered
+                                       target:self
+                                       action:@selector(pushMyNewViewController:)];
+     
+    //Lägger till "Settings"-knapp i navigationBar
+    self.navigationItem.rightBarButtonItem = settingsButton;
+    */
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     if (![PFUser currentUser]) {
+        nameLabel.text = @"Laddar...";
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         [PFUser logInWithUsernameInBackground:@"admin" password:@"admin"
-                                    block:^(PFUser *user, NSError *error) {
-                                        if (user) {
-                                            NSLog(@"Inloggning lyckades!");
-                                            nameLabel.text = [NSString stringWithFormat:@"%@", user.username];
-                                        } else {
-                                            NSLog(@"Inloggning misslyckades!");
-                                            nameLabel.text = @"nickname";
-                                        }
-                                    }];
+                                        block:^(PFUser *user, NSError *error) {
+                                            if (user) {
+                                                NSLog(@"Inloggning lyckades!");
+                                                nameLabel.text = [NSString stringWithFormat:@"%@", user.username];
+                                            } else {
+                                                NSLog(@"Inloggning misslyckades!");
+                                                nameLabel.text = @"nickname";
+                                            }
+                                        }];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }else{
         nameLabel.text = [NSString stringWithFormat:@"%@", [PFUser currentUser].username];
     }
+
     //Sätter ramen för scrollView
     CGRect bounds = self.view.bounds;
     self.scrollView.frame = bounds;
     
     //Sätter statusbar till VIT
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]
-                                     initWithImage:[[UIImage imageNamed:@"settings_icon"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                       style:UIBarButtonItemStyleBordered
-                                       target:self
-                                       action:@selector(pushMyNewViewController:)];
-    
-    //Lägger till "Settings"-knapp i navigationBar
-    self.navigationItem.rightBarButtonItem = settingsButton;
-    settingsView = [[SettingsViewController alloc] init];
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
 }
 
 -(void)pushMyNewViewController:(id)sender {
+    settingsView = [[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self.navigationController pushViewController:settingsView animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

@@ -41,6 +41,7 @@
 		6F9F75A918B79D7B00B69308 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F75A818B79D7B00B69308 /* LogInViewController.m */; };
 		6FC0C82B18B6D59300F737EC /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C82A18B6D59300F737EC /* SettingsViewController.m */; };
 		6FC18B2118BC273C005B226F /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC18B2018BC273C005B226F /* Movie.m */; };
+		6FD8105C18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8105B18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m */; };
 		7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7308FDE618B76D0000F93344 /* ActivityTableView.m */; };
 		7315839B20B24CCB9354FBC0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0503F7E37414EF9911FF6EE /* libPods.a */; };
 		731BE8E818B61EAC0009D8FE /* FilmActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 731BE8E718B61EAC0009D8FE /* FilmActivityView.m */; };
@@ -113,6 +114,8 @@
 		6FC0C82A18B6D59300F737EC /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		6FC18B1F18BC273C005B226F /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
 		6FC18B2018BC273C005B226F /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
+		6FD8105A18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ScrollingNavbar.h"; sourceTree = "<group>"; };
+		6FD8105B18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ScrollingNavbar.m"; sourceTree = "<group>"; };
 		7308FDE518B76D0000F93344 /* ActivityTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableView.h; sourceTree = "<group>"; };
 		7308FDE618B76D0000F93344 /* ActivityTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableView.m; sourceTree = "<group>"; };
 		731BE8E618B61EAC0009D8FE /* FilmActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmActivityView.h; sourceTree = "<group>"; };
@@ -263,6 +266,8 @@
 		6F68D7BA18BCC38000457BA4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6FD8105A18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.h */,
+				6FD8105B18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m */,
 				6F0CAA3818B3709200AE42F9 /* ImageEffects.h */,
 				6F0CAA3918B3709200AE42F9 /* ImageEffects.m */,
 				6F39372718F29AD10026AB4C /* Reachability.h */,
@@ -447,6 +452,7 @@
 				6F0CAA4418B3709200AE42F9 /* ImageEffects.m in Sources */,
 				6FC18B2118BC273C005B226F /* Movie.m in Sources */,
 				6F9F75A918B79D7B00B69308 /* LogInViewController.m in Sources */,
+				6FD8105C18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m in Sources */,
 				73C7E73118B37A1A00453123 /* RateView.m in Sources */,
 				6FC0C82B18B6D59300F737EC /* SettingsViewController.m in Sources */,
 				6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */,

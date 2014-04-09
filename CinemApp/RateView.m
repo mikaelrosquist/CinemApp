@@ -20,9 +20,13 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.movieID = movieID; //Varningen klagar på att det är två variabler som heter movieID
+        
+        [self checkIfRated:self.movieID];
+        
         //rateLabel
         UILabel *rateLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 100, 44)];
-        rateLabel.text = @"Rating";
+        rateLabel.text = @"Your rating";
         [self addSubview:rateLabel];
         
         //slider
@@ -31,6 +35,7 @@
         slider.minimumValue = 0;
         slider.maximumValue = 10;
         slider.value = 5;
+        
         //Vad som händer när man SLAJDAR
         [slider addTarget:self action:@selector(sliderAction:) forControlEvents:UIControlEventValueChanged];
         [slider setBackgroundColor:[UIColor clearColor]];
@@ -45,9 +50,9 @@
         
         //sliderLabel
         sliderLabel = [[UILabel alloc]initWithFrame:CGRectMake(285, 65, 20, 44)];
-        sliderLabel.text = @"5";
         sliderLabel.textColor = [UIColor whiteColor];
         sliderLabel.textAlignment = NSTextAlignmentCenter;
+        sliderLabel.text = @"5";
         [self addSubview:sliderLabel];
         
         //commentLabel
@@ -57,11 +62,9 @@
         
         //commentField
         commentField = [[UITextView alloc]initWithFrame:CGRectMake(10, 145, 300, 120)];
-        commentField.text = @"How was it? Leave a note...\n\n\n";
-        //commentField.borderStyle = UITextBorderStyleRoundedRect;
+        commentField.text = @"How was it? Leave a note...";
         commentField.textAlignment = 0;
         [self addSubview:commentField];
-        
 
         //rateButton
         UIButton *rateButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 280, 300, 40)];
@@ -74,6 +77,8 @@
         //selected state
         //Fixa så att knappen blir mörkare när den markeras
         rateButton.showsTouchWhenHighlighted = YES;
+        [rateButton addTarget:self action:@selector(saveRating:) forControlEvents:UIControlEventTouchUpInside];
+
         
         [self addSubview:rateButton];
 
@@ -90,7 +95,7 @@
         if (currentUser) {
             NSLog(@"Inloggad!");
             
-            NSString *test = [NSString stringWithFormat:@"%@",movieID];
+            NSString *test = [NSString stringWithFormat:@"%@",self.movieID];
             
             PFQuery *query = [PFQuery queryWithClassName:@"Rating"];
             [query whereKey:@"user" equalTo:currentUser.username];
@@ -108,6 +113,28 @@
     return self;
 }
 
+-(void)saveRating:(id)sender {
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        
+        NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+        [f setNumberStyle:NSNumberFormatterDecimalStyle];
+        NSNumber *myNumber = [f numberFromString:sliderLabel.text];
+        
+        PFObject *rating = [PFObject objectWithClassName:@"Rating"];
+        rating[@"user"] = @"admin";
+        rating[@"comment"] = commentField.text;
+        rating[@"rating"] = myNumber;
+        rating[@"movieId"] = [NSString stringWithFormat:@"%@", self.movieID];
+        [rating saveInBackground];
+        NSLog(@"Rating sparas...");
+
+    }else{
+        NSLog(@"Inte inloggad!");
+    }
+    
+}
+
 - (void)sliderAction:(id)sender {
     NSInteger val = lround(slider.value);
     sliderLabel.text = [NSString stringWithFormat:@"%d",val];
@@ -115,6 +142,27 @@
 
 -(void)dismissKeyboard {
     [commentField resignFirstResponder];
+}
+
+-(void)checkIfRated:(NSString *)movieID {
+    PFUser *currentUser = [PFUser currentUser];
+    
+    if (currentUser) {
+        
+        NSString *test = [NSString stringWithFormat:@"%@",self.movieID];
+        PFQuery *query = [PFQuery queryWithClassName:@"Rating"];
+        [query whereKey:@"user" equalTo:currentUser.username];
+        [query whereKey:@"movieId" equalTo:test];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (object){
+                    slider.value = [[object objectForKey:@"rating"] intValue];
+                    NSInteger val = lround(slider.value);
+                    sliderLabel.text = [NSString stringWithFormat:@"%d",val];
+            } else {
+                //Inget
+            }
+        }];
+    }
 }
 
 /*

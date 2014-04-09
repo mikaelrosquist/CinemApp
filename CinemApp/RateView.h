@@ -18,6 +18,6 @@
 @property (nonatomic, strong) UITextView *commentField;
 @property (nonatomic, strong) NSString *movieID;
 
-
+- (void) checkIfRated:(NSString *)movieID;
 
 @end

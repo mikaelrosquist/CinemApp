@@ -10,4 +10,11 @@
 
 @interface SettingsViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
 
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) NSArray* accountSection;
+@property (strong, nonatomic) NSArray* generalSection;
+@property (strong, nonatomic) NSArray* aboutSection;
+
+
+
 @end

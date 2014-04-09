@@ -123,7 +123,9 @@ static CGFloat backdropImageWidth  = 320.0;
         
         //Castar runtime till runTimeString och sätter sedan movieRuntimeString
         NSString *runTimeString = [[json objectForKey:@"runtime"] stringValue];
-        NSString *movieRuntimeString = [runTimeString stringByAppendingString:@" min"];
+        NSString *movieRuntimeString = @"";
+        if(![runTimeString isEqual: @"0"])
+            movieRuntimeString = [runTimeString stringByAppendingString:@" min"];
         
         // Perform on main thread/queue
         dispatch_async(dispatch_get_main_queue(), ^{

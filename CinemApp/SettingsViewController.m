@@ -15,9 +15,8 @@
 @end
 
 @implementation SettingsViewController
-{
-    NSArray *tableData;
-}
+
+@synthesize tableView, accountSection, generalSection, aboutSection;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -28,19 +27,42 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [PFUser logOut];
+- (void)viewWillAppear:(BOOL)animated
+{
+    //Färg på navigationBaren
+    UIImage *_defaultImage;
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    
+    [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationController.navigationBar.translucent = NO;
+    [super viewWillAppear:animated];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    tableData = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
-
+    [self setTitle:@"Table View"];
+	
+	self.accountSection = @[@"Change email", @"Change password", @"Privacy"];
+    
+    self.generalSection = @[@"Push notifications"];
+    
+    self.aboutSection = @[@"About", @"Follow us on Twitter"];
+	
+	[self.tableView setDelegate:self];
+	[self.tableView setDataSource:self];
+	self.edgesForExtendedLayout = UIRectEdgeNone;
     
     //Sätter knapparna i navigationBar till röda
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
@@ -53,34 +75,104 @@
     //self.navigationItem.rightBarButtonItem = saveBarButton;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
 {
-    // Return the number of sections.
-    return 3;
+	// This enables the user to scroll down the navbar by tapping the status bar.
+	return YES;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 4;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+    case 0:
+        return @"ACCOUNT";
+        
+    case 1:
+        return @"GENERAL";
+    
+    case 2:
+        return @"ABOUT";
+            
+    }
+    
+    return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return 0;
+	if(section==0)
+        return self.accountSection.count;
+    else if(section==1)
+        return self.generalSection.count;
+    else if(section==2)
+        return self.aboutSection.count;
+    
+    return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    
-    return cell;
+	UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Identifier"];
+	if (!cell) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Identifier"];
+	}
+	
+    if(indexPath.section == 0){
+        cell.textLabel.text = self.accountSection[indexPath.row];
+    }
+    else if(indexPath.section == 1){
+        cell.textLabel.text = self.generalSection[indexPath.row];
+    }
+    else if(indexPath.section == 2){
+        cell.textLabel.text = self.aboutSection[indexPath.row];
+    }
+    else {
+        cell.textLabel.text = @"Logout";
+    }
+		
+	return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(indexPath.section==0)
+    {
+        if(indexPath.row==0)
+        {
+            //Och så vidare...
+        }
+    }
+    else if(indexPath.section==1)
+    {
+        if(indexPath.row==0)
+        {
+            //Och så vidare...
+        }
+    }
+    else if(indexPath.section==2)
+    {
+        if(indexPath.row==0)
+        {
+            //Och så vidare...
+        }
+    }
+    else if(indexPath.section==3)
+    {
+        if(indexPath.row==0)
+        {
+            [PFUser logOut];
+            [self.navigationController popViewControllerAnimated:YES];
+            NSLog(@"Användaren utloggad");
+        }
+    }
+    
+}
 
 @end
