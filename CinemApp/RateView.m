@@ -56,13 +56,22 @@
         sliderLabel.text = @"5";
         [self addSubview:sliderLabel];
         
+        //visa i feed-switchen
+        UILabel *feedLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 110, 100, 44)];
+        feedLabel.text = @"Show in feed";
+        [self addSubview:feedLabel];
+        UISwitch *feedSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(258, 120, 40, 20)];
+        feedSwitch.onTintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
+        [feedSwitch setOn:YES];
+        [self addSubview:feedSwitch];
+        
         //commentLabel
-        UILabel *commentLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 100, 100, 44)];
-        commentLabel.text = @"Comment";
-        [self addSubview:commentLabel];
+        //UILabel *commentLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 150, 100, 44)];
+        //commentLabel.text = @"Comment";
+        //[self addSubview:commentLabel];
         
         //commentField
-        commentField = [[UITextView alloc]initWithFrame:CGRectMake(10, 145, 300, 120)];
+        commentField = [[UITextView alloc]initWithFrame:CGRectMake(10, 170, 300, 120)];
         //[self.commentField resignFirstResponder];
         commentField.textColor = [UIColor grayColor];
         commentField.text = @"How was it? Leave a note...";
@@ -71,7 +80,7 @@
         [self addSubview:commentField];
 
         //rateButton
-        UIButton *rateButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 280, 300, 40)];
+        UIButton *rateButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 305, 300, 40)];
         [rateButton setTitle:@"Rate" forState:UIControlStateNormal];
         rateButton.layer.cornerRadius = 5.0f;
         rateButton.tintColor = [UIColor whiteColor];
