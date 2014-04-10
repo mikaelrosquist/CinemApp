@@ -39,6 +39,7 @@
 		6F46492918F4052400A85584 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492818F4052400A85584 /* QuartzCore.framework */; };
 		6F46492B18F4052800A85584 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492A18F4052800A85584 /* Security.framework */; };
 		6F46492F18F4053300A85584 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492E18F4053300A85584 /* SystemConfiguration.framework */; };
+		6F6D3DD718F7030A00D53B66 /* AccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6D3DD618F7030A00D53B66 /* AccountSettingsViewController.m */; };
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
 		6F9F75A918B79D7B00B69308 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F75A818B79D7B00B69308 /* LogInViewController.m */; };
 		6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */; };
@@ -108,6 +109,8 @@
 		6F46492818F4052400A85584 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6F46492A18F4052800A85584 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6F46492E18F4053300A85584 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6F6D3DD518F7030A00D53B66 /* AccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSettingsViewController.h; sourceTree = "<group>"; };
+		6F6D3DD618F7030A00D53B66 /* AccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSettingsViewController.m; sourceTree = "<group>"; };
 		6F955AFF18B397A7004C4B70 /* MovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieView.h; sourceTree = "<group>"; };
 		6F955B0018B397A7004C4B70 /* MovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieView.m; sourceTree = "<group>"; };
 		6F9F75A718B79D7B00B69308 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
@@ -251,6 +254,8 @@
 				6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */,
 				6F0F9B4618F6B909002FFFF2 /* ProfileSettingsViewController.h */,
 				6F0F9B4718F6B909002FFFF2 /* ProfileSettingsViewController.m */,
+				6F6D3DD518F7030A00D53B66 /* AccountSettingsViewController.h */,
+				6F6D3DD618F7030A00D53B66 /* AccountSettingsViewController.m */,
 				6F0F9B4A18F6D1CE002FFFF2 /* PasswordViewController.h */,
 				6F0F9B4B18F6D1CE002FFFF2 /* PasswordViewController.m */,
 				6F0F9B4D18F6D1E0002FFFF2 /* PushNotificationsViewController.h */,
@@ -442,6 +447,7 @@
 				6F955B0118B397A7004C4B70 /* MovieView.m in Sources */,
 				6F0CAA1A18B3705400AE42F9 /* AppDelegate.m in Sources */,
 				6F0CAA1618B3705400AE42F9 /* main.m in Sources */,
+				6F6D3DD718F7030A00D53B66 /* AccountSettingsViewController.m in Sources */,
 				6F0CAA4818B3709200AE42F9 /* ActivityViewController.m in Sources */,
 				6F39372918F29AD10026AB4C /* Reachability.m in Sources */,
 				6F0CAA4518B3709200AE42F9 /* HomeViewController.m in Sources */,

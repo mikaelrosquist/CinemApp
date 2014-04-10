@@ -16,7 +16,7 @@
 
 @implementation ProfileSettingsViewController
 
-@synthesize personalSection, privateProfileSection, removeAccountSection;
+@synthesize personalSection, privateProfileSection;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -31,13 +31,11 @@
 {
     [super viewDidLoad];
     
-    [self setTitle:@"Private settings"];
+    [self setTitle:@"Edit profile"];
 	
-	self.personalSection = @[@"Username", @"Email"];
+	self.personalSection = @[@"Name", @"Username", @"Profile picture"];
     
     self.privateProfileSection = @[@"Private profile"];
-    
-    self.removeAccountSection = @[@"Remove account"];
 	
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
@@ -53,12 +51,12 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0)
-        return @"Personal information";
+        return @"Profile information";
     else
         return nil;
 }
@@ -69,8 +67,6 @@
         return self.personalSection.count;
     else if(section==1)
         return self.privateProfileSection.count;
-    else if(section==2)
-        return self.removeAccountSection.count;
     
     return 1;
 }
@@ -83,30 +79,34 @@
 	}
 	
     if(indexPath.section == 0){
+        if(indexPath.row == 0 || indexPath.row == 1){
         
+            UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(110, 8, 205, 30)];
+            playerTextField.adjustsFontSizeToFitWidth = YES;
+            playerTextField.textColor = [UIColor blackColor];
+            playerTextField.backgroundColor = [UIColor whiteColor];
+            playerTextField.autocorrectionType = UITextAutocorrectionTypeNo; // stäng av autocorrect
+            playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // stäng av autoversaler
+            playerTextField.tag = 0;
+            playerTextField.clearButtonMode = UITextFieldViewModeAlways; // ta bort 'x'-knappen
+            [playerTextField setEnabled: YES];
+            playerTextField.keyboardType = UIKeyboardTypeEmailAddress;
+            playerTextField.returnKeyType = UIReturnKeyNext;
+            
+            if ([indexPath row] == 0)
+                playerTextField.placeholder = @"Admin Admin";
+            else if ([indexPath row] == 1)
+                playerTextField.placeholder = @"admin";
         
-        UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(110, 8, 205, 30)];
-        playerTextField.adjustsFontSizeToFitWidth = YES;
-        playerTextField.textColor = [UIColor blackColor];
-        
-        playerTextField.backgroundColor = [UIColor whiteColor];
-        playerTextField.autocorrectionType = UITextAutocorrectionTypeNo; // stäng av autocorrect
-        playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // stäng av autoversaler
-        playerTextField.tag = 0;
-        playerTextField.clearButtonMode = UITextFieldViewModeAlways; // ta bort 'x'-knappen
-        [playerTextField setEnabled: YES];
-        playerTextField.keyboardType = UIKeyboardTypeEmailAddress;
-        playerTextField.returnKeyType = UIReturnKeyNext;
-        if ([indexPath row] == 0)
-            playerTextField.placeholder = @"admin";
-        else if ([indexPath row] == 1)
-            playerTextField.placeholder = @"admin@mail.com";
-        
-        playerTextField.secureTextEntry = NO;
-        
+            playerTextField.secureTextEntry = NO;
+            [cell.contentView addSubview:playerTextField];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }else{
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
         cell.textLabel.text = self.personalSection[indexPath.row];
         
-        [cell.contentView addSubview:playerTextField];
+        
        
     }
     else if(indexPath.section == 1){
@@ -124,11 +124,7 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    else if(indexPath.section == 2){
-        cell.textLabel.text = self.removeAccountSection[indexPath.row];
-        cell.textLabel.textColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
-    }
-    
+
 	return cell;
 }
 
@@ -136,8 +132,6 @@
 -(NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 1)
         return @"Toggle to require authorization before anyone can follow you or see your ratings. Your existing followers won't be affected.";
-    else if (section == 2)
-        return @"This will permanently remove your account. The username cannot be reused by anyone.";
     else
         return nil;
 }

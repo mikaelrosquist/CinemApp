@@ -12,6 +12,5 @@
 
 @property (strong, nonatomic) NSArray* personalSection;
 @property (strong, nonatomic) NSArray* privateProfileSection;
-@property (strong, nonatomic) NSArray* removeAccountSection;
 
 @end

@@ -16,7 +16,7 @@
 
 @implementation SettingsRootViewController
 
-@synthesize accountSection, generalSection, aboutSection, profileSettingsView, passwordSettingsView, notificationsSettingsView;
+@synthesize accountSection, generalSection, aboutSection, profileSettingsView, accountSettingsView, notificationsSettingsView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -27,17 +27,13 @@
     return self;
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleDefault;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self setTitle:@"Settings"];
 	
-	self.accountSection = @[@"Profile settings", @"Change password"];
+	self.accountSection = @[@"Edit profile", @"Account settings"];
     
     self.generalSection = @[@"Push notifications"];
     
@@ -62,6 +58,22 @@
     [super viewWillAppear:animated];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 4;
 }
@@ -69,7 +81,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
     case 0:
-        return @"ACCOUNT";
+        return @"USER SETTINGS";
     case 1:
         return @"GENERAL";
     case 2:
@@ -131,8 +143,8 @@
         }
         else if(indexPath.row==1)
         {
-            passwordSettingsView = [[PasswordViewController alloc] initWithStyle:UITableViewStyleGrouped];
-            [self.navigationController pushViewController:passwordSettingsView animated:YES];
+            accountSettingsView = [[AccountSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:accountSettingsView animated:YES];
         }
     }
     else if(indexPath.section==1)
