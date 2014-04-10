@@ -181,6 +181,7 @@
                                               otherButtonTitles:nil];
         
         [alert show];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
 
 }
