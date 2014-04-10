@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "ProfileSettingsViewController.h"
-#import "AccountSettingsViewController.h"
 #import "PushNotificationsViewController.h"
 
 @interface SettingsRootViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
@@ -18,7 +17,6 @@
 @property (strong, nonatomic) NSArray* aboutSection;
 
 @property (nonatomic, strong) ProfileSettingsViewController *profileSettingsView;
-@property (nonatomic, strong) AccountSettingsViewController *accountSettingsView;
 @property (nonatomic, strong) PushNotificationsViewController *notificationsSettingsView;
 
 @end

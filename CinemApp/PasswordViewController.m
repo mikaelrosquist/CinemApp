@@ -44,7 +44,7 @@
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save"
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
-                                                                  action:@selector(save)];
+                                                                    action:@selector(save:)];
     
     self.navigationItem.rightBarButtonItem = barButtonItem;
 }
@@ -98,8 +98,8 @@
 	return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+-(void)save:(id)sender {
+    //kod
 }
 
 @end

@@ -16,7 +16,7 @@
 
 @implementation ProfileSettingsViewController
 
-@synthesize personalSection, privateProfileSection;
+@synthesize personalSection, passwordSection, privateProfileSection, removeAccountSection, passwordSettingsView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -31,12 +31,16 @@
 {
     [super viewDidLoad];
     
-    [self setTitle:@"Edit profile"];
+    [self setTitle:@"Profile settings"];
 	
-	self.personalSection = @[@"Name", @"Username", @"Profile picture"];
+	self.personalSection = @[@"Username", @"Email", @"Profile picture"];
+    
+    self.passwordSection = @[@"Change password"];
     
     self.privateProfileSection = @[@"Private profile"];
 	
+    self.removeAccountSection = @[@"Remove account"];
+    
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
 	self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -44,19 +48,19 @@
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save"
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
-                                                                    action:@selector(save)];
+                                                                    action:@selector(save:)];
     
     self.navigationItem.rightBarButtonItem = barButtonItem;
 
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 4;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0)
-        return @"Profile information";
+        return @"User information";
     else
         return nil;
 }
@@ -67,6 +71,10 @@
         return self.personalSection.count;
     else if(section==1)
         return self.privateProfileSection.count;
+    else if(section==2)
+        return self.privateProfileSection.count;
+    else if(section==3)
+        return self.removeAccountSection.count;
     
     return 1;
 }
@@ -94,9 +102,9 @@
             playerTextField.returnKeyType = UIReturnKeyNext;
             
             if ([indexPath row] == 0)
-                playerTextField.placeholder = @"Admin Admin";
-            else if ([indexPath row] == 1)
                 playerTextField.placeholder = @"admin";
+            else if ([indexPath row] == 1)
+                playerTextField.placeholder = @"admin@mail.com";
         
             playerTextField.secureTextEntry = NO;
             [cell.contentView addSubview:playerTextField];
@@ -110,7 +118,13 @@
         
        
     }
+    
     else if(indexPath.section == 1){
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.text = self.passwordSection[indexPath.row];
+    }
+    
+    else if(indexPath.section == 2){
         cell.textLabel.text = self.privateProfileSection[indexPath.row];
         UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
         cell.accessoryView = switchView;
@@ -125,21 +139,42 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    
+    else if(indexPath.section == 3){
+        cell.textLabel.text = self.removeAccountSection[indexPath.row];
+        cell.textLabel.textColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
+    }
 
 	return cell;
 }
 
 
 -(NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (section == 1)
+    if (section == 2)
         return @"Toggle to require authorization before anyone can follow you or see your ratings. Your existing followers won't be affected.";
+    else if (section == 3)
+        return @"This will permanently remove your account. The username cannot be reused by anyone.";
     else
         return nil;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //kod
+    if(indexPath.section==1){
+        if(indexPath.row==0){
+            passwordSettingsView = [[PasswordViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:passwordSettingsView animated:YES];
+        }
+    }else if(indexPath.section==3){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"This function does not yet work"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+    }
+
 }
 
 - (void)updateSwitchAtIndexPath:(UISwitch *)switchView {
@@ -157,5 +192,8 @@
     
 }
 
+-(void)save:(id)sender {
+    //kod
+}
 
 @end

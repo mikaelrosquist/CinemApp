@@ -16,7 +16,7 @@
 
 @implementation SettingsRootViewController
 
-@synthesize accountSection, generalSection, aboutSection, profileSettingsView, accountSettingsView, notificationsSettingsView;
+@synthesize accountSection, generalSection, aboutSection, profileSettingsView, notificationsSettingsView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -33,11 +33,9 @@
     
     [self setTitle:@"Settings"];
 	
-	self.accountSection = @[@"Edit profile", @"Account settings"];
+	self.accountSection = @[@"Profile settings", @"Push notifications"];
     
-    self.generalSection = @[@"Push notifications"];
-    
-    self.aboutSection = @[@"About", @"Follow us on Twitter"];
+    self.aboutSection = @[@"About", @"Terms of service", @"Follow us on Twitter"];
 	
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
@@ -59,7 +57,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -67,10 +65,7 @@
     case 0:
         return @"USER SETTINGS";
     case 1:
-        return @"GENERAL";
-    case 2:
-        return @"ABOUT";
-            
+        return @"INFORMATION";
     }
     return nil;
 }
@@ -80,8 +75,6 @@
 	if(section==0)
         return self.accountSection.count;
     else if(section==1)
-        return self.generalSection.count;
-    else if(section==2)
         return self.aboutSection.count;
     
     return 1;
@@ -99,13 +92,9 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if(indexPath.section == 1){
-        cell.textLabel.text = self.generalSection[indexPath.row];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    }
-    else if(indexPath.section == 2){
         cell.userInteractionEnabled = NO;
         cell.textLabel.text = self.aboutSection[indexPath.row];
-        if(indexPath.row == 0)
+        if(indexPath.row == 0 || indexPath.row == 1)
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {
@@ -127,26 +116,18 @@
         }
         else if(indexPath.row==1)
         {
-            accountSettingsView = [[AccountSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
-            [self.navigationController pushViewController:accountSettingsView animated:YES];
+            notificationsSettingsView = [[PushNotificationsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:notificationsSettingsView animated:YES];
         }
     }
     else if(indexPath.section==1)
     {
         if(indexPath.row==0)
         {
-            notificationsSettingsView = [[PushNotificationsViewController alloc] initWithStyle:UITableViewStyleGrouped];
-            [self.navigationController pushViewController:notificationsSettingsView animated:YES];
-        }
-    }
-    else if(indexPath.section==2)
-    {
-        if(indexPath.row==0)
-        {
             //Och så vidare...
         }
     }
-    else if(indexPath.section==3)
+    else if(indexPath.section==2)
     {
         if(indexPath.row==0)
         {
