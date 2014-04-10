@@ -16,7 +16,7 @@
 
 @implementation SettingsRootViewController
 
-@synthesize tableView, accountSection, generalSection, aboutSection, profileSettingsView;
+@synthesize accountSection, generalSection, aboutSection, profileSettingsView, passwordSettingsView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -56,14 +56,10 @@
     [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.translucent = NO;
-
-    
 }
 
-- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
-{
-	// This enables the user to scroll down the navbar by tapping the status bar.
-	return YES;
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -74,15 +70,12 @@
     switch (section) {
     case 0:
         return @"ACCOUNT";
-        
     case 1:
         return @"GENERAL";
-    
     case 2:
         return @"ABOUT";
             
     }
-    
     return nil;
 }
 
@@ -117,15 +110,17 @@
         cell.textLabel.text = self.aboutSection[indexPath.row];
         if(indexPath.row == 0)
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.userInteractionEnabled = NO;
     }
     else {
         cell.textLabel.text = @"Logout";
+        cell.textLabel.textColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     }
-		
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if(indexPath.section==0)
     {
@@ -133,7 +128,11 @@
         {
             profileSettingsView = [[ProfileSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:profileSettingsView animated:YES];
-
+        }
+        else if(indexPath.row==1)
+        {
+            passwordSettingsView = [[PasswordViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:passwordSettingsView animated:YES];
         }
     }
     else if(indexPath.section==1)
@@ -163,7 +162,6 @@
             [alert show];
         }
     }
-    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

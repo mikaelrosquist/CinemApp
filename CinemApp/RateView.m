@@ -16,11 +16,11 @@
 
 @synthesize commentField, movieID;
 
--(id)initWithMovieID:(CGRect)frame :(NSString *)movieID
+-(id)initWithMovieID:(CGRect)frame :(NSString *)incomingMovieID
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.movieID = movieID; //Varningen klagar på att det är två variabler som heter movieID
+        self.movieID = incomingMovieID; //Varningen klagar på att det är två variabler som heter movieID
         
         [self checkIfRated:self.movieID];
         

@@ -1,7 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "Movie.h"
 #import "RateViewController.h"
-#import <JLTMDbClient.h>
 
 @interface RateSearchViewController : UITableViewController
 <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>

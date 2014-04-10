@@ -1,18 +1,18 @@
 //
-//  MovieTableViewController.m
+//  PushNotificationsViewController.m
 //  CinemApp
 //
-//  Created by mikael on 08/04/14.
+//  Created by Teodor Östlund on 2014-04-10.
 //  Copyright (c) 2014 Rosquist Östlund. All rights reserved.
 //
 
-#import "MovieTableViewController.h"
+#import "PushNotificationsViewController.h"
 
-@interface MovieTableViewController ()
+@interface PushNotificationsViewController ()
 
 @end
 
-@implementation MovieTableViewController
+@implementation PushNotificationsViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -50,7 +50,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
     // Return the number of rows in the section.
     return 0;
 }

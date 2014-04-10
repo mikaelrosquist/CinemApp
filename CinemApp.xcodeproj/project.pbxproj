@@ -26,6 +26,8 @@
 		6F0CAA4818B3709200AE42F9 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */; };
 		6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */; };
 		6F0F9B4818F6B909002FFFF2 /* ProfileSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F9B4718F6B909002FFFF2 /* ProfileSettingsViewController.m */; };
+		6F0F9B4C18F6D1CE002FFFF2 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F9B4B18F6D1CE002FFFF2 /* PasswordViewController.m */; };
+		6F0F9B4F18F6D1E0002FFFF2 /* PushNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F9B4E18F6D1E0002FFFF2 /* PushNotificationsViewController.m */; };
 		6F16175E18BBBA4800754A10 /* RateSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F16175C18BBBA4800754A10 /* RateSearchViewController.m */; };
 		6F39372918F29AD10026AB4C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F39372818F29AD10026AB4C /* Reachability.m */; };
 		6F46491D18F404DA00A85584 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46491C18F404DA00A85584 /* Parse.framework */; };
@@ -36,15 +38,12 @@
 		6F46492718F4052000A85584 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492618F4052000A85584 /* MobileCoreServices.framework */; };
 		6F46492918F4052400A85584 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492818F4052400A85584 /* QuartzCore.framework */; };
 		6F46492B18F4052800A85584 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492A18F4052800A85584 /* Security.framework */; };
-		6F46492D18F4052D00A85584 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492C18F4052D00A85584 /* StoreKit.framework */; };
 		6F46492F18F4053300A85584 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492E18F4053300A85584 /* SystemConfiguration.framework */; };
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
 		6F9F75A918B79D7B00B69308 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F75A818B79D7B00B69308 /* LogInViewController.m */; };
 		6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */; };
 		6FC18B2118BC273C005B226F /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC18B2018BC273C005B226F /* Movie.m */; };
-		6FD8105C18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8105B18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m */; };
 		7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7308FDE618B76D0000F93344 /* ActivityTableView.m */; };
-		7315839B20B24CCB9354FBC0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0503F7E37414EF9911FF6EE /* libPods.a */; };
 		731BE8E818B61EAC0009D8FE /* FilmActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 731BE8E718B61EAC0009D8FE /* FilmActivityView.m */; };
 		73C7E73118B37A1A00453123 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C7E73018B37A1A00453123 /* RateView.m */; };
 		73C8444118F3FE8C0022AF1E /* MovieTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C8444018F3FE8C0022AF1E /* MovieTableView.m */; };
@@ -92,6 +91,10 @@
 		6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		6F0F9B4618F6B909002FFFF2 /* ProfileSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileSettingsViewController.h; sourceTree = "<group>"; };
 		6F0F9B4718F6B909002FFFF2 /* ProfileSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileSettingsViewController.m; sourceTree = "<group>"; };
+		6F0F9B4A18F6D1CE002FFFF2 /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
+		6F0F9B4B18F6D1CE002FFFF2 /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController.m; sourceTree = "<group>"; };
+		6F0F9B4D18F6D1E0002FFFF2 /* PushNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationsViewController.h; sourceTree = "<group>"; };
+		6F0F9B4E18F6D1E0002FFFF2 /* PushNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNotificationsViewController.m; sourceTree = "<group>"; };
 		6F16175B18BBBA4800754A10 /* RateSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateSearchViewController.h; sourceTree = "<group>"; };
 		6F16175C18BBBA4800754A10 /* RateSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateSearchViewController.m; sourceTree = "<group>"; };
 		6F39372718F29AD10026AB4C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -104,11 +107,7 @@
 		6F46492618F4052000A85584 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		6F46492818F4052400A85584 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6F46492A18F4052800A85584 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		6F46492C18F4052D00A85584 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6F46492E18F4053300A85584 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		6F46493018F4073A00A85584 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		6F46493218F4077100A85584 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		6F46493418F4077900A85584 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		6F955AFF18B397A7004C4B70 /* MovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieView.h; sourceTree = "<group>"; };
 		6F955B0018B397A7004C4B70 /* MovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieView.m; sourceTree = "<group>"; };
 		6F9F75A718B79D7B00B69308 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
@@ -117,8 +116,6 @@
 		6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsRootViewController.m; sourceTree = "<group>"; };
 		6FC18B1F18BC273C005B226F /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
 		6FC18B2018BC273C005B226F /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
-		6FD8105A18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ScrollingNavbar.h"; sourceTree = "<group>"; };
-		6FD8105B18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ScrollingNavbar.m"; sourceTree = "<group>"; };
 		7308FDE518B76D0000F93344 /* ActivityTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableView.h; sourceTree = "<group>"; };
 		7308FDE618B76D0000F93344 /* ActivityTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableView.m; sourceTree = "<group>"; };
 		731BE8E618B61EAC0009D8FE /* FilmActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmActivityView.h; sourceTree = "<group>"; };
@@ -129,8 +126,6 @@
 		73C8444018F3FE8C0022AF1E /* MovieTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieTableView.m; sourceTree = "<group>"; };
 		73C8444218F401060022AF1E /* MovieTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieTableViewController.h; sourceTree = "<group>"; };
 		73C8444318F401060022AF1E /* MovieTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieTableViewController.m; sourceTree = "<group>"; };
-		A0503F7E37414EF9911FF6EE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED5665886EE44C019112E5BC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +137,6 @@
 				6F0CAA0A18B3705400AE42F9 /* Foundation.framework in Frameworks */,
 				6F46491D18F404DA00A85584 /* Parse.framework in Frameworks */,
 				6F46492F18F4053300A85584 /* SystemConfiguration.framework in Frameworks */,
-				6F46492D18F4052D00A85584 /* StoreKit.framework in Frameworks */,
 				6F46492B18F4052800A85584 /* Security.framework in Frameworks */,
 				6F46492918F4052400A85584 /* QuartzCore.framework in Frameworks */,
 				6F46492718F4052000A85584 /* MobileCoreServices.framework in Frameworks */,
@@ -151,7 +145,6 @@
 				6F0CAA0C18B3705400AE42F9 /* CoreGraphics.framework in Frameworks */,
 				6F46492118F4050100A85584 /* CFNetwork.framework in Frameworks */,
 				6F46491F18F404FA00A85584 /* AudioToolbox.framework in Frameworks */,
-				7315839B20B24CCB9354FBC0 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +168,6 @@
 				6F0CAA2818B3705500AE42F9 /* CinemAppTests */,
 				6F0CAA0818B3705400AE42F9 /* Frameworks */,
 				6F0CAA0718B3705400AE42F9 /* Products */,
-				ED5665886EE44C019112E5BC /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -191,11 +183,7 @@
 		6F0CAA0818B3705400AE42F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6F46493418F4077900A85584 /* AdSupport.framework */,
-				6F46493218F4077100A85584 /* libz.1.2.5.dylib */,
-				6F46493018F4073A00A85584 /* Social.framework */,
 				6F46492E18F4053300A85584 /* SystemConfiguration.framework */,
-				6F46492C18F4052D00A85584 /* StoreKit.framework */,
 				6F46492A18F4052800A85584 /* Security.framework */,
 				6F46492818F4052400A85584 /* QuartzCore.framework */,
 				6F46492618F4052000A85584 /* MobileCoreServices.framework */,
@@ -208,7 +196,6 @@
 				6F0CAA0B18B3705400AE42F9 /* CoreGraphics.framework */,
 				6F0CAA0D18B3705400AE42F9 /* UIKit.framework */,
 				6F0CAA2218B3705400AE42F9 /* XCTest.framework */,
-				A0503F7E37414EF9911FF6EE /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -264,6 +251,10 @@
 				6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */,
 				6F0F9B4618F6B909002FFFF2 /* ProfileSettingsViewController.h */,
 				6F0F9B4718F6B909002FFFF2 /* ProfileSettingsViewController.m */,
+				6F0F9B4A18F6D1CE002FFFF2 /* PasswordViewController.h */,
+				6F0F9B4B18F6D1CE002FFFF2 /* PasswordViewController.m */,
+				6F0F9B4D18F6D1E0002FFFF2 /* PushNotificationsViewController.h */,
+				6F0F9B4E18F6D1E0002FFFF2 /* PushNotificationsViewController.m */,
 			);
 			name = SettingsViewControllers;
 			sourceTree = "<group>";
@@ -280,8 +271,6 @@
 		6F68D7BA18BCC38000457BA4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6FD8105A18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.h */,
-				6FD8105B18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m */,
 				6F0CAA3818B3709200AE42F9 /* ImageEffects.h */,
 				6F0CAA3918B3709200AE42F9 /* ImageEffects.m */,
 				6F39372718F29AD10026AB4C /* Reachability.h */,
@@ -338,11 +327,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F0CAA3218B3705500AE42F9 /* Build configuration list for PBXNativeTarget "CinemApp" */;
 			buildPhases = (
-				C555B610B3C242D191D641BF /* Check Pods Manifest.lock */,
 				6F0CAA0218B3705400AE42F9 /* Sources */,
 				6F0CAA0318B3705400AE42F9 /* Frameworks */,
 				6F0CAA0418B3705400AE42F9 /* Resources */,
-				5018766054E0453F9CB8A3DB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -377,9 +364,17 @@
 		6F0CA9FE18B3705400AE42F9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Rosquist Östlund";
 				TargetAttributes = {
+					6F0CAA0518B3705400AE42F9 = {
+						DevelopmentTeam = L2AF42U6B2;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
+					};
 					6F0CAA2018B3705400AE42F9 = {
 						TestTargetID = 6F0CAA0518B3705400AE42F9;
 					};
@@ -423,55 +418,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		5018766054E0453F9CB8A3DB /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C555B610B3C242D191D641BF /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		6F0CAA0218B3705400AE42F9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6F0CAA4618B3709200AE42F9 /* ExploreViewController.m in Sources */,
+				6F0F9B4C18F6D1CE002FFFF2 /* PasswordViewController.m in Sources */,
 				6F0CAA4418B3709200AE42F9 /* ImageEffects.m in Sources */,
 				6FC18B2118BC273C005B226F /* Movie.m in Sources */,
 				6F9F75A918B79D7B00B69308 /* LogInViewController.m in Sources */,
-				6FD8105C18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m in Sources */,
 				73C7E73118B37A1A00453123 /* RateView.m in Sources */,
 				6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */,
 				6F0F9B4818F6B909002FFFF2 /* ProfileSettingsViewController.m in Sources */,
 				6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */,
 				73C8444118F3FE8C0022AF1E /* MovieTableView.m in Sources */,
 				6F16175E18BBBA4800754A10 /* RateSearchViewController.m in Sources */,
+				6F0F9B4F18F6D1E0002FFFF2 /* PushNotificationsViewController.m in Sources */,
 				6F0CAA4718B3709200AE42F9 /* RateViewController.m in Sources */,
 				731BE8E818B61EAC0009D8FE /* FilmActivityView.m in Sources */,
 				73C8444418F401060022AF1E /* MovieTableViewController.m in Sources */,
@@ -527,7 +490,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -566,7 +528,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -597,10 +558,11 @@
 		};
 		6F0CAA3318B3705500AE42F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED5665886EE44C019112E5BC /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -619,16 +581,18 @@
 					SystemConfiguration,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		6F0CAA3418B3705500AE42F9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED5665886EE44C019112E5BC /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -647,6 +611,7 @@
 					SystemConfiguration,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -654,7 +619,6 @@
 		6F0CAA3618B3705500AE42F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CinemApp.app/CinemApp";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -677,7 +641,6 @@
 		6F0CAA3718B3705500AE42F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CinemApp.app/CinemApp";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

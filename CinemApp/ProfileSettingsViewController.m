@@ -16,7 +16,7 @@
 
 @implementation ProfileSettingsViewController
 
-@synthesize tableView, personalSection, contactSection, privateProfileSection, removeAccountSection;
+@synthesize personalSection, contactSection, privateProfileSection, removeAccountSection;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

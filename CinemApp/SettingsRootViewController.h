@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "ProfileSettingsViewController.h"
+#import "PasswordViewController.h"
 
 @interface SettingsRootViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
 
-@property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray* accountSection;
 @property (strong, nonatomic) NSArray* generalSection;
 @property (strong, nonatomic) NSArray* aboutSection;
 
 @property (nonatomic, strong) ProfileSettingsViewController *profileSettingsView;
+@property (nonatomic, strong) PasswordViewController *passwordSettingsView;
 
 @end
