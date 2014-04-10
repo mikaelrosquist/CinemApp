@@ -42,6 +42,14 @@
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
 	self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save"
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(save)];
+    
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
