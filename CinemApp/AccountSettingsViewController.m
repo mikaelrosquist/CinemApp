@@ -33,7 +33,7 @@
     
     [self setTitle:@"Account settings"];
 	
-	self.passwordSection = @[@"Change password"];
+	self.passwordSection = @[@"Email", @"Change password"];
     
     self.removeAccountSection = @[@"Remove account"];
 	
@@ -64,7 +64,27 @@
 	}
 	
     if(indexPath.section == 0){
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if(indexPath.row == 0){
+            
+            UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(80, 8, 235, 30)];
+            playerTextField.adjustsFontSizeToFitWidth = YES;
+            playerTextField.textColor = [UIColor blackColor];
+            playerTextField.backgroundColor = [UIColor whiteColor];
+            playerTextField.autocorrectionType = UITextAutocorrectionTypeNo; // stäng av autocorrect
+            playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // stäng av autoversaler
+            playerTextField.tag = 0;
+            playerTextField.clearButtonMode = UITextFieldViewModeAlways; // ta bort 'x'-knappen
+            [playerTextField setEnabled: YES];
+            playerTextField.keyboardType = UIKeyboardTypeEmailAddress;
+            playerTextField.returnKeyType = UIReturnKeyNext;
+            playerTextField.placeholder = @"admin@mail.com";
+            
+            playerTextField.secureTextEntry = NO;
+            [cell.contentView addSubview:playerTextField];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }else{
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
         cell.textLabel.text = self.passwordSection[indexPath.row];
     }
     else if(indexPath.section == 1){
@@ -86,7 +106,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section==0){
-        if(indexPath.row==0){
+        if(indexPath.row==1){
             passwordSettingsView = [[PasswordViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:passwordSettingsView animated:YES];
         }
