@@ -89,34 +89,36 @@
     if(indexPath.section == 0){
         if(indexPath.row == 0 || indexPath.row == 1){
         
-            UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(110, 8, 205, 30)];
+            UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(50, 8, 260, 30)];
             playerTextField.adjustsFontSizeToFitWidth = YES;
             playerTextField.textColor = [UIColor blackColor];
             playerTextField.backgroundColor = [UIColor whiteColor];
-            playerTextField.autocorrectionType = UITextAutocorrectionTypeNo; // stäng av autocorrect
-            playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // stäng av autoversaler
+            playerTextField.autocorrectionType = UITextAutocorrectionTypeNo; //stäng av autocorrect
+            playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; //stäng av autoversaler
             playerTextField.tag = 0;
-            playerTextField.clearButtonMode = UITextFieldViewModeAlways; // ta bort 'x'-knappen
+            playerTextField.clearButtonMode = UITextFieldViewModeWhileEditing; //'x'-knappen
             [playerTextField setEnabled: YES];
             playerTextField.keyboardType = UIKeyboardTypeEmailAddress;
             playerTextField.returnKeyType = UIReturnKeyNext;
+            playerTextField.placeholder = self.personalSection[indexPath.row];
+            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
             
-            if ([indexPath row] == 0)
-                playerTextField.placeholder = @"admin";
-            else if ([indexPath row] == 1)
-                playerTextField.placeholder = @"admin@mail.com";
-        
+            if ([indexPath row] == 0){
+                imgView.image = [UIImage imageNamed:@"settings_username"];
+                playerTextField.text = @"admin";
+            }else if ([indexPath row] == 1){
+                imgView.image = [UIImage imageNamed:@"settings_email"];
+            }
+            
+            cell.imageView.image = imgView.image;
             playerTextField.secureTextEntry = NO;
             [cell.contentView addSubview:playerTextField];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }else{
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.userInteractionEnabled = NO;
+            cell.textLabel.text = self.personalSection[indexPath.row];
         }
-        cell.textLabel.text = self.personalSection[indexPath.row];
-        
-        
-       
     }
     
     else if(indexPath.section == 1){
@@ -133,7 +135,7 @@
         NSString *privateProfile = [defaults objectForKey:@"privateProfile"];
         
         if([privateProfile isEqual: @"ON"])
-             [switchView setOn:YES animated:YES];
+            [switchView setOn:YES animated:YES];
         else
             [switchView setOn:NO animated:YES];
         
@@ -189,7 +191,6 @@
     [defaults setObject:privateProfile forKey:@"privateProfile"];
     [defaults synchronize];
     NSLog(@"Privat profil har ändrats till: %@", privateProfile);
-    
 }
 
 -(void)save:(id)sender {

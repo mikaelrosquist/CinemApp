@@ -16,7 +16,7 @@
 
 @implementation PushNotificationsViewController
 
-@synthesize likesSection, commentsSection, followersSection;
+@synthesize notificationsSection;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,11 +37,7 @@
     
     [self setTitle:@"Push notifications"];
 	
-	self.likesSection = @[@"Off", @"From people I follow", @"On"];
-    
-    self.commentsSection = @[@"Off", @"From people I follow", @"On"];
-    
-    self.followersSection = @[@"Off", @"On"];
+	self.notificationsSection = @[@"Likes", @"Comments", @"New followers"];
 	
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
@@ -63,32 +59,16 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return @"NOTIFICATIONS FOR LIKES";
-        case 1:
-            return @"NOTIFICATIONS FOR COMMENTS";
-        case 2:
-            return @"NOTIFICATIONS FOR NEW FOLLOWERS";
-            
-    }
-    return nil;
+    return @"NOTIFICATIONS";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if(section==0)
-        return self.likesSection.count;
-    else if(section==1)
-        return self.commentsSection.count;
-    else if(section==2)
-        return self.followersSection.count;
-    
-    return 1;
+    return self.notificationsSection.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -98,25 +78,74 @@
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Identifier"];
 	}
 	
-    if(indexPath.section == 0){
-        cell.textLabel.text = self.likesSection[indexPath.row];
-        if(indexPath.row == 0)
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    cell.textLabel.text = self.notificationsSection[indexPath.row];
+    UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
+    cell.accessoryView = switchView;
+    switchView.tag = indexPath.row;
+    [switchView addTarget:self action:@selector(updateSwitchAtIndexPath:) forControlEvents:UIControlEventTouchUpInside];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *likeNotification = [defaults objectForKey:@"likeNotification"];
+    NSString *commentNotification = [defaults objectForKey:@"commentNotification"];
+    NSString *followerNotification = [defaults objectForKey:@"followerNotification"];
+    
+    switch(indexPath.row)
+    {
+        case 0:
+            ([likeNotification isEqual: @"ON"]) ? [switchView setOn:YES] : [switchView setOn:NO];
+            break;
+        case 1:
+            ([commentNotification isEqual: @"ON"]) ? [switchView setOn:YES] : [switchView setOn:NO];
+            break;
+        case 2:
+            ([followerNotification isEqual: @"ON"]) ? [switchView setOn:YES] : [switchView setOn:NO];
+            break;
+        default:
+            NSLog(@"Error!");
     }
-    else if(indexPath.section == 1){
-        cell.textLabel.text = self.commentsSection[indexPath.row];
-        if(indexPath.row == 0)
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    else if(indexPath.section == 2){
-        cell.textLabel.text = self.followersSection[indexPath.row];
-        if(indexPath.row == 0)
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
+
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+-(NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    return @"You can change the overall notifications settings in your phones Settings application.";
+}
+
+- (void)updateSwitchAtIndexPath:(UISwitch *)switchView{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *likeNotification;
+    NSString *commentNotification;
+    NSString *followerNotification;
+    
+    switch(switchView.tag)
+    {
+        case 0:
+            likeNotification = ([switchView isOn]) ? @"ON" : @"OFF";
+            [defaults setObject:likeNotification forKey:@"likeNotification"];
+            NSLog(@"Notifikationer för likes har satts till: %@", likeNotification);
+            break;
+        case 1:
+            commentNotification = ([switchView isOn]) ? @"ON" : @"OFF";
+            [defaults setObject:commentNotification forKey:@"commentNotification"];
+            NSLog(@"Notifikationer för kommentarer har satts till: %@", commentNotification);
+            break;
+        case 2:
+            followerNotification = ([switchView isOn]) ? @"ON" : @"OFF";
+            [defaults setObject:followerNotification forKey:@"followerNotification"];
+            NSLog(@"Notifikationer för nya följare har satts till: %@", followerNotification);
+            break;
+        default:
+            NSLog(@"Error!");
+    }
+    [defaults synchronize];
+    
+}
+
 @end

@@ -115,10 +115,9 @@
             [query whereKey:@"movieId" equalTo:test];
             [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
                 if (!error) {
-                    // The count request succeeded. Log the count
-                    NSLog(@"Den här filmen har betygsatts %d gånger av den här personen", count);
+                    NSLog(@"Den här filmen har betygsatts av den här personen");
                 } else {
-                    // The request failed
+                    NSLog(@"Den här filmen har inte betygsatts av den här personen");
                 }
             }];
         }

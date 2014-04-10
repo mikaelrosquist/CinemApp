@@ -32,14 +32,12 @@ static CGFloat backdropImageWidth  = 320.0;
         
         settingsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [settingsButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
-        settingsButton.frame = CGRectMake(283, 32, 25, 25);
+        settingsButton.frame = CGRectMake(276, 25, 40, 40);
         
         UIImage *settingsButtonImage = [UIImage imageNamed:@"settings_icon"];
         [settingsButton setImage:settingsButtonImage forState:UIControlStateNormal];
         settingsButton.tintColor = [UIColor whiteColor];
         [settingsButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
-
-
         
         //Profilinfo
         UIImage *profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];

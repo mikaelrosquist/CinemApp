@@ -10,8 +10,6 @@
 
 @interface PushNotificationsViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
 
-@property (strong, nonatomic) NSArray* likesSection;
-@property (strong, nonatomic) NSArray* commentsSection;
-@property (strong, nonatomic) NSArray* followersSection;
+@property (strong, nonatomic) NSArray* notificationsSection;
 
 @end

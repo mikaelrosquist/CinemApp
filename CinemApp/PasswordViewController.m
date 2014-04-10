@@ -90,7 +90,7 @@
         if ([indexPath row] == 0)
             playerTextField.placeholder = @"New password";
         else if ([indexPath row] == 1)
-            playerTextField.placeholder = @"New password, again";
+            playerTextField.placeholder = @"Confirm new password";
     }
     playerTextField.secureTextEntry = YES;
     [cell.contentView addSubview:playerTextField];
