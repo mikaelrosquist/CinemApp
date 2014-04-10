@@ -14,7 +14,7 @@
     UIImage *moviePosterString;
 }
 
-@synthesize json, resultArray, mainTableView, moviesArray, activityIndicatorView, searchBar;
+@synthesize json, resultArray, moviesArray, activityIndicatorView, searchBar;
 
 - (void)didReceiveMemoryWarning
 {

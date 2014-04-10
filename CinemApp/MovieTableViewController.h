@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "MovieTableView.h"
+#import "MovieView.h"
+#import "RateViewController.h"
 
-@interface MovieTableViewController : UITableViewController
+@interface MovieTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+
+- (id)initWithData:(UITableViewStyle)style
+                  :(NSArray *)personArray;
+
+- (void)makeTableView:(UITableView *)table;
+
+@property (nonatomic, strong) UITableView *personTable;
+@property (nonatomic, strong) NSArray *personArray;
 
 @end

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MovieTableView.h"
+#import "MovieTableViewController.h"
 //#import <JLTMDbClient.h>
 
 @interface MovieView : UIView
@@ -15,7 +16,7 @@
 -(id)initWithMovieInfo:(CGRect)frame
                       :(NSData*)posterImage
                       :(NSString *)moviePlot
-                      :(NSArray *)castArray;
+                      :(UITableView *)castTable;
 
 @property (nonatomic, strong) NSString *plotText;
 @property (nonatomic, strong) UITextView *plotView;
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) NSData *posterImage;
 @property (nonatomic, strong) UILabel *castLabel;
 @property (nonatomic, strong) UIImageView *personView;
+@property (nonatomic, strong) UITableView *castTable;
 
 - (void)textViewDidChange:(UITextView *)textView;
 

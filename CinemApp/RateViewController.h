@@ -11,6 +11,7 @@
 #import "MovieView.h"
 #import "ActivityTableView.h"
 #import "ImageEffects.h"
+#import "MovieTableViewController.h"
 
 @interface RateViewController : UIViewController<UIScrollViewDelegate, UITableViewDelegate>
 
@@ -18,8 +19,10 @@
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIImageView *backdropImageView;
 @property (nonatomic, retain) UIImageView *backdropWithBlurImageView;
-@property (nonatomic, strong) MovieView *movieView;
+//@property (nonatomic, strong) MovieView *movieView;
 @property (nonatomic, strong) RateView *rateView;
+@property (nonatomic, strong) UITableView *movieTableView; //tabellen med skådisar i movieView
+//@property (nonatomic, strong) MovieTableViewController *movieTVC;
 
 @property (nonatomic, strong) NSString *movieID;
 @property (nonatomic, strong) NSString *movieName;

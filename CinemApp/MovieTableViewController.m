@@ -14,6 +14,8 @@
 
 @implementation MovieTableViewController
 
+@synthesize personTable, personArray;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -23,9 +25,28 @@
     return self;
 }
 
+- (id)initWithData:(UITableViewStyle)style :(NSArray *)array{
+    
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+        personArray = array;
+        [self.tableView setFrame:CGRectMake(10, 220, 300, 300)];
+    }
+    return self;
+}
+
+- (void)makeTableView:(UITableView *)table{
+    table = self.tableView;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor clearColor];
+    [self.tableView setDelegate:self];
+	[self.tableView setDataSource:self];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -50,21 +71,36 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
     // Return the number of rows in the section.
-    return 0;
+    return [personArray count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    NSLog(@"PERSONARRAY: %@", personArray);
+    static NSString *cellIdentifier = @"Cell";
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if(cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
+    
+    NSString *name = [[personArray objectAtIndex:indexPath.row] valueForKey:@"name"];
+    
+    [cell.textLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Regular" size: 14.0]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
+    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: cell.textLabel.attributedText];
+    [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 13.0] range: NSMakeRange([name length]+1, 6)];
+    [cell.textLabel setAttributedText: text];
+
+    
+    //cell.textLabel.text = [personArray objectAtIndex:indexPath.row];
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

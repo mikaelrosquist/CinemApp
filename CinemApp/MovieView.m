@@ -7,10 +7,9 @@
 
 @implementation MovieView
 
-@synthesize plotText, plotView, posterView, castLabel, personView;
+@synthesize plotText, plotView, posterView, castLabel, personView, castTable;
 
 BOOL plotEnlarged = NO;
-MovieTableView *castTable;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -39,7 +38,7 @@ MovieTableView *castTable;
     return self;
 }
 
--(id)initWithMovieInfo:(CGRect)frame :(NSData*)posterImage :(NSString *)moviePlot :(NSArray *)castArray
+-(id)initWithMovieInfo:(CGRect)frame :(NSData*)posterImage :(NSString *)moviePlot :(UITableView *)cTable
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -75,7 +74,7 @@ MovieTableView *castTable;
         [self addSubview:castLabel];
         
         //castTable
-        castTable = [[MovieTableView alloc]initWithData:CGRectMake(0, plotView.frame.size.height+60, 320, 400):castArray];
+        castTable = cTable;
         [self addSubview:castTable];
         
         //cast
