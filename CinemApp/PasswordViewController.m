@@ -72,7 +72,7 @@
     
     cell.accessoryType = UITableViewCellAccessoryNone;
 	
-    UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 8, 300, 30)];
+    UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(55, 8, 260, 30)];
     playerTextField.adjustsFontSizeToFitWidth = YES;
     playerTextField.textColor = [UIColor blackColor];
     
@@ -93,6 +93,10 @@
             playerTextField.placeholder = @"Confirm new password";
     }
     playerTextField.secureTextEntry = YES;
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    imgView.image = [UIImage imageNamed:@"settings_password"];
+    cell.imageView.image = imgView.image;
+
     [cell.contentView addSubview:playerTextField];
     
 	return cell;

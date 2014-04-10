@@ -95,7 +95,7 @@
     if(indexPath.section == 0){
         if(indexPath.row == 0 || indexPath.row == 1){
         
-            UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(50, 8, 260, 30)];
+            UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(55, 8, 260, 30)];
             playerTextField.adjustsFontSizeToFitWidth = YES;
             playerTextField.textColor = [UIColor blackColor];
             playerTextField.backgroundColor = [UIColor whiteColor];
