@@ -127,7 +127,7 @@
 
 -(NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 1)
-        return @"Toggle to require authorization before anyone can follow you or see your movie ratings. Your existing followers won't be affected.";
+        return @"Toggle to require authorization before anyone can follow you or see your ratings. Your existing followers won't be affected.";
     else if (section == 2)
         return @"This will permanently remove your account. The username cannot be reused by anyone.";
     else
