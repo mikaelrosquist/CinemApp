@@ -7,16 +7,16 @@
 //  Copyright (c) 2014 Rosquist Östlund. All rights reserved.
 //
 
-#import "SettingsViewController.h"
+#import "SettingsRootViewController.h"
 #import "Parse/Parse.h"
 
-@interface SettingsViewController ()
+@interface SettingsRootViewController ()
 
 @end
 
-@implementation SettingsViewController
+@implementation SettingsRootViewController
 
-@synthesize tableView, accountSection, generalSection, aboutSection;
+@synthesize tableView, accountSection, generalSection, aboutSection, profileSettingsView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -31,25 +31,13 @@
     return UIStatusBarStyleDefault;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    //Färg på navigationBaren
-    UIImage *_defaultImage;
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
-    [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.navigationController.navigationBar.translucent = NO;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self setTitle:@"Settings"];
 	
-	self.accountSection = @[@"Profile settings", @"Change email", @"Change password"];
+	self.accountSection = @[@"Profile settings", @"Change password"];
     
     self.generalSection = @[@"Push notifications"];
     
@@ -61,6 +49,15 @@
     
     //Sätter knapparna i navigationBar till röda
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
+    
+    //Färg på navigationBaren
+    UIImage *_defaultImage;
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
+    [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationController.navigationBar.translucent = NO;
+
+    
 }
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
@@ -110,8 +107,7 @@
 	
     if(indexPath.section == 0){
         cell.textLabel.text = self.accountSection[indexPath.row];
-        if(indexPath.row == 0)
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if(indexPath.section == 1){
         cell.textLabel.text = self.generalSection[indexPath.row];
@@ -119,6 +115,8 @@
     }
     else if(indexPath.section == 2){
         cell.textLabel.text = self.aboutSection[indexPath.row];
+        if(indexPath.row == 0)
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {
         cell.textLabel.text = @"Logout";
@@ -133,7 +131,9 @@
     {
         if(indexPath.row==0)
         {
-            //Och så vidare...
+            profileSettingsView = [[ProfileSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:profileSettingsView animated:YES];
+
         }
     }
     else if(indexPath.section==1)

@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProfileSettingsViewController.h"
 
-@interface SettingsViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
+@interface SettingsRootViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray* accountSection;
 @property (strong, nonatomic) NSArray* generalSection;
 @property (strong, nonatomic) NSArray* aboutSection;
 
-
+@property (nonatomic, strong) ProfileSettingsViewController *profileSettingsView;
 
 @end

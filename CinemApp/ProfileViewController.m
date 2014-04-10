@@ -116,7 +116,7 @@ static CGFloat backdropImageWidth  = 320.0;
     if(segment.selectedSegmentIndex == 0) {
         //visar recent
     }else if(segment.selectedSegmentIndex == 1){
-        settingsView = [[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        settingsView = [[SettingsRootViewController alloc] initWithStyle:UITableViewStyleGrouped];
         [self.navigationController pushViewController:settingsView animated:YES];
         [self.navigationController setNavigationBarHidden:YES animated:YES];
 
@@ -163,7 +163,7 @@ static CGFloat backdropImageWidth  = 320.0;
 }
 
 -(void)pushMyNewViewController:(id)sender {
-    settingsView = [[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    settingsView = [[SettingsRootViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self.navigationController pushViewController:settingsView animated:YES];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }

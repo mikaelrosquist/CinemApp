@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MovieView.h"
-#import "SettingsViewController.h"
+#import "SettingsRootViewController.h"
 
 @interface ProfileViewController : UIViewController<UIScrollViewDelegate>
 
@@ -16,7 +16,7 @@
 @property (nonatomic, retain) UIImageView *backdropImageView;
 @property (nonatomic, retain) UIImageView *backdropWithBlurImageView;
 @property (nonatomic, retain) UIImageView *profilePictureImageView;
-@property (nonatomic, strong) SettingsViewController *settingsView;
+@property (nonatomic, strong) SettingsRootViewController *settingsView;
 
 
 

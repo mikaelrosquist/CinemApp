@@ -25,6 +25,7 @@
 		6F0CAA4718B3709200AE42F9 /* RateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA3F18B3709200AE42F9 /* RateViewController.m */; };
 		6F0CAA4818B3709200AE42F9 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */; };
 		6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */; };
+		6F0F9B4818F6B909002FFFF2 /* ProfileSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F9B4718F6B909002FFFF2 /* ProfileSettingsViewController.m */; };
 		6F16175E18BBBA4800754A10 /* RateSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F16175C18BBBA4800754A10 /* RateSearchViewController.m */; };
 		6F39372918F29AD10026AB4C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F39372818F29AD10026AB4C /* Reachability.m */; };
 		6F46491D18F404DA00A85584 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46491C18F404DA00A85584 /* Parse.framework */; };
@@ -39,7 +40,7 @@
 		6F46492F18F4053300A85584 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492E18F4053300A85584 /* SystemConfiguration.framework */; };
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
 		6F9F75A918B79D7B00B69308 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F75A818B79D7B00B69308 /* LogInViewController.m */; };
-		6FC0C82B18B6D59300F737EC /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C82A18B6D59300F737EC /* SettingsViewController.m */; };
+		6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */; };
 		6FC18B2118BC273C005B226F /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC18B2018BC273C005B226F /* Movie.m */; };
 		6FD8105C18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD8105B18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m */; };
 		7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7308FDE618B76D0000F93344 /* ActivityTableView.m */; };
@@ -89,6 +90,8 @@
 		6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
 		6F0CAA4218B3709200AE42F9 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		6F0F9B4618F6B909002FFFF2 /* ProfileSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileSettingsViewController.h; sourceTree = "<group>"; };
+		6F0F9B4718F6B909002FFFF2 /* ProfileSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileSettingsViewController.m; sourceTree = "<group>"; };
 		6F16175B18BBBA4800754A10 /* RateSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateSearchViewController.h; sourceTree = "<group>"; };
 		6F16175C18BBBA4800754A10 /* RateSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateSearchViewController.m; sourceTree = "<group>"; };
 		6F39372718F29AD10026AB4C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -110,8 +113,8 @@
 		6F955B0018B397A7004C4B70 /* MovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieView.m; sourceTree = "<group>"; };
 		6F9F75A718B79D7B00B69308 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		6F9F75A818B79D7B00B69308 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
-		6FC0C82918B6D59300F737EC /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		6FC0C82A18B6D59300F737EC /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		6FC0C82918B6D59300F737EC /* SettingsRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsRootViewController.h; sourceTree = "<group>"; };
+		6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsRootViewController.m; sourceTree = "<group>"; };
 		6FC18B1F18BC273C005B226F /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
 		6FC18B2018BC273C005B226F /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
 		6FD8105A18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ScrollingNavbar.h"; sourceTree = "<group>"; };
@@ -254,6 +257,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6F0F9B4918F6B95D002FFFF2 /* SettingsViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6FC0C82918B6D59300F737EC /* SettingsRootViewController.h */,
+				6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */,
+				6F0F9B4618F6B909002FFFF2 /* ProfileSettingsViewController.h */,
+				6F0F9B4718F6B909002FFFF2 /* ProfileSettingsViewController.m */,
+			);
+			name = SettingsViewControllers;
+			sourceTree = "<group>";
+		};
 		6F46491B18F3EE0900A85584 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,8 +326,7 @@
 				6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */,
 				6F0CAA4218B3709200AE42F9 /* ProfileViewController.h */,
 				6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */,
-				6FC0C82918B6D59300F737EC /* SettingsViewController.h */,
-				6FC0C82A18B6D59300F737EC /* SettingsViewController.m */,
+				6F0F9B4918F6B95D002FFFF2 /* SettingsViewControllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -454,7 +467,8 @@
 				6F9F75A918B79D7B00B69308 /* LogInViewController.m in Sources */,
 				6FD8105C18F57C6A00DF0B9A /* UIViewController+ScrollingNavbar.m in Sources */,
 				73C7E73118B37A1A00453123 /* RateView.m in Sources */,
-				6FC0C82B18B6D59300F737EC /* SettingsViewController.m in Sources */,
+				6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */,
+				6F0F9B4818F6B909002FFFF2 /* ProfileSettingsViewController.m in Sources */,
 				6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */,
 				73C8444118F3FE8C0022AF1E /* MovieTableView.m in Sources */,
 				6F16175E18BBBA4800754A10 /* RateSearchViewController.m in Sources */,
