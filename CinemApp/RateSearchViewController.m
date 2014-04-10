@@ -93,6 +93,11 @@
         [self.tableView reloadData];
         [self.tableView setHidden:YES];
     }
+    
+    //Kontroll om söksträngen endast innehåller mellanrum
+    NSString * searchString = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if (![searchString length])
+        self.searchBar.text = @"";
 
 }
 
