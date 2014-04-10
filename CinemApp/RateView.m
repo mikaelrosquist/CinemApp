@@ -51,6 +51,7 @@
         //sliderLabel
         sliderLabel = [[UILabel alloc]initWithFrame:CGRectMake(285, 65, 20, 44)];
         sliderLabel.textColor = [UIColor whiteColor];
+        sliderLabel.font = [UIFont fontWithName:@"Helvetica Neue-Bold" size:16];
         sliderLabel.textAlignment = NSTextAlignmentCenter;
         sliderLabel.text = @"5";
         [self addSubview:sliderLabel];
@@ -62,7 +63,10 @@
         
         //commentField
         commentField = [[UITextView alloc]initWithFrame:CGRectMake(10, 145, 300, 120)];
+        //[self.commentField resignFirstResponder];
+        commentField.textColor = [UIColor grayColor];
         commentField.text = @"How was it? Leave a note...";
+        commentField.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
         commentField.textAlignment = 0;
         [self addSubview:commentField];
 

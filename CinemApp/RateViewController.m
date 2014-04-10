@@ -137,6 +137,7 @@ static CGFloat backdropImageWidth  = 320.0;
             //Allokerar och initierar vyerna för segmented control
             movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 830):moviePoster:moviePlot:movieTableView];
             rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight+10, 320, 410):movieID];
+            rateView.commentField.delegate = self;
             tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
             
             //Formaterar en sträng med genrar
@@ -299,5 +300,26 @@ static CGFloat backdropImageWidth  = 320.0;
     creditsJson = [NSJSONSerialization JSONObjectWithData:creditsData options:kNilOptions error:nil];
     //NSLog(@"%@", creditsJson);
 }
+
+
+//Placeholder till commentFiled i rateView.
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if ([rateView.commentField.text isEqualToString:@"How was it? Leave a note..."]) {
+        rateView.commentField.text = @"";
+        rateView.commentField.textColor = [UIColor blackColor]; //optional
+    }
+    [rateView.commentField becomeFirstResponder];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([rateView.commentField.text isEqualToString:@""]) {
+        rateView.commentField.text = @"How was it? Leave a note...";
+        rateView.commentField.textColor = [UIColor lightGrayColor]; //optional
+    }
+    [rateView.commentField resignFirstResponder];
+}
+
 
 @end

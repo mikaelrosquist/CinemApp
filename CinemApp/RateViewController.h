@@ -13,7 +13,7 @@
 #import "ImageEffects.h"
 #import "MovieTableViewController.h"
 
-@interface RateViewController : UIViewController<UIScrollViewDelegate, UITableViewDelegate>
+@interface RateViewController : UIViewController<UIScrollViewDelegate, UITableViewDelegate, UITextViewDelegate>
 
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) UITableView *tableView;
@@ -32,7 +32,7 @@
 @property (nonatomic, strong) NSString *movieBackground;
 @property (nonatomic, strong) NSString *moviePlot;
 
-@property (nonatomic, strong) NSDictionary * json;
+@property (nonatomic, strong) NSDictionary *json;
 @property (nonatomic, strong) NSDictionary *creditsJson;
 
 #pragma mark - Methods
