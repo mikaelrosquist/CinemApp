@@ -1,18 +1,22 @@
+
 //
-//  PushNotificationsViewController.m
+//  SettingsViewController.m
 //  CinemApp
 //
-//  Created by Teodor Östlund on 2014-04-10.
+//  Created by Teodor Östlund on 2014-02-20.
 //  Copyright (c) 2014 Rosquist Östlund. All rights reserved.
 //
 
 #import "PushNotificationsViewController.h"
+#import "Parse/Parse.h"
 
 @interface PushNotificationsViewController ()
 
 @end
 
 @implementation PushNotificationsViewController
+
+@synthesize likesSection, commentsSection, followersSection;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -23,95 +27,96 @@
     return self;
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    [self setTitle:@"Push notifications"];
+	
+	self.likesSection = @[@"Off", @"From people I follow", @"On"];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.commentsSection = @[@"Off", @"From people I follow", @"On"];
+    
+    self.followersSection = @[@"Off", @"On"];
+	
+	[self.tableView setDelegate:self];
+	[self.tableView setDataSource:self];
+	self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    //Sätter knapparna i navigationBar till röda
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
+    
+    //Färg på navigationBaren
+    UIImage *_defaultImage;
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
+    [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationController.navigationBar.translucent = NO;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
-#pragma mark - Table view data source
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 3;
+}
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 0;
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return @"NOTIFICATIONS FOR LIKES";
+        case 1:
+            return @"NOTIFICATIONS FOR COMMENTS";
+        case 2:
+            return @"NOTIFICATIONS FOR NEW FOLLOWERS";
+            
+    }
+    return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+	if(section==0)
+        return self.likesSection.count;
+    else if(section==1)
+        return self.commentsSection.count;
+    else if(section==2)
+        return self.followersSection.count;
     
-    // Configure the cell...
-    
-    return cell;
+    return 1;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+	UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Identifier"];
+	if (!cell) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Identifier"];
+	}
+	
+    if(indexPath.section == 0){
+        cell.textLabel.text = self.likesSection[indexPath.row];
+        if(indexPath.row == 0)
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else if(indexPath.section == 1){
+        cell.textLabel.text = self.commentsSection[indexPath.row];
+        if(indexPath.row == 0)
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else if(indexPath.section == 2){
+        cell.textLabel.text = self.followersSection[indexPath.row];
+        if(indexPath.row == 0)
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+	return cell;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

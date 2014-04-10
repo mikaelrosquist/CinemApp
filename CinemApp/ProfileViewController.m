@@ -20,6 +20,7 @@ static CGFloat backdropImageWidth  = 320.0;
 
 @implementation ProfileViewController{
     UILabel *nameLabel;
+    UIButton *settingsButton;
 }
 
 @synthesize settingsView;
@@ -29,10 +30,21 @@ static CGFloat backdropImageWidth  = 320.0;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
+        settingsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [settingsButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
+        settingsButton.frame = CGRectMake(283, 32, 25, 25);
+        
+        UIImage *settingsButtonImage = [UIImage imageNamed:@"settings_icon"];
+        [settingsButton setImage:settingsButtonImage forState:UIControlStateNormal];
+        settingsButton.tintColor = [UIColor whiteColor];
+        [settingsButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
+
+
+        
         //Profilinfo
         UIImage *profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
         UIImage *profileBackgroundImage = [UIImage imageNamed:@"kitten"];
-        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 320, 40)];
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 23, 320, 40)];
         
         nameLabel.textAlignment = NSTextAlignmentCenter;
         nameLabel.textColor=[UIColor whiteColor];
@@ -71,6 +83,7 @@ static CGFloat backdropImageWidth  = 320.0;
         [self.view addSubview:self.backdropWithBlurImageView];
         [self.scrollView addSubview:self.profilePictureImageView];
         [self.scrollView addSubview:nameLabel];
+        [self.scrollView addSubview:settingsButton];
         [self.scrollView addSubview:segmentedControl];
         [self.view addSubview:self.scrollView];
         
@@ -104,6 +117,7 @@ static CGFloat backdropImageWidth  = 320.0;
     //Alpha på bakgrundsbilden och nameLabel när man scrolar
     self.backdropWithBlurImageView.alpha = blurAlpha;
     self.profilePictureImageView.alpha = blurAlpha;
+    settingsButton.alpha = blurAlpha;
     nameLabel.alpha = blurAlpha;
     
     //Log för debug
@@ -116,10 +130,7 @@ static CGFloat backdropImageWidth  = 320.0;
     if(segment.selectedSegmentIndex == 0) {
         //visar recent
     }else if(segment.selectedSegmentIndex == 1){
-        settingsView = [[SettingsRootViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        [self.navigationController pushViewController:settingsView animated:YES];
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
-
+    
     }
 }
 
@@ -162,7 +173,7 @@ static CGFloat backdropImageWidth  = 320.0;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
--(void)pushMyNewViewController:(id)sender {
+-(void)showSettings:(id)sender {
     settingsView = [[SettingsRootViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self.navigationController pushViewController:settingsView animated:YES];
     [self.navigationController setNavigationBarHidden:YES animated:YES];

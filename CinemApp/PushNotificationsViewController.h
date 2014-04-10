@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PushNotificationsViewController : UITableViewController
+@interface PushNotificationsViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) NSArray* likesSection;
+@property (strong, nonatomic) NSArray* commentsSection;
+@property (strong, nonatomic) NSArray* followersSection;
 
 @end

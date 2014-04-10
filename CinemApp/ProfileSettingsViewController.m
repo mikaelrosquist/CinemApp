@@ -16,7 +16,7 @@
 
 @implementation ProfileSettingsViewController
 
-@synthesize personalSection, contactSection, privateProfileSection, removeAccountSection;
+@synthesize personalSection, privateProfileSection, removeAccountSection;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -31,11 +31,9 @@
 {
     [super viewDidLoad];
     
-    [self setTitle:@"Profile settings"];
+    [self setTitle:@"Private settings"];
 	
-	self.personalSection = @[@"Nickname", @"Profile picture"];
-    
-    self.contactSection = @[@"Email"];
+	self.personalSection = @[@"Username", @"Email"];
     
     self.privateProfileSection = @[@"Private profile"];
     
@@ -47,20 +45,14 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return @"Public information";
-            
-        case 1:
-            return @"Contact information";
-            
-    }
-    
-    return nil;
+    if(section == 0)
+        return @"Personal information";
+    else
+        return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -68,10 +60,8 @@
 	if(section==0)
         return self.personalSection.count;
     else if(section==1)
-        return self.contactSection.count;
-    else if(section==2)
         return self.privateProfileSection.count;
-    else if(section==3)
+    else if(section==2)
         return self.removeAccountSection.count;
     
     return 1;
@@ -85,12 +75,33 @@
 	}
 	
     if(indexPath.section == 0){
+        
+        
+        UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(110, 8, 205, 30)];
+        playerTextField.adjustsFontSizeToFitWidth = YES;
+        playerTextField.textColor = [UIColor blackColor];
+        
+        playerTextField.backgroundColor = [UIColor whiteColor];
+        playerTextField.autocorrectionType = UITextAutocorrectionTypeNo; // stäng av autocorrect
+        playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // stäng av autoversaler
+        playerTextField.tag = 0;
+        playerTextField.clearButtonMode = UITextFieldViewModeAlways; // ta bort 'x'-knappen
+        [playerTextField setEnabled: YES];
+        playerTextField.keyboardType = UIKeyboardTypeEmailAddress;
+        playerTextField.returnKeyType = UIReturnKeyNext;
+        if ([indexPath row] == 0)
+            playerTextField.placeholder = @"admin";
+        else if ([indexPath row] == 1)
+            playerTextField.placeholder = @"admin@mail.com";
+        
+        playerTextField.secureTextEntry = NO;
+        
         cell.textLabel.text = self.personalSection[indexPath.row];
+        
+        [cell.contentView addSubview:playerTextField];
+       
     }
     else if(indexPath.section == 1){
-        cell.textLabel.text = self.contactSection[indexPath.row];
-    }
-    else if(indexPath.section == 2){
         cell.textLabel.text = self.privateProfileSection[indexPath.row];
         UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
         cell.accessoryView = switchView;
@@ -105,18 +116,27 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    else if(indexPath.section == 3){
+    else if(indexPath.section == 2){
         cell.textLabel.text = self.removeAccountSection[indexPath.row];
-    }
-    else{
-        cell.textLabel.text = nil;
+        cell.textLabel.textColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     }
     
 	return cell;
 }
 
+
+-(NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    if (section == 1)
+        return @"Toggle to require authorization before anyone can follow you or see your movie ratings. Your existing followers won't be affected.";
+    else if (section == 2)
+        return @"This will permanently remove your account. The username cannot be reused by anyone.";
+    else
+        return nil;
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    //kod
 }
 
 - (void)updateSwitchAtIndexPath:(UISwitch *)switchView {

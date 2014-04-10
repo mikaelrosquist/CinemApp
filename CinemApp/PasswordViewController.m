@@ -41,7 +41,7 @@
 	[self.tableView setDataSource:self];
 	self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Done"
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save"
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(save)];
@@ -79,7 +79,6 @@
     playerTextField.backgroundColor = [UIColor whiteColor];
     playerTextField.autocorrectionType = UITextAutocorrectionTypeNo; // no auto correction support
     playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
-    //playerTextField.textAlignment = UITextAlignmentLeft;
     playerTextField.tag = 0;
     playerTextField.clearButtonMode = UITextFieldViewModeNever; // no clear 'x' button to the right
     [playerTextField setEnabled: YES];
@@ -95,20 +94,6 @@
     }
     playerTextField.secureTextEntry = YES;
     [cell.contentView addSubview:playerTextField];
-    
-    /*
-    if ([indexPath section] == 0) {
-        cell.textLabel.text = @"Email";
-    }
-    else if ([indexPath section] == 1) {
-        if ([indexPath row] == 0) {
-            cell.textLabel.text = @"Email";
-        }
-        else {
-            cell.textLabel.text = @"Password";
-        }
-    }
-    */
     
 	return cell;
 }

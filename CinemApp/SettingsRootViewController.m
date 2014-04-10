@@ -16,7 +16,7 @@
 
 @implementation SettingsRootViewController
 
-@synthesize accountSection, generalSection, aboutSection, profileSettingsView, passwordSettingsView;
+@synthesize accountSection, generalSection, aboutSection, profileSettingsView, passwordSettingsView, notificationsSettingsView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -113,7 +113,7 @@
         cell.userInteractionEnabled = NO;
     }
     else {
-        cell.textLabel.text = @"Logout";
+        cell.textLabel.text = @"Log out";
         cell.textLabel.textColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     }
 	return cell;
@@ -139,7 +139,8 @@
     {
         if(indexPath.row==0)
         {
-            //Och så vidare...
+            notificationsSettingsView = [[PushNotificationsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:notificationsSettingsView animated:YES];
         }
     }
     else if(indexPath.section==2)
@@ -153,7 +154,7 @@
     {
         if(indexPath.row==0)
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logout"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log out"
                                                             message:@"Are you sure you want to logout?"
                                                            delegate:self
                                                   cancelButtonTitle:@"Cancel"
