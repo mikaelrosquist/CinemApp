@@ -54,22 +54,6 @@
     self.navigationController.navigationBar.translucent = NO;
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-}
-
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleDefault;
 }
@@ -119,10 +103,10 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if(indexPath.section == 2){
+        cell.userInteractionEnabled = NO;
         cell.textLabel.text = self.aboutSection[indexPath.row];
         if(indexPath.row == 0)
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.userInteractionEnabled = NO;
     }
     else {
         cell.textLabel.text = @"Log out";

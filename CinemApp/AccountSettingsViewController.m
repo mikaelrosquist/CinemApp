@@ -93,10 +93,21 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section==0)
-        if(indexPath.row==0)
+    if(indexPath.section==0){
+        if(indexPath.row==0){
             passwordSettingsView = [[PasswordViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:passwordSettingsView animated:YES];
+        }
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"This function does not yet work"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+    }
+    
 }
 
 

@@ -103,6 +103,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }else{
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.userInteractionEnabled = NO;
         }
         cell.textLabel.text = self.personalSection[indexPath.row];
         
