@@ -95,7 +95,7 @@
     if(indexPath.section == 0){
         if(indexPath.row == 0 || indexPath.row == 1){
         
-            UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(55, 8, 260, 30)];
+            UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(52, 8, 260, 30)];
             playerTextField.adjustsFontSizeToFitWidth = YES;
             playerTextField.textColor = [UIColor blackColor];
             playerTextField.backgroundColor = [UIColor whiteColor];
@@ -130,6 +130,10 @@
     else if(indexPath.section == 1){
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = self.passwordSection[indexPath.row];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+        imgView.image = [UIImage imageNamed:@"settings_password"];
+        cell.imageView.image = imgView.image;
+
     }
     
     else if(indexPath.section == 2){
