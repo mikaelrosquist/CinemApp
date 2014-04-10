@@ -114,7 +114,7 @@
             [query whereKey:@"user" equalTo:currentUser.username];
             [query whereKey:@"movieId" equalTo:test];
             [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
-                if (!error) {
+                if (!error && count > 0) {
                     NSLog(@"Den här filmen har betygsatts av den här personen");
                 } else {
                     NSLog(@"Den här filmen har inte betygsatts av den här personen");
