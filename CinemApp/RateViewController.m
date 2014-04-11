@@ -34,6 +34,10 @@ static CGFloat backdropImageWidth  = 320.0;
 {
     [super viewDidLoad];
     NSLog(@"LADDAT: RateViewController");
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
+    self.navigationController.navigationBar.translucent = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     [DejalActivityView activityViewForView:self.view];
     self.view.userInteractionEnabled = NO;
@@ -207,8 +211,12 @@ static CGFloat backdropImageWidth  = 320.0;
             [self.scrollView addSubview:segmentedControl];
             [self.view addSubview:self.scrollView];
             
-            [DejalBezelActivityView removeViewAnimated:YES];
+            [DejalActivityView removeView];
             self.view.userInteractionEnabled = YES;
+            
+            //Färg på navigationBaren
+            self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+            
         });
     });
     //skapar tableView
@@ -223,14 +231,7 @@ static CGFloat backdropImageWidth  = 320.0;
     self.scrollView.delaysContentTouches = YES;
     
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
-    
-    //Färg på navigationBaren
-    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
-    self.navigationController.navigationBar.translucent = YES;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    
+
     //Tar bort "Back"-texten på filmsidorna
     self.navigationController.navigationBar.topItem.backBarButtonItem = [[UIBarButtonItem alloc]
                                                                          initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
