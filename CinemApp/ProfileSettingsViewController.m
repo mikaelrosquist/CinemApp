@@ -111,9 +111,10 @@
             
             if ([indexPath row] == 0){
                 imgView.image = [UIImage imageNamed:@"settings_username"];
-                playerTextField.text = @"admin";
+                playerTextField.text = @"testuser";
             }else if ([indexPath row] == 1){
                 imgView.image = [UIImage imageNamed:@"settings_email"];
+                playerTextField.text = @"test.user@gmail.com";
             }
             
             cell.imageView.image = imgView.image;

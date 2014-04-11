@@ -144,7 +144,7 @@ static CGFloat backdropImageWidth  = 320.0;
     if (![PFUser currentUser]) {
         nameLabel.text = @"Laddar...";
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        [PFUser logInWithUsernameInBackground:@"admin" password:@"admin"
+        [PFUser logInWithUsernameInBackground:@"testuser" password:@"admin"
                                         block:^(PFUser *user, NSError *error) {
                                             if (user) {
                                                 NSLog(@"Inloggning lyckades!");
