@@ -35,7 +35,6 @@
     HomeViewController* home = [[HomeViewController alloc] init];
     ExploreViewController* explore = [[ExploreViewController alloc] init];
     RateSearchViewController* rateSearch = [[RateSearchViewController alloc] init];
-    //RateViewController* rate = [[RateViewController alloc] init];
     ActivityViewController* activity = [[ActivityViewController alloc] init];
     ProfileViewController* profile = [[ProfileViewController alloc] init];
     
@@ -51,14 +50,7 @@
     profileNav.navigationBar.translucent = YES;
     profileNav.view.backgroundColor = [UIColor clearColor];
     profileNav.navigationBar.barStyle = UIBarStyleBlack;
-/*
-    [rateNav.navigationBar setBackgroundImage:[UIImage new]
-                                   forBarMetrics:UIBarMetricsDefault];
-    rateNav.navigationBar.shadowImage = [UIImage new];
-    rateNav.navigationBar.translucent = YES;
-    rateNav.view.backgroundColor = [UIColor clearColor];
-    rateNav.navigationBar.barStyle = UIBarStyleBlack;
-  */      
+
     NSArray* controllers = [NSArray arrayWithObjects:homeNav, exploreNav, rateNav, activityNav, profileNav, nil];
     self.tabBarController.viewControllers = controllers;
     
@@ -102,8 +94,6 @@
     
     self.window.rootViewController = self.tabBarController;
     
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
     

@@ -12,6 +12,7 @@
 @implementation RateView{
     UILabel *sliderLabel;
     UISlider *slider;
+    UIButton *rateButton;
 }
 
 @synthesize commentField, movieID;
@@ -75,12 +76,12 @@
         //[self.commentField resignFirstResponder];
         commentField.textColor = [UIColor grayColor];
         commentField.text = @"How was it? Leave a note...";
-        commentField.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+        commentField.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
         commentField.textAlignment = 0;
         [self addSubview:commentField];
 
         //rateButton
-        UIButton *rateButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 305, 300, 40)];
+        rateButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 305, 300, 40)];
         [rateButton setTitle:@"Rate" forState:UIControlStateNormal];
         rateButton.layer.cornerRadius = 5.0f;
         rateButton.tintColor = [UIColor whiteColor];
@@ -128,17 +129,29 @@
 -(void)saveRating:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
-        
+        NSString *test = [NSString stringWithFormat:@"%@",self.movieID];
         NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
         [f setNumberStyle:NSNumberFormatterDecimalStyle];
         NSNumber *myNumber = [f numberFromString:sliderLabel.text];
         
-        PFObject *rating = [PFObject objectWithClassName:@"Rating"];
-        rating[@"user"] = @"admin";
-        rating[@"comment"] = commentField.text;
-        rating[@"rating"] = myNumber;
-        rating[@"movieId"] = [NSString stringWithFormat:@"%@", self.movieID];
-        [rating saveInBackground];
+        PFQuery *query = [PFQuery queryWithClassName:@"Rating"];
+        [query whereKey:@"user" equalTo:currentUser.username];
+        [query whereKey:@"movieId" equalTo:test];
+        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (object){
+                object[@"comment"] = commentField.text;
+                object[@"rating"] = myNumber;
+                [object saveInBackground];
+            } else {
+                PFObject *rating = [PFObject objectWithClassName:@"Rating"];
+                rating[@"user"] = currentUser.username;
+                rating[@"comment"] = commentField.text;
+                rating[@"rating"] = myNumber;
+                rating[@"movieId"] = [NSString stringWithFormat:@"%@", self.movieID];
+                [rating saveInBackground];
+
+            }
+        }];
         NSLog(@"Rating sparas...");
 
     }else{
@@ -170,6 +183,8 @@
                     slider.value = [[object objectForKey:@"rating"] intValue];
                     NSInteger val = lround(slider.value);
                     sliderLabel.text = [NSString stringWithFormat:@"%d",val];
+                    commentField.text = [object objectForKey:@"comment"];
+                    [rateButton setTitle:@"Update rating" forState:UIControlStateNormal];
             } else {
                 //Inget
             }

@@ -39,6 +39,7 @@
 		6F46492918F4052400A85584 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492818F4052400A85584 /* QuartzCore.framework */; };
 		6F46492B18F4052800A85584 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492A18F4052800A85584 /* Security.framework */; };
 		6F46492F18F4053300A85584 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492E18F4053300A85584 /* SystemConfiguration.framework */; };
+		6F6D3DDA18F81FFB00D53B66 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */; };
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
 		6F9F75A918B79D7B00B69308 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F75A818B79D7B00B69308 /* LogInViewController.m */; };
 		6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */; };
@@ -108,6 +109,8 @@
 		6F46492818F4052400A85584 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6F46492A18F4052800A85584 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6F46492E18F4053300A85584 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6F6D3DD818F81FFB00D53B66 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
+		6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
 		6F955AFF18B397A7004C4B70 /* MovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieView.h; sourceTree = "<group>"; };
 		6F955B0018B397A7004C4B70 /* MovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieView.m; sourceTree = "<group>"; };
 		6F9F75A718B79D7B00B69308 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
@@ -271,6 +274,8 @@
 		6F68D7BA18BCC38000457BA4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6F6D3DD818F81FFB00D53B66 /* DejalActivityView.h */,
+				6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */,
 				6F0CAA3818B3709200AE42F9 /* ImageEffects.h */,
 				6F0CAA3918B3709200AE42F9 /* ImageEffects.m */,
 				6F39372718F29AD10026AB4C /* Reachability.h */,
@@ -432,6 +437,7 @@
 				6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */,
 				6F0F9B4818F6B909002FFFF2 /* ProfileSettingsViewController.m in Sources */,
 				6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */,
+				6F6D3DDA18F81FFB00D53B66 /* DejalActivityView.m in Sources */,
 				73C8444118F3FE8C0022AF1E /* MovieTableView.m in Sources */,
 				6F16175E18BBBA4800754A10 /* RateSearchViewController.m in Sources */,
 				6F0F9B4F18F6D1E0002FFFF2 /* PushNotificationsViewController.m in Sources */,

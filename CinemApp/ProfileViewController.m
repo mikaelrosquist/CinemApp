@@ -9,6 +9,7 @@
 #import "ProfileViewController.h"
 #import "ImageEffects.h"
 #import "Parse/Parse.h"
+#import "DejalActivityView.h"
 
 //Sätter backgrundsbildens höjd och bredd till statiska värden
 static CGFloat backdropImageHeight  = 250.0;

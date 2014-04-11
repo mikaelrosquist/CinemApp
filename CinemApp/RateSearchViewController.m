@@ -31,7 +31,7 @@
     [searchBar setDelegate:self];
     [searchBar setShowsCancelButton:NO];
     [[self navigationItem] setTitleView:searchBar];
-    searchBar.placeholder = @"Search";
+    searchBar.placeholder = @"Search movie";
     searchBar.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     
     [self.tableView setHidden:YES];
@@ -44,17 +44,16 @@
     
 }
 
-- (void)viewDidAppear:(BOOL)animated
+
+-(void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    
     //Färg på navigationBaren
     UIImage *_defaultImage;
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
-    [super viewWillAppear:animated];
-}
-
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleDefault;
+    
 }
 
 -(void)refresh {

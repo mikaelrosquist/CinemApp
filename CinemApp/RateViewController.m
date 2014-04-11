@@ -7,6 +7,7 @@
 //
 
 #import "RateViewController.h"
+#import "DejalActivityView.h"
 
 #define getDataURL @"http://api.themoviedb.org/3/movie/"
 #define api_key @"?api_key=2da45d86a9897bdf7e7eab86aa0485e3"
@@ -33,6 +34,9 @@ static CGFloat backdropImageWidth  = 320.0;
 {
     [super viewDidLoad];
     NSLog(@"LADDAT: RateViewController");
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    [DejalActivityView activityViewForView:self.view];
+    self.view.userInteractionEnabled = NO;
     
     //Skapar scollView
     self.scrollView = [[UIScrollView alloc] init];
@@ -83,14 +87,13 @@ static CGFloat backdropImageWidth  = 320.0;
     self.backdropWithBlurImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.backdropWithBlurImageView setClipsToBounds:YES];
     
+    /*
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityIndicator.frame = CGRectMake(0, 0, backdropImageWidth, backdropImageHeight-50);
     [activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [activityIndicator startAnimating];
     [self.backdropImageView addSubview:activityIndicator];
-    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    self.view.userInteractionEnabled = NO;
+    */
     
     //SKAPAR NY TRÅD FÖR INLADDNING AV DATA
     dispatch_queue_t queue = dispatch_queue_create("myqueue", NULL);
@@ -188,10 +191,6 @@ static CGFloat backdropImageWidth  = 320.0;
                 [self.backdropImageView setImage: img];
                 [self.backdropWithBlurImageView setImage: [img applyDarkEffectWithIntensity:0 darkness:0.6]];
             }
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            [activityIndicator stopAnimating];
-            [activityIndicator removeFromSuperview];
-            self.view.userInteractionEnabled = YES;
             
             //Skapar segmented control-menyn
             UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Movie details", @"Rate movie", @"Friend activity", nil]];
@@ -200,21 +199,24 @@ static CGFloat backdropImageWidth  = 320.0;
             segmentedControl.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
             [segmentedControl addTarget:self action:@selector(valueChanged:) forControlEvents: UIControlEventValueChanged];
             
+            //Lägger till alla subviews i den här vyn
+            [self.view addSubview:self.backdropImageView];
+            [self.view addSubview:self.backdropWithBlurImageView];
+            [self.view addSubview:self.tableView];
             [self.scrollView addSubview:movieTitleLabel];
             [self.scrollView addSubview:segmentedControl];
             [self.view addSubview:self.scrollView];
+            
+            [DejalBezelActivityView removeViewAnimated:YES];
+            self.view.userInteractionEnabled = YES;
         });
     });
-    
     //skapar tableView
     self.tableView = [[UITableView alloc] init];
     self.tableView.delegate = self;
     self.tableView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
     
-    //Lägger till alla subviews i den här vyn
-    [self.view addSubview:self.backdropImageView];
-    [self.view addSubview:self.backdropWithBlurImageView];
-    [self.view addSubview:self.tableView];
+    
     
     //Ska göra det enklare att använda slidern, vet ej om det funkar
     self.scrollView.canCancelContentTouches = YES;
