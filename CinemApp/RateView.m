@@ -25,13 +25,8 @@
         
         [self checkIfRated:self.movieID];
         
-        //rateLabel
-        UILabel *rateLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 100, 44)];
-        rateLabel.text = @"Your rating";
-        [self addSubview:rateLabel];
-        
         //slider
-        CGRect frame = CGRectMake(10, 80, 260, 15);
+        CGRect frame = CGRectMake(10, 55, 260, 15);
         slider = [[UISlider alloc] initWithFrame:frame];
         slider.minimumValue = 0;
         slider.maximumValue = 10;
@@ -46,11 +41,11 @@
         //sliderLabelBG
         UIImage *sliderLabelBG = [UIImage imageNamed:@"rate-score"];
         self.sliderLabelBGView = [[UIImageView alloc] initWithImage:sliderLabelBG];
-        self.sliderLabelBGView.frame = CGRectMake(280, 72, 30, 30);
+        self.sliderLabelBGView.frame = CGRectMake(280, 47, 30, 30);
         [self addSubview:self.sliderLabelBGView];
         
         //sliderLabel
-        sliderLabel = [[UILabel alloc]initWithFrame:CGRectMake(285, 65, 20, 44)];
+        sliderLabel = [[UILabel alloc]initWithFrame:CGRectMake(285, 40, 20, 44)];
         sliderLabel.textColor = [UIColor whiteColor];
         sliderLabel.font = [UIFont fontWithName:@"Helvetica Neue-Bold" size:16];
         sliderLabel.textAlignment = NSTextAlignmentCenter;
@@ -58,10 +53,10 @@
         [self addSubview:sliderLabel];
         
         //visa i feed-switchen
-        UILabel *feedLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 205, 100, 44)];
+        UILabel *feedLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 180, 100, 44)];
         feedLabel.text = @"Show in feed";
         [self addSubview:feedLabel];
-        UISwitch *feedSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(258, 215, 40, 20)];
+        UISwitch *feedSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(258, 190, 40, 20)];
         feedSwitch.onTintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
         [feedSwitch setOn:YES];
         [self addSubview:feedSwitch];
@@ -72,7 +67,7 @@
         //[self addSubview:commentLabel];
         
         //commentField
-        commentField = [[UITextView alloc]initWithFrame:CGRectMake(10, 120, 300, 80)];
+        commentField = [[UITextView alloc]initWithFrame:CGRectMake(10, 95, 300, 80)];
         //[self.commentField resignFirstResponder];
         commentField.textColor = [UIColor lightGrayColor];
         commentField.text = @"How was it? Leave a note...";
@@ -83,7 +78,7 @@
         [self addSubview:commentField];
         
         //characterLabel
-        characterLabel = [[UILabel alloc]initWithFrame:CGRectMake(commentField.frame.size.width-10, commentField.frame.size.height+104, 30, 15)];
+        characterLabel = [[UILabel alloc]initWithFrame:CGRectMake(commentField.frame.size.width-10, commentField.frame.size.height+79, 30, 15)];
         characterLabel.text = @"140";
         characterLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:10];
         characterLabel.textColor = [UIColor lightGrayColor];
@@ -91,7 +86,7 @@
 
         //rateButton
 
-        rateButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 260, 300, 40)];
+        rateButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 235, 300, 40)];
         [rateButton setTitle:@"Rate" forState:UIControlStateNormal];
         rateButton.layer.cornerRadius = 2.0f;
         rateButton.tintColor = [UIColor whiteColor];

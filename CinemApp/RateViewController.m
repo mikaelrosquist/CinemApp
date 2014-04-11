@@ -142,8 +142,8 @@ static CGFloat backdropImageWidth  = 320.0;
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Allokerar och initierar vyerna för segmented control
-            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 830):moviePoster:moviePlot:movieTableView];
-            rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight+10, 320, 390):movieID];
+            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 500):moviePoster:moviePlot:movieTableView];
+            rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight+10, 320, 300):movieID];
             rateView.commentField.delegate = self;
             tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
             
@@ -225,7 +225,6 @@ static CGFloat backdropImageWidth  = 320.0;
     self.tableView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
     
     
-    
     //Ska göra det enklare att använda slidern, vet ej om det funkar
     self.scrollView.canCancelContentTouches = YES;
     self.scrollView.delaysContentTouches = YES;
@@ -237,7 +236,7 @@ static CGFloat backdropImageWidth  = 320.0;
                                                                          initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     //Sätter ramen för scrollView
     CGRect bounds = self.view.bounds;
-    bounds.size.height = self.view.frame.size.height+15;
+    bounds.size.height -= 50;
     self.scrollView.frame = bounds;
     
     self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
