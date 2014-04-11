@@ -17,18 +17,18 @@ BOOL plotEnlarged = NO;
     if (self) {
         
         //plotLabel
-        UILabel *plotLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 100, 44)];
+        UILabel *plotLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 40, 100, 44)];
         plotLabel.text = @"Plot";
         [self addSubview:plotLabel];
         
         //plotView
-        plotView = [[UITextView alloc]initWithFrame:CGRectMake(10, 70, 300, 100)];
+        plotView = [[UITextView alloc]initWithFrame:CGRectMake(10, 80, 300, 100)];
         plotView.text = plotText;
         plotView.textAlignment = 0;
         [self addSubview:plotView];
         
         //castLabel
-        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 170, 100, 44)];
+        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 180, 100, 44)];
         castLabel.text = @"Cast";
         [self addSubview:castLabel];
         
@@ -44,14 +44,14 @@ BOOL plotEnlarged = NO;
     if (self) {
         self.plotText = moviePlot;
         //plotView
-        plotView = [[UITextView alloc]initWithFrame:CGRectMake(10, 40, 300, 150)];
+        plotView = [[UITextView alloc]initWithFrame:CGRectMake(10, 50, 300, 150)];
         plotView.text = moviePlot;
         [plotView setFont:[UIFont systemFontOfSize:14]];
         plotView.textAlignment = 0;
         [plotView setUserInteractionEnabled:NO];
         plotView.backgroundColor = [UIColor clearColor];
-        [plotView setContentInset:UIEdgeInsetsMake(-10, -5, 10, 5)];
-        UIBezierPath * imgRect = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 97, 133)];
+        [plotView setContentInset:UIEdgeInsetsMake(-10, 5, 10, 5)];
+        UIBezierPath * imgRect = [UIBezierPath bezierPathWithRect:CGRectMake(0, 10, 97, 133)];
         self.plotView.textContainer.exclusionPaths = @[imgRect];
         [self addSubview:plotView];
         
@@ -64,12 +64,12 @@ BOOL plotEnlarged = NO;
         plotView.userInteractionEnabled = YES;
         
         //Poster
-        posterView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 40, 90, 130)];
+        posterView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 50, 90, 130)];
         posterView.image = [UIImage imageWithData:posterImage];
         [self addSubview:posterView];
         
         //castLabel
-        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+20, 100, 44)];
+        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+30, 100, 44)];
         castLabel.text = @"Top Cast";
         [self addSubview:castLabel];
         
@@ -130,7 +130,7 @@ BOOL plotEnlarged = NO;
     newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
     
     if(newFrame.size.height < 150 || plotEnlarged){
-        newFrame = CGRectMake(10, 40, 300, 150);
+        newFrame = CGRectMake(10, 50, 300, 150);
         plotEnlarged = NO;
     }
     else
@@ -138,8 +138,8 @@ BOOL plotEnlarged = NO;
     
     [UIView beginAnimations:nil context:nil];
     textView.frame = newFrame;
-    [self.castLabel setFrame:CGRectMake(10, textView.frame.size.height+20, 100, 44)];
-    [castTable setFrame:CGRectMake(0, textView.frame.size.height+60, 320, 400)];
+    [self.castLabel setFrame:CGRectMake(10, textView.frame.size.height+30, 100, 44)];
+    [castTable setFrame:CGRectMake(0, textView.frame.size.height+70, 320, 400)];
     [UIView commitAnimations];
 }
 @end

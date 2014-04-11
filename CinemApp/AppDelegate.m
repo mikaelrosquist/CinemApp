@@ -86,10 +86,6 @@
     profileTabBarItem.title = nil;
     profileTabBarItem.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
     
-    
-    
-
-    
     [tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar"]];
     
     self.window.rootViewController = self.tabBarController;

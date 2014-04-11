@@ -142,8 +142,8 @@ static CGFloat backdropImageWidth  = 320.0;
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Allokerar och initierar vyerna för segmented control
-            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 500):moviePoster:moviePlot:movieTableView];
-            rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight+10, 320, 300):movieID];
+            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 500):moviePoster:moviePlot:movieTableView];
+            rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 300):movieID];
             rateView.commentField.delegate = self;
             tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
             
@@ -183,6 +183,11 @@ static CGFloat backdropImageWidth  = 320.0;
             [self.scrollView addSubview:rateView];
             [self.scrollView addSubview:movieGenresLabel];
             [self.scrollView addSubview:movieRuntimeLabel];
+            
+            if([rateView superview]!=nil)
+                NSLog(@"visible");
+            else
+                NSLog(@"not visible");
             
             //Gömmer de vyer som inte ska synnas i Segmented Control vid load
             rateView.hidden = TRUE;
