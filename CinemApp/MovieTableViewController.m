@@ -31,22 +31,24 @@
     if (self) {
         // Custom initialization
         personArray = array;
+        NSLog(@"PersonArray: %@", personArray);
         [self.tableView setFrame:CGRectMake(10, 220, 300, 300)];
+        self.view.backgroundColor = [UIColor clearColor];
+        self.tableView.Delegate = self;
+        self.tableView.dataSource = self;
     }
     return self;
 }
 
 - (void)makeTableView:(UITableView *)table{
     table = self.tableView;
+    NSLog(@"maketableview");
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor clearColor];
-    [self.tableView setDelegate:self];
-	[self.tableView setDataSource:self];
+    NSLog(@"viewdidload");
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -72,7 +74,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [personArray count];
+    //return [personArray count];
+    return 10;
 }
 
 

@@ -14,7 +14,7 @@
     UISlider *slider;
 }
 
-@synthesize commentField, movieID;
+@synthesize commentField, movieID, characterLabel;
 
 -(id)initWithMovieID:(CGRect)frame :(NSString *)incomingMovieID
 {
@@ -57,10 +57,10 @@
         [self addSubview:sliderLabel];
         
         //visa i feed-switchen
-        UILabel *feedLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 110, 100, 44)];
+        UILabel *feedLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 205, 100, 44)];
         feedLabel.text = @"Show in feed";
         [self addSubview:feedLabel];
-        UISwitch *feedSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(258, 120, 40, 20)];
+        UISwitch *feedSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(258, 215, 40, 20)];
         feedSwitch.onTintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
         [feedSwitch setOn:YES];
         [self addSubview:feedSwitch];
@@ -71,16 +71,23 @@
         //[self addSubview:commentLabel];
         
         //commentField
-        commentField = [[UITextView alloc]initWithFrame:CGRectMake(10, 170, 300, 120)];
+        commentField = [[UITextView alloc]initWithFrame:CGRectMake(10, 120, 300, 80)];
         //[self.commentField resignFirstResponder];
-        commentField.textColor = [UIColor grayColor];
+        commentField.textColor = [UIColor lightGrayColor];
         commentField.text = @"How was it? Leave a note...";
         commentField.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
         commentField.textAlignment = 0;
         [self addSubview:commentField];
+        
+        //characterLabel
+        characterLabel = [[UILabel alloc]initWithFrame:CGRectMake(commentField.frame.size.width-10, commentField.frame.size.height+104, 30, 15)];
+        characterLabel.text = @"140";
+        characterLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:10];
+        characterLabel.textColor = [UIColor lightGrayColor];
+        [self addSubview:characterLabel];
 
         //rateButton
-        UIButton *rateButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 305, 300, 40)];
+        UIButton *rateButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 260, 300, 40)];
         [rateButton setTitle:@"Rate" forState:UIControlStateNormal];
         rateButton.layer.cornerRadius = 5.0f;
         rateButton.tintColor = [UIColor whiteColor];

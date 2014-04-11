@@ -136,7 +136,7 @@ static CGFloat backdropImageWidth  = 320.0;
             
             //Allokerar och initierar vyerna för segmented control
             movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight+10, 320, 830):moviePoster:moviePlot:movieTableView];
-            rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight+10, 320, 430):movieID];
+            rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight+10, 320, 390):movieID];
             rateView.commentField.delegate = self;
             tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
             
@@ -307,7 +307,7 @@ static CGFloat backdropImageWidth  = 320.0;
 {
     if ([rateView.commentField.text isEqualToString:@"How was it? Leave a note..."]) {
         rateView.commentField.text = @"";
-        rateView.commentField.textColor = [UIColor blackColor]; //optional
+        rateView.commentField.textColor = [UIColor blackColor];
     }
     [rateView.commentField becomeFirstResponder];
 }
@@ -316,10 +316,23 @@ static CGFloat backdropImageWidth  = 320.0;
 {
     if ([rateView.commentField.text isEqualToString:@""]) {
         rateView.commentField.text = @"How was it? Leave a note...";
-        rateView.commentField.textColor = [UIColor lightGrayColor]; //optional
+        rateView.commentField.textColor = [UIColor lightGrayColor];
     }
     [rateView.commentField resignFirstResponder];
 }
 
+//Ska hålla koll på antal tecken i commentField (i rateView)
+- (void)textViewDidChange:(UITextView *)textView{
+   
+    NSUInteger chars = [[textView text] length];
+    chars = 140 - chars;
+    rateView.characterLabel.text = [NSString stringWithFormat: @"%d", (int)chars];
+    rateView.characterLabel.textColor = [UIColor lightGrayColor];
+    
+    if (chars > 140){
+        rateView.characterLabel.textColor = [UIColor redColor];
+    }
+    NSLog(@"CHARS: %lu", (unsigned long)chars);
+}
 
 @end
