@@ -78,6 +78,8 @@
         commentField.text = @"How was it? Leave a note...";
         commentField.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
         commentField.textAlignment = 0;
+        commentField.clipsToBounds = YES;
+        commentField.layer.cornerRadius = 2.0f;
         [self addSubview:commentField];
         
         //characterLabel
@@ -91,7 +93,7 @@
 
         rateButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 260, 300, 40)];
         [rateButton setTitle:@"Rate" forState:UIControlStateNormal];
-        rateButton.layer.cornerRadius = 5.0f;
+        rateButton.layer.cornerRadius = 2.0f;
         rateButton.tintColor = [UIColor whiteColor];
         //normal state
         [rateButton setTitleColor:rateButton.tintColor forState:UIControlStateNormal];
