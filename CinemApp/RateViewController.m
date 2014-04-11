@@ -39,7 +39,7 @@ static CGFloat backdropImageWidth  = 320.0;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    [DejalActivityView activityViewForView:self.view];
+    [DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
     self.view.userInteractionEnabled = NO;
     
     //Skapar scollView

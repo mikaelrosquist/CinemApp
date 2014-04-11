@@ -56,6 +56,10 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
 -(void)refresh {
     if(![self.searchBar.text isEqualToString: @""])
         [self retrieveData];
