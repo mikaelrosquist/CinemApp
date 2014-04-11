@@ -33,7 +33,7 @@
     
     [self setTitle:@"Profile settings"];
 	
-	self.personalSection = @[@"Username", @"Email", @"Profile picture"];
+	self.personalSection = @[@"Username", @"Email", @"Profile picture", @"Cover picture"];
     
     self.passwordSection = @[@"Change password"];
     

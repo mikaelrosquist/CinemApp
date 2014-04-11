@@ -35,7 +35,7 @@
 	
 	self.accountSection = @[@"Profile settings", @"Push notifications"];
     
-    self.aboutSection = @[@"About", @"Terms of service", @"Follow us on Twitter"];
+    self.aboutSection = @[@"FAQ", @"About us", @"Terms of service"];
 	
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
@@ -100,8 +100,7 @@
     else if(indexPath.section == 1){
         cell.userInteractionEnabled = NO;
         cell.textLabel.text = self.aboutSection[indexPath.row];
-        if(indexPath.row == 0 || indexPath.row == 1)
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {
         cell.textLabel.text = @"Log out";
