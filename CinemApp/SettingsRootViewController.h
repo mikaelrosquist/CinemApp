@@ -19,4 +19,6 @@
 @property (nonatomic, strong) ProfileSettingsViewController *profileSettingsView;
 @property (nonatomic, strong) PushNotificationsViewController *notificationsSettingsView;
 
+@property (strong, nonatomic) UITabBarController *tabController;
+
 @end

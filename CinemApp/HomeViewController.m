@@ -7,6 +7,8 @@
 //
 
 #import "HomeViewController.h"
+#import "Parse/Parse.h"
+#import "LogInViewController.h"
 
 @interface HomeViewController ()
 
@@ -31,6 +33,15 @@
     
     //Byter färg på navigationBar
     //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+   /* if (![PFUser currentUser]) {
+        LogInViewController *loginView = [[LogInViewController alloc] init];
+        loginView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:loginView animated:YES completion:nil];
+    }*/
 }
 
 - (void)didReceiveMemoryWarning

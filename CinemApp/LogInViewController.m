@@ -7,6 +7,8 @@
 //
 
 #import "LogInViewController.h"
+#import "DejalActivityView.h"
+#import "Parse/Parse.h"
 
 @interface LogInViewController ()
 
@@ -26,7 +28,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [DejalActivityView activityViewForView:self.view withLabel:@"Logging in..."].showNetworkActivityIndicator = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [PFUser logInWithUsernameInBackground:@"testuser" password:@"admin"
+                                    block:^(PFUser *user, NSError *error) {
+                                        if (user) {
+                                            NSLog(@"Inloggning lyckades!");
+                                            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+                                        } else {
+                                            NSLog(@"Inloggning misslyckades!");
+                                        }
+                                    }];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
 }
 
 - (void)didReceiveMemoryWarning

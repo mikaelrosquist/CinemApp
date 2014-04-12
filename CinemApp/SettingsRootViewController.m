@@ -8,7 +8,9 @@
 //
 
 #import "SettingsRootViewController.h"
+#import "LogInViewController.h"
 #import "Parse/Parse.h"
+#import "AppDelegate.h"
 
 @interface SettingsRootViewController ()
 
@@ -16,7 +18,7 @@
 
 @implementation SettingsRootViewController
 
-@synthesize accountSection, generalSection, aboutSection, profileSettingsView, notificationsSettingsView;
+@synthesize accountSection, generalSection, aboutSection, profileSettingsView, notificationsSettingsView, tabController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -151,7 +153,18 @@
 {
     if (buttonIndex == 1) {
         [PFUser logOut];
-        [self.navigationController popViewControllerAnimated:YES];
+        
+        //[[[UIApplication sharedApplication] delegate].window setRootViewController:self.tabBarController];
+       
+        LogInViewController *loginView = [[LogInViewController alloc] init];
+        loginView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:loginView animated:YES completion:nil];
+         [self.tabBarController setSelectedIndex:0];
+        [self.navigationController popViewControllerAnimated:NO];
+        //LogInViewController *loginView = [[LogInViewController alloc] init];
+        //[self presentViewController:loginView animated:YES completion:nil];
+        
+        
         NSLog(@"Användaren utloggad");
     }
     else if (buttonIndex == 0) {
