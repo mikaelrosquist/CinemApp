@@ -14,7 +14,9 @@
 
 @end
 
-@implementation LogInViewController
+@implementation LogInViewController{
+    UIButton *button;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,12 +30,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [DejalActivityView activityViewForView:self.view withLabel:@"Logging in..."].showNetworkActivityIndicator = YES;
+    
+    button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button addTarget:self
+               action:@selector(logIn:)
+     forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:@"Log in" forState:UIControlStateNormal];
+    button.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
+    [self.view addSubview:button];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)logIn:(id)sender {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [button removeFromSuperview];
+    [DejalActivityView activityViewForView:self.view withLabel:@"Logging in..."].showNetworkActivityIndicator = YES;
     [PFUser logInWithUsernameInBackground:@"testuser" password:@"admin"
                                     block:^(PFUser *user, NSError *error) {
                                         if (user) {
@@ -44,13 +60,8 @@
                                         }
                                     }];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    
+
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
