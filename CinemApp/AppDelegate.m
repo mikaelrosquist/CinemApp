@@ -90,9 +90,11 @@
     
     [tabBar setBackgroundImage:[UIImage imageNamed:@"tab-bar"]];
     self.window.rootViewController = self.tabBarController;
+    
     if (![PFUser currentUser]) {
-        LogInViewController *loginView = [[LogInViewController alloc] init];
-        [self.window.rootViewController presentViewController:loginView animated:YES completion:nil];
+        LogInViewController *loginView = [[LogInViewController alloc] initWithNibName:nil bundle:nil];
+        loginView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self.window.rootViewController presentViewController:loginView animated:NO completion:nil];
     }
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
