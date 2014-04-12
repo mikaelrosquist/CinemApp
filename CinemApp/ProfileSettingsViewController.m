@@ -33,7 +33,7 @@
     
     [self setTitle:@"Profile settings"];
 	
-	self.personalSection = @[@"Username", @"Email", @"Profile picture", @"Cover picture"];
+	self.personalSection = @[@"Username", @"Email", @"Profile picture", @"Cover photo"];
     
     self.passwordSection = @[@"Change password"];
     
@@ -76,7 +76,7 @@
 	if(section==0)
         return self.personalSection.count;
     else if(section==1)
-        return self.privateProfileSection.count;
+        return self.passwordSection.count;
     else if(section==2)
         return self.privateProfileSection.count;
     else if(section==3)
@@ -87,10 +87,9 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Identifier"];
-	if (!cell) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Identifier"];
-	}
+    NSString *Identifier = [NSString stringWithFormat:@"Cell%@", indexPath];
+	UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:Identifier];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
 	
     if(indexPath.section == 0){
         if(indexPath.row == 0 || indexPath.row == 1){
@@ -157,7 +156,6 @@
         cell.textLabel.text = self.removeAccountSection[indexPath.row];
         cell.textLabel.textColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     }
-
 	return cell;
 }
 
