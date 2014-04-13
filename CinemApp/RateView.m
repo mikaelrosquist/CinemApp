@@ -173,7 +173,7 @@
 
 - (void)sliderAction:(id)sender {
     NSInteger val = lround(slider.value);
-    sliderLabel.text = [NSString stringWithFormat:@"%d",val];
+    sliderLabel.text = [NSString stringWithFormat:@"%ld",(long)val];
 }
 
 -(void)dismissKeyboard {
@@ -193,7 +193,7 @@
             if (object){
                     slider.value = [[object objectForKey:@"rating"] intValue];
                     NSInteger val = lround(slider.value);
-                    sliderLabel.text = [NSString stringWithFormat:@"%d",val];
+                    sliderLabel.text = [NSString stringWithFormat:@"%ld",(long)val];
                     commentField.text = [object objectForKey:@"comment"];
                     [rateButton setTitle:@"Remove rating" forState:UIControlStateNormal];
                     rateButton.backgroundColor = [UIColor darkGrayColor];
