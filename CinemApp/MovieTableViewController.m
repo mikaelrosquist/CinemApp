@@ -32,8 +32,8 @@
         // Custom initialization
         personArray = array;
         NSLog(@"PersonArray: %@", personArray);
-        [self.tableView setFrame:CGRectMake(10, 220, 300, 300)];
-        self.view.backgroundColor = [UIColor clearColor];
+        [self.view setFrame:CGRectMake(10, 220, 300, 300)];
+        self.view.backgroundColor = [UIColor blackColor];
         self.tableView.Delegate = self;
         self.tableView.dataSource = self;
     }
@@ -49,6 +49,7 @@
 {
     [super viewDidLoad];
     NSLog(@"viewdidload");
+    [self.tableView setHidden:NO];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -67,8 +68,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
-    return 0;
+    return 1;
+    NSLog(@"sections");
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -78,10 +79,9 @@
     return 10;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSLog(@"PERSONARRAY: %@", personArray);
+    NSLog(@"PERSONARRAY: %@", personArray);
     static NSString *cellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];

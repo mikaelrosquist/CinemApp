@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UITextView *commentField;
 @property (nonatomic, strong) NSString *movieID;
 @property (nonatomic, strong) UILabel *characterLabel;
+@property (nonatomic, strong) NSString *placeholder;
 
 - (void) checkIfRated:(NSString *)movieID;
 

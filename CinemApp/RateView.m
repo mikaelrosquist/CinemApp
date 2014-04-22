@@ -16,15 +16,12 @@
     UIButton *rateButton;
 }
 
-@synthesize commentField, movieID, characterLabel;
-
-NSString *placeholder = @"How was it? Leave a note...";
+@synthesize commentField, movieID, characterLabel, placeholder;
 
 -(id)initWithMovieID:(CGRect)frame :(NSString *)incomingMovieID
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
         
         self.movieID = incomingMovieID;
         [self checkIfRated:self.movieID];
@@ -71,8 +68,8 @@ NSString *placeholder = @"How was it? Leave a note...";
         //[self addSubview:commentLabel];
         
         //commentField
+        placeholder = @"How was it? Leave a note...";
         commentField = [[UITextView alloc]initWithFrame:CGRectMake(10, 105, 300, 80)];
-        //[self.commentField resignFirstResponder];
         commentField.textColor = [UIColor lightGrayColor];
         commentField.text = placeholder;
         commentField.font = [UIFont fontWithName:@"Helvetica Neue" size:16];

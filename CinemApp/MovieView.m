@@ -74,7 +74,7 @@ BOOL plotEnlarged = NO;
         [self addSubview:castLabel];
         
         //castTable
-        self.castTable = cTable;
+        castTable = cTable;
         [self addSubview:self.castTable];
         
         //cast

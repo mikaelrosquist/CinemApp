@@ -133,9 +133,14 @@ UITapGestureRecognizer *tap;
         
             //Lägger cast i en array
         NSMutableArray *castArray = [creditsJson objectForKey:@"cast"];
+        
+        
+        
             //Skapar movieTableView
         MovieTableViewController *movieTVC = [[MovieTableViewController alloc]initWithData:UITableViewStylePlain:castArray];
         [movieTVC makeTableView:movieTableView];
+        
+        
         
         //Lägger genrar i en array
         NSArray *genreArray = [json objectForKey:@"genres"];
@@ -298,7 +303,7 @@ UITapGestureRecognizer *tap;
     movieGenresLabel.alpha = blurAlpha;
     
     //Log för debug
-    NSLog(@"YOFFSET: %f", yOffset);
+    //NSLog(@"YOFFSET: %f", yOffset);
     //NSLog(@"BLUR ALPHA: %f", blurAlpha);
 }
 
@@ -342,7 +347,7 @@ UITapGestureRecognizer *tap;
 //Placeholder till commentFiled i rateView.
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ([rateView.commentField.text isEqualToString:@"How was it? Leave a note..."]) {
+    if ([rateView.commentField.text isEqualToString:rateView.placeholder]) {
         rateView.commentField.text = @"";
         rateView.commentField.textColor = [UIColor blackColor];
     }
@@ -352,7 +357,7 @@ UITapGestureRecognizer *tap;
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     if ([rateView.commentField.text isEqualToString:@""]) {
-        rateView.commentField.text = @"How was it? Leave a note...";
+        rateView.commentField.text = rateView.placeholder;
         rateView.commentField.textColor = [UIColor lightGrayColor];
     }
     [rateView.commentField resignFirstResponder];
@@ -369,7 +374,7 @@ UITapGestureRecognizer *tap;
     if (chars > 140){
         rateView.characterLabel.textColor = [UIColor redColor];
     }
-    NSLog(@"CHARS: %lu", (unsigned long)chars);
+    //NSLog(@"CHARS: %lu", (unsigned long)chars);
 }
 
 //Flyttar views när tangentbord visas
