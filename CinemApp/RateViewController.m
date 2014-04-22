@@ -30,6 +30,9 @@ static CGFloat backdropImageWidth  = 320.0;
 
 @synthesize rateView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, moviePlot, json, creditsJson, tableView, movieTableView;
 
+BOOL keyboardVisible = NO;
+UITapGestureRecognizer *tap;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -46,6 +49,11 @@ static CGFloat backdropImageWidth  = 320.0;
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.delegate = self;
     self.scrollView.alwaysBounceVertical = YES;
+    
+    //Tar bort tangentbordet om man klickar inom scrollView
+    tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
     
     //Om det inte finns något årtal
     if([movieRelease isEqualToString:@""])
@@ -146,6 +154,17 @@ static CGFloat backdropImageWidth  = 320.0;
             rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 300):movieID];
             rateView.commentField.delegate = self;
             tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
+            
+            //Kollar om tengentbordet visas
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(keyboardWillShow:)
+                                                         name:UIKeyboardWillShowNotification
+                                                       object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self
+                                                     selector:@selector(keyboardWillHide:)
+                                                         name:UIKeyboardWillHideNotification
+                                                       object:nil];
+
             
             //Formaterar en sträng med genrar
             NSString *movieGenreString = @"";
@@ -256,11 +275,19 @@ static CGFloat backdropImageWidth  = 320.0;
     float blurAlpha = (yOffset/70.0)+1.1;
     
     //Om man scrollar UP eller NER så ändras bakgrundbildens storlek och position
-    if (yOffset < 0)
-        f = CGRectMake(-(enlargmentFactor-backdropImageWidth)/2, 0, enlargmentFactor, backdropImageHeight+ABS(yOffset));
-    else
-        f = CGRectMake(0, -yOffset, backdropImageWidth, backdropImageHeight);
-    
+    //Anpassning efter tangentbord (-60 i y-led).
+    if(keyboardVisible){
+        if (yOffset < 0)
+            f = CGRectMake(-(enlargmentFactor-backdropImageWidth)/2, -60, enlargmentFactor, backdropImageHeight+ABS(yOffset));
+        else
+            f = CGRectMake(0, -yOffset-60, backdropImageWidth, backdropImageHeight);
+    }
+    else{
+        if (yOffset < 0)
+            f = CGRectMake(-(enlargmentFactor-backdropImageWidth)/2, 0, enlargmentFactor, backdropImageHeight+ABS(yOffset));
+        else
+            f = CGRectMake(0, -yOffset, backdropImageWidth, backdropImageHeight);
+    }
     self.backdropImageView.frame = f;
     self.backdropWithBlurImageView.frame = f;
     
@@ -271,13 +298,14 @@ static CGFloat backdropImageWidth  = 320.0;
     movieGenresLabel.alpha = blurAlpha;
     
     //Log för debug
-    //NSLog(@"YOFFSET: %f", yOffset);
+    NSLog(@"YOFFSET: %f", yOffset);
     //NSLog(@"BLUR ALPHA: %f", blurAlpha);
 }
 
 //SEGMENTED CONTROL
 - (void)valueChanged:(UISegmentedControl *)segment {
     if(segment.selectedSegmentIndex == 0) {
+        [self dismissKeyboard];
         movieView.hidden = FALSE;
         rateView.hidden = TRUE;
         tableView.hidden = TRUE;
@@ -287,7 +315,9 @@ static CGFloat backdropImageWidth  = 320.0;
         rateView.hidden = FALSE;
         tableView.hidden = TRUE;
         self.scrollView.contentSize = CGSizeMake(320, rateView.frame.size.height+backdropImageHeight);
+        [self.scrollView addGestureRecognizer:tap];
     }else if(segment.selectedSegmentIndex == 2){
+        [self dismissKeyboard];
         movieView.hidden = TRUE;
         rateView.hidden = TRUE;
         tableView.hidden = FALSE;
@@ -328,7 +358,7 @@ static CGFloat backdropImageWidth  = 320.0;
     [rateView.commentField resignFirstResponder];
 }
 
-//Ska hålla koll på antal tecken i commentField (i rateView)
+//Håller koll på antal tecken i commentField (i rateView)
 - (void)textViewDidChange:(UITextView *)textView{
    
     NSUInteger chars = [[textView text] length];
@@ -340,6 +370,45 @@ static CGFloat backdropImageWidth  = 320.0;
         rateView.characterLabel.textColor = [UIColor redColor];
     }
     NSLog(@"CHARS: %lu", (unsigned long)chars);
+}
+
+//Flyttar views när tangentbord visas
+- (void)keyboardWillShow:(NSNotification *)note
+{
+    keyboardVisible = YES;
+    
+    //Hämta tangetbordets frame.
+    //NSDictionary* keyboardInfo = [note userInfo];
+    //NSValue* keyboardFrame = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    //CGRect keyboardFrameRect = [keyboardFrame CGRectValue];
+
+    [UIView beginAnimations:nil context:nil];
+    self.scrollView.center = CGPointMake(self.scrollView.center.x, self.scrollView.center.y-60);
+    self.backdropImageView.center = CGPointMake(_backdropImageView.center.x, _backdropImageView.center.y-60);
+    self.backdropWithBlurImageView.center = CGPointMake(_backdropWithBlurImageView.center.x, _backdropWithBlurImageView.center.y-60);
+    rateView.frame = CGRectMake(rateView.frame.origin.x, rateView.frame.origin.y, rateView.frame.size.width, rateView.frame.size.height+45);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.origin.x, rateView.frame.size.height+backdropImageHeight+60);
+    
+    [UIView commitAnimations];
+}
+
+- (void)keyboardWillHide:(NSNotification *)note
+{
+    keyboardVisible = NO;
+    
+    //Något spökar här.. Animationen blir lite konstig om man har scrollat efter tangentbordet har blivit synligt.
+    
+    [UIView beginAnimations:nil context:nil];
+    self.scrollView.center = CGPointMake(self.scrollView.center.x, self.scrollView.center.y+60);
+    self.backdropImageView.center = CGPointMake(_backdropImageView.center.x, _backdropImageView.center.y+60);
+    self.backdropWithBlurImageView.center = CGPointMake(_backdropWithBlurImageView.center.x, _backdropWithBlurImageView.center.y+60);
+    rateView.frame = CGRectMake(rateView.frame.origin.x, rateView.frame.origin.y, rateView.frame.size.width, rateView.frame.size.height-45);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.origin.x, rateView.frame.size.height+backdropImageHeight-60);
+    [UIView commitAnimations];
+}
+
+-(void)dismissKeyboard {
+    [rateView.commentField resignFirstResponder];
 }
 
 @end

@@ -44,14 +44,14 @@ BOOL plotEnlarged = NO;
     if (self) {
         self.plotText = moviePlot;
         //plotView
-        plotView = [[UITextView alloc]initWithFrame:CGRectMake(10, 50, 300, 150)];
+        plotView = [[UITextView alloc]initWithFrame:CGRectMake(10, 50, 310, 150)];
         plotView.text = moviePlot;
         [plotView setFont:[UIFont systemFontOfSize:14]];
-        plotView.textAlignment = 0;
+        plotView.textAlignment = NSTextAlignmentJustified;
         [plotView setUserInteractionEnabled:NO];
         plotView.backgroundColor = [UIColor clearColor];
-        [plotView setContentInset:UIEdgeInsetsMake(-10, 5, 10, 5)];
-        UIBezierPath * imgRect = [UIBezierPath bezierPathWithRect:CGRectMake(0, 10, 97, 133)];
+        [plotView setContentInset:UIEdgeInsetsMake(-11, -5, 11, 5)];
+        UIBezierPath * imgRect = [UIBezierPath bezierPathWithRect:CGRectMake(0, 10, 97, 120)];
         self.plotView.textContainer.exclusionPaths = @[imgRect];
         [self addSubview:plotView];
         
@@ -64,7 +64,7 @@ BOOL plotEnlarged = NO;
         plotView.userInteractionEnabled = YES;
         
         //Poster
-        posterView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 50, 90, 130)];
+        posterView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 50, 90, 128)];
         posterView.image = [UIImage imageWithData:posterImage];
         [self addSubview:posterView];
         
@@ -74,8 +74,8 @@ BOOL plotEnlarged = NO;
         [self addSubview:castLabel];
         
         //castTable
-        castTable = cTable;
-        [self addSubview:castTable];
+        self.castTable = cTable;
+        [self addSubview:self.castTable];
         
         //cast
         //NSLog(@"CastArray: %@", castArray);
@@ -130,7 +130,7 @@ BOOL plotEnlarged = NO;
     newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
     
     if(newFrame.size.height < 150 || plotEnlarged){
-        newFrame = CGRectMake(10, 50, 300, 150);
+        newFrame = CGRectMake(10, 50, 310, 150);
         plotEnlarged = NO;
     }
     else

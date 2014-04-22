@@ -18,14 +18,16 @@
 
 @synthesize commentField, movieID, characterLabel;
 
+NSString *placeholder = @"How was it? Leave a note...";
+
 -(id)initWithMovieID:(CGRect)frame :(NSString *)incomingMovieID
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.movieID = incomingMovieID; //Varningen klagar på att det är två variabler som heter movieID
         
+        
+        self.movieID = incomingMovieID;
         [self checkIfRated:self.movieID];
-
         
         //slider
         CGRect frame = CGRectMake(10, 65, 260, 15);
@@ -72,7 +74,7 @@
         commentField = [[UITextView alloc]initWithFrame:CGRectMake(10, 105, 300, 80)];
         //[self.commentField resignFirstResponder];
         commentField.textColor = [UIColor lightGrayColor];
-        commentField.text = @"How was it? Leave a note...";
+        commentField.text = placeholder;
         commentField.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
         commentField.textAlignment = 0;
         commentField.clipsToBounds = YES;
@@ -80,14 +82,14 @@
         [self addSubview:commentField];
         
         //characterLabel
-        characterLabel = [[UILabel alloc]initWithFrame:CGRectMake(commentField.frame.size.width-10, commentField.frame.size.height+79, 30, 15)];
+        characterLabel = [[UILabel alloc]initWithFrame:CGRectMake(commentField.frame.size.width-13, commentField.frame.size.height+90, 20, 15)];
         characterLabel.text = @"140";
         characterLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:10];
         characterLabel.textColor = [UIColor lightGrayColor];
+        characterLabel.textAlignment = UITextAlignmentRight;
         [self addSubview:characterLabel];
 
         //rateButton
-
         rateButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 245, 300, 40)];
         [rateButton setTitle:@"Rate" forState:UIControlStateNormal];
         rateButton.layer.cornerRadius = 2.0f;
@@ -157,7 +159,10 @@
             } else {
                 PFObject *rating = [PFObject objectWithClassName:@"Rating"];
                 rating[@"user"] = currentUser.username;
-                rating[@"comment"] = commentField.text;
+                if(commentField.text == placeholder) //Kollar endast minnesadressen och inte texten. Man kan alltså skriva in exakt likadan text som placeholdern och det kommer då bli en kommentar. Tycker det är snyggare än att använda [commentField.text isEqualToString:placeholder].
+                    rating[@"comment"] = NULL; //Vet inte vad som ska hända om ingen kommentar skrivs.
+                else
+                    rating[@"comment"] = commentField.text;
                 rating[@"rating"] = myNumber;
                 rating[@"movieId"] = [NSString stringWithFormat:@"%@", self.movieID];
                 [rating saveInBackground];
@@ -203,7 +208,6 @@
         }];
     }
 }
-
 
 
 /*
