@@ -158,6 +158,7 @@ UITapGestureRecognizer *tap;
             movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 500):moviePoster:moviePlot:movieTableView];
             rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 300):movieID];
             rateView.commentField.delegate = self;
+            [rateView.commentField setReturnKeyType:UIReturnKeyDone];
             tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
             
             //Kollar om tengentbordet visas

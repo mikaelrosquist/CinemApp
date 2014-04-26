@@ -76,9 +76,6 @@
         commentField.textAlignment = 0;
         commentField.clipsToBounds = YES;
         commentField.layer.cornerRadius = 2.0f;
-        [commentField setReturnKeyType:UIReturnKeyDone];
-        commentField.delegate = (id)self;
-        [commentField setDelegate:(id)self];
         [self addSubview:commentField];
         
         //characterLabel
@@ -183,12 +180,6 @@
 
 -(void)dismissKeyboard {
     [commentField resignFirstResponder];
-}
-
-#pragma mark UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	[textField resignFirstResponder];
-	return YES;
 }
 
 -(void)checkIfRated:(NSString *)movieID {
