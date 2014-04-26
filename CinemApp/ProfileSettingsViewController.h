@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PasswordViewController.h"
 
-@interface ProfileSettingsViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
+@interface ProfileSettingsViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (strong, nonatomic) NSArray* personalSection;
 @property (strong, nonatomic) NSArray* passwordSection;

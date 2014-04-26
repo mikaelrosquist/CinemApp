@@ -76,6 +76,9 @@
         commentField.textAlignment = 0;
         commentField.clipsToBounds = YES;
         commentField.layer.cornerRadius = 2.0f;
+        [commentField setReturnKeyType:UIReturnKeyDone];
+        commentField.delegate = (id)self;
+        [commentField setDelegate:(id)self];
         [self addSubview:commentField];
         
         //characterLabel
@@ -83,7 +86,7 @@
         characterLabel.text = @"140";
         characterLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:10];
         characterLabel.textColor = [UIColor lightGrayColor];
-        characterLabel.textAlignment = UITextAlignmentRight;
+        characterLabel.textAlignment = NSTextAlignmentRight;
         [self addSubview:characterLabel];
 
         //rateButton
@@ -180,6 +183,12 @@
 
 -(void)dismissKeyboard {
     [commentField resignFirstResponder];
+}
+
+#pragma mark UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	[textField resignFirstResponder];
+	return YES;
 }
 
 -(void)checkIfRated:(NSString *)movieID {
