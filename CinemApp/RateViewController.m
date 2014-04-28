@@ -154,7 +154,7 @@ UITapGestureRecognizer *tap;
         movieWriters  = [[NSMutableArray alloc] init];
         for(int i=0; i<[movieCrew count]; i++){
             jobTitle = [movieCrew[i] objectForKey:@"job"];
-            if([jobTitle isEqualToString:@"Screenplay"])
+            if([jobTitle isEqualToString:@"Screenplay"] || [jobTitle isEqualToString:@"Author"] || [jobTitle isEqualToString:@"Writer"])
                 [movieWriters addObject:[movieCrew[i] objectForKey:@"name"]];
         }
         
@@ -175,7 +175,7 @@ UITapGestureRecognizer *tap;
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Allokerar och initierar vyerna för segmented control
-            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 240+castInt*75):moviePoster:moviePlot:movieDirectors:movieWriters:movieTableView];
+            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 260+castInt*75):moviePoster:moviePlot:movieDirectors:movieWriters:movieTableView];
             [movieView addSubview:movieTVC.view];
             
             rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 230):movieID];

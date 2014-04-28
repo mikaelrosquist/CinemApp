@@ -114,7 +114,6 @@ BOOL plotEnlarged = NO;
         writerLabel.text = writerString;
         [self addSubview:writerLabel];
         
-        
         //castLabel
         castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+73, 100, 44)];
         castLabel.text = @"Top Cast";

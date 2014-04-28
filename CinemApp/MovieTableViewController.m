@@ -206,4 +206,10 @@
 }
 */
 
+- (CGFloat)tableViewHeight
+{
+    [personTable layoutIfNeeded];
+    return [personTable contentSize].height;
+}
+
 @end
