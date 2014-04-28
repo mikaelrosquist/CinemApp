@@ -178,7 +178,7 @@ UITapGestureRecognizer *tap;
             movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 240+castInt*75):moviePoster:moviePlot:movieDirectors:movieWriters:movieTableView];
             [movieView addSubview:movieTVC.view];
             
-            rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 230):movieID];
+            rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 300):movieID];
             rateView.commentField.delegate = self;
             [rateView.commentField setReturnKeyType:UIReturnKeyDone];
             tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];

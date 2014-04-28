@@ -59,6 +59,11 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [self.view resignFirstResponder];
+    [super viewWillDisappear:animated];
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -103,7 +108,7 @@
     [cellTextField setTag:[indexPath row]];
     
     [[cellTextField viewWithTag:0] performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.6];
-    
+
     cell.imageView.image = imgView.image;
     [cell.contentView addSubview:cellTextField];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -139,7 +144,6 @@
     
     return YES;
 }
-
 
 - (void)didReceiveMemoryWarning
 {

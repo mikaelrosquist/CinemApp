@@ -160,7 +160,7 @@
         UINavigationController *logInNav = [[UINavigationController alloc] initWithRootViewController:loginView];
         logInNav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:logInNav animated:NO completion:nil];
-         [self.tabBarController setSelectedIndex:0];
+        [self.tabBarController setSelectedIndex:0];
         [self.navigationController popViewControllerAnimated:NO];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         NSLog(@"Användaren utloggad");
