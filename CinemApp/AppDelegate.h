@@ -9,5 +9,6 @@
 @property (strong, nonatomic) UITabBarController *tabBarController;
 @property (nonatomic, strong) NotLoggedInViewController* loginView;
 
+- (void)setupTabBarController;
 
 @end

@@ -31,6 +31,25 @@
     self.window.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     [self.window makeKeyAndVisible];
     
+    [self setupTabBarController];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+
+    
+    return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    if (self.tabBarController.selectedIndex==2) {
+        [self.tabBarController.tabBar setSelectionIndicatorImage:nil];
+    } else {
+        [self.tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar_selected"]];
+    }
+}
+
+- (void)setupTabBarController{
+    NSLog(@"Skapar vyer");
+    
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.delegate = self;
     
@@ -52,7 +71,7 @@
     profileNav.navigationBar.translucent = YES;
     profileNav.view.backgroundColor = [UIColor clearColor];
     profileNav.navigationBar.barStyle = UIBarStyleBlack;
-
+    
     NSArray* controllers = [NSArray arrayWithObjects:homeNav, exploreNav, rateNav, activityNav, profileNav, nil];
     self.tabBarController.viewControllers = controllers;
     
@@ -97,18 +116,8 @@
         logInNav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self.window.rootViewController presentViewController:logInNav animated:NO completion:nil];
     }
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
     
-    return YES;
-}
-
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    if (self.tabBarController.selectedIndex==2) {
-        [self.tabBarController.tabBar setSelectionIndicatorImage:nil];
-    } else {
-        [self.tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tab-bar_selected"]];
-    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

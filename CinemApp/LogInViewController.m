@@ -9,6 +9,7 @@
 #import "LogInViewController.h"
 #import "Parse/Parse.h"
 #import "DejalActivityView.h"
+#import "AppDelegate.h"
 
 @interface LogInViewController ()
 
@@ -35,6 +36,8 @@
                                     block:^(PFUser *user, NSError *error) {
                                         if (user) {
                                             NSLog(@"Inloggning lyckades!");
+                                            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                                            [appDelegate setupTabBarController];
                                             [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
                                         } else {
                                             NSLog(@"Inloggning misslyckades!");
