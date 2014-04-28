@@ -9,7 +9,7 @@
 
 @implementation MovieView
 
-@synthesize plotText, plotView, posterView, castLabel, castTable;
+@synthesize plotText, plotView, posterView, castLabel, castTable, directorLabel, writerLabel, directorsArray, writersArray;
 
 BOOL plotEnlarged = NO;
 
@@ -40,7 +40,7 @@ BOOL plotEnlarged = NO;
     return self;
 }
 
--(id)initWithMovieInfo:(CGRect)frame :(NSData*)posterImage :(NSString *)moviePlot :(UITableView *)castTableView
+-(id)initWithMovieInfo:(CGRect)frame :(NSData*)posterImage :(NSString *)moviePlot :(NSMutableArray *)directors :(NSMutableArray *)writers :(UITableView *)castTableView
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -70,8 +70,53 @@ BOOL plotEnlarged = NO;
         posterView.image = [UIImage imageWithData:posterImage];
         [self addSubview:posterView];
         
+        //Directors och writers
+        directorsArray = directors;
+        writersArray = writers;
+        
+        //NSLog(@"Directors: %@", directorsArray);
+        //NSLog(@"Writers: %@", writersArray);
+        
+        NSString *directorString;
+        directorLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+30, 300, 30)];
+        directorLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
+        directorLabel.textColor = [UIColor lightGrayColor];
+        if([directorsArray count] > 1)
+            directorString = @"Directors: ";
+        else
+            directorString = @"Director: ";
+        NSString *str;
+        for (int i=0; i < [directorsArray count]; i++) {
+            str = directorsArray[i];
+            directorString = [directorString stringByAppendingString:str];
+            if(i < [directorsArray count]-1)
+                directorString = [directorString stringByAppendingString:@", "];
+        }
+        directorLabel.text = directorString;
+        [self addSubview:directorLabel];
+        
+        str = @"";
+        NSString *writerString;
+        writerLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+55, 300, 30)];
+        writerLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
+        writerLabel.textColor = [UIColor lightGrayColor];
+        if([writersArray count] > 1)
+            writerString = @"Writers: ";
+        else
+            writerString = @"Writer: ";
+        
+        for (int i=0; i < [writersArray count]; i++) {
+            str = writersArray[i];
+            writerString = [writerString stringByAppendingString:str];
+            if(i < [writersArray count]-1)
+                writerString = [writerString stringByAppendingString:@", "];
+        }
+        writerLabel.text = writerString;
+        [self addSubview:writerLabel];
+        
+        
         //castLabel
-        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+30, 100, 44)];
+        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+73, 100, 44)];
         castLabel.text = @"Top Cast";
         [self addSubview:castLabel];
         
@@ -140,8 +185,10 @@ BOOL plotEnlarged = NO;
     
     [UIView beginAnimations:nil context:nil];
     textView.frame = newFrame;
-    [self.castLabel setFrame:CGRectMake(10, textView.frame.size.height+30, 100, 44)];
-    [castTable setFrame:CGRectMake(10, textView.frame.size.height+70, 300, 400)];
+    [self.castLabel setFrame:CGRectMake(10, textView.frame.size.height+73, 100, 44)];
+    [self.directorLabel setFrame:CGRectMake(10, textView.frame.size.height+30, 300, 30)];
+    [self.writerLabel setFrame:CGRectMake(10, textView.frame.size.height+55, 300, 30)];
+    [castTable setFrame:CGRectMake(10, textView.frame.size.height+110, 300, 400)];
     [UIView commitAnimations];
 }
 @end

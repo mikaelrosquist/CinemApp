@@ -28,7 +28,7 @@ static CGFloat backdropImageWidth  = 320.0;
     //UITableViewCell *cell;
 }
 
-@synthesize rateView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, moviePlot, json, creditsJson, movieTableView, castArray, tableView, movieTVC;
+@synthesize rateView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, moviePlot, json, creditsJson, movieTableView, castArray, tableView, movieTVC, movieDirectors, movieWriters;
 
 BOOL keyboardVisible = NO;
 UITapGestureRecognizer *tap;
@@ -138,7 +138,25 @@ UITapGestureRecognizer *tap;
             castInt = 7;
         else
             castInt = [castArray count];
-
+        
+            //Hämtar crew
+        NSMutableArray *movieCrew = [creditsJson objectForKey:@"crew"];
+        NSString *jobTitle;
+        
+            //Directors
+        movieDirectors  = [[NSMutableArray alloc] init];
+        for(int i=0; i<[movieCrew count]; i++){
+            jobTitle = [movieCrew[i] objectForKey:@"job"];
+            if([jobTitle isEqualToString:@"Director"])
+                [movieDirectors addObject:[movieCrew[i] objectForKey:@"name"]];
+        }
+            //Writers
+        movieWriters  = [[NSMutableArray alloc] init];
+        for(int i=0; i<[movieCrew count]; i++){
+            jobTitle = [movieCrew[i] objectForKey:@"job"];
+            if([jobTitle isEqualToString:@"Screenplay"])
+                [movieWriters addObject:[movieCrew[i] objectForKey:@"name"]];
+        }
         
             //Skapar movieTableView
         movieTVC = [[MovieTableViewController alloc]initWithData:castArray];
@@ -157,7 +175,7 @@ UITapGestureRecognizer *tap;
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Allokerar och initierar vyerna för segmented control
-            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 240+castInt*75):moviePoster:moviePlot:movieTableView];
+            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 240+castInt*75):moviePoster:moviePlot:movieDirectors:movieWriters:movieTableView];
             [movieView addSubview:movieTVC.view];
             
             rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 230):movieID];
@@ -351,7 +369,7 @@ UITapGestureRecognizer *tap;
     NSURL *creditsURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", getDataURL, movieID, getCreditsURL, api_key]];
     NSData *creditsData = [NSData dataWithContentsOfURL:creditsURL];
     creditsJson = [NSJSONSerialization JSONObjectWithData:creditsData options:kNilOptions error:nil];
-    //NSLog(@"%@", creditsJson);
+    NSLog(@"%@", creditsJson);
 }
 
 

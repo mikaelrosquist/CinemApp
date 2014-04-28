@@ -30,7 +30,7 @@
     self = [super initWithNibName:Nil bundle:Nil];
     if (self) {
         
-        [self.view setFrame:CGRectMake(10, 220, 300, 400)];
+        [self.view setFrame:CGRectMake(10, 260, 300, 400)];
         
         personArray = castArray;
         NSLog(@"TableView PersonArray: %@", personArray);

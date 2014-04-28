@@ -30,6 +30,8 @@
 @property (nonatomic, strong) NSString *movieRuntime;
 @property (nonatomic, strong) NSString *movieBackground;
 @property (nonatomic, strong) NSString *moviePlot;
+@property (nonatomic, strong) NSMutableArray *movieDirectors;
+@property (nonatomic, strong) NSMutableArray *movieWriters;
 @property (nonatomic, strong) NSMutableArray *castArray;
 
 @property (nonatomic, strong) NSDictionary *json;

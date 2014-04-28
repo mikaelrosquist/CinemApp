@@ -15,6 +15,8 @@
 -(id)initWithMovieInfo:(CGRect)frame
                       :(NSData*)posterImage
                       :(NSString *)moviePlot
+                      :(NSMutableArray *)directors
+                      :(NSMutableArray *)writers
                       :(UIView *)castTableView;
 
 @property (nonatomic, strong) NSString *plotText;
@@ -22,7 +24,11 @@
 @property (nonatomic, strong) UIImageView *posterView;
 @property (nonatomic, strong) NSData *posterImage;
 @property (nonatomic, strong) UILabel *castLabel;
+@property (nonatomic, strong) UILabel *directorLabel;
+@property (nonatomic, strong) UILabel *writerLabel;
 @property (nonatomic, strong) UITableView *castTable;
+@property (nonatomic, strong) NSMutableArray* directorsArray;
+@property (nonatomic, strong) NSMutableArray* writersArray;
 
 - (void)textViewDidChange:(UITextView *)textView;
 
