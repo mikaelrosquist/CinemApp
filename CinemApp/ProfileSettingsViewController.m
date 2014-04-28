@@ -10,7 +10,9 @@
 #import "ProfileSettingsViewController.h"
 #import "Parse/Parse.h"
 
-@interface ProfileSettingsViewController ()
+@interface ProfileSettingsViewController (){
+    PFUser *currentUser;
+}
 
 @end
 
@@ -30,6 +32,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    currentUser = [PFUser currentUser];
     
     [self setTitle:@"Profile settings"];
 	
@@ -110,11 +114,11 @@
             
             if ([indexPath row] == 0){
                 imgView.image = [UIImage imageNamed:@"settings_username"];
-                playerTextField.text = @"testuser";
+                playerTextField.text = currentUser.username;
                 playerTextField.returnKeyType = UIReturnKeyNext;
             }else if ([indexPath row] == 1){
                 imgView.image = [UIImage imageNamed:@"settings_email"];
-                playerTextField.text = @"test.user@gmail.com";
+                playerTextField.text = currentUser.email;
                 playerTextField.returnKeyType = UIReturnKeyDone;
             }
             
