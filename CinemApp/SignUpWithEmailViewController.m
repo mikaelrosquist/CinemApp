@@ -203,8 +203,11 @@
                 [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
             } else {
                 NSString *errorString = [error userInfo][@"error"];
+                NSString *firstCapChar = [[errorString substringToIndex:1] capitalizedString];
+                NSString *cappedString = [errorString stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:firstCapChar];
+                
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                message:errorString
+                                                                message:cappedString
                                                                delegate:self
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
@@ -214,8 +217,8 @@
             [DejalBezelActivityView removeView];
         }];
     }else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                        message:@"Please fill in all the fields"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry"
+                                                        message:@"Please complete all boxes."
                                                        delegate:self
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
