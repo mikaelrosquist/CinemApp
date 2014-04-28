@@ -13,16 +13,15 @@
 #import "ImageEffects.h"
 #import "MovieTableViewController.h"
 
-@interface RateViewController : UIViewController<UIScrollViewDelegate, UITableViewDelegate, UITextViewDelegate>
+@interface RateViewController : UIViewController< UIScrollViewDelegate>
 
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIImageView *backdropImageView;
 @property (nonatomic, retain) UIImageView *backdropWithBlurImageView;
-//@property (nonatomic, strong) MovieView *movieView;
 @property (nonatomic, strong) RateView *rateView;
-@property (nonatomic, strong) UITableView *movieTableView; //tabellen med skådisar i movieView
-//@property (nonatomic, strong) MovieTableViewController *movieTVC;
+@property (nonatomic, strong) UIView *movieTableView; //viewn med skådisar i movieTVC
+@property (nonatomic, strong) MovieTableViewController *movieTVC;
 
 @property (nonatomic, strong) NSString *movieID;
 @property (nonatomic, strong) NSString *movieName;
@@ -31,11 +30,13 @@
 @property (nonatomic, strong) NSString *movieRuntime;
 @property (nonatomic, strong) NSString *movieBackground;
 @property (nonatomic, strong) NSString *moviePlot;
+@property (nonatomic, strong) NSMutableArray *castArray;
 
 @property (nonatomic, strong) NSDictionary *json;
 @property (nonatomic, strong) NSDictionary *creditsJson;
 
 #pragma mark - Methods
-- (void) retrieveData;
+- (void)retrieveData;
+- (NSMutableArray*)getCastArray;
 
 @end

@@ -28,7 +28,7 @@ static CGFloat backdropImageWidth  = 320.0;
     //UITableViewCell *cell;
 }
 
-@synthesize rateView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, moviePlot, json, creditsJson, tableView, movieTableView;
+@synthesize rateView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, moviePlot, json, creditsJson, movieTableView, castArray, tableView, movieTVC;
 
 BOOL keyboardVisible = NO;
 UITapGestureRecognizer *tap;
@@ -132,15 +132,17 @@ UITapGestureRecognizer *tap;
         NSData *moviePoster = [NSData dataWithContentsOfURL:posterURL];
         
             //Lägger cast i en array
-        NSMutableArray *castArray = [creditsJson objectForKey:@"cast"];
-        
-        
+        castArray = [creditsJson objectForKey:@"cast"];
+        int castInt;
+        if([castArray count] > 7)
+            castInt = 7;
+        else
+            castInt = [castArray count];
+
         
             //Skapar movieTableView
-        MovieTableViewController *movieTVC = [[MovieTableViewController alloc]initWithData:UITableViewStylePlain:castArray];
-        [movieTVC makeTableView:movieTableView];
-        
-        
+        movieTVC = [[MovieTableViewController alloc]initWithData:castArray];
+        movieTableView = movieTVC.view;
         
         //Lägger genrar i en array
         NSArray *genreArray = [json objectForKey:@"genres"];
@@ -155,8 +157,10 @@ UITapGestureRecognizer *tap;
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Allokerar och initierar vyerna för segmented control
-            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 500):moviePoster:moviePlot:movieTableView];
-            rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 300):movieID];
+            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 240+castInt*75):moviePoster:moviePlot:movieTableView];
+            [movieView addSubview:movieTVC.view];
+            
+            rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 230):movieID];
             rateView.commentField.delegate = self;
             tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
             
@@ -252,7 +256,7 @@ UITapGestureRecognizer *tap;
     self.tableView = [[UITableView alloc] init];
     self.tableView.delegate = self;
     self.tableView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
-    
+
     
     //Ska göra det enklare att använda slidern, vet ej om det funkar
     self.scrollView.canCancelContentTouches = YES;
@@ -326,7 +330,7 @@ UITapGestureRecognizer *tap;
         movieView.hidden = TRUE;
         rateView.hidden = TRUE;
         tableView.hidden = FALSE;
-        self.scrollView.contentSize = CGSizeMake(320, tableView.frame.size.height+backdropImageHeight);
+        self.scrollView.contentSize = CGSizeMake(320, movieTableView.frame.size.height+backdropImageHeight);
     }
 }
 
@@ -404,16 +408,20 @@ UITapGestureRecognizer *tap;
     //Något spökar här.. Animationen blir lite konstig om man har scrollat efter tangentbordet har blivit synligt.
     
     [UIView beginAnimations:nil context:nil];
-    self.scrollView.center = CGPointMake(self.scrollView.center.x, self.scrollView.center.y+60);
-    self.backdropImageView.center = CGPointMake(_backdropImageView.center.x, _backdropImageView.center.y+60);
-    self.backdropWithBlurImageView.center = CGPointMake(_backdropWithBlurImageView.center.x, _backdropWithBlurImageView.center.y+60);
     rateView.frame = CGRectMake(rateView.frame.origin.x, rateView.frame.origin.y, rateView.frame.size.width, rateView.frame.size.height-45);
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.origin.x, rateView.frame.size.height+backdropImageHeight-60);
+    self.backdropWithBlurImageView.center = CGPointMake(_backdropWithBlurImageView.center.x, _backdropWithBlurImageView.center.y+60);
+    self.backdropImageView.center = CGPointMake(_backdropImageView.center.x, _backdropImageView.center.y+60);
+    self.scrollView.center = CGPointMake(self.scrollView.center.x, self.scrollView.center.y+60);
     [UIView commitAnimations];
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.origin.x, rateView.frame.size.height+backdropImageHeight-60);
 }
 
 -(void)dismissKeyboard {
     [rateView.commentField resignFirstResponder];
+}
+
+- (NSMutableArray*)getCastArray{
+    return castArray;
 }
 
 @end

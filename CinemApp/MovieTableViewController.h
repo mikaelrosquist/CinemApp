@@ -11,14 +11,13 @@
 #import "MovieView.h"
 #import "RateViewController.h"
 
-@interface MovieTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MovieTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-- (id)initWithData:(UITableViewStyle)style
-                  :(NSArray *)personArray;
-
-- (void)makeTableView:(UITableView *)table;
+- (id)viewDidLoad:(NSArray *)castArray;
+- (id)initWithData:(NSMutableArray*)castArray;
 
 @property (nonatomic, strong) UITableView *personTable;
-@property (nonatomic, strong) NSArray *personArray;
+@property (nonatomic, strong) NSMutableArray *personArray;
+@property (nonatomic, strong) UIView *movieTableView;
 
 @end

@@ -14,48 +14,62 @@
 
 @implementation MovieTableViewController
 
-@synthesize personTable, personArray;
+@synthesize personTable, personArray, movieTableView;
 
-- (id)initWithStyle:(UITableViewStyle)style
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+         //init code
     }
     return self;
 }
 
-- (id)initWithData:(UITableViewStyle)style :(NSArray *)array{
+- (id)initWithData:(NSMutableArray *)castArray{
+    self = [super initWithNibName:Nil bundle:Nil];
+    if (self) {
+        
+        [self.view setFrame:CGRectMake(10, 220, 300, 400)];
+        
+        personArray = castArray;
+        NSLog(@"TableView PersonArray: %@", personArray);
+        
+        //Max 7 skådisar visas
+        int tableLength;
+        if([personArray count] > 7)
+            tableLength = 7;
+        else
+            tableLength = [personArray count];
+        
+        personTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 300, tableLength*75)];
+        personTable.dataSource = self;
+        personTable.delegate = self;
+		personTable.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
+        personTable.separatorColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
+        personTable.scrollEnabled = NO;
+		
+        [self.view addSubview:personTable];
+        movieTableView = self.view;
+    }
+    return self;
+}
+
+- (id)viewDidLoad:(NSMutableArray *)castArray{
     
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-        personArray = array;
-        NSLog(@"PersonArray: %@", personArray);
-        [self.view setFrame:CGRectMake(10, 220, 300, 300)];
-        self.view.backgroundColor = [UIColor blackColor];
-        self.tableView.Delegate = self;
-        self.tableView.dataSource = self;
-    }
-    return self;
-}
-
-- (void)makeTableView:(UITableView *)table{
-    table = self.tableView;
-    NSLog(@"maketableview");
-}
-
-- (void)viewDidLoad
-{
     [super viewDidLoad];
-    NSLog(@"viewdidload");
-    [self.tableView setHidden:NO];
+    if (self) {
+        //NSLog(@"%f", [personTable contentSize].height);
+        //[personTable setFrame:CGRectMake(0, 0, 300, [personTable contentSize].height)];
+    }
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    return self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,39 +83,67 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
-    NSLog(@"sections");
+    NSLog(@"numberOfSections");
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    //return [personArray count];
-    return 10;
+    return [personArray count];
+    NSLog(@"numberOfRows %d", [personArray count]);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"PERSONARRAY: %@", personArray);
+    //NSLog(@"PERSONARRAY: %@", personArray);
+    NSLog(@"cellForRowAtIndexPath");
     static NSString *cellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        NSLog(@"ny cell");
+    }
+    if(personArray != 0){
+    
+        NSString *name = [[personArray objectAtIndex:indexPath.row] valueForKey:@"name"];
+        NSString *movieChar = [[personArray objectAtIndex:indexPath.row] objectForKey:@"character"];
+        
+        NSLog(@"NAMN: %@",name);
+        NSLog(@"KARAKTÄR: %@",movieChar);
+        
+        UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 5, 200, 30)];
+        nameLabel.text = name;
+        UILabel *charLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 25, 200, 30)];
+        charLabel.text = movieChar;
+        charLabel.textColor = [UIColor lightGrayColor];
+        
+        //profile pics
+        NSString *imagePath = [[personArray objectAtIndex:indexPath.row] objectForKey:@"profile_path"];
+        NSString *imageString = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w90%@", imagePath];
+        NSURL *imageURL = [NSURL URLWithString:imageString];
+        NSData *personImage = [NSData dataWithContentsOfURL:imageURL];
+        UIImageView *personView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 47, 70)];
+        personView.image = [UIImage imageWithData:personImage];
+        
+        [cell.contentView addSubview:personView];
+        [cell.contentView addSubview:nameLabel];
+        [cell.contentView addSubview:charLabel];
+        
+        cell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
+        cell.contentView.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setUserInteractionEnabled:NO];
     }
     
-    NSString *name = [[personArray objectAtIndex:indexPath.row] valueForKey:@"name"];
-    
-    [cell.textLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Regular" size: 14.0]];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", name];
-    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithAttributedString: cell.textLabel.attributedText];
-    [text addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 13.0] range: NSMakeRange([name length]+1, 6)];
-    [cell.textLabel setAttributedText: text];
-
-    
-    //cell.textLabel.text = [personArray objectAtIndex:indexPath.row];
-    
     return cell;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 75;
 }
 
 
@@ -110,9 +152,19 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
 */
+
+- (NSIndexPath *)tableView:(UITableView *)tv willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell* cell = [tv cellForRowAtIndexPath:indexPath];
+    if(cell.selectionStyle == UITableViewCellSelectionStyleNone){
+        return nil;
+    }
+    return indexPath;
+}
+
 
 /*
 // Override to support editing the table view.

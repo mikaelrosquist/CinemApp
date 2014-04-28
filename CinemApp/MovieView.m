@@ -1,13 +1,15 @@
-//in subclassed UIView
 #import "MovieView.h"
+#import "MovieTableView.h"
+#import "MovieTableViewController.h"
 #import "ImageEffects.h"
+#import <UIKit/UIKit.h>
 
 #define getDataURL @"api.themoviedb.org/3/movie/"
 #define api_key @"2da45d86a9897bdf7e7eab86aa0485e3"
 
 @implementation MovieView
 
-@synthesize plotText, plotView, posterView, castLabel, personView, castTable;
+@synthesize plotText, plotView, posterView, castLabel, castTable;
 
 BOOL plotEnlarged = NO;
 
@@ -38,7 +40,7 @@ BOOL plotEnlarged = NO;
     return self;
 }
 
--(id)initWithMovieInfo:(CGRect)frame :(NSData*)posterImage :(NSString *)moviePlot :(UITableView *)cTable
+-(id)initWithMovieInfo:(CGRect)frame :(NSData*)posterImage :(NSString *)moviePlot :(UITableView *)castTableView
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -74,7 +76,7 @@ BOOL plotEnlarged = NO;
         [self addSubview:castLabel];
         
         //castTable
-        castTable = cTable;
+        castTable = castTableView;
         [self addSubview:self.castTable];
         
         //cast
@@ -139,7 +141,7 @@ BOOL plotEnlarged = NO;
     [UIView beginAnimations:nil context:nil];
     textView.frame = newFrame;
     [self.castLabel setFrame:CGRectMake(10, textView.frame.size.height+30, 100, 44)];
-    [castTable setFrame:CGRectMake(0, textView.frame.size.height+70, 320, 400)];
+    [castTable setFrame:CGRectMake(10, textView.frame.size.height+70, 300, 400)];
     [UIView commitAnimations];
 }
 @end
