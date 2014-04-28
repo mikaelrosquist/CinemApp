@@ -157,8 +157,9 @@
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         [PFUser logOut];
         NotLoggedInViewController *loginView = [[NotLoggedInViewController alloc] init];
-        loginView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:loginView animated:NO completion:nil];
+        UINavigationController *logInNav = [[UINavigationController alloc] initWithRootViewController:loginView];
+        logInNav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:logInNav animated:NO completion:nil];
          [self.tabBarController setSelectedIndex:0];
         [self.navigationController popViewControllerAnimated:NO];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;

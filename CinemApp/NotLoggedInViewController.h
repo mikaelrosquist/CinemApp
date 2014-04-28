@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SignUpWithEmailViewController.h"
+#import "LogInViewController.h"
 
 @interface NotLoggedInViewController : UIViewController
+
+@property (nonatomic, strong) SignUpWithEmailViewController *signUpWithEmailViewController;
+@property (nonatomic, strong) LogInViewController *logInViewController;
 
 @end

@@ -92,9 +92,10 @@
     self.window.rootViewController = self.tabBarController;
     
     if (![PFUser currentUser]) {
-        NotLoggedInViewController *loginView = [[NotLoggedInViewController alloc] initWithNibName:nil bundle:nil];
-        loginView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self.window.rootViewController presentViewController:loginView animated:NO completion:nil];
+        NotLoggedInViewController *loginView = [[NotLoggedInViewController alloc] init];
+        UINavigationController *logInNav = [[UINavigationController alloc] initWithRootViewController:loginView];
+        logInNav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self.window.rootViewController presentViewController:logInNav animated:NO completion:nil];
     }
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 
