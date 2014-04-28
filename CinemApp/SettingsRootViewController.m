@@ -8,7 +8,7 @@
 //
 
 #import "SettingsRootViewController.h"
-#import "LogInViewController.h"
+#import "NotLoggedInViewController.h"
 #import "Parse/Parse.h"
 #import "AppDelegate.h"
 
@@ -156,7 +156,7 @@
     if (buttonIndex == 1) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         [PFUser logOut];
-        LogInViewController *loginView = [[LogInViewController alloc] init];
+        NotLoggedInViewController *loginView = [[NotLoggedInViewController alloc] init];
         loginView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:loginView animated:NO completion:nil];
          [self.tabBarController setSelectedIndex:0];
