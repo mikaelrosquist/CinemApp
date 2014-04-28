@@ -13,7 +13,7 @@
 #import "ImageEffects.h"
 #import "MovieTableViewController.h"
 
-@interface RateViewController : UIViewController< UIScrollViewDelegate>
+@interface RateViewController : UIViewController<UIScrollViewDelegate, UITableViewDelegate, UITextViewDelegate>
 
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) UITableView *tableView;
