@@ -185,9 +185,9 @@
 }
 
 - (void)signUp:(id)sender {
-    [DejalBezelActivityView activityViewForView:self.view];
+    
     if(emailData != nil && usernameData != nil && passwordData != nil){
-        
+        [DejalBezelActivityView activityViewForView:self.view];
         
         PFUser *user = [PFUser user];
         user.email = emailData;
@@ -208,8 +208,16 @@
                 
                 [alert show];
             }
-            [DejalBezelActivityView removeViewAnimated:YES];
+            [DejalBezelActivityView removeViewAnimated:NO];
         }];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Please fill in all the fields"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        
+        [alert show];
     }
 }
 
