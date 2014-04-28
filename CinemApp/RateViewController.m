@@ -175,7 +175,7 @@ UITapGestureRecognizer *tap;
         dispatch_async(dispatch_get_main_queue(), ^{
             
             //Allokerar och initierar vyerna för segmented control
-            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 240+castInt*75):moviePoster:moviePlot:movieDirectors:movieWriters:movieTableView];
+            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 265+castInt*75):moviePoster:moviePlot:movieDirectors:movieWriters:movieTableView];
             [movieView addSubview:movieTVC.view];
             
             rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 300):movieID];
