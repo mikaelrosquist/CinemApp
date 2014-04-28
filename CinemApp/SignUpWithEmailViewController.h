@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SignUpWithEmailViewController : UIViewController
+@interface SignUpWithEmailViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @end

@@ -111,7 +111,7 @@
 }
 
 - (void)signUp:(id)sender {
-    signUpWithEmailViewController = [[SignUpWithEmailViewController alloc] init];
+    signUpWithEmailViewController = [[SignUpWithEmailViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self.navigationController pushViewController:signUpWithEmailViewController animated:YES];
     [sender setAlpha:1.0];
     
