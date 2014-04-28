@@ -111,10 +111,15 @@
             if ([indexPath row] == 0){
                 imgView.image = [UIImage imageNamed:@"settings_username"];
                 playerTextField.text = @"testuser";
+                playerTextField.returnKeyType = UIReturnKeyNext;
             }else if ([indexPath row] == 1){
                 imgView.image = [UIImage imageNamed:@"settings_email"];
                 playerTextField.text = @"test.user@gmail.com";
+                playerTextField.returnKeyType = UIReturnKeyDone;
             }
+            
+            [playerTextField setTag:[indexPath row]];
+            playerTextField.delegate = self;
             
             cell.imageView.image = imgView.image;
             playerTextField.secureTextEntry = NO;
@@ -201,6 +206,16 @@
     [defaults setObject:privateProfile forKey:@"privateProfile"];
     [defaults synchronize];
     NSLog(@"Privat profil har ändrats till: %@", privateProfile);
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    UIView *view = [self.view viewWithTag:textField.tag + 1];
+    if (!view)
+        [textField resignFirstResponder];
+    else
+        [view becomeFirstResponder];
+    return YES;
 }
 
 -(void)save:(id)sender {

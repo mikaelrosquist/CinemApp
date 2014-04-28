@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PasswordViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
+@interface PasswordViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (strong, nonatomic) NSArray* currentPasswordSection;
 @property (strong, nonatomic) NSArray* changePasswordSection;

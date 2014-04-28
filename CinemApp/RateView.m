@@ -83,7 +83,7 @@
         characterLabel.text = @"140";
         characterLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:10];
         characterLabel.textColor = [UIColor lightGrayColor];
-        characterLabel.textAlignment = UITextAlignmentRight;
+        characterLabel.textAlignment = NSTextAlignmentRight;
         [self addSubview:characterLabel];
 
         //rateButton
@@ -102,11 +102,7 @@
         
         [self addSubview:rateButton];
 
-        //Gömmer tangentbordet om man klickar någon annanstans i den här vyn
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                       initWithTarget:self
-                                       action:@selector(dismissKeyboard)];
-        [self addGestureRecognizer:tap];
+        
         
         [self setBackgroundColor:[UIColor clearColor]];
         
@@ -178,10 +174,6 @@
     sliderLabel.text = [NSString stringWithFormat:@"%ld",(long)val];
 }
 
--(void)dismissKeyboard {
-    [commentField resignFirstResponder];
-}
-
 -(void)checkIfRated:(NSString *)movieID {
     PFUser *currentUser = [PFUser currentUser];
     
@@ -205,6 +197,7 @@
         }];
     }
 }
+
 
 
 /*

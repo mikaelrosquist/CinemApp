@@ -133,8 +133,6 @@ static CGFloat backdropImageWidth  = 320.0;
     }
 }
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];

@@ -86,12 +86,17 @@
     playerTextField.returnKeyType = UIReturnKeyNext;
     if(indexPath.section == 0){
         playerTextField.placeholder = @"Current password";
+        [playerTextField setTag:0];
     }else if(indexPath.section == 1){
         if ([indexPath row] == 0)
             playerTextField.placeholder = @"New password";
-        else if ([indexPath row] == 1)
+        else if ([indexPath row] == 1){
             playerTextField.placeholder = @"Confirm new password";
+            playerTextField.returnKeyType = UIReturnKeyDone;
+        }
+        [playerTextField setTag:[indexPath row]+1];
     }
+    playerTextField.delegate = self;
     playerTextField.secureTextEntry = YES;
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     imgView.image = [UIImage imageNamed:@"settings_password"];
@@ -100,6 +105,16 @@
     [cell.contentView addSubview:playerTextField];
     
 	return cell;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    UIView *view = [self.view viewWithTag:textField.tag + 1];
+    if (!view)
+        [textField resignFirstResponder];
+    else
+        [view becomeFirstResponder];
+    return YES;
 }
 
 -(void)save:(id)sender {

@@ -8,7 +8,7 @@
 
 #import "HomeViewController.h"
 #import "Parse/Parse.h"
-#import "LogInViewController.h"
+#import "NotLoggedInViewController.h"
 
 @interface HomeViewController ()
 

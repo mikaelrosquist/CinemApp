@@ -8,7 +8,7 @@
 //
 
 #import "SettingsRootViewController.h"
-#import "LogInViewController.h"
+#import "NotLoggedInViewController.h"
 #import "Parse/Parse.h"
 #import "AppDelegate.h"
 
@@ -149,22 +149,20 @@
     }
 }
 
+
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         [PFUser logOut];
-        
-        //[[[UIApplication sharedApplication] delegate].window setRootViewController:self.tabBarController];
-       
-        LogInViewController *loginView = [[LogInViewController alloc] init];
-        loginView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:loginView animated:YES completion:nil];
+        NotLoggedInViewController *loginView = [[NotLoggedInViewController alloc] init];
+        UINavigationController *logInNav = [[UINavigationController alloc] initWithRootViewController:loginView];
+        logInNav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:logInNav animated:NO completion:nil];
          [self.tabBarController setSelectedIndex:0];
         [self.navigationController popViewControllerAnimated:NO];
-        //LogInViewController *loginView = [[LogInViewController alloc] init];
-        //[self presentViewController:loginView animated:YES completion:nil];
-        
-        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         NSLog(@"Användaren utloggad");
     }
     else if (buttonIndex == 0) {
