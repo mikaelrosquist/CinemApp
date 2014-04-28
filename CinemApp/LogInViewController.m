@@ -38,7 +38,6 @@
                                             NSLog(@"Inloggning lyckades!");
                                             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                                             [appDelegate setupTabBarController];
-                                            [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
                                         } else {
                                             NSLog(@"Inloggning misslyckades!");
                                         }

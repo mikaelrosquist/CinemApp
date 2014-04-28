@@ -58,6 +58,7 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -103,6 +104,8 @@
     cellTextField.delegate = self;
     
     [cellTextField setTag:[indexPath row]];
+    
+    [[cellTextField viewWithTag:0] performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.6];
     
     cell.imageView.image = imgView.image;
     [cell.contentView addSubview:cellTextField];
@@ -187,7 +190,7 @@
 - (void)signUp:(id)sender {
     
     if(emailData != nil && usernameData != nil && passwordData != nil){
-        [DejalBezelActivityView activityViewForView:self.view];
+        [DejalBezelActivityView activityViewForView:self.navigationController.navigationBar.superview withLabel:@"Creating user..."].showNetworkActivityIndicator = YES;
         
         PFUser *user = [PFUser user];
         user.email = emailData;
@@ -208,7 +211,7 @@
                 
                 [alert show];
             }
-            [DejalBezelActivityView removeViewAnimated:NO];
+            [DejalBezelActivityView removeView];
         }];
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"

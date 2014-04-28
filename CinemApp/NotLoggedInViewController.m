@@ -11,7 +11,7 @@
 #import "Parse/Parse.h"
 #import "AppDelegate.h"
 
-#define BUTTON_WIDTH 280.0
+#define BUTTON_WIDTH 300.0
 #define BUTTON_HEIGHT 40.0
 #define BUTTON_BORDER 0.0
 #define BUTTON_RADIUS 2.0
@@ -52,8 +52,8 @@
     
     signUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
      logInButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    signUpButton.frame = CGRectMake(20.0, 250.0, BUTTON_WIDTH, BUTTON_HEIGHT);
-    logInButton.frame = CGRectMake(20.0, 300.0, BUTTON_WIDTH, BUTTON_HEIGHT);
+    signUpButton.frame = CGRectMake(10.0, 250.0, BUTTON_WIDTH, BUTTON_HEIGHT);
+    logInButton.frame = CGRectMake(10.0, 300.0, BUTTON_WIDTH, BUTTON_HEIGHT);
     [signUpButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [logInButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     signUpButton.layer.borderWidth = BUTTON_BORDER;
