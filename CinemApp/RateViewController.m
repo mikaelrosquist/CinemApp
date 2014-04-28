@@ -170,8 +170,13 @@ UITapGestureRecognizer *tap;
                                                      selector:@selector(keyboardWillHide:)
                                                          name:UIKeyboardWillHideNotification
                                                        object:nil];
-
             
+            //Gömmer tangentbordet om man klickar någon annanstans i den här vyn
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                           initWithTarget:self
+                                           action:@selector(dismissKeyboard)];
+            [self.view addGestureRecognizer:tap];
+
             //Formaterar en sträng med genrar
             NSString *movieGenreString = @"";
             for (int i = 0; i < [genreArray count]; i++) {
@@ -275,6 +280,7 @@ UITapGestureRecognizer *tap;
 
 //SCROLLVIEW
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [rateView.commentField resignFirstResponder];
     CGRect f;
     CGFloat yOffset = self.scrollView.contentOffset.y;
     CGFloat enlargmentFactor = ((ABS(yOffset)+backdropImageHeight)*backdropImageWidth)/backdropImageHeight;
@@ -415,6 +421,14 @@ UITapGestureRecognizer *tap;
 
 -(void)dismissKeyboard {
     [rateView.commentField resignFirstResponder];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqual:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
 }
 
 @end
