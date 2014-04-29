@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserSearchViewController : UITableViewController
+@interface UserSearchViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
+
+@property (nonatomic, strong) UISearchBar *searchBar;
 
 @end

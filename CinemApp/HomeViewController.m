@@ -9,13 +9,14 @@
 #import "HomeViewController.h"
 #import "Parse/Parse.h"
 #import "NotLoggedInViewController.h"
-#import "UserSearchViewController.h"
 
 @interface HomeViewController ()
 
 @end
 
 @implementation HomeViewController
+
+@synthesize searchUserView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +32,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+        
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
     
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                     target:self
@@ -59,7 +62,7 @@
 }
 
 -(void)searchUser:(id)sender {
-    UserSearchViewController *searchUserView = [[UserSearchViewController alloc] init];
+    searchUserView = [[UserSearchViewController alloc] initWithStyle:UITableViewStylePlain];
     [self.navigationController pushViewController:searchUserView animated:YES];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
