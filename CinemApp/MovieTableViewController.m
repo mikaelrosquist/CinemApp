@@ -36,7 +36,7 @@
         NSLog(@"TableView PersonArray: %@", personArray);
         
         //Max 7 skådisar visas
-        int tableLength;
+        NSUInteger tableLength;
         if([personArray count] > 7)
             tableLength = 7;
         else
@@ -59,16 +59,8 @@
     
     [super viewDidLoad];
     if (self) {
-        //NSLog(@"%f", [personTable contentSize].height);
-        //[personTable setFrame:CGRectMake(0, 0, 300, [personTable contentSize].height)];
+      
     }
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
     return self;
 }
 

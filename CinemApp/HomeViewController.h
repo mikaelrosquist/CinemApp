@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ActivityViewController;
 
 @interface HomeViewController : UIViewController
+
+@property (nonatomic, strong) ActivityViewController *feedTable;
 
 @end

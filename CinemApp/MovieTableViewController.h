@@ -15,7 +15,6 @@
 
 - (id)viewDidLoad:(NSArray *)castArray;
 - (id)initWithData:(NSMutableArray*)castArray;
-- (CGFloat)tableViewHeight;
 
 @property (nonatomic, strong) UITableView *personTable;
 @property (nonatomic, strong) NSMutableArray *personArray;

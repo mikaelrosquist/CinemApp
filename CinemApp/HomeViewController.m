@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "Parse/Parse.h"
 #import "NotLoggedInViewController.h"
+#import "ActivityViewController.h"
 
 @interface HomeViewController ()
 
@@ -16,13 +17,16 @@
 
 @implementation HomeViewController
 
+@synthesize feedTable;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
         self.title = @"CinemApp";
-
+        feedTable = [[ActivityViewController alloc]initWithNibName:nil bundle:nil];
+        [self.view addSubview:feedTable.view];
     }
     return self;
 }
