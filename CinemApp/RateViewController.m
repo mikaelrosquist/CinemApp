@@ -440,7 +440,7 @@ UITapGestureRecognizer *tap;
     self.backdropImageView.center = CGPointMake(_backdropImageView.center.x, _backdropImageView.center.y+60);
     self.scrollView.center = CGPointMake(self.scrollView.center.x, self.scrollView.center.y+60);
     [UIView commitAnimations];
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.origin.x, rateView.frame.size.height+backdropImageHeight-60);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.origin.x, rateView.frame.size.height+backdropImageHeight);
 }
 
 -(void)dismissKeyboard {
