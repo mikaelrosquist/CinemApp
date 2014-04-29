@@ -10,7 +10,7 @@
 #import "HomeViewController.h"
 #import "ExploreViewController.h"
 #import "RateViewController.h"
-#import "ActivityViewController.h"
+#import "NotificationViewController.h"
 #import "ProfileViewController.h"
 #import "RateSearchViewController.h"
 #import "Parse/Parse.h"
@@ -58,7 +58,7 @@
     HomeViewController* home = [[HomeViewController alloc] init];
     ExploreViewController* explore = [[ExploreViewController alloc] init];
     RateSearchViewController* rateSearch = [[RateSearchViewController alloc] init];
-    ActivityViewController* activity = [[ActivityViewController alloc] init];
+    NotificationViewController* activity = [[NotificationViewController alloc] init];
     ProfileViewController* profile = [[ProfileViewController alloc] init];
     
     UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController:home];

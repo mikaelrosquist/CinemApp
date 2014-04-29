@@ -23,7 +23,7 @@
 		6F0CAA4518B3709200AE42F9 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA3B18B3709200AE42F9 /* HomeViewController.m */; };
 		6F0CAA4618B3709200AE42F9 /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA3D18B3709200AE42F9 /* ExploreViewController.m */; };
 		6F0CAA4718B3709200AE42F9 /* RateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA3F18B3709200AE42F9 /* RateViewController.m */; };
-		6F0CAA4818B3709200AE42F9 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */; };
+		6F0CAA4818B3709200AE42F9 /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4118B3709200AE42F9 /* NotificationViewController.m */; };
 		6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */; };
 		6F0F9B4818F6B909002FFFF2 /* ProfileSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F9B4718F6B909002FFFF2 /* ProfileSettingsViewController.m */; };
 		6F0F9B4C18F6D1CE002FFFF2 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F9B4B18F6D1CE002FFFF2 /* PasswordViewController.m */; };
@@ -89,8 +89,8 @@
 		6F0CAA3D18B3709200AE42F9 /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
 		6F0CAA3E18B3709200AE42F9 /* RateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateViewController.h; sourceTree = "<group>"; };
 		6F0CAA3F18B3709200AE42F9 /* RateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateViewController.m; sourceTree = "<group>"; };
-		6F0CAA4018B3709200AE42F9 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
-		6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
+		6F0CAA4018B3709200AE42F9 /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
+		6F0CAA4118B3709200AE42F9 /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
 		6F0CAA4218B3709200AE42F9 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		6F0F9B4618F6B909002FFFF2 /* ProfileSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileSettingsViewController.h; sourceTree = "<group>"; };
@@ -339,8 +339,8 @@
 				6F0CAA3F18B3709200AE42F9 /* RateViewController.m */,
 				6F16175B18BBBA4800754A10 /* RateSearchViewController.h */,
 				6F16175C18BBBA4800754A10 /* RateSearchViewController.m */,
-				6F0CAA4018B3709200AE42F9 /* ActivityViewController.h */,
-				6F0CAA4118B3709200AE42F9 /* ActivityViewController.m */,
+				6F0CAA4018B3709200AE42F9 /* NotificationViewController.h */,
+				6F0CAA4118B3709200AE42F9 /* NotificationViewController.m */,
 				6F0CAA4218B3709200AE42F9 /* ProfileViewController.h */,
 				6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */,
 				6F0F9B4918F6B95D002FFFF2 /* SettingsViewControllers */,
@@ -474,7 +474,7 @@
 				6F0CAA1A18B3705400AE42F9 /* AppDelegate.m in Sources */,
 				6FD5598F190E62DA00BB0424 /* SignUpWithEmailViewController.m in Sources */,
 				6F0CAA1618B3705400AE42F9 /* main.m in Sources */,
-				6F0CAA4818B3709200AE42F9 /* ActivityViewController.m in Sources */,
+				6F0CAA4818B3709200AE42F9 /* NotificationViewController.m in Sources */,
 				6F39372918F29AD10026AB4C /* Reachability.m in Sources */,
 				6F0CAA4518B3709200AE42F9 /* HomeViewController.m in Sources */,
 			);
