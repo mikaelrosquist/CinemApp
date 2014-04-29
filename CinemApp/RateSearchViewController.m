@@ -53,6 +53,11 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
     
+    if(moviesArray.count < 1)
+        [searchBar becomeFirstResponder];
+    
+    NSLog(@"%i", moviesArray.count);
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{

@@ -29,6 +29,7 @@
 		6F0F9B4C18F6D1CE002FFFF2 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F9B4B18F6D1CE002FFFF2 /* PasswordViewController.m */; };
 		6F0F9B4F18F6D1E0002FFFF2 /* PushNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F9B4E18F6D1E0002FFFF2 /* PushNotificationsViewController.m */; };
 		6F16175E18BBBA4800754A10 /* RateSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F16175C18BBBA4800754A10 /* RateSearchViewController.m */; };
+		6F1FD5A7190FC3AD0031E957 /* UserSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1FD5A6190FC3AD0031E957 /* UserSearchViewController.m */; };
 		6F39372918F29AD10026AB4C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F39372818F29AD10026AB4C /* Reachability.m */; };
 		6F46491D18F404DA00A85584 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46491C18F404DA00A85584 /* Parse.framework */; };
 		6F46491F18F404FA00A85584 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46491E18F404FA00A85584 /* AudioToolbox.framework */; };
@@ -103,6 +104,8 @@
 		6F0F9B4E18F6D1E0002FFFF2 /* PushNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNotificationsViewController.m; sourceTree = "<group>"; };
 		6F16175B18BBBA4800754A10 /* RateSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateSearchViewController.h; sourceTree = "<group>"; };
 		6F16175C18BBBA4800754A10 /* RateSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateSearchViewController.m; sourceTree = "<group>"; };
+		6F1FD5A5190FC3AD0031E957 /* UserSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchViewController.h; sourceTree = "<group>"; };
+		6F1FD5A6190FC3AD0031E957 /* UserSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchViewController.m; sourceTree = "<group>"; };
 		6F39372718F29AD10026AB4C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		6F39372818F29AD10026AB4C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		6F46491C18F404DA00A85584 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -351,6 +354,8 @@
 				73C8444318F401060022AF1E /* MovieTableViewController.m */,
 				6F0CAA3A18B3709200AE42F9 /* HomeViewController.h */,
 				6F0CAA3B18B3709200AE42F9 /* HomeViewController.m */,
+				6F1FD5A5190FC3AD0031E957 /* UserSearchViewController.h */,
+				6F1FD5A6190FC3AD0031E957 /* UserSearchViewController.m */,
 				6F0CAA3C18B3709200AE42F9 /* ExploreViewController.h */,
 				6F0CAA3D18B3709200AE42F9 /* ExploreViewController.m */,
 				6F0CAA3E18B3709200AE42F9 /* RateViewController.h */,
@@ -495,7 +500,11 @@
 				6F0CAA1618B3705400AE42F9 /* main.m in Sources */,
 				6F0CAA4818B3709200AE42F9 /* NotificationViewController.m in Sources */,
 				6F39372918F29AD10026AB4C /* Reachability.m in Sources */,
+<<<<<<< HEAD
 				7316259D190FCFB1004D8D49 /* ActivityTableViewCell.m in Sources */,
+=======
+				6F1FD5A7190FC3AD0031E957 /* UserSearchViewController.m in Sources */,
+>>>>>>> FETCH_HEAD
 				6F0CAA4518B3709200AE42F9 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

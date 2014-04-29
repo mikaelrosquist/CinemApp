@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+<<<<<<< HEAD
 @class ActivityViewController;
 
 @interface HomeViewController : UIViewController
 
 @property (nonatomic, strong) ActivityViewController *feedTable;
+=======
+#import "UserSearchViewController.h"
+
+@interface HomeViewController : UIViewController
+
+@property (nonatomic, strong) UserSearchViewController *searchUserView;
+>>>>>>> FETCH_HEAD
 
 @end
