@@ -88,7 +88,7 @@
 	[self.searchBar setShowsCancelButton:YES animated:YES];
     if([self.searchBar.text isEqualToString: @""]){
         [self.tableView reloadData];
-        [self.tableView setHidden:YES];
+        [self.tableView setHidden:NO];
     }
 }
 
@@ -97,7 +97,7 @@
 	[self.searchBar setShowsCancelButton:NO animated:YES];
     if([self.searchBar.text isEqualToString: @""]){
         [self.tableView reloadData];
-        [self.tableView setHidden:YES];
+        [self.tableView setHidden:NO];
     }
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
