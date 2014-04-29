@@ -36,7 +36,7 @@
         NSLog(@"TableView PersonArray: %@", personArray);
         
         //Max 7 skådisar visas
-        int tableLength;
+        NSUInteger tableLength;
         if([personArray count] > 7)
             tableLength = 7;
         else

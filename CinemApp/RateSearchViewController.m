@@ -56,7 +56,7 @@
     if(moviesArray.count < 1)
         [searchBar becomeFirstResponder];
     
-    NSLog(@"%i", moviesArray.count);
+    NSLog(@"%lu", (unsigned long)moviesArray.count);
     
 }
 
