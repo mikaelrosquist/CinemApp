@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserSearchViewController.h"
 
 @interface HomeViewController : UIViewController
+
+@property (nonatomic, strong) UserSearchViewController *searchUserView;
 
 @end

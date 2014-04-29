@@ -16,13 +16,15 @@
 
 @implementation HomeViewController
 
+@synthesize searchUserView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
         self.title = @"CinemApp";
-
+        
     }
     return self;
 }
@@ -31,23 +33,38 @@
 {
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                  target:self
+                                                                                  action:@selector(searchUser:)];
+    
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+    
     //Byter färg på navigationBar
     //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-   /* if (![PFUser currentUser]) {
-        LogInViewController *loginView = [[LogInViewController alloc] init];
-        loginView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:loginView animated:YES completion:nil];
-    }*/
+    
+    /* if (![PFUser currentUser]) {
+     LogInViewController *loginView = [[LogInViewController alloc] init];
+     loginView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+     [self presentViewController:loginView animated:YES completion:nil];
+     }*/
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)searchUser:(id)sender {
+    searchUserView = [[UserSearchViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:searchUserView animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 @end

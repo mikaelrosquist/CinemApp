@@ -41,6 +41,7 @@
 		6F46492F18F4053300A85584 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492E18F4053300A85584 /* SystemConfiguration.framework */; };
 		6F5AF01E190FA5F10000B23D /* GTScrollNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AF01D190FA5F10000B23D /* GTScrollNavigationBar.m */; };
 		6F6D3DDA18F81FFB00D53B66 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */; };
+		6F862E81190FE4C100782E37 /* UserSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F862E80190FE4C100782E37 /* UserSearchViewController.m */; };
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
 		6F9F75A918B79D7B00B69308 /* NotLoggedInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F75A818B79D7B00B69308 /* NotLoggedInViewController.m */; };
 		6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */; };
@@ -116,6 +117,8 @@
 		6F5AF01D190FA5F10000B23D /* GTScrollNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTScrollNavigationBar.m; sourceTree = "<group>"; };
 		6F6D3DD818F81FFB00D53B66 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
 		6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
+		6F862E7F190FE4C100782E37 /* UserSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchViewController.h; sourceTree = "<group>"; };
+		6F862E80190FE4C100782E37 /* UserSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchViewController.m; sourceTree = "<group>"; };
 		6F955AFF18B397A7004C4B70 /* MovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieView.h; sourceTree = "<group>"; };
 		6F955B0018B397A7004C4B70 /* MovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieView.m; sourceTree = "<group>"; };
 		6F9F75A718B79D7B00B69308 /* NotLoggedInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotLoggedInViewController.h; sourceTree = "<group>"; };
@@ -328,11 +331,12 @@
 		73C7E73318B37A6400453123 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6FD5597E190E56EF00BB0424 /* LogInViewControllers */,
 				73C8444218F401060022AF1E /* MovieTableViewController.h */,
 				73C8444318F401060022AF1E /* MovieTableViewController.m */,
 				6F0CAA3A18B3709200AE42F9 /* HomeViewController.h */,
 				6F0CAA3B18B3709200AE42F9 /* HomeViewController.m */,
+				6F862E7F190FE4C100782E37 /* UserSearchViewController.h */,
+				6F862E80190FE4C100782E37 /* UserSearchViewController.m */,
 				6F0CAA3C18B3709200AE42F9 /* ExploreViewController.h */,
 				6F0CAA3D18B3709200AE42F9 /* ExploreViewController.m */,
 				6F0CAA3E18B3709200AE42F9 /* RateViewController.h */,
@@ -343,6 +347,7 @@
 				6F0CAA4118B3709200AE42F9 /* NotificationViewController.m */,
 				6F0CAA4218B3709200AE42F9 /* ProfileViewController.h */,
 				6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */,
+				6FD5597E190E56EF00BB0424 /* LogInViewControllers */,
 				6F0F9B4918F6B95D002FFFF2 /* SettingsViewControllers */,
 			);
 			name = Controllers;
@@ -453,6 +458,7 @@
 			files = (
 				6F0CAA4618B3709200AE42F9 /* ExploreViewController.m in Sources */,
 				6F0F9B4C18F6D1CE002FFFF2 /* PasswordViewController.m in Sources */,
+				6F862E81190FE4C100782E37 /* UserSearchViewController.m in Sources */,
 				6FD55992190E62FD00BB0424 /* LogInViewController.m in Sources */,
 				6F0CAA4418B3709200AE42F9 /* ImageEffects.m in Sources */,
 				6FC18B2118BC273C005B226F /* Movie.m in Sources */,

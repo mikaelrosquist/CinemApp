@@ -53,6 +53,11 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
     
+    if(moviesArray.count < 1)
+        [searchBar becomeFirstResponder];
+    
+    NSLog(@"%i", moviesArray.count);
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -68,12 +73,12 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
 	[self.searchBar becomeFirstResponder];
 	[self.searchBar setShowsCancelButton:YES animated:YES];
-        if([self.searchBar.text isEqualToString: @""]){
-            moviesArray = nil;
-            [self.tableView reloadData];
-            [self.tableView setHidden:YES];
-        }
+    if([self.searchBar.text isEqualToString: @""]){
+        moviesArray = nil;
+        [self.tableView reloadData];
+        [self.tableView setHidden:YES];
     }
+}
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
 	[self.searchBar resignFirstResponder];
@@ -100,7 +105,7 @@
     NSString * searchString = [self.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (![searchString length])
         self.searchBar.text = @"";
-
+    
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -131,17 +136,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellIdentifier = @"Cell";
-
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     if(moviesArray.count != 0){
-    
+        
         NSString *movieTitle = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
         NSString *movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
-    
+        
         [cell.textLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Regular" size: 14.0]];
         if(![movieRelease isEqualToString:@""] && movieRelease != nil){
             movieRelease = [NSString stringWithFormat:@"(%@)", [movieRelease substringToIndex:4]];
@@ -158,7 +163,7 @@
         cell.textLabel.numberOfLines = 2;
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
+        
     }
     return cell;
 }
@@ -175,7 +180,7 @@
     dvc.movieName = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"original_title"];
     dvc.movieRelease = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"release_date"];
     dvc.movieBackground = [[moviesArray objectAtIndex:indexPath.row] valueForKey:@"backdrop_path"];
-
+    
     NSLog(@"VALD FILM: %@", [[moviesArray objectAtIndex:indexPath.row] objectForKey:@"original_title"]);
     
     [self.navigationController pushViewController:dvc animated:YES];
@@ -192,14 +197,14 @@
             //Någonstans här får vi ibland 'NSInvalidArgumentException', reason: 'data parameter is nil'
             NSString *parsedSearchQuery;
             parsedSearchQuery = [searchQuery stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    
+            
             NSURL *url = [NSURL URLWithString:[[NSString stringWithFormat:@"%@%@", getDataURL, parsedSearchQuery]   stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
             NSData *data = [NSData dataWithContentsOfURL:url];
             
             //NSLog(@"%@", data);
             if(data != nil){
                 json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-            
+                
                 moviesArray = [[NSMutableArray alloc] init];
                 moviesArray = [json objectForKey:@"results"];
             }else{
@@ -209,11 +214,11 @@
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
                 [alert show];
-
+                
             }
             
             //NSLog(@"%@", moviesArray);
-
+            
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -222,9 +227,9 @@
                 [self.tableView setHidden:NO];
                 NSLog(@"HÄMTAT: Sökresultat för %@", parsedSearchQuery);
             });
-        
+            
         }else{
-
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"Not connected to internet");
                 
