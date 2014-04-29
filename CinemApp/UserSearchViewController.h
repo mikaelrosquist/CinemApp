@@ -11,5 +11,6 @@
 @interface UserSearchViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
 @property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) NSArray *usersArray;
 
 @end
