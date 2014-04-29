@@ -102,9 +102,8 @@
         [self addSubview:rateButton];
 
         //Gömmer tangentbordet om man klickar någon annanstans i den här vyn
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                       initWithTarget:self
-                                       action:@selector(dismissKeyboard)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self
+                                                                             action:@selector(dismissKeyboard)];
         [self addGestureRecognizer:tap];
         
         [self setBackgroundColor:[UIColor clearColor]];

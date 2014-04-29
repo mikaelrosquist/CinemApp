@@ -176,8 +176,8 @@ UITapGestureRecognizer *tap;
             
             //Allokerar och initierar vyerna för segmented control
             
-            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 265+castInt*75):moviePoster:moviePlot:movieDirectors:movieWriters:movieTableView];
-
+            movieView = [[MovieView alloc] initWithMovieInfo:CGRectMake(0, backdropImageHeight, 320, 280+castInt*75):moviePoster:moviePlot:movieDirectors:movieWriters:movieTableView:self];
+            //Tabellen med skådisar läggs till i moviewView
             [movieView addSubview:movieTVC.view];
             
             rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 300):movieID];
@@ -196,9 +196,8 @@ UITapGestureRecognizer *tap;
                                                        object:nil];
             
             //Gömmer tangentbordet om man klickar någon annanstans i den här vyn
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                           initWithTarget:self
-                                           action:@selector(dismissKeyboard)];
+            tap = [[UITapGestureRecognizer alloc]initWithTarget:self
+                                                         action:@selector(dismissKeyboard)];
             [self.view addGestureRecognizer:tap];
 
             //Formaterar en sträng med genrar
@@ -396,7 +395,7 @@ UITapGestureRecognizer *tap;
 
 //Håller koll på antal tecken i commentField (i rateView)
 - (void)textViewDidChange:(UITextView *)textView{
-   
+    
     NSUInteger chars = [[textView text] length];
     chars = 140 - chars;
     rateView.characterLabel.text = [NSString stringWithFormat: @"%d", (int)chars];
@@ -405,7 +404,6 @@ UITapGestureRecognizer *tap;
     if (chars > 140){
         rateView.characterLabel.textColor = [UIColor redColor];
     }
-    //NSLog(@"CHARS: %lu", (unsigned long)chars);
 }
 
 //Flyttar views när tangentbord visas
@@ -459,5 +457,10 @@ UITapGestureRecognizer *tap;
     }
     return YES;
 }
+
+-(void)enlargeScrollView:(CGFloat)addedHeight{
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, movieView.frame.size.height+backdropImageHeight+addedHeight);
+}
+
 
 @end

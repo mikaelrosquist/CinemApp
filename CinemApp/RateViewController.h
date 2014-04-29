@@ -37,6 +37,8 @@
 @property (nonatomic, strong) NSDictionary *json;
 @property (nonatomic, strong) NSDictionary *creditsJson;
 
+-(void)enlargeScrollView:(CGFloat)addedHeight;
+
 #pragma mark - Methods
 - (void)retrieveData;
 - (NSMutableArray*)getCastArray;

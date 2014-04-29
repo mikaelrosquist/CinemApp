@@ -7,17 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+@class RateViewController;
 @class MovieTableView;
 @class MovieTableViewController;
 
-@interface MovieView : UIView
+
+@interface MovieView : UIView<UITextFieldDelegate>
 
 -(id)initWithMovieInfo:(CGRect)frame
                       :(NSData*)posterImage
                       :(NSString *)moviePlot
                       :(NSMutableArray *)directors
                       :(NSMutableArray *)writers
-                      :(UIView *)castTableView;
+                      :(UIView *)castTableView
+                      :(RateViewController *)rateViewController;
 
 @property (nonatomic, strong) NSString *plotText;
 @property (nonatomic, strong) UITextView *plotView;
@@ -29,6 +32,8 @@
 @property (nonatomic, strong) UITableView *castTable;
 @property (nonatomic, strong) NSMutableArray* directorsArray;
 @property (nonatomic, strong) NSMutableArray* writersArray;
+@property (nonatomic, strong) RateViewController* rvc;
+@property BOOL plotEnlarged;
 
 - (void)textViewDidChange:(UITextView *)textView;
 

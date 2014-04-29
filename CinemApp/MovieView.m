@@ -1,6 +1,7 @@
 #import "MovieView.h"
 #import "MovieTableView.h"
 #import "MovieTableViewController.h"
+#import "RateViewController.h"
 #import "ImageEffects.h"
 #import <UIKit/UIKit.h>
 
@@ -9,14 +10,15 @@
 
 @implementation MovieView
 
-@synthesize plotText, plotView, posterView, castLabel, castTable, directorLabel, writerLabel, directorsArray, writersArray;
+@synthesize plotText, plotView, posterView, castLabel, castTable, directorLabel, writerLabel, directorsArray, writersArray, plotEnlarged, rvc;
 
-BOOL plotEnlarged = NO;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+    
+        plotEnlarged = NO;
         
         //plotLabel
         UILabel *plotLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 40, 100, 44)];
@@ -40,10 +42,12 @@ BOOL plotEnlarged = NO;
     return self;
 }
 
--(id)initWithMovieInfo:(CGRect)frame :(NSData*)posterImage :(NSString *)moviePlot :(NSMutableArray *)directors :(NSMutableArray *)writers :(UITableView *)castTableView
+-(id)initWithMovieInfo:(CGRect)frame :(NSData*)posterImage :(NSString *)moviePlot :(NSMutableArray *)directors :(NSMutableArray *)writers :(UITableView *)castTableView :(RateViewController *)rateViewController
 {
     self = [super initWithFrame:frame];
     if (self) {
+        rvc = rateViewController;
+        
         self.plotText = moviePlot;
         //plotView
         plotView = [[UITextView alloc]initWithFrame:CGRectMake(10, 50, 310, 150)];
@@ -59,7 +63,7 @@ BOOL plotEnlarged = NO;
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                               action:@selector(tappedPlotView)];
-        [plotView addGestureRecognizer:tap];
+        [self addGestureRecognizer:tap];
         plotView.editable = NO;
         plotView.selectable = NO; //så man inte kan markera/kopiera text
         plotView.scrollEnabled = NO;
@@ -78,7 +82,7 @@ BOOL plotEnlarged = NO;
         //NSLog(@"Writers: %@", writersArray);
         
         NSString *directorString;
-        directorLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+30, 300, 30)];
+        directorLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+35, 300, 30)];
         directorLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
         directorLabel.textColor = [UIColor lightGrayColor];
         if([directorsArray count] > 1)
@@ -92,14 +96,19 @@ BOOL plotEnlarged = NO;
             if(i < [directorsArray count]-1)
                 directorString = [directorString stringByAppendingString:@", "];
         }
+        
+        if([directorString isEqualToString:@"Director: "])
+            directorString = [directorString stringByAppendingString:@"N/A"];
+        
         directorLabel.text = directorString;
         [self addSubview:directorLabel];
         
         str = @"";
         NSString *writerString;
-        writerLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+55, 300, 30)];
+        writerLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+60, 300, 30)];
         writerLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
         writerLabel.textColor = [UIColor lightGrayColor];
+        
         if([writersArray count] > 1)
             writerString = @"Writers: ";
         else
@@ -111,47 +120,22 @@ BOOL plotEnlarged = NO;
             if(i < [writersArray count]-1)
                 writerString = [writerString stringByAppendingString:@", "];
         }
+        
+        if([writerString isEqualToString:@"Writer: "])
+            writerString = [writerString stringByAppendingString:@"N/A"];
+            
         writerLabel.text = writerString;
         [self addSubview:writerLabel];
         
+        
         //castLabel
-        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+73, 100, 44)];
+        castLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+85, 100, 44)];
         castLabel.text = @"Top Cast";
         [self addSubview:castLabel];
         
         //castTable
         castTable = castTableView;
         [self addSubview:self.castTable];
-        
-        //cast
-        //NSLog(@"CastArray: %@", castArray);
-        
-      /*  double y = 0.2;
-        if (![castArray count] < 1) {
-            for (int i=0; i < 5; i++) {
-                NSString *nameStr = [[castArray objectAtIndex:i] objectForKey:@"name"];
-                NSString *charStr = [[castArray objectAtIndex:i] objectForKey:@"character"];
-                //profile pics
-                NSString *imagePath = [[castArray objectAtIndex:i] objectForKey:@"profile_path"];
-                NSString *imageString = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w90%@", imagePath];
-                NSURL *imageURL = [NSURL URLWithString:imageString];
-                NSData *personImage = [NSData dataWithContentsOfURL:imageURL];
-                personView = [[UIImageView alloc]initWithFrame:CGRectMake(10, plotView.frame.size.height+65 +i*90, 59, 87)];
-                personView.image = [UIImage imageWithData:personImage];
-                [self addSubview:personView];
-                
-                UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, plotView.frame.size.height+75 +i*90, 200, 44)];
-                nameLabel.text = nameStr;
-                UILabel *charLabel = [[UILabel alloc]initWithFrame:CGRectMake(82, plotView.frame.size.height+75 +y*90, 200, 44)];
-                charLabel.font = [charLabel.font fontWithSize:12];
-                charLabel.textColor = [UIColor grayColor];
-                charLabel.text = charStr;
-                y++;
-                [self addSubview:nameLabel];
-                [self addSubview:charLabel];
-            }
-        } */
-        
     }
     return self;
 }
@@ -166,6 +150,8 @@ BOOL plotEnlarged = NO;
 //förstorar och förminskar plot-texten.
 - (void)textViewDidChange:(UITextView *)textView
 {
+    
+    NSLog(@"movieView Height: %f", self.frame.size.height);
     NSLog(@"Plot content: %f", plotView.contentSize.height);
     NSLog(@"Plot frame: %f", plotView.frame.size.height);
     NSLog(@"Poster: %f", posterView.frame.size.height);
@@ -184,10 +170,13 @@ BOOL plotEnlarged = NO;
     
     [UIView beginAnimations:nil context:nil];
     textView.frame = newFrame;
-    [self.castLabel setFrame:CGRectMake(10, textView.frame.size.height+73, 100, 44)];
-    [self.directorLabel setFrame:CGRectMake(10, textView.frame.size.height+30, 300, 30)];
-    [self.writerLabel setFrame:CGRectMake(10, textView.frame.size.height+55, 300, 30)];
-    [castTable setFrame:CGRectMake(10, textView.frame.size.height+110, 300, 400)];
+    [self.castLabel setFrame:CGRectMake(10, textView.frame.size.height+85, 100, 44)];
+    [self.directorLabel setFrame:CGRectMake(10, textView.frame.size.height+35, 300, 30)];
+    [self.writerLabel setFrame:CGRectMake(10, textView.frame.size.height+60, 300, 30)];
+    [castTable setFrame:CGRectMake(10, textView.frame.size.height+125, 300, 400)];
+    [rvc enlargeScrollView:textView.frame.size.height-150];
+    
     [UIView commitAnimations];
 }
+
 @end

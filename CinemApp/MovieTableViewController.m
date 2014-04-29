@@ -30,7 +30,7 @@
     self = [super initWithNibName:Nil bundle:Nil];
     if (self) {
         
-        [self.view setFrame:CGRectMake(10, 260, 300, 400)];
+        [self.view setFrame:CGRectMake(10, 275, 300, 400)];
         
         personArray = castArray;
         NSLog(@"TableView PersonArray: %@", personArray);
@@ -90,7 +90,6 @@
 {
     // Return the number of rows in the section.
     return [personArray count];
-    NSLog(@"numberOfRows %d", [personArray count]);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,9 +112,9 @@
         NSLog(@"NAMN: %@",name);
         NSLog(@"KARAKTÄR: %@",movieChar);
         
-        UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 5, 200, 30)];
+        UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 5, 240, 30)];
         nameLabel.text = name;
-        UILabel *charLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 25, 200, 30)];
+        UILabel *charLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 25, 240, 30)];
         charLabel.text = movieChar;
         charLabel.textColor = [UIColor lightGrayColor];
         
@@ -211,11 +210,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (CGFloat)tableViewHeight
-{
-    [personTable layoutIfNeeded];
-    return [personTable contentSize].height;
-}
 
 @end
