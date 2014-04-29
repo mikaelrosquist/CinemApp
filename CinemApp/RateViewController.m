@@ -134,7 +134,7 @@ UITapGestureRecognizer *tap;
         
         //Lägger cast i en array
         castArray = [creditsJson objectForKey:@"cast"];
-        NSUInteger castInt;
+        int castInt;
         if([castArray count] > 7)
             castInt = 7;
         else

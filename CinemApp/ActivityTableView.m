@@ -6,22 +6,9 @@
 //  Copyright (c) 2014 Rosquist Östlund. All rights reserved.
 //
 
-
-
-
-
-
-//ANVÄNDS INTE FÖR NÄRVARANDE!
-
-
-
-
-
 #import "ActivityTableView.h"
 
 @implementation ActivityTableView
-
-@synthesize tableCell;
 
 float height = 80;
 
@@ -29,7 +16,7 @@ float height = 80;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        tableCell = [[ActivityTableViewCell alloc] init];
+        
     }
     return self;
 }

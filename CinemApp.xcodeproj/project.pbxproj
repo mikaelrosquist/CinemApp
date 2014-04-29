@@ -29,7 +29,6 @@
 		6F0F9B4C18F6D1CE002FFFF2 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F9B4B18F6D1CE002FFFF2 /* PasswordViewController.m */; };
 		6F0F9B4F18F6D1E0002FFFF2 /* PushNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0F9B4E18F6D1E0002FFFF2 /* PushNotificationsViewController.m */; };
 		6F16175E18BBBA4800754A10 /* RateSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F16175C18BBBA4800754A10 /* RateSearchViewController.m */; };
-		6F1FD5A7190FC3AD0031E957 /* UserSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1FD5A6190FC3AD0031E957 /* UserSearchViewController.m */; };
 		6F39372918F29AD10026AB4C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F39372818F29AD10026AB4C /* Reachability.m */; };
 		6F46491D18F404DA00A85584 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46491C18F404DA00A85584 /* Parse.framework */; };
 		6F46491F18F404FA00A85584 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46491E18F404FA00A85584 /* AudioToolbox.framework */; };
@@ -49,8 +48,6 @@
 		6FD5598F190E62DA00BB0424 /* SignUpWithEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD5598E190E62DA00BB0424 /* SignUpWithEmailViewController.m */; };
 		6FD55992190E62FD00BB0424 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD55991190E62FD00BB0424 /* LogInViewController.m */; };
 		7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7308FDE618B76D0000F93344 /* ActivityTableView.m */; };
-		7316259A190FC43E004D8D49 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73162599190FC43E004D8D49 /* ActivityViewController.m */; };
-		7316259D190FCFB1004D8D49 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7316259C190FCFB1004D8D49 /* ActivityTableViewCell.m */; };
 		731BE8E818B61EAC0009D8FE /* FilmActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 731BE8E718B61EAC0009D8FE /* FilmActivityView.m */; };
 		73C7E73118B37A1A00453123 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C7E73018B37A1A00453123 /* RateView.m */; };
 		73C8444118F3FE8C0022AF1E /* MovieTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C8444018F3FE8C0022AF1E /* MovieTableView.m */; };
@@ -104,8 +101,6 @@
 		6F0F9B4E18F6D1E0002FFFF2 /* PushNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNotificationsViewController.m; sourceTree = "<group>"; };
 		6F16175B18BBBA4800754A10 /* RateSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateSearchViewController.h; sourceTree = "<group>"; };
 		6F16175C18BBBA4800754A10 /* RateSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateSearchViewController.m; sourceTree = "<group>"; };
-		6F1FD5A5190FC3AD0031E957 /* UserSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchViewController.h; sourceTree = "<group>"; };
-		6F1FD5A6190FC3AD0031E957 /* UserSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchViewController.m; sourceTree = "<group>"; };
 		6F39372718F29AD10026AB4C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		6F39372818F29AD10026AB4C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		6F46491C18F404DA00A85584 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -135,10 +130,6 @@
 		6FD55991190E62FD00BB0424 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		7308FDE518B76D0000F93344 /* ActivityTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableView.h; sourceTree = "<group>"; };
 		7308FDE618B76D0000F93344 /* ActivityTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableView.m; sourceTree = "<group>"; };
-		73162598190FC43E004D8D49 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
-		73162599190FC43E004D8D49 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
-		7316259B190FCFB1004D8D49 /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableViewCell.h; sourceTree = "<group>"; };
-		7316259C190FCFB1004D8D49 /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
 		731BE8E618B61EAC0009D8FE /* FilmActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmActivityView.h; sourceTree = "<group>"; };
 		731BE8E718B61EAC0009D8FE /* FilmActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmActivityView.m; sourceTree = "<group>"; };
 		73C7E72F18B37A1A00453123 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
@@ -317,21 +308,11 @@
 			name = LogInViewControllers;
 			sourceTree = "<group>";
 		};
-		7316259E190FCFBC004D8D49 /* ActivityTableView */ = {
+		73C7E73218B37A4F00453123 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				7308FDE518B76D0000F93344 /* ActivityTableView.h */,
 				7308FDE618B76D0000F93344 /* ActivityTableView.m */,
-				7316259B190FCFB1004D8D49 /* ActivityTableViewCell.h */,
-				7316259C190FCFB1004D8D49 /* ActivityTableViewCell.m */,
-			);
-			name = ActivityTableView;
-			sourceTree = "<group>";
-		};
-		73C7E73218B37A4F00453123 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				7316259E190FCFBC004D8D49 /* ActivityTableView */,
 				731BE8E618B61EAC0009D8FE /* FilmActivityView.h */,
 				731BE8E718B61EAC0009D8FE /* FilmActivityView.m */,
 				73C7E72F18B37A1A00453123 /* RateView.h */,
@@ -348,14 +329,10 @@
 			isa = PBXGroup;
 			children = (
 				6FD5597E190E56EF00BB0424 /* LogInViewControllers */,
-				73162598190FC43E004D8D49 /* ActivityViewController.h */,
-				73162599190FC43E004D8D49 /* ActivityViewController.m */,
 				73C8444218F401060022AF1E /* MovieTableViewController.h */,
 				73C8444318F401060022AF1E /* MovieTableViewController.m */,
 				6F0CAA3A18B3709200AE42F9 /* HomeViewController.h */,
 				6F0CAA3B18B3709200AE42F9 /* HomeViewController.m */,
-				6F1FD5A5190FC3AD0031E957 /* UserSearchViewController.h */,
-				6F1FD5A6190FC3AD0031E957 /* UserSearchViewController.m */,
 				6F0CAA3C18B3709200AE42F9 /* ExploreViewController.h */,
 				6F0CAA3D18B3709200AE42F9 /* ExploreViewController.m */,
 				6F0CAA3E18B3709200AE42F9 /* RateViewController.h */,
@@ -481,7 +458,6 @@
 				6FC18B2118BC273C005B226F /* Movie.m in Sources */,
 				6F9F75A918B79D7B00B69308 /* NotLoggedInViewController.m in Sources */,
 				73C7E73118B37A1A00453123 /* RateView.m in Sources */,
-				7316259A190FC43E004D8D49 /* ActivityViewController.m in Sources */,
 				6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */,
 				6F0F9B4818F6B909002FFFF2 /* ProfileSettingsViewController.m in Sources */,
 				6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */,
@@ -500,11 +476,6 @@
 				6F0CAA1618B3705400AE42F9 /* main.m in Sources */,
 				6F0CAA4818B3709200AE42F9 /* NotificationViewController.m in Sources */,
 				6F39372918F29AD10026AB4C /* Reachability.m in Sources */,
-<<<<<<< HEAD
-				7316259D190FCFB1004D8D49 /* ActivityTableViewCell.m in Sources */,
-=======
-				6F1FD5A7190FC3AD0031E957 /* UserSearchViewController.m in Sources */,
->>>>>>> FETCH_HEAD
 				6F0CAA4518B3709200AE42F9 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ActivityTableViewCell.h"
 
-@interface ActivityTableView : UITableView
+@interface ActivityTableView : UITableViewCell
 
-@property (nonatomic, strong) ActivityTableViewCell *tableCell;
 
 @end
