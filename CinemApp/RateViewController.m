@@ -9,6 +9,7 @@
 #import "RateViewController.h"
 #import "DejalActivityView.h"
 
+
 #define getDataURL @"http://api.themoviedb.org/3/movie/"
 #define api_key @"?api_key=2da45d86a9897bdf7e7eab86aa0485e3"
 #define getCreditsURL @"/credits"
@@ -52,8 +53,8 @@ UITapGestureRecognizer *tap;
     
     //Tar bort tangentbordet om man klickar inom scrollView
     tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
+           initWithTarget:self
+           action:@selector(dismissKeyboard)];
     
     //Om det inte finns något årtal
     if([movieRelease isEqualToString:@""])
@@ -100,12 +101,12 @@ UITapGestureRecognizer *tap;
     [self.backdropWithBlurImageView setClipsToBounds:YES];
     
     /*
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityIndicator.frame = CGRectMake(0, 0, backdropImageWidth, backdropImageHeight-50);
-    [activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [activityIndicator startAnimating];
-    [self.backdropImageView addSubview:activityIndicator];
-    */
+     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+     activityIndicator.frame = CGRectMake(0, 0, backdropImageWidth, backdropImageHeight-50);
+     [activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
+     [activityIndicator startAnimating];
+     [self.backdropImageView addSubview:activityIndicator];
+     */
     
     //SKAPAR NY TRÅD FÖR INLADDNING AV DATA
     dispatch_queue_t queue = dispatch_queue_create("myqueue", NULL);
@@ -123,15 +124,15 @@ UITapGestureRecognizer *tap;
         NSLog(@"HÄMTAT: Filmdata från TMDb");
         
         //Parsar filminfo till movieView
-            //Plot
+        //Plot
         moviePlot = [json valueForKey:@"overview"];
-            //Poster
+        //Poster
         NSString *posterPath = [json valueForKey:@"poster_path"];
         NSString *posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w185%@", posterPath];
         NSURL *posterURL = [NSURL URLWithString:posterString];
         NSData *moviePoster = [NSData dataWithContentsOfURL:posterURL];
         
-            //Lägger cast i en array
+        //Lägger cast i en array
         castArray = [creditsJson objectForKey:@"cast"];
         int castInt;
         if([castArray count] > 7)
@@ -139,18 +140,18 @@ UITapGestureRecognizer *tap;
         else
             castInt = [castArray count];
         
-            //Hämtar crew
+        //Hämtar crew
         NSMutableArray *movieCrew = [creditsJson objectForKey:@"crew"];
         NSString *jobTitle;
         
-            //Directors
+        //Directors
         movieDirectors  = [[NSMutableArray alloc] init];
         for(int i=0; i<[movieCrew count]; i++){
             jobTitle = [movieCrew[i] objectForKey:@"job"];
             if([jobTitle isEqualToString:@"Director"])
                 [movieDirectors addObject:[movieCrew[i] objectForKey:@"name"]];
         }
-            //Writers
+        //Writers
         movieWriters  = [[NSMutableArray alloc] init];
         for(int i=0; i<[movieCrew count]; i++){
             jobTitle = [movieCrew[i] objectForKey:@"job"];
@@ -158,7 +159,7 @@ UITapGestureRecognizer *tap;
                 [movieWriters addObject:[movieCrew[i] objectForKey:@"name"]];
         }
         
-            //Skapar movieTableView
+        //Skapar movieTableView
         movieTVC = [[MovieTableViewController alloc]initWithData:castArray];
         movieTableView = movieTVC.view;
         
@@ -199,7 +200,7 @@ UITapGestureRecognizer *tap;
             tap = [[UITapGestureRecognizer alloc]initWithTarget:self
                                                          action:@selector(dismissKeyboard)];
             [self.view addGestureRecognizer:tap];
-
+            
             //Formaterar en sträng med genrar
             NSString *movieGenreString = @"";
             for (int i = 0; i < [genreArray count]; i++) {
@@ -281,14 +282,14 @@ UITapGestureRecognizer *tap;
     self.tableView = [[UITableView alloc] init];
     self.tableView.delegate = self;
     self.tableView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
-
+    
     
     //Ska göra det enklare att använda slidern, vet ej om det funkar
     self.scrollView.canCancelContentTouches = YES;
     self.scrollView.delaysContentTouches = YES;
     
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
-
+    
     //Tar bort "Back"-texten på filmsidorna
     self.navigationController.navigationBar.topItem.backBarButtonItem = [[UIBarButtonItem alloc]
                                                                          initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -323,6 +324,14 @@ UITapGestureRecognizer *tap;
         else
             f = CGRectMake(0, -yOffset, backdropImageWidth, backdropImageHeight);
     }
+    
+    if (yOffset > 90){
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+    }else if (yOffset < 90){
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    }
+    
+    
     self.backdropImageView.frame = f;
     self.backdropWithBlurImageView.frame = f;
     
@@ -335,6 +344,10 @@ UITapGestureRecognizer *tap;
     //Log för debug
     //NSLog(@"YOFFSET: %f", yOffset);
     //NSLog(@"BLUR ALPHA: %f", blurAlpha);
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 //SEGMENTED CONTROL
@@ -415,7 +428,7 @@ UITapGestureRecognizer *tap;
     //NSDictionary* keyboardInfo = [note userInfo];
     //NSValue* keyboardFrame = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
     //CGRect keyboardFrameRect = [keyboardFrame CGRectValue];
-
+    
     [UIView beginAnimations:nil context:nil];
     self.scrollView.center = CGPointMake(self.scrollView.center.x, self.scrollView.center.y-60);
     self.backdropImageView.center = CGPointMake(_backdropImageView.center.x, _backdropImageView.center.y-60);

@@ -14,6 +14,7 @@
 #import "ProfileViewController.h"
 #import "RateSearchViewController.h"
 #import "Parse/Parse.h"
+#import "GTScrollNavigationBar.h"
 
 @implementation AppDelegate
 
@@ -24,6 +25,7 @@
 {
     [Parse setApplicationId:@"LkmDnlPFo5EMB1o30VRxUaUwFG9q891pic8oobsp"
                   clientKey:@"zpwuevUaEySDKdFuSf1mQ5b30J8wrrj2xl8Ndkce"];
+    
     
     
     
@@ -64,7 +66,11 @@
     UINavigationController *rateNav = [[UINavigationController alloc] initWithRootViewController:rateSearch];
     UINavigationController *activityNav = [[UINavigationController alloc] initWithRootViewController:activity];
     UINavigationController *profileNav = [[UINavigationController alloc] initWithRootViewController:profile];
-    
+    /*
+    UINavigationController *rateNav = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
+                                                                       toolbarClass:nil];
+    [rateNav setViewControllers:@[rateSearch] animated:NO];
+    */
     [profileNav.navigationBar setBackgroundImage:[UIImage new]
                                    forBarMetrics:UIBarMetricsDefault];
     profileNav.navigationBar.shadowImage = [UIImage new];
