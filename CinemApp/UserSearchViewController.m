@@ -51,7 +51,7 @@
     searchBar.placeholder = @"Search user";
     searchBar.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     [searchBar becomeFirstResponder];
-    [self.tableView setHidden:YES];
+    [self.tableView setHidden:NO];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
@@ -147,7 +147,7 @@
     
         cell.textLabel.text = [NSString stringWithFormat:@"%@", username];
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
-        imgView.image = [UIImage imageNamed:@"profilePicPlaceHolder"];
+        imgView.image = [UIImage imageNamed:@"settings_username"];
         cell.imageView.image = imgView.image;
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
