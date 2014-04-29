@@ -40,7 +40,6 @@
 		6F46492B18F4052800A85584 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492A18F4052800A85584 /* Security.framework */; };
 		6F46492F18F4053300A85584 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492E18F4053300A85584 /* SystemConfiguration.framework */; };
 		6F5AF01E190FA5F10000B23D /* GTScrollNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AF01D190FA5F10000B23D /* GTScrollNavigationBar.m */; };
-		6F655988190FE828004D09CF /* UserSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F655987190FE828004D09CF /* UserSearchViewController.m */; };
 		6F6D3DDA18F81FFB00D53B66 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */; };
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
 		6F9F75A918B79D7B00B69308 /* NotLoggedInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F75A818B79D7B00B69308 /* NotLoggedInViewController.m */; };
@@ -52,6 +51,7 @@
 		730B80B4190FE41200FB9872 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 730B80B3190FE41200FB9872 /* ActivityViewController.m */; };
 		730B80B7190FE4CA00FB9872 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 730B80B6190FE4CA00FB9872 /* ActivityTableViewCell.m */; };
 		731BE8E818B61EAC0009D8FE /* FilmActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 731BE8E718B61EAC0009D8FE /* FilmActivityView.m */; };
+		731C8693190FE95300E34C33 /* UserSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 731C8692190FE95300E34C33 /* UserSearchViewController.m */; };
 		73C7E73118B37A1A00453123 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C7E73018B37A1A00453123 /* RateView.m */; };
 		73C8444118F3FE8C0022AF1E /* MovieTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C8444018F3FE8C0022AF1E /* MovieTableView.m */; };
 		73C8444418F401060022AF1E /* MovieTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C8444318F401060022AF1E /* MovieTableViewController.m */; };
@@ -117,8 +117,6 @@
 		6F46492E18F4053300A85584 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6F5AF01C190FA5F10000B23D /* GTScrollNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTScrollNavigationBar.h; sourceTree = "<group>"; };
 		6F5AF01D190FA5F10000B23D /* GTScrollNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTScrollNavigationBar.m; sourceTree = "<group>"; };
-		6F655986190FE828004D09CF /* UserSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserSearchViewController.h; path = "../../CinemApp kopia/CinemApp/UserSearchViewController.h"; sourceTree = "<group>"; };
-		6F655987190FE828004D09CF /* UserSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserSearchViewController.m; path = "../../CinemApp kopia/CinemApp/UserSearchViewController.m"; sourceTree = "<group>"; };
 		6F6D3DD818F81FFB00D53B66 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
 		6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
 		6F955AFF18B397A7004C4B70 /* MovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieView.h; sourceTree = "<group>"; };
@@ -141,6 +139,8 @@
 		730B80B6190FE4CA00FB9872 /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
 		731BE8E618B61EAC0009D8FE /* FilmActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmActivityView.h; sourceTree = "<group>"; };
 		731BE8E718B61EAC0009D8FE /* FilmActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmActivityView.m; sourceTree = "<group>"; };
+		731C8691190FE95300E34C33 /* UserSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchViewController.h; sourceTree = "<group>"; };
+		731C8692190FE95300E34C33 /* UserSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchViewController.m; sourceTree = "<group>"; };
 		73C7E72F18B37A1A00453123 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
 		73C7E73018B37A1A00453123 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
 		73C8443F18F3FE8C0022AF1E /* MovieTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieTableView.h; sourceTree = "<group>"; };
@@ -346,12 +346,12 @@
 				73C8444318F401060022AF1E /* MovieTableViewController.m */,
 				6F0CAA3A18B3709200AE42F9 /* HomeViewController.h */,
 				6F0CAA3B18B3709200AE42F9 /* HomeViewController.m */,
-				6F655986190FE828004D09CF /* UserSearchViewController.h */,
-				6F655987190FE828004D09CF /* UserSearchViewController.m */,
 				6F0CAA3C18B3709200AE42F9 /* ExploreViewController.h */,
 				6F0CAA3D18B3709200AE42F9 /* ExploreViewController.m */,
 				6F0CAA3E18B3709200AE42F9 /* RateViewController.h */,
 				6F0CAA3F18B3709200AE42F9 /* RateViewController.m */,
+				731C8691190FE95300E34C33 /* UserSearchViewController.h */,
+				731C8692190FE95300E34C33 /* UserSearchViewController.m */,
 				6F16175B18BBBA4800754A10 /* RateSearchViewController.h */,
 				6F16175C18BBBA4800754A10 /* RateSearchViewController.m */,
 				6F0CAA4018B3709200AE42F9 /* NotificationViewController.h */,
@@ -471,7 +471,7 @@
 				6FD55992190E62FD00BB0424 /* LogInViewController.m in Sources */,
 				6F0CAA4418B3709200AE42F9 /* ImageEffects.m in Sources */,
 				6FC18B2118BC273C005B226F /* Movie.m in Sources */,
-				6F655988190FE828004D09CF /* UserSearchViewController.m in Sources */,
+				731C8693190FE95300E34C33 /* UserSearchViewController.m in Sources */,
 				6F9F75A918B79D7B00B69308 /* NotLoggedInViewController.m in Sources */,
 				73C7E73118B37A1A00453123 /* RateView.m in Sources */,
 				730B80B4190FE41200FB9872 /* ActivityViewController.m in Sources */,
