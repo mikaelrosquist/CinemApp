@@ -146,6 +146,9 @@
         NSString *username = [[usersArray objectAtIndex:indexPath.row] valueForKey:@"username"];
     
         cell.textLabel.text = [NSString stringWithFormat:@"%@", username];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
+        imgView.image = [UIImage imageNamed:@"profilePicPlaceHolder"];
+        cell.imageView.image = imgView.image;
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
