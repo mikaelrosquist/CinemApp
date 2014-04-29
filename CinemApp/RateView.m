@@ -98,7 +98,6 @@
         //Fixa så att knappen blir mörkare när den markeras
         rateButton.showsTouchWhenHighlighted = YES;
         [rateButton addTarget:self action:@selector(saveRating:) forControlEvents:UIControlEventTouchUpInside];
-
         
         [self addSubview:rateButton];
 

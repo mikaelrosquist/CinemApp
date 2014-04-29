@@ -120,12 +120,18 @@
         charLabel.textColor = [UIColor lightGrayColor];
         
         //profile pics
+        
         NSString *imagePath = [[personArray objectAtIndex:indexPath.row] objectForKey:@"profile_path"];
         NSString *imageString = [NSString stringWithFormat:@"http://image.tmdb.org/t/p/w90%@", imagePath];
         NSURL *imageURL = [NSURL URLWithString:imageString];
         NSData *personImage = [NSData dataWithContentsOfURL:imageURL];
         UIImageView *personView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 47, 70)];
-        personView.image = [UIImage imageWithData:personImage];
+        if ([imagePath isEqual: [NSNull null]])
+            personView.image = [UIImage imageNamed:@"actor-placeholder"];
+        else
+            personView.image = [UIImage imageWithData:personImage];
+        
+        NSLog(@"BILD: %@",imagePath);
         
         [cell.contentView addSubview:personView];
         [cell.contentView addSubview:nameLabel];
