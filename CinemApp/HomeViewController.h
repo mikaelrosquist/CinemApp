@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "UserSearchViewController.h"
 
+@class ActivityViewController;
+
 @interface HomeViewController : UIViewController
 
+@property (nonatomic, strong) ActivityViewController *activityTable;
 @property (nonatomic, strong) UserSearchViewController *searchUserView;
+
 
 @end

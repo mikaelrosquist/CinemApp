@@ -41,7 +41,6 @@
 		6F46492F18F4053300A85584 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492E18F4053300A85584 /* SystemConfiguration.framework */; };
 		6F5AF01E190FA5F10000B23D /* GTScrollNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AF01D190FA5F10000B23D /* GTScrollNavigationBar.m */; };
 		6F6D3DDA18F81FFB00D53B66 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */; };
-		6F862E81190FE4C100782E37 /* UserSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F862E80190FE4C100782E37 /* UserSearchViewController.m */; };
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
 		6F9F75A918B79D7B00B69308 /* NotLoggedInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F75A818B79D7B00B69308 /* NotLoggedInViewController.m */; };
 		6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */; };
@@ -49,6 +48,8 @@
 		6FD5598F190E62DA00BB0424 /* SignUpWithEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD5598E190E62DA00BB0424 /* SignUpWithEmailViewController.m */; };
 		6FD55992190E62FD00BB0424 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD55991190E62FD00BB0424 /* LogInViewController.m */; };
 		7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7308FDE618B76D0000F93344 /* ActivityTableView.m */; };
+		730B80B4190FE41200FB9872 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 730B80B3190FE41200FB9872 /* ActivityViewController.m */; };
+		730B80B7190FE4CA00FB9872 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 730B80B6190FE4CA00FB9872 /* ActivityTableViewCell.m */; };
 		731BE8E818B61EAC0009D8FE /* FilmActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 731BE8E718B61EAC0009D8FE /* FilmActivityView.m */; };
 		73C7E73118B37A1A00453123 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C7E73018B37A1A00453123 /* RateView.m */; };
 		73C8444118F3FE8C0022AF1E /* MovieTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C8444018F3FE8C0022AF1E /* MovieTableView.m */; };
@@ -117,8 +118,6 @@
 		6F5AF01D190FA5F10000B23D /* GTScrollNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTScrollNavigationBar.m; sourceTree = "<group>"; };
 		6F6D3DD818F81FFB00D53B66 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
 		6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
-		6F862E7F190FE4C100782E37 /* UserSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchViewController.h; sourceTree = "<group>"; };
-		6F862E80190FE4C100782E37 /* UserSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchViewController.m; sourceTree = "<group>"; };
 		6F955AFF18B397A7004C4B70 /* MovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieView.h; sourceTree = "<group>"; };
 		6F955B0018B397A7004C4B70 /* MovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieView.m; sourceTree = "<group>"; };
 		6F9F75A718B79D7B00B69308 /* NotLoggedInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotLoggedInViewController.h; sourceTree = "<group>"; };
@@ -133,6 +132,10 @@
 		6FD55991190E62FD00BB0424 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		7308FDE518B76D0000F93344 /* ActivityTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableView.h; sourceTree = "<group>"; };
 		7308FDE618B76D0000F93344 /* ActivityTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableView.m; sourceTree = "<group>"; };
+		730B80B2190FE41200FB9872 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
+		730B80B3190FE41200FB9872 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
+		730B80B5190FE4CA00FB9872 /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableViewCell.h; sourceTree = "<group>"; };
+		730B80B6190FE4CA00FB9872 /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewCell.m; sourceTree = "<group>"; };
 		731BE8E618B61EAC0009D8FE /* FilmActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilmActivityView.h; sourceTree = "<group>"; };
 		731BE8E718B61EAC0009D8FE /* FilmActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilmActivityView.m; sourceTree = "<group>"; };
 		73C7E72F18B37A1A00453123 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
@@ -316,6 +319,8 @@
 			children = (
 				7308FDE518B76D0000F93344 /* ActivityTableView.h */,
 				7308FDE618B76D0000F93344 /* ActivityTableView.m */,
+				730B80B5190FE4CA00FB9872 /* ActivityTableViewCell.h */,
+				730B80B6190FE4CA00FB9872 /* ActivityTableViewCell.m */,
 				731BE8E618B61EAC0009D8FE /* FilmActivityView.h */,
 				731BE8E718B61EAC0009D8FE /* FilmActivityView.m */,
 				73C7E72F18B37A1A00453123 /* RateView.h */,
@@ -331,12 +336,13 @@
 		73C7E73318B37A6400453123 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				730B80B2190FE41200FB9872 /* ActivityViewController.h */,
+				730B80B3190FE41200FB9872 /* ActivityViewController.m */,
+				6FD5597E190E56EF00BB0424 /* LogInViewControllers */,
 				73C8444218F401060022AF1E /* MovieTableViewController.h */,
 				73C8444318F401060022AF1E /* MovieTableViewController.m */,
 				6F0CAA3A18B3709200AE42F9 /* HomeViewController.h */,
 				6F0CAA3B18B3709200AE42F9 /* HomeViewController.m */,
-				6F862E7F190FE4C100782E37 /* UserSearchViewController.h */,
-				6F862E80190FE4C100782E37 /* UserSearchViewController.m */,
 				6F0CAA3C18B3709200AE42F9 /* ExploreViewController.h */,
 				6F0CAA3D18B3709200AE42F9 /* ExploreViewController.m */,
 				6F0CAA3E18B3709200AE42F9 /* RateViewController.h */,
@@ -347,7 +353,6 @@
 				6F0CAA4118B3709200AE42F9 /* NotificationViewController.m */,
 				6F0CAA4218B3709200AE42F9 /* ProfileViewController.h */,
 				6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */,
-				6FD5597E190E56EF00BB0424 /* LogInViewControllers */,
 				6F0F9B4918F6B95D002FFFF2 /* SettingsViewControllers */,
 			);
 			name = Controllers;
@@ -458,12 +463,12 @@
 			files = (
 				6F0CAA4618B3709200AE42F9 /* ExploreViewController.m in Sources */,
 				6F0F9B4C18F6D1CE002FFFF2 /* PasswordViewController.m in Sources */,
-				6F862E81190FE4C100782E37 /* UserSearchViewController.m in Sources */,
 				6FD55992190E62FD00BB0424 /* LogInViewController.m in Sources */,
 				6F0CAA4418B3709200AE42F9 /* ImageEffects.m in Sources */,
 				6FC18B2118BC273C005B226F /* Movie.m in Sources */,
 				6F9F75A918B79D7B00B69308 /* NotLoggedInViewController.m in Sources */,
 				73C7E73118B37A1A00453123 /* RateView.m in Sources */,
+				730B80B4190FE41200FB9872 /* ActivityViewController.m in Sources */,
 				6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */,
 				6F0F9B4818F6B909002FFFF2 /* ProfileSettingsViewController.m in Sources */,
 				6F0CAA4918B3709200AE42F9 /* ProfileViewController.m in Sources */,
@@ -482,6 +487,7 @@
 				6F0CAA1618B3705400AE42F9 /* main.m in Sources */,
 				6F0CAA4818B3709200AE42F9 /* NotificationViewController.m in Sources */,
 				6F39372918F29AD10026AB4C /* Reachability.m in Sources */,
+				730B80B7190FE4CA00FB9872 /* ActivityTableViewCell.m in Sources */,
 				6F0CAA4518B3709200AE42F9 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
