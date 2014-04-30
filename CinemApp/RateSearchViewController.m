@@ -50,7 +50,6 @@
     
     //Färg på navigationBaren
     UIImage *_defaultImage;
-    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
     
     if(moviesArray.count < 1)
@@ -62,6 +61,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 }
 
 -(void)refresh {

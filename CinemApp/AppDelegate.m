@@ -33,6 +33,11 @@
     self.window.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     [self.window makeKeyAndVisible];
     
+    //[[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]}];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
+
+
+    
     [self setupTabBarController];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -59,24 +64,15 @@
     ExploreViewController* explore = [[ExploreViewController alloc] init];
     RateSearchViewController* rateSearch = [[RateSearchViewController alloc] init];
     NotificationViewController* activity = [[NotificationViewController alloc] init];
-    ProfileViewController* profile = [[ProfileViewController alloc] init];
+    ProfileViewController* profile = [[ProfileViewController alloc] initWithUser:[PFUser currentUser]];
     
     UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController:home];
     UINavigationController *exploreNav = [[UINavigationController alloc] initWithRootViewController:explore];
     UINavigationController *rateNav = [[UINavigationController alloc] initWithRootViewController:rateSearch];
     UINavigationController *activityNav = [[UINavigationController alloc] initWithRootViewController:activity];
     UINavigationController *profileNav = [[UINavigationController alloc] initWithRootViewController:profile];
-    /*
-    UINavigationController *rateNav = [[UINavigationController alloc] initWithNavigationBarClass:[GTScrollNavigationBar class]
-                                                                       toolbarClass:nil];
-    [rateNav setViewControllers:@[rateSearch] animated:NO];
-    */
-    [profileNav.navigationBar setBackgroundImage:[UIImage new]
-                                   forBarMetrics:UIBarMetricsDefault];
-    profileNav.navigationBar.shadowImage = [UIImage new];
-    profileNav.navigationBar.translucent = YES;
-    profileNav.view.backgroundColor = [UIColor clearColor];
-    profileNav.navigationBar.barStyle = UIBarStyleBlack;
+
+    
     
     NSArray* controllers = [NSArray arrayWithObjects:homeNav, exploreNav, rateNav, activityNav, profileNav, nil];
     self.tabBarController.viewControllers = controllers;

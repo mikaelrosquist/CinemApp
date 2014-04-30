@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ProfileSettingsViewController.h"
 #import "PushNotificationsViewController.h"
+#import "SecuritySettingsViewController.h"
 
 @interface SettingsRootViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
 
@@ -18,6 +19,7 @@
 
 @property (nonatomic, strong) ProfileSettingsViewController *profileSettingsView;
 @property (nonatomic, strong) PushNotificationsViewController *notificationsSettingsView;
+@property (nonatomic, strong) SecuritySettingsViewController *securitySettingsView;
 
 @property (strong, nonatomic) UITabBarController *tabController;
 

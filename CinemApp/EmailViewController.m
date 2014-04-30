@@ -7,43 +7,34 @@
 //  Copyright (c) 2014 Rosquist Östlund. All rights reserved.
 //
 
-#import "PasswordViewController.h"
+#import "EmailViewController.h"
 #import "Parse/Parse.h"
 
-@interface PasswordViewController ()
+@interface EmailViewController ()
 
 @end
 
-@implementation PasswordViewController
+@implementation EmailViewController
 
-@synthesize currentPasswordSection, changePasswordSection;
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize emailSection, passwordSection;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [self setTitle:@"Change Password"];
-	
-	self.currentPasswordSection = @[@"Nickname"];
     
-    self.changePasswordSection = @[@"Email", @"hej"];
+    [self setTitle:@"Update email"];
+	
+	self.emailSection = @[@"New email"];
+    
+    self.passwordSection = @[@"Password"];
 	
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
 	self.edgesForExtendedLayout = UIRectEdgeNone;
     
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Save"
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
                                                                     action:@selector(save:)];
     
     self.navigationItem.rightBarButtonItem = barButtonItem;
@@ -55,11 +46,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if(section==0)
-        return 1;
-    else if(section==1)
-        return 2;
-    
     return 1;
 }
 
@@ -84,24 +70,20 @@
     [playerTextField setEnabled: YES];
     playerTextField.keyboardType = UIKeyboardTypeEmailAddress;
     playerTextField.returnKeyType = UIReturnKeyNext;
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     if(indexPath.section == 0){
-        playerTextField.placeholder = @"Current password";
+        playerTextField.placeholder = @"New email address";
         [playerTextField setTag:0];
+        imgView.image = [UIImage imageNamed:@"settings_email"];
     }else if(indexPath.section == 1){
-        if ([indexPath row] == 0)
-            playerTextField.placeholder = @"New password";
-        else if ([indexPath row] == 1){
-            playerTextField.placeholder = @"Confirm new password";
-            playerTextField.returnKeyType = UIReturnKeyDone;
-        }
-        [playerTextField setTag:[indexPath row]+1];
+        playerTextField.placeholder = @"Password for security";
+        playerTextField.returnKeyType = UIReturnKeyDone;
+        [playerTextField setTag:1];
+        imgView.image = [UIImage imageNamed:@"settings_password"];
     }
     playerTextField.delegate = self;
     playerTextField.secureTextEntry = YES;
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    imgView.image = [UIImage imageNamed:@"settings_password"];
     cell.imageView.image = imgView.image;
-
     [cell.contentView addSubview:playerTextField];
     
 	return cell;
