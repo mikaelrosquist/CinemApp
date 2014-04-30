@@ -41,10 +41,16 @@
     self.navigationItem.rightBarButtonItem = barButtonItem;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    UIImage *_defaultImage;
+    [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
+}
+
 -(void)searchUser:(id)sender {
     searchUserView = [[UserSearchViewController alloc] initWithStyle:UITableViewStylePlain];
     [self.navigationController pushViewController:searchUserView animated:YES];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 @end
