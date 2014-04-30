@@ -351,7 +351,6 @@
 			children = (
 				730B80B2190FE41200FB9872 /* ActivityViewController.h */,
 				730B80B3190FE41200FB9872 /* ActivityViewController.m */,
-				6FD5597E190E56EF00BB0424 /* LogInViewControllers */,
 				73C8444218F401060022AF1E /* MovieTableViewController.h */,
 				73C8444318F401060022AF1E /* MovieTableViewController.m */,
 				6F0CAA3A18B3709200AE42F9 /* HomeViewController.h */,
@@ -368,6 +367,7 @@
 				731C8692190FE95300E34C33 /* UserSearchViewController.m */,
 				6F0CAA4218B3709200AE42F9 /* ProfileViewController.h */,
 				6F0CAA4318B3709200AE42F9 /* ProfileViewController.m */,
+				6FD5597E190E56EF00BB0424 /* LogInViewControllers */,
 				6F0F9B4918F6B95D002FFFF2 /* SettingsViewControllers */,
 			);
 			name = Controllers;
