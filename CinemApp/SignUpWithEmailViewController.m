@@ -9,6 +9,7 @@
 #import "SignUpWithEmailViewController.h"
 #import "Parse/Parse.h"
 #import "DejalActivityView.h"
+#import "AppDelegate.h"<
 
 @interface SignUpWithEmailViewController (){
     NSArray* placeholders;
@@ -200,7 +201,8 @@
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
                 NSLog(@"Användare skapad!!!");
-                [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
+                AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                [appDelegate setupTabBarController];
             } else {
                 NSString *errorString = [error userInfo][@"error"];
                 NSString *firstCapChar = [[errorString substringToIndex:1] capitalizedString];

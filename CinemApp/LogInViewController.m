@@ -164,8 +164,11 @@
                                                 [appDelegate setupTabBarController];
                                             } else {
                                                 NSString *errorString = [error userInfo][@"error"];
+                                                NSString *firstCapChar = [[errorString substringToIndex:1] capitalizedString];
+                                                NSString *cappedString = [errorString stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:firstCapChar];
+
                                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                                message:errorString
+                                                                                                message:cappedString
                                                                                                delegate:self
                                                                                       cancelButtonTitle:@"OK"
                                                                                       otherButtonTitles:nil];
