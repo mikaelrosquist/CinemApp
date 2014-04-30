@@ -18,7 +18,7 @@
 
 @implementation SettingsRootViewController
 
-@synthesize accountSection, generalSection, aboutSection, profileSettingsView, notificationsSettingsView, tabController;
+@synthesize accountSection, generalSection, aboutSection, profileSettingsView, securitySettingsView, notificationsSettingsView, tabController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -29,35 +29,32 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
+    
     [self setTitle:@"Settings"];
 	
-	self.accountSection = @[@"Profile settings", @"Push notifications"];
+	self.accountSection = @[@"Profile settings", @"Security settings", @"Push notifications"];
     
     self.aboutSection = @[@"FAQ", @"About us", @"Terms of service"];
 	
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
-	self.edgesForExtendedLayout = UIRectEdgeNone;
+	//self.edgesForExtendedLayout = UIRectEdgeNone;
     
     //Sätter knapparna i navigationBar till röda
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
-    
-    //Färg på navigationBaren
-    UIImage *_defaultImage;
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
-    [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.navigationController.navigationBar.translucent = NO;
-}
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -122,6 +119,11 @@
         }
         else if(indexPath.row==1)
         {
+            securitySettingsView = [[SecuritySettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:securitySettingsView animated:YES];
+        }
+        else if(indexPath.row==2)
+        {
             notificationsSettingsView = [[PushNotificationsViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:notificationsSettingsView animated:YES];
         }
@@ -156,10 +158,12 @@
     if (buttonIndex == 1) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         [PFUser logOut];
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         NotLoggedInViewController *loginView = [[NotLoggedInViewController alloc] init];
         UINavigationController *logInNav = [[UINavigationController alloc] initWithRootViewController:loginView];
         logInNav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:logInNav animated:NO completion:nil];
+        [app.window.rootViewController presentViewController:logInNav animated:NO completion:nil];
+        
         [self.tabBarController setSelectedIndex:0];
         [self.navigationController popViewControllerAnimated:NO];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;

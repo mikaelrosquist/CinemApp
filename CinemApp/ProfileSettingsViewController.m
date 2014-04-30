@@ -12,13 +12,14 @@
 
 @interface ProfileSettingsViewController (){
     PFUser *currentUser;
+    NSString *fullName;
 }
 
 @end
 
 @implementation ProfileSettingsViewController
 
-@synthesize personalSection, passwordSection, privateProfileSection, removeAccountSection, passwordSettingsView;
+@synthesize personalSection, privateProfileSection, removeAccountSection;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,9 +38,7 @@
     
     [self setTitle:@"Profile settings"];
 	
-	self.personalSection = @[@"Username", @"Email", @"Profile picture", @"Cover photo"];
-    
-    self.passwordSection = @[@"Change password"];
+	self.personalSection = @[@"Full name", @"Profile picture", @"Cover photo"];
     
     self.privateProfileSection = @[@"Private profile"];
 	
@@ -55,6 +54,23 @@
                                                                     action:@selector(save:)];
     
     self.navigationItem.rightBarButtonItem = barButtonItem;
+    
+    PFUser *user = [PFUser currentUser];
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"objectId" equalTo:user.objectId];
+    query.limit = 1;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            if (objects.count > 0) {
+                PFObject *_user = [objects objectAtIndex:0];
+                fullName = [_user objectForKey:@"fullname"];
+            }
+        }
+    }];
+    
+    NSLog(@"%@", fullName);
+
 
 }
 
@@ -65,7 +81,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -80,10 +96,8 @@
 	if(section==0)
         return self.personalSection.count;
     else if(section==1)
-        return self.passwordSection.count;
-    else if(section==2)
         return self.privateProfileSection.count;
-    else if(section==3)
+    else if(section==2)
         return self.removeAccountSection.count;
     
     return 1;
@@ -96,7 +110,7 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
 	
     if(indexPath.section == 0){
-        if(indexPath.row == 0 || indexPath.row == 1){
+        if(indexPath.row == 0){
         
             UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(52, 8, 260, 30)];
             playerTextField.adjustsFontSizeToFitWidth = YES;
@@ -104,8 +118,8 @@
             playerTextField.backgroundColor = [UIColor whiteColor];
             playerTextField.autocorrectionType = UITextAutocorrectionTypeNo; //stäng av autocorrect
             playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; //stäng av autoversaler
-            playerTextField.tag = 0;
             playerTextField.clearButtonMode = UITextFieldViewModeWhileEditing; //'x'-knappen
+            playerTextField.tag = 0;
             [playerTextField setEnabled: YES];
             playerTextField.keyboardType = UIKeyboardTypeEmailAddress;
             playerTextField.returnKeyType = UIReturnKeyNext;
@@ -114,12 +128,10 @@
             
             if ([indexPath row] == 0){
                 imgView.image = [UIImage imageNamed:@"settings_username"];
-                playerTextField.text = currentUser.username;
+                if(![fullName  isEqual: [NSNull null]])
+                    playerTextField.text = fullName;
+                
                 playerTextField.returnKeyType = UIReturnKeyNext;
-            }else if ([indexPath row] == 1){
-                imgView.image = [UIImage imageNamed:@"settings_email"];
-                playerTextField.text = currentUser.email;
-                playerTextField.returnKeyType = UIReturnKeyDone;
             }
             
             [playerTextField setTag:[indexPath row]];
@@ -137,15 +149,6 @@
     }
     
     else if(indexPath.section == 1){
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text = self.passwordSection[indexPath.row];
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        imgView.image = [UIImage imageNamed:@"settings_password"];
-        cell.imageView.image = imgView.image;
-
-    }
-    
-    else if(indexPath.section == 2){
         cell.textLabel.text = self.privateProfileSection[indexPath.row];
         UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
         cell.accessoryView = switchView;
@@ -161,7 +164,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    else if(indexPath.section == 3){
+    else if(indexPath.section == 2){
         cell.textLabel.text = self.removeAccountSection[indexPath.row];
         cell.textLabel.textColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     }
@@ -170,9 +173,9 @@
 
 
 -(NSString *) tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (section == 2)
+    if (section == 1)
         return @"Toggle to require authorization before anyone can follow you or see your ratings. Your existing followers won't be affected.";
-    else if (section == 3)
+    else if (section == 2)
         return @"This will permanently remove your account. The username cannot be reused by anyone.";
     else
         return nil;
@@ -180,12 +183,7 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section==1){
-        if(indexPath.row==0){
-            passwordSettingsView = [[PasswordViewController alloc] initWithStyle:UITableViewStyleGrouped];
-            [self.navigationController pushViewController:passwordSettingsView animated:YES];
-        }
-    }else if(indexPath.section==3){
+    if(indexPath.section==2){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                         message:@"This function does not yet work"
                                                        delegate:self

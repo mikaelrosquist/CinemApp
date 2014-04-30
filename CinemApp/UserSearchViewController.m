@@ -9,6 +9,7 @@
 #import "UserSearchViewController.h"
 #import "Reachability.h"
 #import "Parse/Parse.h"
+#import "ProfileViewController.h"
 
 
 @interface UserSearchViewController ()
@@ -67,16 +68,15 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    //Färg på navigationBaren
     UIImage *_defaultImage;
-    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
     
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    //Färg på navigationBaren
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 }
 
 -(void)refresh {
@@ -156,6 +156,18 @@
     return cell;
 }
 
+//TABLE DELEGATE METHODS
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.searchBar resignFirstResponder];
+    
+    ProfileViewController * profileVC = [[ProfileViewController alloc]initWithUser:[usersArray objectAtIndex:indexPath.row]];
+    
+    //NSLog(@"VALD ANVÄNDARE: %@", [usersArray objectAtIndex:indexPath.row]);
+    
+    [self.navigationController pushViewController:profileVC animated:YES];
+}
+
 
 //HÄMTA DATA
 - (void) retrieveData
@@ -172,11 +184,6 @@
             
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 if (!error) {
-                    
-                    for (PFObject *object in objects) {
-                        PFUser *user = (PFUser *)[query getObjectWithId:object.objectId];
-                        NSLog(@"%@", user.username);
-                    }
                     
                     usersArray = objects;
                     

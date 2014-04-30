@@ -24,10 +24,10 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        self.title = @"CinemApp";
+        self.title = @"News";
         activityTable = [[ActivityViewController alloc]initWithNibName:nil bundle:nil];
         [self.view addSubview:activityTable.view];
+
     }
     return self;
 }
@@ -35,32 +35,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
         
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                   target:self
                                                                                   action:@selector(searchUser:)];
     
     self.navigationItem.rightBarButtonItem = barButtonItem;
-    
-    //Byter färg på navigationBar
-    //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:1.000 green:0.314 blue:0.329 alpha:1];
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
-
-    /* if (![PFUser currentUser]) {
-     LogInViewController *loginView = [[LogInViewController alloc] init];
-     loginView.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-     [self presentViewController:loginView animated:YES completion:nil];
-     }*/
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)searchUser:(id)sender {

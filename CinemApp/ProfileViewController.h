@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MovieView.h"
 #import "SettingsRootViewController.h"
+#import "Parse/Parse.h"
 
 @interface ProfileViewController : UIViewController<UIScrollViewDelegate>
+
+-(id)initWithUser:(PFUser *)user;
 
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) UIImageView *backdropImageView;

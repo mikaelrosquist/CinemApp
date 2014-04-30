@@ -12,10 +12,7 @@
 @interface ProfileSettingsViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (strong, nonatomic) NSArray* personalSection;
-@property (strong, nonatomic) NSArray* passwordSection;
 @property (strong, nonatomic) NSArray* privateProfileSection;
 @property (strong, nonatomic) NSArray* removeAccountSection;
-
-@property (nonatomic, strong) PasswordViewController *passwordSettingsView;
 
 @end
