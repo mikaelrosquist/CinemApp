@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "UserSearchViewController.h"
+#import "ActivityViewController.h"
+#import "Parse/Parse.h"
 
 @class ActivityViewController;
 

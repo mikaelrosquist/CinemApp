@@ -19,15 +19,12 @@
 
 @synthesize activityTable, searchUserView;
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
         self.title = @"CinemApp";
         activityTable = [[ActivityViewController alloc]initWithNibName:nil bundle:nil];
-        [self.view addSubview:activityTable.view];
     }
     return self;
 }
@@ -35,11 +32,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
+    [self.view addSubview:activityTable.view];
+    
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                   target:self
                                                                                   action:@selector(searchUser:)];
-    
     self.navigationItem.rightBarButtonItem = barButtonItem;
     
     //Byter färg på navigationBar

@@ -63,7 +63,7 @@
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                               action:@selector(tappedPlotView)];
-        [self addGestureRecognizer:tap];
+        [self.plotView addGestureRecognizer:tap];
         plotView.editable = NO;
         plotView.selectable = NO; //så man inte kan markera/kopiera text
         plotView.scrollEnabled = NO;

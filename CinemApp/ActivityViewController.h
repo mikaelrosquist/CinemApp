@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Parse/Parse.h"
 #import "HomeViewController.h"
 #import "ActivityTableView.h"
 #import "ActivityTableViewCell.h"
@@ -15,4 +16,7 @@
 
 @property (nonatomic, strong) UITableView *activityTable;
 @property (nonatomic, strong) ActivityTableViewCell *activityTableCell;
+
+- (void)retrieveMovieRatings;
+
 @end
