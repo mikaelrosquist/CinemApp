@@ -20,33 +20,10 @@
 
 @synthesize accountSection, generalSection, aboutSection, profileSettingsView, securitySettingsView, notificationsSettingsView, tabController;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    
-    
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    //self.navigationController.navigationBar.translucent = NO;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
     
     [self setTitle:@"Settings"];
 	
@@ -60,7 +37,20 @@
     
     //Sätter knapparna i navigationBar till röda
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
+    
+    //Färg på navigationBaren
+    UIImage *_defaultImage;
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
+    [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationController.navigationBar.translucent = NO;
 
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{

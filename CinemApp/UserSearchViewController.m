@@ -159,9 +159,6 @@
     [self.searchBar resignFirstResponder];
     
     ProfileViewController * profileVC = [[ProfileViewController alloc]initWithUser:[usersArray objectAtIndex:indexPath.row]];
-    
-    //NSLog(@"VALD ANVÄNDARE: %@", [usersArray objectAtIndex:indexPath.row]);
-    
     [self.navigationController pushViewController:profileVC animated:YES];
 }
 

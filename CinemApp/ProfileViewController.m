@@ -29,10 +29,6 @@ static CGFloat backdropImageWidth  = 320.0;
 
 -(id)initWithUser:(PFUser *)user
 {
-    NSLog(@"LADDAT %@:s PROFIL", user.username);
-    self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
-    [DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
-    
     UIImage *profileBackgroundImage;
     
     if(user == [PFUser currentUser]){
@@ -46,7 +42,6 @@ static CGFloat backdropImageWidth  = 320.0;
         [settingsButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
         settingsView = [[SettingsRootViewController alloc] initWithStyle:UITableViewStyleGrouped];
         profileBackgroundImage = [UIImage imageNamed:@"kitten"];
-        [self.navigationController setNavigationBarHidden: YES animated:NO];
         
         ownUser = YES;
         
@@ -112,7 +107,6 @@ static CGFloat backdropImageWidth  = 320.0;
     //[self setAutomaticallyAdjustsScrollViewInsets:YES];
     CGRect bounds = self.view.bounds;
     self.scrollView.frame = bounds;
-    [DejalActivityView removeView];
     return self;
 }
 
@@ -159,22 +153,20 @@ static CGFloat backdropImageWidth  = 320.0;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //Sätter ramen för scrollView
-    CGRect bounds = self.view.bounds;
-    self.scrollView.frame = bounds;
+    
+
     
     if(ownUser)
-        [self.navigationController setNavigationBarHidden: YES animated:NO];
+        [self.navigationController setNavigationBarHidden: YES animated:YES];
     else{
-        [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
+        [self.navigationController setNavigationBarHidden: NO animated:YES];
         self.navigationController.navigationBar.translucent = YES;
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         self.navigationController.navigationBar.shadowImage = [UIImage new];
         self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
-        [self.navigationController setNavigationBarHidden: NO animated:NO];
     }
-    
 }
+
 
 -(void)showSettings:(id)sender {
     
