@@ -20,8 +20,9 @@
 @synthesize activityTable, activityTableCell;
 
 NSDictionary *json;
-
 NSArray *ratingsArray;
+NSData *moviePoster;
+NSString *movieTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -92,15 +93,17 @@ NSArray *ratingsArray;
         NSString *rating = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"rating"];
         NSString *movieID = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"movieId"];
         
-        NSData *moviePoster = [self retrieveMovieInfo:movieID];
+        [self retrieveMovieInfo:movieID];
         
         NSLog(@"Betyg: %@",rating);
         
-        UILabel *userLabel = [[UILabel alloc]initWithFrame:CGRectMake(180, 5, 100, 30)];
+        UILabel *userLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 5, 100, 30)];
         userLabel.text = username;
-        UILabel *ratingLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 5, 30, 30)];
-        ratingLabel.text = rating;
-        UITextView *commentView = [[UITextView alloc]initWithFrame:CGRectMake(110, 40, 240, 75)];
+        UILabel *movieTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 40, 100, 30)];
+        movieTitleLabel.text = movieTitle;
+       // UILabel *ratingLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 5, 30, 30)];
+       // ratingLabel.text = rating;
+        UITextView *commentView = [[UITextView alloc]initWithFrame:CGRectMake(110, 70, 240, 30)];
         commentView.text = comment;
         [commentView setContentInset:UIEdgeInsetsMake(-10, -5, 10, 5)];
         
@@ -108,6 +111,7 @@ NSArray *ratingsArray;
         posterView.image = [UIImage imageWithData:moviePoster];
         
         [activityTableCell.contentView addSubview:userLabel];
+        [activityTableCell.contentView addSubview:movieTitleLabel];
         //[activityTableCell.contentView addSubview:ratingLabel];
         [activityTableCell.contentView addSubview:commentView];
         [activityTableCell.contentView addSubview:posterView];
@@ -131,10 +135,6 @@ NSArray *ratingsArray;
     [movieQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
-        /*    for (PFObject *object in objects) {
-                PFObject *rating = (PFObject *)[movieQuery getObjectWithId:object.objectId];
-                //NSLog(@"%@", rating);
-            }*/
             ratingsArray = objects;
             
             [[self activityTable] reloadData];
@@ -150,7 +150,7 @@ NSArray *ratingsArray;
 }
 
 
--(NSData *)retrieveMovieInfo:(NSString *)movieID{
+-(void)retrieveMovieInfo:(NSString *)movieID{
     
     //NSString *movieString = (NSString *)movieID;
     
@@ -160,15 +160,15 @@ NSArray *ratingsArray;
     NSData *data = [NSData dataWithContentsOfURL:url];
     json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     
-    //NSLog(@"%@", json);
+    NSLog(@"%@", json);
     
     NSString *posterPath = [json valueForKey:@"poster_path"];
     NSString *posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w185%@", posterPath];
     NSURL *posterURL = [NSURL URLWithString:posterString];
-    NSData *moviePoster = [NSData dataWithContentsOfURL:posterURL];
+    moviePoster = [NSData dataWithContentsOfURL:posterURL];
     
-    return moviePoster;
-    }
+    movieTitle = [json valueForKey:@"original_title"];
+}
 
 
 /*
