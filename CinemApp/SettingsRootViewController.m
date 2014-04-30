@@ -34,6 +34,12 @@
     
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    //self.navigationController.navigationBar.translucent = NO;
 }
 
 - (void)viewDidLoad

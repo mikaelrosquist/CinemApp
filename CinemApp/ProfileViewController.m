@@ -21,7 +21,8 @@ static CGFloat backdropImageWidth  = 320.0;
 
 @implementation ProfileViewController{
     UILabel *nameLabel;
-    UIBarButtonItem *settingsButton;
+    UIButton *settingsButton;
+    BOOL ownUser;
 }
 
 @synthesize settingsView;
@@ -32,22 +33,31 @@ static CGFloat backdropImageWidth  = 320.0;
     self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     [DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
     
+    UIImage *profileBackgroundImage;
+    
     if(user == [PFUser currentUser]){
-        settingsButton = [[UIBarButtonItem alloc]
-                                           initWithImage:[[UIImage imageNamed:@"settings_icon"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                           style:UIBarButtonItemStyleBordered
-                                           target:self
-                                           action:@selector(showSettings:)];
+        settingsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [settingsButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
+        settingsButton.frame = CGRectMake(276, 25, 35, 35);
         
-        //Lägger till "Settings"-knapp i navigationBar
-        self.navigationItem.rightBarButtonItem = settingsButton;
+        UIImage *settingsButtonImage = [UIImage imageNamed:@"settings_icon"];
+        [settingsButton setImage:settingsButtonImage forState:UIControlStateNormal];
+        settingsButton.tintColor = [UIColor whiteColor];
+        [settingsButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
         settingsView = [[SettingsRootViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        profileBackgroundImage = [UIImage imageNamed:@"kitten"];
+        [self.navigationController setNavigationBarHidden: YES animated:NO];
+        
+        ownUser = YES;
+        
+    }else{
+        profileBackgroundImage = [UIImage imageNamed:@"moviebackdropplaceholder"];
+        ownUser = NO;
     }
     
     
     //Profilinfo
     UIImage *profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
-    UIImage *profileBackgroundImage = [UIImage imageNamed:@"kitten"];
     nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 23, 320, 40)];
     nameLabel.text = [NSString stringWithFormat:@"%@", user.username];
     nameLabel.textAlignment = NSTextAlignmentCenter;
@@ -90,6 +100,7 @@ static CGFloat backdropImageWidth  = 320.0;
     [self.view addSubview:self.backdropWithBlurImageView];
     [self.scrollView addSubview:self.profilePictureImageView];
     [self.scrollView addSubview:nameLabel];
+    [self.scrollView addSubview:settingsButton];
     [self.scrollView addSubview:segmentedControl];
     [self.view addSubview:self.scrollView];
     
@@ -152,18 +163,27 @@ static CGFloat backdropImageWidth  = 320.0;
     CGRect bounds = self.view.bounds;
     self.scrollView.frame = bounds;
     
-    //Sätter statusbar till VIT
-    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
-    self.navigationController.navigationBar.translucent = YES;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
+    if(ownUser)
+        [self.navigationController setNavigationBarHidden: YES animated:NO];
+    else{
+        [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
+        self.navigationController.navigationBar.translucent = YES;
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        self.navigationController.navigationBar.shadowImage = [UIImage new];
+        self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
+        [self.navigationController setNavigationBarHidden: NO animated:NO];
+    }
+    
 }
 
-
-
 -(void)showSettings:(id)sender {
+    
+    UIImage *_defaultImage;
+    [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
+
     [self.navigationController pushViewController:settingsView animated:YES];
+    [self.navigationController setNavigationBarHidden: NO animated:YES];
+
 }
 
 @end
