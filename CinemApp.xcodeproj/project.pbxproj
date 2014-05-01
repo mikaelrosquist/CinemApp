@@ -46,9 +46,9 @@
 		6F98FF981910F246003BD3F3 /* EmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F98FF971910F246003BD3F3 /* EmailViewController.m */; };
 		6F9F75A918B79D7B00B69308 /* NotLoggedInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F75A818B79D7B00B69308 /* NotLoggedInViewController.m */; };
 		6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */; };
-		6FC18B2118BC273C005B226F /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC18B2018BC273C005B226F /* Movie.m */; };
 		6FD5598F190E62DA00BB0424 /* SignUpWithEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD5598E190E62DA00BB0424 /* SignUpWithEmailViewController.m */; };
 		6FD55992190E62FD00BB0424 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD55991190E62FD00BB0424 /* LogInViewController.m */; };
+		6FDF6A9C19126AE800F0FAE4 /* FollowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF6A9B19126AE800F0FAE4 /* FollowModel.m */; };
 		7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7308FDE618B76D0000F93344 /* ActivityTableView.m */; };
 		730B80B4190FE41200FB9872 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 730B80B3190FE41200FB9872 /* ActivityViewController.m */; };
 		730B80B7190FE4CA00FB9872 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 730B80B6190FE4CA00FB9872 /* ActivityTableViewCell.m */; };
@@ -131,12 +131,12 @@
 		6F9F75A818B79D7B00B69308 /* NotLoggedInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotLoggedInViewController.m; sourceTree = "<group>"; };
 		6FC0C82918B6D59300F737EC /* SettingsRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsRootViewController.h; sourceTree = "<group>"; };
 		6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsRootViewController.m; sourceTree = "<group>"; };
-		6FC18B1F18BC273C005B226F /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
-		6FC18B2018BC273C005B226F /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
 		6FD5598D190E62DA00BB0424 /* SignUpWithEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpWithEmailViewController.h; sourceTree = "<group>"; };
 		6FD5598E190E62DA00BB0424 /* SignUpWithEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpWithEmailViewController.m; sourceTree = "<group>"; };
 		6FD55990190E62FD00BB0424 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		6FD55991190E62FD00BB0424 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
+		6FDF6A9A19126AE800F0FAE4 /* FollowModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowModel.h; sourceTree = "<group>"; };
+		6FDF6A9B19126AE800F0FAE4 /* FollowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowModel.m; sourceTree = "<group>"; };
 		7308FDE518B76D0000F93344 /* ActivityTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableView.h; sourceTree = "<group>"; };
 		7308FDE618B76D0000F93344 /* ActivityTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableView.m; sourceTree = "<group>"; };
 		730B80B2190FE41200FB9872 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
@@ -293,8 +293,8 @@
 		6F46491B18F3EE0900A85584 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6FC18B1F18BC273C005B226F /* Movie.h */,
-				6FC18B2018BC273C005B226F /* Movie.m */,
+				6FDF6A9A19126AE800F0FAE4 /* FollowModel.h */,
+				6FDF6A9B19126AE800F0FAE4 /* FollowModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -480,11 +480,11 @@
 				6F0F9B4C18F6D1CE002FFFF2 /* PasswordViewController.m in Sources */,
 				6FD55992190E62FD00BB0424 /* LogInViewController.m in Sources */,
 				6F0CAA4418B3709200AE42F9 /* ImageEffects.m in Sources */,
-				6FC18B2118BC273C005B226F /* Movie.m in Sources */,
 				6F98FF981910F246003BD3F3 /* EmailViewController.m in Sources */,
 				731C8693190FE95300E34C33 /* UserSearchViewController.m in Sources */,
 				6F9F75A918B79D7B00B69308 /* NotLoggedInViewController.m in Sources */,
 				73C7E73118B37A1A00453123 /* RateView.m in Sources */,
+				6FDF6A9C19126AE800F0FAE4 /* FollowModel.m in Sources */,
 				730B80B4190FE41200FB9872 /* ActivityViewController.m in Sources */,
 				6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */,
 				6F0F9B4818F6B909002FFFF2 /* ProfileSettingsViewController.m in Sources */,
