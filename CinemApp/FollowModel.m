@@ -11,7 +11,17 @@
 @implementation FollowModel
 
 - (BOOL) isFollowing: (PFUser *)user1 :(PFUser *)user2{
-    return YES;
+    
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Follow"];
+    [query whereKey:@"userId" equalTo:user1.objectId];
+    [query whereKey:@"followsId" equalTo:user2.objectId];
+    [query getFirstObject];
+    
+    if([query getFirstObject] != nil)
+        return YES;
+    else
+        return NO;
 }
 
 - (void) addFollower: (PFUser *)user1 :(PFUser *)user2{

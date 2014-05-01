@@ -10,6 +10,7 @@
 #import "ImageEffects.h"
 #import "Parse/Parse.h"
 #import "DejalActivityView.h"
+#import <QuartzCore/QuartzCore.h>
 
 //Sätter backgrundsbildens höjd och bredd till statiska värden
 static CGFloat backdropImageHeight  = 250.0;
@@ -21,11 +22,11 @@ static CGFloat backdropImageWidth  = 320.0;
 
 @implementation ProfileViewController{
     UILabel *nameLabel;
-    UIButton *settingsButton;
+    UIButton *settingsButton, *followButton;
     BOOL ownUser;
 }
 
-@synthesize settingsView;
+@synthesize settingsView, followModel;
 
 -(id)initWithUser:(PFUser *)user
 {
@@ -48,12 +49,46 @@ static CGFloat backdropImageWidth  = 320.0;
     }else{
         profileBackgroundImage = [UIImage imageNamed:@"moviebackdropplaceholder"];
         ownUser = NO;
+        
+        followButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        followButton.frame = CGRectMake(90, 160, 140, 30);
+        [followButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15.0]];
+        
+        [DejalWhiteActivityView activityViewForView:followButton withLabel:@""].showNetworkActivityIndicator = YES;
+        
+        dispatch_queue_t queue= dispatch_queue_create("Parse data", 0);
+        dispatch_async(queue, ^{ // to get all data from server and parsing
+            followModel = [[FollowModel alloc]init];
+            BOOL following = [followModel isFollowing:[PFUser currentUser] :user];
+            
+
+            dispatch_sync(dispatch_get_main_queue(), ^{ // share data to other view controllers in main thread
+                [DejalActivityView removeView];
+                [[followButton layer] setBorderWidth:1.0f];
+                [[followButton layer] setCornerRadius:5.0f];
+                if(following){
+                    [followButton setTitle:@"Following" forState:UIControlStateNormal];
+                    [followButton setTitleColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1] forState:UIControlStateNormal];
+                    [[followButton layer] setBorderColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1].CGColor];
+                    //[followButton addTarget:self action:@selector(unfollowUser:) forControlEvents:UIControlEventTouchUpInside];
+
+                }else{
+                    [followButton setTitle:@"Follow" forState:UIControlStateNormal];
+                    [followButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+                    [[followButton layer] setBorderColor:[UIColor greenColor].CGColor];
+                    //[followButton addTarget:self action:@selector(followUser:) forControlEvents:UIControlEventTouchUpInside];
+
+                }
+                
+            });
+        });
+        
     }
     
     
     //Profilinfo
     UIImage *profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
-    nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 23, 320, 40)];
+    nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 320, 40)];
     nameLabel.text = [NSString stringWithFormat:@"%@", user.username];
     nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.textColor=[UIColor whiteColor];
@@ -61,7 +96,7 @@ static CGFloat backdropImageWidth  = 320.0;
     
     //Allokerar och initierar profilbilden
     self.profilePictureImageView = [[UIImageView alloc] initWithImage:profilePictureImage];
-    self.profilePictureImageView.frame = CGRectMake(120, 75, 80, 80);
+    self.profilePictureImageView.frame = CGRectMake(120, 65, 80, 80);
     
     //Allokerar och initierar profilens bakgrundsbild
     self.backdropImageView = [[UIImageView alloc] initWithImage:profileBackgroundImage];
@@ -96,6 +131,7 @@ static CGFloat backdropImageWidth  = 320.0;
     [self.scrollView addSubview:self.profilePictureImageView];
     [self.scrollView addSubview:nameLabel];
     [self.scrollView addSubview:settingsButton];
+    [self.scrollView addSubview:followButton];
     [self.scrollView addSubview:segmentedControl];
     [self.view addSubview:self.scrollView];
     

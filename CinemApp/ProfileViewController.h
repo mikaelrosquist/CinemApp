@@ -10,8 +10,11 @@
 #import "MovieView.h"
 #import "SettingsRootViewController.h"
 #import "Parse/Parse.h"
+#import "FollowModel.h"
 
-@interface ProfileViewController : UIViewController<UIScrollViewDelegate>
+@interface ProfileViewController : UIViewController<UIScrollViewDelegate>{
+    FollowModel *followModel;
+}
 
 -(id)initWithUser:(PFUser *)user;
 
@@ -20,6 +23,8 @@
 @property (nonatomic, retain) UIImageView *backdropWithBlurImageView;
 @property (nonatomic, retain) UIImageView *profilePictureImageView;
 @property (nonatomic, strong) SettingsRootViewController *settingsView;
+@property (nonatomic, retain) FollowModel *followModel;
+
 
 
 

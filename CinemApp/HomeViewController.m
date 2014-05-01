@@ -24,8 +24,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"News";
-        activityTable = [[ActivityViewController alloc]initWithNibName:nil bundle:nil];
-        [self.view addSubview:activityTable.view];
+        //activityTable = [[ActivityViewController alloc]initWithNibName:nil bundle:nil];
+        //[self.view addSubview:activityTable.view];
 
     }
     return self;

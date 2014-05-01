@@ -1,5 +1,4 @@
 #import <UIKit/UIKit.h>
-#import "Movie.h"
 #import "RateViewController.h"
 
 @interface RateSearchViewController : UITableViewController
