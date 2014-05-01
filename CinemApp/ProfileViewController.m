@@ -23,7 +23,8 @@ static CGFloat backdropImageWidth  = 320.0;
 @implementation ProfileViewController{
     UILabel *nameLabel;
     UIButton *settingsButton, *followButton;
-    BOOL ownUser;
+    BOOL ownUser, following;
+    PFUser *thisUser;
 }
 
 @synthesize settingsView, followModel;
@@ -31,6 +32,7 @@ static CGFloat backdropImageWidth  = 320.0;
 -(id)initWithUser:(PFUser *)user
 {
     UIImage *profileBackgroundImage;
+    thisUser = user;
     
     if(user == [PFUser currentUser]){
         settingsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -51,15 +53,18 @@ static CGFloat backdropImageWidth  = 320.0;
         ownUser = NO;
         
         followButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        followButton.frame = CGRectMake(90, 160, 140, 30);
-        [followButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15.0]];
+        followButton.frame = CGRectMake(80, 160, 160, 28);
+        [followButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0]];
+        [followButton addTarget:self action:@selector(setBgColorForButton:) forControlEvents:UIControlEventTouchDown];
+        [followButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchDragExit];
+        [followButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchUpInside];
         
         [DejalWhiteActivityView activityViewForView:followButton withLabel:@""].showNetworkActivityIndicator = YES;
         
         dispatch_queue_t queue= dispatch_queue_create("Parse data", 0);
         dispatch_async(queue, ^{ // to get all data from server and parsing
             followModel = [[FollowModel alloc]init];
-            BOOL following = [followModel isFollowing:[PFUser currentUser] :user];
+            following = [followModel isFollowing:[PFUser currentUser] :user];
             
 
             dispatch_sync(dispatch_get_main_queue(), ^{ // share data to other view controllers in main thread
@@ -67,19 +72,20 @@ static CGFloat backdropImageWidth  = 320.0;
                 [[followButton layer] setBorderWidth:1.0f];
                 [[followButton layer] setCornerRadius:5.0f];
                 if(following){
-                    [followButton setTitle:@"Following" forState:UIControlStateNormal];
-                    [followButton setTitleColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1] forState:UIControlStateNormal];
-                    [[followButton layer] setBorderColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1].CGColor];
-                    //[followButton addTarget:self action:@selector(unfollowUser:) forControlEvents:UIControlEventTouchUpInside];
+                    [followButton setTitle:@"✓ Following" forState:UIControlStateNormal];
+                    [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    [[followButton layer] setBorderColor:[UIColor colorWithRed:0.580 green:0.780 blue:0.416 alpha:1].CGColor];
+                    followButton.backgroundColor = [UIColor colorWithRed:0.580 green:0.780 blue:0.416 alpha:1];
+                    [followButton addTarget:self action:@selector(followMethod:) forControlEvents:UIControlEventTouchUpInside];
+                    followButton.tag = 1;
 
                 }else{
-                    [followButton setTitle:@"Follow" forState:UIControlStateNormal];
-                    [followButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
-                    [[followButton layer] setBorderColor:[UIColor greenColor].CGColor];
-                    //[followButton addTarget:self action:@selector(followUser:) forControlEvents:UIControlEventTouchUpInside];
-
+                    [followButton setTitle:@"+ Follow" forState:UIControlStateNormal];
+                    [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                    [[followButton layer] setBorderColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1].CGColor];
+                    [followButton addTarget:self action:@selector(followMethod:) forControlEvents:UIControlEventTouchUpInside];
+                    followButton.tag = 2;
                 }
-                
             });
         });
         
@@ -139,6 +145,7 @@ static CGFloat backdropImageWidth  = 320.0;
     self.extendedLayoutIncludesOpaqueBars=YES;
     self.automaticallyAdjustsScrollViewInsets=YES;
     self.scrollView.contentSize = CGSizeMake(320, self.view.frame.size.height);
+    self.scrollView.delaysContentTouches = YES;
     
     //[self setAutomaticallyAdjustsScrollViewInsets:YES];
     CGRect bounds = self.view.bounds;
@@ -204,14 +211,54 @@ static CGFloat backdropImageWidth  = 320.0;
 }
 
 
--(void)showSettings:(id)sender {
+- (void)showSettings:(id)sender {
     
     UIImage *_defaultImage;
     [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
 
     [self.navigationController pushViewController:settingsView animated:YES];
     [self.navigationController setNavigationBarHidden: NO animated:YES];
+}
 
+- (void)followMethod:(id)sender{
+    NSLog(@"%hhd", following);
+    if(!following){
+        [followModel addFollower:[PFUser currentUser] :thisUser];
+        following = YES;
+        [followButton setTitle:@"✓ Following" forState:UIControlStateNormal];
+        [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [[followButton layer] setBorderColor:[UIColor colorWithRed:0.580 green:0.780 blue:0.416 alpha:1].CGColor];
+        followButton.backgroundColor = [UIColor colorWithRed:0.580 green:0.780 blue:0.416 alpha:1];
+        followButton.tag = 1;
+    }else{
+        [followModel delFollower:[PFUser currentUser] :thisUser];
+        following = NO;
+        [followButton setTitle:@"+ Follow" forState:UIControlStateNormal];
+        [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [[followButton layer] setBorderColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1].CGColor];
+        followButton.backgroundColor = nil;
+        followButton.tag = 2;
+    }
+}
+
+-(void)setBgColorForButton:(UIButton*)sender
+{
+    UIButton *button = (UIButton *)sender;
+    if(button.tag == 1){
+        [sender setAlpha:0.5];
+    }else if(button.tag == 2){
+        button.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
+    }
+}
+
+-(void)clearBgColorForButton:(UIButton*)sender
+{
+    UIButton *button = (UIButton *)sender;
+    if(button.tag == 1){
+        [sender setAlpha:1.0];
+    }else if(button.tag == 2){
+        button.backgroundColor = nil;
+    }
 }
 
 @end

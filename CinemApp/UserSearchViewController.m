@@ -185,7 +185,7 @@
                         [[self tableView] reloadData];
                         [self.refreshControl endRefreshing];
                         [self.tableView setHidden:NO];
-                        NSLog(@"HÄMTAT: Sökresultat för %@", usersArray);
+                        //NSLog(@"HÄMTAT: Sökresultat för %@", usersArray);
                     });
     
                 } else {

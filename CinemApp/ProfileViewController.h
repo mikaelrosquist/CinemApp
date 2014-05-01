@@ -25,7 +25,7 @@
 @property (nonatomic, strong) SettingsRootViewController *settingsView;
 @property (nonatomic, retain) FollowModel *followModel;
 
-
+- (void)followMethod:(id)sender;
 
 
 @end
