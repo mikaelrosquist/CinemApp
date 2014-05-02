@@ -38,11 +38,13 @@
     PFQuery *pushQuery = [PFInstallation query];
     [pushQuery whereKey:@"user" matchesQuery:innerQuery];
     
-    NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [NSString stringWithFormat:@"%@ has started following you!", user1.username], @"alert",
-                          @"Increment", @"badge",
-                          @"", @"sound",
-                          nil];
+    
+    NSDictionary *data = @{
+                           @"alert": [NSString stringWithFormat:@"%@ has started following you!", user1.username],
+                           @"userId": user1.objectId,
+                           @"badge": @"Increment",
+                           @"sound": @""
+                           };
     
     // Send push notification to query
     PFPush *push = [[PFPush alloc] init];

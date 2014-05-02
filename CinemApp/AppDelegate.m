@@ -16,7 +16,9 @@
 #import "Parse/Parse.h"
 #import "GTScrollNavigationBar.h"
 
-@implementation AppDelegate
+@implementation AppDelegate{
+    ;
+}
 
 @synthesize tabBarController;
 @synthesize window;
@@ -28,7 +30,26 @@
     
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
     
+    NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     
+    if ([PFUser currentUser] && notificationPayload != nil){
+        
+        
+        // Create a pointer to the Photo object
+        NSString *userId = [notificationPayload objectForKey:@"userId"];
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"objectId" equalTo:userId];
+        PFUser *user = (PFUser*)[query getFirstObject];
+        
+        NSLog(@"hej");
+        
+        //ProfileViewController *viewController = [[ProfileViewController alloc] initWithUser:user];
+        //[home.navigationController pushViewController:viewController animated:YES];
+        
+    }
+
+    
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     [self.window makeKeyAndVisible];
@@ -64,7 +85,9 @@
     ExploreViewController* explore = [[ExploreViewController alloc] init];
     RateSearchViewController* rateSearch = [[RateSearchViewController alloc] init];
     NotificationViewController* activity = [[NotificationViewController alloc] init];
+    
     ProfileViewController* profile;
+    
     if ([PFUser currentUser])
         profile = [[ProfileViewController alloc] initWithUser:[PFUser currentUser]];
     else
@@ -146,10 +169,7 @@
                 }
             }];
         }
-    }   
-
-
-    
+    }
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -165,6 +185,27 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
+    
+    if ([PFUser currentUser]){
+        
+        
+        // Create a pointer to the Photo object
+        NSString *userId = [userInfo objectForKey:@"userId"];
+        PFQuery *query = [PFUser query];
+        [query whereKey:@"objectId" equalTo:userId];
+        PFUser *user = (PFUser*)[query getFirstObject];
+        
+        UINavigationController *navigationController = (UINavigationController *) [[self tabBarController] selectedViewController];
+        ProfileViewController *viewController = [[ProfileViewController alloc] initWithUser:user];
+        [navigationController pushViewController:viewController animated:YES];
+        
+        //ProfileViewController *viewController = [[ProfileViewController alloc] initWithUser:user];
+        //[home.navigationController pushViewController:viewController animated:YES];
+        
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
