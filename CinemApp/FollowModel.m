@@ -28,7 +28,6 @@
     follow[@"userId"] = user1.objectId;
     follow[@"followsId"] = user2.objectId;
     [follow saveInBackground];
-    NSLog(@"Avföljt");
 }
 
 - (void) delFollower: (PFUser *)user1 :(PFUser *)user2{
@@ -36,7 +35,6 @@
     [query whereKey:@"userId" equalTo:user1.objectId];
     [query whereKey:@"followsId" equalTo:user2.objectId];
     [[query getFirstObject] deleteInBackground];
-    NSLog(@"Avföljt");
 }
 
 @end
