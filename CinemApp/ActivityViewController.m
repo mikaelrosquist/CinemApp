@@ -34,9 +34,12 @@ BOOL oneMovie = NO;
     if (self) {
         [self retrieveUserRatings];
         
-        activityTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 320, tableHeight*148+20)];
+        activityTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 320, 600)];
         activityTable.dataSource = self;
         activityTable.delegate = self;
+        
+        activityTable.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
+        activityTable.separatorColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
         
         [self.view addSubview:activityTable];
     }
@@ -177,7 +180,6 @@ BOOL oneMovie = NO;
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-    
 }
 
 
