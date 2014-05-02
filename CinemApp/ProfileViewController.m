@@ -103,6 +103,8 @@ static CGFloat backdropImageWidth  = 320.0;
     nameLabel.textColor=[UIColor whiteColor];
     [nameLabel setFont:[UIFont fontWithName: @"AvenirNext-Medium" size: 25.0f]];
     
+    [self calculateFollowers];
+    
     noOfRatingsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 210, 60, 40)];
     noOfRatingsLabel.text = [NSString stringWithFormat:@"0"];
     noOfRatingsLabel.textAlignment = NSTextAlignmentCenter;
@@ -315,6 +317,38 @@ static CGFloat backdropImageWidth  = 320.0;
         button.backgroundColor = nil;
     }
     button.frame = CGRectMake(80, 170, 160, 28);
+}
+
+-(void)calculateFollowers{
+    
+    PFUser *user = thisUser;
+    
+    PFQuery *ratingsQuery = [PFQuery queryWithClassName:@"Rating"];
+    [ratingsQuery whereKey:@"user" equalTo:user.username];
+    [ratingsQuery countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
+        if (!error) {
+            noOfRatingsLabel.text = [NSString stringWithFormat:@"%i", count];
+        }
+    }];
+    
+    PFQuery *followingQuery = [PFQuery queryWithClassName:@"Follow"];
+    [followingQuery whereKey:@"userId" equalTo:user.objectId];
+    [followingQuery countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
+        if (!error) {
+            noOfFollowingLabel.text = [NSString stringWithFormat:@"%i", count];
+        }
+    }];
+    
+    PFQuery *followersQuery = [PFQuery queryWithClassName:@"Follow"];
+    [followersQuery whereKey:@"followsId" equalTo:user.objectId];
+    [followersQuery countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
+        if (!error) {
+            noOfFollowersLabel.text = [NSString stringWithFormat:@"%i", count];
+        }
+    }];
+    
+    
+
 }
 
 @end

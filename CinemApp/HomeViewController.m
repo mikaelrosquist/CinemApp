@@ -35,9 +35,12 @@
 {
     [super viewDidLoad];
 
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                  target:self
-                                                                                  action:@selector(searchUser:)];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"searchUser"]
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(searchUser:)];
+
+
     self.navigationItem.rightBarButtonItem = barButtonItem;
 }
 
