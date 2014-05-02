@@ -48,17 +48,18 @@
     
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 300, 44)];
     [searchBar setDelegate:self];
-    [searchBar setShowsCancelButton:NO];
+    [searchBar becomeFirstResponder];
     [[self navigationItem] setTitleView:searchBar];
     searchBar.placeholder = @"Search user";
     searchBar.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
-    [searchBar becomeFirstResponder];
+    
     self.tableView.contentInset = UIEdgeInsetsMake(-35.0f, 0.0f, 0.0f, 0.0);
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [searchBar resignFirstResponder];
+    [self.searchBar setShowsCancelButton:NO animated:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
