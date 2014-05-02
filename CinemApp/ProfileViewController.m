@@ -13,7 +13,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 //Sätter backgrundsbildens höjd och bredd till statiska värden
-static CGFloat backdropImageHeight  = 250.0;
+static CGFloat backdropImageHeight  = 270.0;
 static CGFloat backdropImageWidth  = 320.0;
 
 @interface ProfileViewController ()
@@ -21,7 +21,7 @@ static CGFloat backdropImageWidth  = 320.0;
 @end
 
 @implementation ProfileViewController{
-    UILabel *nameLabel;
+    UILabel *nameLabel, *noOfRatingsLabel, *ratingsLabel, *noOfFollowersLabel, *followersLabel, *noOfFollowingLabel, *followingLabel;
     UIButton *settingsButton, *followButton;
     BOOL ownUser, following;
     PFUser *thisUser;
@@ -49,11 +49,12 @@ static CGFloat backdropImageWidth  = 320.0;
         ownUser = YES;
         
     }else{
+        
         profileBackgroundImage = [UIImage imageNamed:@"moviebackdropplaceholder"];
         ownUser = NO;
         
         followButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        followButton.frame = CGRectMake(80, 160, 160, 28);
+        followButton.frame = CGRectMake(80, 170, 160, 28);
         [followButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0]];
         [followButton addTarget:self action:@selector(setBgColorForButton:) forControlEvents:UIControlEventTouchDown];
         [followButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchDragExit];
@@ -90,19 +91,59 @@ static CGFloat backdropImageWidth  = 320.0;
         });
         
     }
-    
+    //Allokerar och initierar profilbilden
+    UIImage *profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
+    self.profilePictureImageView = [[UIImageView alloc] initWithImage:profilePictureImage];
+    self.profilePictureImageView.frame = CGRectMake(120, 35, 80, 80);
     
     //Profilinfo
-    UIImage *profilePictureImage = [UIImage imageNamed:@"profilePicPlaceHolder"];
-    nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 320, 40)];
+    nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 120, 320, 40)];
     nameLabel.text = [NSString stringWithFormat:@"%@", user.username];
     nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.textColor=[UIColor whiteColor];
-    [nameLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 20.0f]];
+    [nameLabel setFont:[UIFont fontWithName: @"AvenirNext-Medium" size: 25.0f]];
     
-    //Allokerar och initierar profilbilden
-    self.profilePictureImageView = [[UIImageView alloc] initWithImage:profilePictureImage];
-    self.profilePictureImageView.frame = CGRectMake(120, 65, 80, 80);
+    noOfRatingsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 210, 60, 40)];
+    noOfRatingsLabel.text = [NSString stringWithFormat:@"0"];
+    noOfRatingsLabel.textAlignment = NSTextAlignmentCenter;
+    noOfRatingsLabel.textColor=[UIColor whiteColor];
+    [noOfRatingsLabel setFont:[UIFont fontWithName: @"AvenirNext-Medium" size: 21.0f]];
+    noOfRatingsLabel.alpha = 0.8;
+    
+    ratingsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 230, 60, 40)];
+    ratingsLabel.text = [NSString stringWithFormat:@"Ratings"];
+    ratingsLabel.textAlignment = NSTextAlignmentCenter;
+    ratingsLabel.textColor=[UIColor whiteColor];
+    [ratingsLabel setFont:[UIFont fontWithName: @"AvenirNext-Medium" size: 12.0f]];
+    ratingsLabel.alpha = 0.8;
+    
+    noOfFollowersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 210, 60, 40)];
+    noOfFollowersLabel.text = [NSString stringWithFormat:@"0"];
+    noOfFollowersLabel.textAlignment = NSTextAlignmentCenter;
+    noOfFollowersLabel.textColor=[UIColor whiteColor];
+    [noOfFollowersLabel setFont:[UIFont fontWithName: @"AvenirNext-Medium" size: 21.0f]];
+    noOfFollowersLabel.alpha = 0.8;
+    
+    followersLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 230, 60, 40)];
+    followersLabel.text = [NSString stringWithFormat:@"Followers"];
+    followersLabel.textAlignment = NSTextAlignmentCenter;
+    followersLabel.textColor=[UIColor whiteColor];
+    [followersLabel setFont:[UIFont fontWithName: @"AvenirNext-Medium" size: 12.0f]];
+    followersLabel.alpha = 0.8;
+    
+    noOfFollowingLabel = [[UILabel alloc] initWithFrame:CGRectMake(230, 210, 60, 40)];
+    noOfFollowingLabel.text = [NSString stringWithFormat:@"0"];
+    noOfFollowingLabel.textAlignment = NSTextAlignmentCenter;
+    noOfFollowingLabel.textColor=[UIColor whiteColor];
+    [noOfFollowingLabel setFont:[UIFont fontWithName: @"AvenirNext-Medium" size: 21.0f]];
+    noOfFollowingLabel.alpha = 0.8;
+    
+    followingLabel = [[UILabel alloc] initWithFrame:CGRectMake(230, 230, 60, 40)];
+    followingLabel.text = [NSString stringWithFormat:@"Following"];
+    followingLabel.textAlignment = NSTextAlignmentCenter;
+    followingLabel.textColor=[UIColor whiteColor];
+    [followingLabel setFont:[UIFont fontWithName: @"AvenirNext-Medium" size: 12.0f]];
+    followingLabel.alpha = 0.8;
     
     //Allokerar och initierar profilens bakgrundsbild
     self.backdropImageView = [[UIImageView alloc] initWithImage:profileBackgroundImage];
@@ -136,6 +177,12 @@ static CGFloat backdropImageWidth  = 320.0;
     [self.view addSubview:self.backdropWithBlurImageView];
     [self.scrollView addSubview:self.profilePictureImageView];
     [self.scrollView addSubview:nameLabel];
+    [self.scrollView addSubview:noOfRatingsLabel];
+    [self.scrollView addSubview:ratingsLabel];
+    [self.scrollView addSubview:noOfFollowersLabel];
+    [self.scrollView addSubview:followersLabel];
+    [self.scrollView addSubview:noOfFollowingLabel];
+    [self.scrollView addSubview:followingLabel];
     [self.scrollView addSubview:settingsButton];
     [self.scrollView addSubview:followButton];
     [self.scrollView addSubview:segmentedControl];
@@ -196,9 +243,10 @@ static CGFloat backdropImageWidth  = 320.0;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    
+    //Tar bort "Back"-texten på filmsidorna
+    self.navigationController.navigationBar.topItem.backBarButtonItem = [[UIBarButtonItem alloc]
+                                                                         initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 
-    
     if(ownUser)
         [self.navigationController setNavigationBarHidden: YES animated:YES];
     else{
@@ -251,10 +299,11 @@ static CGFloat backdropImageWidth  = 320.0;
 {
     UIButton *button = (UIButton *)sender;
     if(button.tag == 1){
-        [sender setAlpha:0.5];
+        [sender setAlpha:0.9];
     }else if(button.tag == 2){
         button.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     }
+    button.frame = CGRectMake(81, 171, 158, 26);
 }
 
 -(void)clearBgColorForButton:(UIButton*)sender
@@ -265,6 +314,7 @@ static CGFloat backdropImageWidth  = 320.0;
     }else if(button.tag == 2){
         button.backgroundColor = nil;
     }
+    button.frame = CGRectMake(80, 170, 160, 28);
 }
 
 @end

@@ -155,7 +155,7 @@ CGFloat tableHeight;
     movieQuery.limit = 10;
     
     //if(incomingID != NULL) //Måste avkommenteras för att newsfeed ska funka
-    [movieQuery whereKey:@"movieId" equalTo:incomingID];
+    [movieQuery whereKey:@"movieId" equalTo:[NSString stringWithFormat:@"%@", incomingID]];
     NSLog(@"retrieveUserRatings MOVIEID: %@", incomingID);
     [movieQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
