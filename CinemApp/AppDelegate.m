@@ -26,9 +26,7 @@
     [Parse setApplicationId:@"LkmDnlPFo5EMB1o30VRxUaUwFG9q891pic8oobsp"
                   clientKey:@"zpwuevUaEySDKdFuSf1mQ5b30J8wrrj2xl8Ndkce"];
     
-    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge |
-                                                    UIRemoteNotificationTypeAlert |
-                                                    UIRemoteNotificationTypeSound];
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
     
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -66,7 +64,11 @@
     ExploreViewController* explore = [[ExploreViewController alloc] init];
     RateSearchViewController* rateSearch = [[RateSearchViewController alloc] init];
     NotificationViewController* activity = [[NotificationViewController alloc] init];
-    ProfileViewController* profile = [[ProfileViewController alloc] initWithUser:[PFUser currentUser]];
+    ProfileViewController* profile;
+    if ([PFUser currentUser])
+        profile = [[ProfileViewController alloc] initWithUser:[PFUser currentUser]];
+    else
+        profile = [[ProfileViewController alloc] init];
     
     UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController:home];
     UINavigationController *exploreNav = [[UINavigationController alloc] initWithRootViewController:explore];
@@ -118,21 +120,50 @@
         logInNav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self.window.rootViewController presentViewController:logInNav animated:NO completion:nil];
     }
+    
+    
+    if ([PFUser currentUser]){
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+        currentInstallation[@"installationUser"] = [[PFUser currentUser]objectId];
+        [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
+        [[PFInstallation currentInstallation] saveEventually];
+        // here we add a column to the installation table and store the current user’s ID
+        // this way we can target specific users later
+        
+        // while we’re at it, this is a good place to reset our app’s badge count
+        // you have to do this locally as well as on the parse server by updating
+        // the PFInstallation object
+        if (currentInstallation.badge != 0) {
+            currentInstallation.badge = 0;
+            [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (error) {
+                    // Handle error here with an alert…
+                }
+                else {
+                    // only update locally if the remote update succeeded so they always match
+                    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+                    NSLog(@"updated badge");
+                }
+            }];
+        }
+    }   
+
 
     
 }
 
-- (void)application:(UIApplication *)application
-didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    [currentInstallation saveInBackground];
+    if ([PFUser currentUser]){
+        [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
+        [[PFInstallation currentInstallation] saveEventually];
+    }
 }
 
-- (void)application:(UIApplication *)application
-didReceiveRemoteNotification:(NSDictionary *)userInfo {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
 }
 
@@ -156,6 +187,30 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    if ([PFUser currentUser]){
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    currentInstallation[@"installationUser"] = [[PFUser currentUser]objectId];
+    // here we add a column to the installation table and store the current user’s ID
+    // this way we can target specific users later
+    
+    // while we’re at it, this is a good place to reset our app’s badge count
+    // you have to do this locally as well as on the parse server by updating
+    // the PFInstallation object
+    if (currentInstallation.badge != 0) {
+        currentInstallation.badge = 0;
+        [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error) {
+                // Handle error here with an alert…
+            }
+            else {
+                // only update locally if the remote update succeeded so they always match
+                [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+                NSLog(@"updated badge");
+            }
+        }];
+    }
+    }   
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

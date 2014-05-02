@@ -14,18 +14,13 @@
 
 @end
 
-@implementation PushNotificationsViewController
+@implementation PushNotificationsViewController{
+    NSString *likeNotification;
+    NSString *commentNotification;
+    NSString *followerNotification;
+}
 
 @synthesize notificationsSection;
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleDefault;
@@ -34,6 +29,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    likeNotification = @"NO";
+    commentNotification = @"NO";
+    followerNotification = @"NO";
+    
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"username" equalTo:[[PFUser currentUser]username]];
+    [query whereKey:@"notifications" equalTo:@YES];
+    [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
+        if (count > 0) {
+            likeNotification = @"ON";
+            [[self tableView] reloadData];
+        }
+    }];
+
     
     [self setTitle:@"Push notifications"];
 	
@@ -83,12 +93,7 @@
     cell.accessoryView = switchView;
     switchView.tag = indexPath.row;
     [switchView addTarget:self action:@selector(updateSwitchAtIndexPath:) forControlEvents:UIControlEventTouchUpInside];
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *likeNotification = [defaults objectForKey:@"likeNotification"];
-    NSString *commentNotification = [defaults objectForKey:@"commentNotification"];
-    NSString *followerNotification = [defaults objectForKey:@"followerNotification"];
-    
+
     switch(indexPath.row)
     {
         case 0:
@@ -118,33 +123,30 @@
 }
 
 - (void)updateSwitchAtIndexPath:(UISwitch *)switchView{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString *likeNotification;
-    NSString *commentNotification;
-    NSString *followerNotification;
+
+    PFUser *user = [PFUser currentUser];
     
     switch(switchView.tag)
     {
         case 0:
             likeNotification = ([switchView isOn]) ? @"ON" : @"OFF";
-            [defaults setObject:likeNotification forKey:@"likeNotification"];
             NSLog(@"Notifikationer för likes har satts till: %@", likeNotification);
+            user[@"notifications"] = ([switchView isOn]) ? @YES : @NO;;
             break;
         case 1:
             commentNotification = ([switchView isOn]) ? @"ON" : @"OFF";
-            [defaults setObject:commentNotification forKey:@"commentNotification"];
             NSLog(@"Notifikationer för kommentarer har satts till: %@", commentNotification);
             break;
         case 2:
             followerNotification = ([switchView isOn]) ? @"ON" : @"OFF";
-            [defaults setObject:followerNotification forKey:@"followerNotification"];
             NSLog(@"Notifikationer för nya följare har satts till: %@", followerNotification);
             break;
         default:
             NSLog(@"Error!");
     }
-    [defaults synchronize];
+    
+    [user save];
+
     
 }
 
