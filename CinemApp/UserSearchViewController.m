@@ -34,7 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+    
+    
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
 	self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -52,10 +53,7 @@
     searchBar.placeholder = @"Search user";
     searchBar.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
     [searchBar becomeFirstResponder];
-    
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
-
+    self.tableView.contentInset = UIEdgeInsetsMake(-35.0f, 0.0f, 0.0f, 0.0);
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -74,10 +72,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-}
-
--(void)refresh {
-    
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {

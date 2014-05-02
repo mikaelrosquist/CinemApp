@@ -33,6 +33,7 @@ static CGFloat backdropImageWidth  = 320.0;
 {
     UIImage *profileBackgroundImage;
     thisUser = user;
+    self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     
     if(user == [PFUser currentUser]){
         settingsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -45,7 +46,7 @@ static CGFloat backdropImageWidth  = 320.0;
         [settingsButton setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
         settingsView = [[SettingsRootViewController alloc] initWithStyle:UITableViewStyleGrouped];
         profileBackgroundImage = [UIImage imageNamed:@"kitten"];
-        
+        [self calculateFollowers];
         ownUser = YES;
         
     }else{

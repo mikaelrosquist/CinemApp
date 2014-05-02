@@ -52,7 +52,7 @@
 }
 
 -(void)searchUser:(id)sender {
-    searchUserView = [[UserSearchViewController alloc] initWithStyle:UITableViewStylePlain];
+    searchUserView = [[UserSearchViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [self.navigationController pushViewController:searchUserView animated:YES];
 }
 
