@@ -35,6 +35,7 @@
 @property (nonatomic, strong) NSMutableArray *movieDirectors;
 @property (nonatomic, strong) NSMutableArray *movieWriters;
 @property (nonatomic, strong) NSMutableArray *castArray;
+@property (nonatomic, strong) NSData *moviePoster;
 
 @property (nonatomic, strong) NSDictionary *json;
 @property (nonatomic, strong) NSDictionary *creditsJson;

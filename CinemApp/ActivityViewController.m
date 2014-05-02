@@ -15,17 +15,17 @@
 
 @end
 
-@implementation ActivityViewController{
-    NSString *incomingID;
-}
+@implementation ActivityViewController
 
-@synthesize activityTable, activityTableCell;
+@synthesize activityTable, activityTableCell, movieTitle;
 
+NSString *movieTitle;
+NSString *movieID;
 NSDictionary *json;
 NSArray *ratingsArray;
 NSData *moviePoster;
-NSString *movieTitle;
 CGFloat tableHeight;
+BOOL oneMovie = NO;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,7 +34,7 @@ CGFloat tableHeight;
     if (self) {
         [self retrieveUserRatings];
         
-        activityTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 320, 600)];
+        activityTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 320, tableHeight*148+20)];
         activityTable.dataSource = self;
         activityTable.delegate = self;
         
@@ -43,15 +43,17 @@ CGFloat tableHeight;
     return self;
 }
 
-- (id)initWithOneMovie:(NSString *)movieID :(CGFloat)backDropImageHeight
+- (id)initWithOneMovie:(NSString *)incomingID :(NSString *)incomingTitle :(NSData *)incomingPoster :(CGFloat)backDropImageHeight
 {
     if (self) {
-        
-        incomingID = movieID;
+        oneMovie = TRUE;
+        movieID = incomingID;
+        movieTitle = incomingTitle;
+        moviePoster = incomingPoster;
         CGFloat yParameter = backDropImageHeight;
         
         [self retrieveUserRatings];
-        NSLog(@"initWithOneMovie MOVIEID: %@", incomingID);
+        NSLog(@"initWithOneMovie MOVIEID: %@", movieID);
         activityTable = [[UITableView alloc]initWithFrame:CGRectMake(0, yParameter+50, 320, tableHeight*148+20)];
         activityTable.dataSource = self;
         activityTable.delegate = self;
@@ -64,7 +66,8 @@ CGFloat tableHeight;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self.activityTable reloadData];
+   // [activityTable setFrame:CGRectMake(activityTable.frame.origin.x, activityTable.frame.origin.y, 320, activityTable.contentSize.height)];
     self.edgesForExtendedLayout = UIRectEdgeAll;
     self.extendedLayoutIncludesOpaqueBars=YES;
     self.automaticallyAdjustsScrollViewInsets=YES;
@@ -116,29 +119,31 @@ CGFloat tableHeight;
         
         NSString *username = [[ratingsArray objectAtIndex:indexPath.row] valueForKey:@"user"];
         NSString *comment = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"comment"];
-        NSString *rating = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"rating"];
-        NSString *movieID = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"movieId"];
+        NSNumber *rating = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"rating"];
+        movieID = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"movieId"];
         
-        [self retrieveMovieInfo:movieID];
+        if(!oneMovie)
+            [self retrieveMovieInfo:movieID];
         
         NSLog(@"Betyg: %@",rating);
         
-        UILabel *userLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 5, 100, 30)];
-        userLabel.text = username;
-        UILabel *movieTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 40, 100, 30)];
+        UILabel *movieTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 5, 100, 30)];
         movieTitleLabel.text = movieTitle;
-       // UILabel *ratingLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 5, 30, 30)];
-       // ratingLabel.text = rating;
-        UITextView *commentView = [[UITextView alloc]initWithFrame:CGRectMake(110, 70, 240, 30)];
+        UITextView *commentView = [[UITextView alloc]initWithFrame:CGRectMake(110, 40, 240, 30)];
         commentView.text = comment;
+        commentView.editable = NO;
         [commentView setContentInset:UIEdgeInsetsMake(-10, -5, 10, 5)];
+        UILabel *userLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 80, 100, 30)];
+        userLabel.text = username;
+        UILabel *ratingLabel = [[UILabel alloc]initWithFrame:CGRectMake(280, 80, 30, 30)];
+        ratingLabel.text = [NSString stringWithFormat:@"%@", rating];
         
         UIImageView *posterView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 90, 128)];
         posterView.image = [UIImage imageWithData:moviePoster];
         
         [activityTableCell.contentView addSubview:userLabel];
         [activityTableCell.contentView addSubview:movieTitleLabel];
-        //[activityTableCell.contentView addSubview:ratingLabel];
+        [activityTableCell.contentView addSubview:ratingLabel];
         [activityTableCell.contentView addSubview:commentView];
         [activityTableCell.contentView addSubview:posterView];
     }
@@ -154,15 +159,14 @@ CGFloat tableHeight;
     PFQuery *movieQuery = [PFQuery queryWithClassName:@"Rating"];
     movieQuery.limit = 10;
     
-    //if(incomingID != NULL) //Måste avkommenteras för att newsfeed ska funka
-    [movieQuery whereKey:@"movieId" equalTo:incomingID];
-    NSLog(@"retrieveUserRatings MOVIEID: %@", incomingID);
+    if(movieID != NULL) //Måste avkommenteras för att newsfeed ska funka
+    [movieQuery whereKey:@"movieId" equalTo:[NSString stringWithFormat:@"%@", movieID]];
     [movieQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
             ratingsArray = objects;
-            tableHeight = [ratingsArray count]+1;
-            
+            tableHeight = [ratingsArray count];
+                
             [[self activityTable] reloadData];
             
             NSLog(@"HÄMTAT: %@", ratingsArray);
@@ -177,8 +181,6 @@ CGFloat tableHeight;
 
 
 -(void)retrieveMovieInfo:(NSString *)movieID{
-    
-    //NSString *movieString = (NSString *)movieID;
     
     NSLog(@"MOVIE ID: %@", movieID);
     
@@ -195,7 +197,6 @@ CGFloat tableHeight;
     
     movieTitle = [json valueForKey:@"original_title"];
 }
-
 
 /*
  #pragma mark - Navigation

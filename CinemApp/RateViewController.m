@@ -29,7 +29,7 @@ static CGFloat backdropImageWidth  = 320.0;
     //UITableViewCell *cell;
 }
 
-@synthesize rateView, activityView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, moviePlot, json, creditsJson, movieTableView, castArray, tableView, movieTVC, movieDirectors, movieWriters;
+@synthesize rateView, activityView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, moviePlot, moviePoster, json, creditsJson, movieTableView, castArray, tableView, movieTVC, movieDirectors, movieWriters;
 
 BOOL keyboardVisible = NO;
 UITapGestureRecognizer *tap;
@@ -130,7 +130,7 @@ UITapGestureRecognizer *tap;
         NSString *posterPath = [json valueForKey:@"poster_path"];
         NSString *posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w185%@", posterPath];
         NSURL *posterURL = [NSURL URLWithString:posterString];
-        NSData *moviePoster = [NSData dataWithContentsOfURL:posterURL];
+        moviePoster = [NSData dataWithContentsOfURL:posterURL];
         
         //Lägger cast i en array
         castArray = [creditsJson objectForKey:@"cast"];
@@ -184,7 +184,7 @@ UITapGestureRecognizer *tap;
             rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 300):movieID];
             rateView.commentField.delegate = self;
             [rateView.commentField setReturnKeyType:UIReturnKeyDone];
-            activityView = [[ActivityViewController alloc]initWithOneMovie:movieID:backdropImageHeight];
+            activityView = [[ActivityViewController alloc]initWithOneMovie:movieID:movieName:moviePoster:backdropImageHeight];
             
             //Kollar om tengentbordet visas
             [[NSNotificationCenter defaultCenter] addObserver:self
@@ -366,6 +366,7 @@ UITapGestureRecognizer *tap;
         movieView.hidden = TRUE;
         rateView.hidden = TRUE;
         activityView.view.hidden = FALSE;
+        [[activityView activityTable] reloadData];
         self.scrollView.contentSize = CGSizeMake(320, activityView.view.frame.size.height+backdropImageHeight);
     }
 }
