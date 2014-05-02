@@ -56,9 +56,9 @@ static CGFloat backdropImageWidth  = 320.0;
         followButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         followButton.frame = CGRectMake(80, 170, 160, 28);
         [followButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0]];
-        [followButton addTarget:self action:@selector(setBgColorForButton:) forControlEvents:UIControlEventTouchDown];
-        [followButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchDragExit];
-        [followButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchUpInside];
+        [followButton addTarget:self action:@selector(buttonHighlighted:) forControlEvents:UIControlEventTouchDown];
+        [followButton addTarget:self action:@selector(buttonPressCancelled:) forControlEvents:UIControlEventTouchDragExit];
+        [followButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [followButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [[followButton layer] setBorderColor:[UIColor grayColor].CGColor];
         [[followButton layer] setBorderWidth:1.0f];
@@ -102,8 +102,6 @@ static CGFloat backdropImageWidth  = 320.0;
     nameLabel.textAlignment = NSTextAlignmentCenter;
     nameLabel.textColor=[UIColor whiteColor];
     [nameLabel setFont:[UIFont fontWithName: @"AvenirNext-Medium" size: 25.0f]];
-    
-    [self calculateFollowers];
     
     noOfRatingsLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 210, 60, 40)];
     noOfRatingsLabel.text = [NSString stringWithFormat:@"0"];
@@ -258,6 +256,8 @@ static CGFloat backdropImageWidth  = 320.0;
         self.navigationController.navigationBar.shadowImage = [UIImage new];
         self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
     }
+    
+    [self calculateFollowers];
 }
 
 
@@ -297,7 +297,7 @@ static CGFloat backdropImageWidth  = 320.0;
     }
 }
 
--(void)setBgColorForButton:(UIButton*)sender
+-(void)buttonHighlighted:(UIButton*)sender
 {
     UIButton *button = (UIButton *)sender;
     if(button.tag == 1){
@@ -308,13 +308,27 @@ static CGFloat backdropImageWidth  = 320.0;
     button.frame = CGRectMake(81, 171, 158, 26);
 }
 
--(void)clearBgColorForButton:(UIButton*)sender
+-(void)buttonPressCancelled:(UIButton*)sender
 {
     UIButton *button = (UIButton *)sender;
     if(button.tag == 1){
         [sender setAlpha:1.0];
     }else if(button.tag == 2){
         button.backgroundColor = nil;
+    }
+    button.frame = CGRectMake(80, 170, 160, 28);
+}
+
+-(void)buttonPressed:(UIButton*)sender
+{
+    UIButton *button = (UIButton *)sender;
+
+    if(button.tag == 1){
+        [sender setAlpha:1.0];
+        noOfFollowersLabel.text = [NSString stringWithFormat:@"%i", [noOfFollowersLabel.text intValue]-1];
+    }else if(button.tag == 2){
+        button.backgroundColor = nil;
+        noOfFollowersLabel.text = [NSString stringWithFormat:@"%i", [noOfFollowersLabel.text intValue]+1];
     }
     button.frame = CGRectMake(80, 170, 160, 28);
 }
