@@ -49,6 +49,9 @@
 		6FD5598F190E62DA00BB0424 /* SignUpWithEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD5598E190E62DA00BB0424 /* SignUpWithEmailViewController.m */; };
 		6FD55992190E62FD00BB0424 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD55991190E62FD00BB0424 /* LogInViewController.m */; };
 		6FDF6A9C19126AE800F0FAE4 /* FollowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF6A9B19126AE800F0FAE4 /* FollowModel.m */; };
+		6FDF6AA11913BA1900F0FAE4 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF6A9D1913B9ED00F0FAE4 /* Lato-Bold.ttf */; };
+		6FDF6AA21913BA1B00F0FAE4 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF6A9E1913B9ED00F0FAE4 /* Lato-Light.ttf */; };
+		6FDF6AA31913BA1D00F0FAE4 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF6A9F1913B9ED00F0FAE4 /* Lato-Regular.ttf */; };
 		7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7308FDE618B76D0000F93344 /* ActivityTableView.m */; };
 		730B80B4190FE41200FB9872 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 730B80B3190FE41200FB9872 /* ActivityViewController.m */; };
 		730B80B7190FE4CA00FB9872 /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 730B80B6190FE4CA00FB9872 /* ActivityTableViewCell.m */; };
@@ -137,6 +140,9 @@
 		6FD55991190E62FD00BB0424 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		6FDF6A9A19126AE800F0FAE4 /* FollowModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowModel.h; sourceTree = "<group>"; };
 		6FDF6A9B19126AE800F0FAE4 /* FollowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowModel.m; sourceTree = "<group>"; };
+		6FDF6A9D1913B9ED00F0FAE4 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		6FDF6A9E1913B9ED00F0FAE4 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		6FDF6A9F1913B9ED00F0FAE4 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		7308FDE518B76D0000F93344 /* ActivityTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableView.h; sourceTree = "<group>"; };
 		7308FDE618B76D0000F93344 /* ActivityTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableView.m; sourceTree = "<group>"; };
 		730B80B2190FE41200FB9872 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
@@ -302,6 +308,7 @@
 		6F68D7BA18BCC38000457BA4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6FDF6AA01913B9F100F0FAE4 /* Fonts */,
 				6F5AF01C190FA5F10000B23D /* GTScrollNavigationBar.h */,
 				6F5AF01D190FA5F10000B23D /* GTScrollNavigationBar.m */,
 				6F6D3DD818F81FFB00D53B66 /* DejalActivityView.h */,
@@ -325,6 +332,16 @@
 				6FD5598E190E62DA00BB0424 /* SignUpWithEmailViewController.m */,
 			);
 			name = LogInViewControllers;
+			sourceTree = "<group>";
+		};
+		6FDF6AA01913B9F100F0FAE4 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6FDF6A9D1913B9ED00F0FAE4 /* Lato-Bold.ttf */,
+				6FDF6A9E1913B9ED00F0FAE4 /* Lato-Light.ttf */,
+				6FDF6A9F1913B9ED00F0FAE4 /* Lato-Regular.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		73C7E73218B37A4F00453123 /* Views */ = {
@@ -457,6 +474,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F0CAA1418B3705400AE42F9 /* InfoPlist.strings in Resources */,
+				6FDF6AA21913BA1B00F0FAE4 /* Lato-Light.ttf in Resources */,
+				6FDF6AA31913BA1D00F0FAE4 /* Lato-Regular.ttf in Resources */,
+				6FDF6AA11913BA1900F0FAE4 /* Lato-Bold.ttf in Resources */,
 				6F0CAA1C18B3705400AE42F9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

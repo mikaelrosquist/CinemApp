@@ -161,6 +161,7 @@ BOOL oneMovie = NO;
     
     if(movieID != NULL) //Måste avkommenteras för att newsfeed ska funka
     [movieQuery whereKey:@"movieId" equalTo:[NSString stringWithFormat:@"%@", movieID]];
+
     [movieQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
