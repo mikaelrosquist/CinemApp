@@ -15,7 +15,9 @@
 
 @end
 
-@implementation ActivityViewController
+@implementation ActivityViewController{
+    NSString *incomingID;
+}
 
 @synthesize activityTable, activityTableCell;
 
@@ -23,14 +25,34 @@ NSDictionary *json;
 NSArray *ratingsArray;
 NSData *moviePoster;
 NSString *movieTitle;
+CGFloat tableHeight;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        [self retrieveMovieRatings];
+        [self retrieveUserRatings];
         
         activityTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 320, 600)];
+        activityTable.dataSource = self;
+        activityTable.delegate = self;
+        
+        [self.view addSubview:activityTable];
+    }
+    return self;
+}
+
+- (id)initWithOneMovie:(NSString *)movieID :(CGFloat)backDropImageHeight
+{
+    if (self) {
+        
+        incomingID = movieID;
+        CGFloat yParameter = backDropImageHeight;
+        
+        [self retrieveUserRatings];
+        NSLog(@"initWithOneMovie MOVIEID: %@", incomingID);
+        activityTable = [[UITableView alloc]initWithFrame:CGRectMake(0, yParameter+50, 320, tableHeight*148+20)];
         activityTable.dataSource = self;
         activityTable.delegate = self;
         
@@ -48,6 +70,10 @@ NSString *movieTitle;
     self.automaticallyAdjustsScrollViewInsets=YES;
     
     // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [[self activityTable] reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,25 +147,25 @@ NSString *movieTitle;
 }
 
 
-- (void)retrieveMovieRatings{
+- (void)retrieveUserRatings{
     
-    //PFQuery *movieQuery = [PFUser query];
-    
-    PFQuery *movieQuery = [PFQuery queryWithClassName:@"Rating"];
-    //Villkor för senare implementering [query whereKey:@"user" equalTo:@"following"];
     ratingsArray = [[NSArray alloc]init];
     
+    PFQuery *movieQuery = [PFQuery queryWithClassName:@"Rating"];
     movieQuery.limit = 10;
-    //searchQuery = [searchQuery lowercaseString];
     
+    //if(incomingID != NULL) //Måste avkommenteras för att newsfeed ska funka
+    [movieQuery whereKey:@"movieId" equalTo:incomingID];
+    NSLog(@"retrieveUserRatings MOVIEID: %@", incomingID);
     [movieQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
             ratingsArray = objects;
+            tableHeight = [ratingsArray count]+1;
             
             [[self activityTable] reloadData];
             
-            NSLog(@"HÄMTAT: Sökresultat för %@", ratingsArray);
+            NSLog(@"HÄMTAT: %@", ratingsArray);
             
         } else {
             // Log details of the failure

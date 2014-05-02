@@ -151,10 +151,10 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
     
-    NSLog(@"movieView Height: %f", self.frame.size.height);
-    NSLog(@"Plot content: %f", plotView.contentSize.height);
-    NSLog(@"Plot frame: %f", plotView.frame.size.height);
-    NSLog(@"Poster: %f", posterView.frame.size.height);
+    //NSLog(@"movieView Height: %f", self.frame.size.height);
+    //NSLog(@"Plot content: %f", plotView.contentSize.height);
+    //NSLog(@"Plot frame: %f", plotView.frame.size.height);
+    //NSLog(@"Poster: %f", posterView.frame.size.height);
     
     CGFloat fixedWidth = textView.frame.size.width;
     CGSize newSize = [textView sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];

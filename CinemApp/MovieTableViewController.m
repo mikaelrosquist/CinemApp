@@ -33,7 +33,7 @@
         [self.view setFrame:CGRectMake(10, 275, 300, 400)];
         
         personArray = castArray;
-        NSLog(@"TableView PersonArray: %@", personArray);
+        //NSLog(@"TableView PersonArray: %@", personArray);
         
         //Max 7 skådisar visas
         NSUInteger tableLength;
@@ -83,7 +83,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
-    NSLog(@"numberOfSections");
+    //NSLog(@"numberOfSections");
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -95,22 +95,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //NSLog(@"PERSONARRAY: %@", personArray);
-    NSLog(@"cellForRowAtIndexPath");
+    //NSLog(@"cellForRowAtIndexPath");
     static NSString *cellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-        NSLog(@"ny cell");
+        //NSLog(@"ny cell");
     }
     if(personArray != 0){
     
         NSString *name = [[personArray objectAtIndex:indexPath.row] valueForKey:@"name"];
         NSString *movieChar = [[personArray objectAtIndex:indexPath.row] objectForKey:@"character"];
         
-        NSLog(@"NAMN: %@",name);
-        NSLog(@"KARAKTÄR: %@",movieChar);
+        //NSLog(@"NAMN: %@",name);
+        //NSLog(@"KARAKTÄR: %@",movieChar);
         
         UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(60, 5, 240, 30)];
         nameLabel.text = name;
@@ -130,7 +130,7 @@
         else
             personView.image = [UIImage imageWithData:personImage];
         
-        NSLog(@"BILD: %@",imagePath);
+        //NSLog(@"BILD: %@",imagePath);
         
         [cell.contentView addSubview:personView];
         [cell.contentView addSubview:nameLabel];

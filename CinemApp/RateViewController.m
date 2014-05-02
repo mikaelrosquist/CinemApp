@@ -29,7 +29,7 @@ static CGFloat backdropImageWidth  = 320.0;
     //UITableViewCell *cell;
 }
 
-@synthesize rateView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, moviePlot, json, creditsJson, movieTableView, castArray, tableView, movieTVC, movieDirectors, movieWriters;
+@synthesize rateView, activityView, movieID, movieName, movieRelease, movieGenre, movieRuntime, movieBackground, moviePlot, json, creditsJson, movieTableView, castArray, tableView, movieTVC, movieDirectors, movieWriters;
 
 BOOL keyboardVisible = NO;
 UITapGestureRecognizer *tap;
@@ -184,7 +184,7 @@ UITapGestureRecognizer *tap;
             rateView = [[RateView alloc] initWithMovieID:CGRectMake(0, backdropImageHeight, 320, 300):movieID];
             rateView.commentField.delegate = self;
             [rateView.commentField setReturnKeyType:UIReturnKeyDone];
-            tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, backdropImageHeight+10, 320, 300)];
+            activityView = [[ActivityViewController alloc]initWithOneMovie:movieID:backdropImageHeight];
             
             //Kollar om tengentbordet visas
             [[NSNotificationCenter defaultCenter] addObserver:self
@@ -245,7 +245,7 @@ UITapGestureRecognizer *tap;
             
             //Gömmer de vyer som inte ska synnas i Segmented Control vid load
             rateView.hidden = TRUE;
-            tableView.hidden = TRUE;
+            activityView.view.hidden = TRUE;
             
             if([movieBackground isEqual: [NSNull null]]){
                 [self.backdropImageView setImage: [UIImage imageNamed:@"moviebackdropplaceholder"]];
@@ -265,7 +265,7 @@ UITapGestureRecognizer *tap;
             //Lägger till alla subviews i den här vyn
             [self.view addSubview:self.backdropImageView];
             [self.view addSubview:self.backdropWithBlurImageView];
-            [self.view addSubview:self.tableView];
+            [self.scrollView addSubview:self.activityView.view];
             [self.scrollView addSubview:movieTitleLabel];
             [self.scrollView addSubview:segmentedControl];
             [self.view addSubview:self.scrollView];
@@ -278,11 +278,6 @@ UITapGestureRecognizer *tap;
             
         });
     });
-    //skapar tableView
-    self.tableView = [[UITableView alloc] init];
-    self.tableView.delegate = self;
-    self.tableView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
-    
     
     //Ska göra det enklare att använda slidern, vet ej om det funkar
     self.scrollView.canCancelContentTouches = YES;
@@ -357,19 +352,21 @@ UITapGestureRecognizer *tap;
         movieView.hidden = FALSE;
         rateView.hidden = TRUE;
         tableView.hidden = TRUE;
+        activityView.view.hidden = TRUE;
         self.scrollView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
     }else if(segment.selectedSegmentIndex == 1){
         movieView.hidden = TRUE;
         rateView.hidden = FALSE;
         tableView.hidden = TRUE;
+        activityView.view.hidden = TRUE;
         self.scrollView.contentSize = CGSizeMake(320, rateView.frame.size.height+backdropImageHeight);
         [self.scrollView addGestureRecognizer:tap];
     }else if(segment.selectedSegmentIndex == 2){
         [self dismissKeyboard];
         movieView.hidden = TRUE;
         rateView.hidden = TRUE;
-        tableView.hidden = FALSE;
-        self.scrollView.contentSize = CGSizeMake(320, movieTableView.frame.size.height+backdropImageHeight);
+        activityView.view.hidden = FALSE;
+        self.scrollView.contentSize = CGSizeMake(320, activityView.view.frame.size.height+backdropImageHeight);
     }
 }
 
@@ -383,7 +380,7 @@ UITapGestureRecognizer *tap;
     NSURL *creditsURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@%@", getDataURL, movieID, getCreditsURL, api_key]];
     NSData *creditsData = [NSData dataWithContentsOfURL:creditsURL];
     creditsJson = [NSJSONSerialization JSONObjectWithData:creditsData options:kNilOptions error:nil];
-    NSLog(@"%@", creditsJson);
+    //NSLog(@"%@", creditsJson);
 }
 
 

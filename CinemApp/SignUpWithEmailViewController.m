@@ -9,7 +9,7 @@
 #import "SignUpWithEmailViewController.h"
 #import "Parse/Parse.h"
 #import "DejalActivityView.h"
-#import "AppDelegate.h"<
+#import "AppDelegate.h"
 
 @interface SignUpWithEmailViewController (){
     NSArray* placeholders;

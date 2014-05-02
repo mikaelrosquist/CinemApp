@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UITableView *activityTable;
 @property (nonatomic, strong) ActivityTableViewCell *activityTableCell;
 
-- (void)retrieveMovieRatings;
+- (id)initWithOneMovie:(NSString *)movieID :(CGFloat)backDropImageHeight;
+- (void)retrieveUserRatings;
 
 @end
