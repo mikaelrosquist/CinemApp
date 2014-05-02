@@ -39,7 +39,7 @@
     [query whereKey:@"notifications" equalTo:@YES];
     [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
         if (count > 0) {
-            likeNotification = @"ON";
+            followerNotification = @"ON";
             [[self tableView] reloadData];
         }
     }];
@@ -130,8 +130,7 @@
     {
         case 0:
             likeNotification = ([switchView isOn]) ? @"ON" : @"OFF";
-            NSLog(@"Notifikationer för likes har satts till: %@", likeNotification);
-            user[@"notifications"] = ([switchView isOn]) ? @YES : @NO;;
+            NSLog(@"Notifikationer för nya följare har satts till: %@", likeNotification);
             break;
         case 1:
             commentNotification = ([switchView isOn]) ? @"ON" : @"OFF";
@@ -139,8 +138,11 @@
             break;
         case 2:
             followerNotification = ([switchView isOn]) ? @"ON" : @"OFF";
-            NSLog(@"Notifikationer för nya följare har satts till: %@", followerNotification);
+            NSLog(@"Notifikationer för likes har satts till: %@", followerNotification);
+            user[@"notifications"] = ([switchView isOn]) ? @YES : @NO;;
             break;
+
+            
         default:
             NSLog(@"Error!");
     }
