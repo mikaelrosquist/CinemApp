@@ -24,8 +24,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"News";
-        //activityTable = [[ActivityViewController alloc]initWithNibName:nil bundle:nil];
-        //[self.view addSubview:activityTable.view];
+        activityTable = [[ActivityViewController alloc]initWithNibName:nil bundle:nil];
+        [self.view addSubview:activityTable.view];
 
     }
     return self;
@@ -39,9 +39,12 @@
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(searchUser:)];
-
-
     self.navigationItem.rightBarButtonItem = barButtonItem;
+    
+    self.edgesForExtendedLayout = UIRectEdgeAll;
+    self.extendedLayoutIncludesOpaqueBars=YES;
+    self.automaticallyAdjustsScrollViewInsets=YES;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{

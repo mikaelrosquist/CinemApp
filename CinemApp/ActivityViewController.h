@@ -14,6 +14,7 @@
 
 @interface ActivityViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UITableView *activityTable;
 @property (nonatomic, strong) ActivityTableViewCell *activityTableCell;
 @property (nonatomic, strong) NSString *movieTitle;

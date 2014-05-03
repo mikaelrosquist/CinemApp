@@ -154,8 +154,8 @@
             } else {
                 PFObject *rating = [PFObject objectWithClassName:@"Rating"];
                 rating[@"user"] = currentUser.username;
-                if(commentField.text == placeholder) //Kollar endast minnesadressen och inte texten. Man kan alltså skriva in exakt likadan text som placeholdern och det kommer då bli en kommentar. Tycker det är snyggare än att använda [commentField.text isEqualToString:placeholder].
-                    rating[@"comment"] = NULL; //Vet inte vad som ska hända om ingen kommentar skrivs.
+                if([commentField.text isEqualToString:placeholder]) //Skickar in en tom string om man inte skriver nåt.
+                    rating[@"comment"] = @"";
                 else
                     rating[@"comment"] = commentField.text;
                 rating[@"rating"] = myNumber;
