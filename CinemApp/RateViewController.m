@@ -421,19 +421,17 @@ UITapGestureRecognizer *tap;
 - (void)keyboardWillShow:(NSNotification *)note
 {
     keyboardVisible = YES;
-    
-    //Hämta tangetbordets frame.
-    //NSDictionary* keyboardInfo = [note userInfo];
-    //NSValue* keyboardFrame = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
-    //CGRect keyboardFrameRect = [keyboardFrame CGRectValue];
-    
+
     [UIView beginAnimations:nil context:nil];
-    self.scrollView.center = CGPointMake(self.scrollView.center.x, self.scrollView.center.y-60);
-    self.backdropImageView.center = CGPointMake(_backdropImageView.center.x, _backdropImageView.center.y-60);
-    self.backdropWithBlurImageView.center = CGPointMake(_backdropWithBlurImageView.center.x, _backdropWithBlurImageView.center.y-60);
-    rateView.frame = CGRectMake(rateView.frame.origin.x, rateView.frame.origin.y, rateView.frame.size.width, rateView.frame.size.height+45);
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.origin.x, rateView.frame.size.height+backdropImageHeight+60);
     
+    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    if (screenRect.size.height == 548)
+        [self.view setFrame:CGRectMake (0,-62,self.view.frame.size.width,self.view.frame.size.height)];
+    else
+        [self.view setFrame:CGRectMake (0,-155,self.view.frame.size.width,self.view.frame.size.height)];
+    
+    
+
     [UIView commitAnimations];
 }
 
@@ -441,15 +439,13 @@ UITapGestureRecognizer *tap;
 {
     keyboardVisible = NO;
     
-    //Något spökar här.. Animationen blir lite konstig om man har scrollat efter tangentbordet har blivit synligt.
     
     [UIView beginAnimations:nil context:nil];
-    rateView.frame = CGRectMake(rateView.frame.origin.x, rateView.frame.origin.y, rateView.frame.size.width, rateView.frame.size.height-45);
-    self.backdropWithBlurImageView.center = CGPointMake(_backdropWithBlurImageView.center.x, _backdropWithBlurImageView.center.y+60);
-    self.backdropImageView.center = CGPointMake(_backdropImageView.center.x, _backdropImageView.center.y+60);
-    self.scrollView.center = CGPointMake(self.scrollView.center.x, self.scrollView.center.y+60);
+    
+    [self.view setFrame:CGRectMake (0,0,self.view.frame.size.width,self.view.frame.size.height)];
+    
     [UIView commitAnimations];
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.origin.x, rateView.frame.size.height+backdropImageHeight);
+    
 }
 
 -(void)dismissKeyboard {
