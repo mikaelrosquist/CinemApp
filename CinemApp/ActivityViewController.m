@@ -63,13 +63,18 @@ UIImageView *posterView;
         [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
         
         scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 520)];
-        activityTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 320, 600)];
+        activityTable = [[UITableView alloc]init];
         activityTable.dataSource = self;
         activityTable.delegate = self;
         activityTable.scrollEnabled=YES;
-        
+        self.scrollView.alwaysBounceVertical = YES;
         [scrollView addSubview:activityTable];
         [self.view addSubview:scrollView];
+        
+        self.activityTable.ScrollIndicatorInsets = UIEdgeInsetsMake(64.0f, 0.0f, 0.0f, 0.0f);
+        self.activityTable.contentInset = UIEdgeInsetsMake(64.0f, 0.0f, 0.0f, 0.0f);
+        CGRect bounds = self.scrollView.bounds;
+        self.activityTable.frame = bounds;
     }
     return self;
 }
@@ -251,7 +256,7 @@ UIImageView *posterView;
             [self.activityTableCell.contentView addSubview:activityTableCell.likeButton];
         }
     }
-    
+    self.activityTableCell.selectionStyle = UITableViewCellSelectionStyleNone;
     return activityTableCell;
 }
 

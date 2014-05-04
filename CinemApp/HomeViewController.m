@@ -52,6 +52,7 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     UIImage *_defaultImage;
     [self.navigationController.navigationBar setBackgroundImage:_defaultImage forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.translucent = YES;
 }
 
 -(void)searchUser:(id)sender {
