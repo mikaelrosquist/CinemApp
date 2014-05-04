@@ -342,8 +342,7 @@ UITapGestureRecognizer *tap;
                     [rating saveInBackground];
                     [DejalBezelActivityView removeViewAnimated:YES];
                     [self.tabBarController setSelectedIndex:0];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshFeed" object:nil];
-
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
             }];
             
