@@ -24,7 +24,7 @@ NSDate *timeStamp;
 NSDate *now;
 NSDateFormatter *dateFormat;
 int timePassed;
-int months, days, hours, minutes, seconds;
+NSInteger months, days, hours, minutes, seconds;
 
 NSString *ten = @"/10";
 NSString *rateString;
@@ -148,7 +148,7 @@ UIImageView *posterView;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 175;
+    return 240;
 }
 
 - (ActivityTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -187,40 +187,41 @@ UIImageView *posterView;
         
         if (titleArray.count > 0){
             
-             NSLog(@"Betyg: %@",rating);
+            NSLog(@"Betyg: %@",rating);
             
             movieTitle = [titleArray objectAtIndex:indexPath.row];
             movieYear = [yearArray objectAtIndex:indexPath.row];
-           
+            
             //Filmtiteln
             activityTableCell.movieTitleLabel.text = [NSString stringWithFormat:@"%@ %@ ", movieTitle, movieYear];
             activityTableCell.movieTitleLabel.frame = CGRectMake(activityTableCell.posterView.frame.size.width+20, activityTableCell.posterView.frame.origin.y-4, 290-activityTableCell.posterView.frame.size.width, activityTableCell.movieTitleLabel.frame.size.height);
             [activityTableCell.movieTitleLabel sizeToFit];
             NSMutableAttributedString *titleYear = [[NSMutableAttributedString alloc] initWithAttributedString: activityTableCell.movieTitleLabel.attributedText];
             [titleYear addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([self.movieTitle length]+1, 6)];
-            [titleYear addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 14.0] range: NSMakeRange([movieTitle length]+1, 6)];
+            [titleYear addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 12.0] range: NSMakeRange([movieTitle length]+1, 6)];
             [activityTableCell.movieTitleLabel setAttributedText: titleYear];
             
-            //Stjärnan anpassas efter poster och titel
-            activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.size.width+20, activityTableCell.movieTitleLabel.frame.size.height+50, 30, 30);
+            //Recension/kommentar anpassas efter poster
+            activityTableCell.commentLabel.text = comment;
+            activityTableCell.commentLabel.frame = CGRectMake(activityTableCell.posterView.frame.size.width+20, activityTableCell.movieTitleLabel.frame.size.height+activityTableCell.movieTitleLabel.frame.origin.y+5, 290-activityTableCell.posterView.frame.size.width, 80);
+            [activityTableCell.commentLabel sizeToFit];
             
-            //Betyget anpassas efter poster, stjärna och titel
+            //Stjärnan anpassas efter poster och kommentar
+            if(activityTableCell.commentLabel.frame.origin.y+activityTableCell.commentLabel.frame.size.height < activityTableCell.posterView.frame.origin.y+activityTableCell.posterView.frame.size.height)
+                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+20, activityTableCell.posterView.frame.origin.y+activityTableCell.posterView.frame.size.height+10, 30, 30);
+            else
+                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+20, activityTableCell.commentLabel.frame.origin.y+activityTableCell.commentLabel.frame.size.height+10, 30, 30);
+            
+            //Betyget anpassas efter stjärnan
             rateString = [NSString stringWithFormat:@"%@", rating];
             activityTableCell.ratingLabel.text = [NSString stringWithFormat:@"%@%@ ", rateString, ten];
-            activityTableCell.ratingLabel.frame = CGRectMake(activityTableCell.posterView.frame.size.width+activityTableCell.rateStar.frame.size.width+25, activityTableCell.movieTitleLabel.frame.size.height+55, 80, 22);
+            activityTableCell.ratingLabel.frame = CGRectMake(activityTableCell.rateStar.frame.origin.x+activityTableCell.rateStar.frame.size.width+5, activityTableCell.rateStar.frame.origin.y+5, 55, 22);
             NSMutableAttributedString *rateOfTen = [[NSMutableAttributedString alloc] initWithAttributedString: activityTableCell.ratingLabel.attributedText];
-            [rateOfTen addAttribute: NSForegroundColorAttributeName value: [UIColor blackColor] range: NSMakeRange([rateString length]+1, 3)];
+            [rateOfTen addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([rateString length]+1, 3)];
             [rateOfTen addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 14.0] range: NSMakeRange([rateString length], 3)];
             [activityTableCell.ratingLabel setAttributedText: rateOfTen];
-
             
             NSLog(@"%@", activityTableCell.movieTitleLabel);
-            
-            activityTableCell.commentView.text = comment;
-            activityTableCell.commentView.editable = NO;
-            activityTableCell.commentView.backgroundColor = activityTableCell.backgroundColor;
-            [activityTableCell.commentView setContentInset:UIEdgeInsetsMake(-10, -5, 10, 5)];
-            //[activityTableCell.commentView sizeToFit]; //strular lite, tror det har med att denna körs innnan kommentaren hämtats från parse.
             
             //Användare
             activityTableCell.userLabel.text = username;
@@ -228,8 +229,11 @@ UIImageView *posterView;
             
             //Tid
             activityTableCell.timeLabel.text = timeString;
-            
             activityTableCell.posterView.image = [UIImage imageWithData:[posterArray objectAtIndex:indexPath.row]];
+            
+            //Buttons anpassas efter stjärna och betyg
+            activityTableCell.likeButton.frame = CGRectMake(activityTableCell.ratingLabel.frame.origin.x+activityTableCell.ratingLabel.frame.size.width+5, activityTableCell.ratingLabel.frame.origin.y, 50, 25);
+            activityTableCell.commentButton.frame = CGRectMake(activityTableCell.likeButton.frame.origin.x+activityTableCell.likeButton.frame.size.width+10, activityTableCell.ratingLabel.frame.origin.y, 90, 25);
             
             //Vet inte om detta bidrar till bättre performance..
             activityTableCell.layer.shouldRasterize = YES;
@@ -241,8 +245,10 @@ UIImageView *posterView;
             [self.activityTableCell.contentView addSubview:activityTableCell.movieTitleLabel];
             [self.activityTableCell.contentView addSubview:activityTableCell.rateStar];
             [self.activityTableCell.contentView addSubview:activityTableCell.ratingLabel];
-            //  [self.contentView addSubview:commentView];
+            [self.activityTableCell.contentView addSubview:activityTableCell.commentLabel];
             [self.activityTableCell.contentView addSubview:activityTableCell.posterView];
+            [self.activityTableCell.contentView addSubview:activityTableCell.commentButton];
+            [self.activityTableCell.contentView addSubview:activityTableCell.likeButton];
         }
     }
     
@@ -265,7 +271,8 @@ UIImageView *posterView;
     
     if(movieID != NULL) //Måste avkommenteras för att newsfeed ska funka
         [movieQuery whereKey:@"movieId" equalTo:[NSString stringWithFormat:@"%@", movieID]];
-
+    
+    [movieQuery orderByDescending:@"createdAt"];
     [movieQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
@@ -290,13 +297,13 @@ UIImageView *posterView;
     //NSLog(@"RETRIEVED MOVIE ID: %@", movieID);
     for(int i=0; i < [ratingsArray count]; i++){
         
-        NSLog(@"RETRIEVING MOVIES");
+        NSLog(@"RETRIEVING MOVIE");
         
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, [[ratingsArray objectAtIndex:i] objectForKey:@"movieId"], api_key]];
         NSData *data = [NSData dataWithContentsOfURL:url];
         json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         
-        NSLog(@"%@", json);
+        //NSLog(@"%@", json);
         
         NSString *posterPath = [json valueForKey:@"poster_path"];
         NSString *posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w90%@", posterPath];
@@ -316,30 +323,40 @@ UIImageView *posterView;
 
 - (NSString *)formatTime:(NSDate *)timeStamp{
     
-    //timePassed = [timeStamp timeIntervalSinceNow];
-    
     unsigned int unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
     NSDateComponents *comps = [gregorian components:unitFlags fromDate:timeStamp  toDate:now  options:0];
     
     months = [comps month];
-    if(months > 0)
-        return timeString = [NSString stringWithFormat:@"%d %@", months, @" months ago"];
-    
+    if(months > 0){
+        if (months == 1)
+            return [NSString stringWithFormat:@"%ld %@", (long)months, @" month ago"];
+        else
+            return [NSString stringWithFormat:@"%ld %@", (long)months, @" months ago"];
+    }
     days = [comps day];
-    if(days > 0)
-        return timeString = [NSString stringWithFormat:@"%d %@", days, @" days ago"];
-    
+    if(days > 0){
+        if (days == 1)
+            return [NSString stringWithFormat:@"%ld %@", (long)days, @" day ago"];
+        else
+            return [NSString stringWithFormat:@"%ld %@", (long)days, @" days ago"];
+    }
     hours = [comps hour];
-    if(hours > 0)
-        return timeString = [NSString stringWithFormat:@"%d %@", hours, @" hours ago"];
-    
+    if(hours > 0){
+        if (hours == 1)
+            return [NSString stringWithFormat:@"%ld %@", (long)hours, @" hour ago"];
+        else
+            return [NSString stringWithFormat:@"%ld %@", (long)hours, @" hours ago"];
+    }
     minutes = [comps minute];
-    if(minutes > 0)
-        return timeString = [NSString stringWithFormat:@"%d %@", minutes, @" minutes ago"];
-    
+    if(minutes > 0){
+        if (minutes == 1)
+            return [NSString stringWithFormat:@"%ld %@", (long)minutes, @" minute ago"];
+        else
+            return [NSString stringWithFormat:@"%ld %@", (long)minutes, @" minutes ago"];
+    }
     seconds = [comps second];
     if(seconds > 0)
-        return timeString = [NSString stringWithFormat:@"%d %@", seconds, @" seconds ago"];
+        return [NSString stringWithFormat:@"%ld %@", (long)seconds, @" seconds ago"];
     
     return timeString;
 }
