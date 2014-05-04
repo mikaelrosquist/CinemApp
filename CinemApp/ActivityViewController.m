@@ -19,6 +19,13 @@
 
 @synthesize scrollView, activityTable, activityTableCell, movieTitle;
 
+NSCalendar *gregorian;
+NSDate *timeStamp;
+NSDate *now;
+NSDateFormatter *dateFormat;
+int timePassed;
+int months, days, hours, minutes, seconds;
+
 NSString *ten = @"/10";
 NSString *rateString;
 
@@ -26,6 +33,7 @@ NSMutableArray *posterArray;
 NSMutableArray *titleArray;
 NSMutableArray *yearArray;
 
+NSString *timeString;
 NSString *movieYear;
 NSString *movieTitle;
 NSString *movieID;
@@ -51,8 +59,10 @@ UIImageView *posterView;
     if (self) {
         [self retrieveUserRatings];
         
-        scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 520)];
+        dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
         
+        scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 520)];
         activityTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, 320, 600)];
         activityTable.dataSource = self;
         activityTable.delegate = self;
@@ -86,6 +96,9 @@ UIImageView *posterView;
 
 - (void)viewDidLoad
 {
+    
+    gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    now = [NSDate date];
     [super viewDidLoad];
     [self.activityTable reloadData];
    // [activityTable setFrame:CGRectMake(activityTable.frame.origin.x, activityTable.frame.origin.y, 320, activityTable.contentSize.height)];
@@ -135,7 +148,7 @@ UIImageView *posterView;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 148;
+    return 175;
 }
 
 - (ActivityTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -164,6 +177,10 @@ UIImageView *posterView;
         comment = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"comment"];
         rating = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"rating"];
         movieID = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"movieId"];
+        timeStamp = [[ratingsArray objectAtIndex:indexPath.row] createdAt];
+        
+        [self formatTime:timeStamp];
+        
         
         //if(!oneMovie)
           //  [self retrieveMovieInfo];
@@ -185,18 +202,17 @@ UIImageView *posterView;
             [activityTableCell.movieTitleLabel setAttributedText: titleYear];
             
             //Stjärnan anpassas efter poster och titel
-            activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.size.width+20, activityTableCell.movieTitleLabel.frame.size.height+10, 30, 30);
+            activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.size.width+20, activityTableCell.movieTitleLabel.frame.size.height+50, 30, 30);
             
             //Betyget anpassas efter poster, stjärna och titel
             rateString = [NSString stringWithFormat:@"%@", rating];
             activityTableCell.ratingLabel.text = [NSString stringWithFormat:@"%@%@ ", rateString, ten];
-            activityTableCell.ratingLabel.frame = CGRectMake(activityTableCell.posterView.frame.size.width+activityTableCell.rateStar.frame.size.width+30, activityTableCell.movieTitleLabel.frame.size.height+15, 80, 22);
+            activityTableCell.ratingLabel.frame = CGRectMake(activityTableCell.posterView.frame.size.width+activityTableCell.rateStar.frame.size.width+25, activityTableCell.movieTitleLabel.frame.size.height+55, 80, 22);
             NSMutableAttributedString *rateOfTen = [[NSMutableAttributedString alloc] initWithAttributedString: activityTableCell.ratingLabel.attributedText];
             [rateOfTen addAttribute: NSForegroundColorAttributeName value: [UIColor blackColor] range: NSMakeRange([rateString length]+1, 3)];
             [rateOfTen addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 14.0] range: NSMakeRange([rateString length], 3)];
             [activityTableCell.ratingLabel setAttributedText: rateOfTen];
 
-            
             
             NSLog(@"%@", activityTableCell.movieTitleLabel);
             
@@ -206,7 +222,12 @@ UIImageView *posterView;
             [activityTableCell.commentView setContentInset:UIEdgeInsetsMake(-10, -5, 10, 5)];
             //[activityTableCell.commentView sizeToFit]; //strular lite, tror det har med att denna körs innnan kommentaren hämtats från parse.
             
+            //Användare
             activityTableCell.userLabel.text = username;
+            activityTableCell.userImageView.image = [UIImage imageNamed:@"profilePicPlaceHolder"];
+            
+            //Tid
+            activityTableCell.timeLabel.text = timeString;
             
             activityTableCell.posterView.image = [UIImage imageWithData:[posterArray objectAtIndex:indexPath.row]];
             
@@ -214,7 +235,9 @@ UIImageView *posterView;
             activityTableCell.layer.shouldRasterize = YES;
             activityTableCell.layer.rasterizationScale = [UIScreen mainScreen].scale;
             
-            //[self.activityTableCell.contentView addSubview:activityTableCell.userLabel];
+            [self.activityTableCell.contentView addSubview:activityTableCell.userImageView];
+            [self.activityTableCell.contentView addSubview:activityTableCell.userLabel];
+            [self.activityTableCell.contentView addSubview:activityTableCell.timeLabel];
             [self.activityTableCell.contentView addSubview:activityTableCell.movieTitleLabel];
             [self.activityTableCell.contentView addSubview:activityTableCell.rateStar];
             [self.activityTableCell.contentView addSubview:activityTableCell.ratingLabel];
@@ -241,7 +264,7 @@ UIImageView *posterView;
     movieQuery.limit = 10;
     
     if(movieID != NULL) //Måste avkommenteras för att newsfeed ska funka
-    [movieQuery whereKey:@"movieId" equalTo:[NSString stringWithFormat:@"%@", movieID]];
+        [movieQuery whereKey:@"movieId" equalTo:[NSString stringWithFormat:@"%@", movieID]];
 
     [movieQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -289,6 +312,36 @@ UIImageView *posterView;
         movieInfoFetched = YES;
 
     }
+}
+
+- (NSString *)formatTime:(NSDate *)timeStamp{
+    
+    //timePassed = [timeStamp timeIntervalSinceNow];
+    
+    unsigned int unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *comps = [gregorian components:unitFlags fromDate:timeStamp  toDate:now  options:0];
+    
+    months = [comps month];
+    if(months > 0)
+        return timeString = [NSString stringWithFormat:@"%d %@", months, @" months ago"];
+    
+    days = [comps day];
+    if(days > 0)
+        return timeString = [NSString stringWithFormat:@"%d %@", days, @" days ago"];
+    
+    hours = [comps hour];
+    if(hours > 0)
+        return timeString = [NSString stringWithFormat:@"%d %@", hours, @" hours ago"];
+    
+    minutes = [comps minute];
+    if(minutes > 0)
+        return timeString = [NSString stringWithFormat:@"%d %@", minutes, @" minutes ago"];
+    
+    seconds = [comps second];
+    if(seconds > 0)
+        return timeString = [NSString stringWithFormat:@"%d %@", seconds, @" seconds ago"];
+    
+    return timeString;
 }
 
 /*

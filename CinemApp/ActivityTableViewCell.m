@@ -10,23 +10,33 @@
 
 @implementation ActivityTableViewCell
 
-@synthesize movieTitleLabel, userLabel, ratingLabel, commentView, posterView, rateStar;
+@synthesize movieTitleLabel, userLabel, ratingLabel, commentView, posterView, rateStar, userImageView, timeLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        posterView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 67.5, 101.25)];
+        posterView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 50, 67.5, 101.25)];
+        userLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 15, 150, 20)];
+        timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(210, 15, 100, 20)];
         movieTitleLabel = [[UILabel alloc]init];
-        userLabel = [[UILabel alloc]initWithFrame:CGRectMake(110, 80, 100, 30)];
+        userImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 30, 30)];
         rateStar = [[UIImageView alloc]init];
         ratingLabel = [[UILabel alloc]init];
         commentView = [[UITextView alloc]initWithFrame:CGRectMake(110, 40, 240, 30)];
         
         rateStar.image = [UIImage imageNamed:@"rate_star"];
         
-        [ratingLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:28]];
+        [userLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14]];
+        userLabel.textColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
+        
+        timeLabel.textAlignment = NSTextAlignmentRight;
+        [timeLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
+        timeLabel.textColor = [UIColor lightGrayColor];
+
+        
+        [ratingLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:28]];
         ratingLabel.textAlignment = NSTextAlignmentLeft;
         
         movieTitleLabel.numberOfLines = 3;

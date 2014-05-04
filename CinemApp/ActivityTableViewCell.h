@@ -10,12 +10,14 @@
 
 @interface ActivityTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UILabel *movieTitleLabel;
 @property (nonatomic, strong) UILabel *userLabel;
-@property (nonatomic, strong) UITextView *commentView;
+@property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UILabel *movieTitleLabel;
 @property (nonatomic, strong) UILabel *ratingLabel;
+@property (nonatomic, strong) UITextView *commentView;
 @property (nonatomic, strong) UIImageView *posterView;
 @property (nonatomic, strong) UIImageView *rateStar;
+@property (nonatomic, strong) UIImageView *userImageView;
 
 
 @end
