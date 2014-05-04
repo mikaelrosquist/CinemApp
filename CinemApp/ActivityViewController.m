@@ -20,20 +20,18 @@
 
 @synthesize scrollView, activityTable, activityTableCell, movieTitle;
 
-NSCalendar *gregorian;
 NSDate *timeStamp;
 NSDate *now;
-NSDateFormatter *dateFormat;
+NSCalendar *gregorian;
 int timePassed;
 NSInteger months, days, hours, minutes, seconds;
-
-NSString *ten = @"/10";
-NSString *rateString;
 
 NSMutableArray *posterArray;
 NSMutableArray *titleArray;
 NSMutableArray *yearArray;
 
+NSString *ten = @"/10";
+NSString *rateString;
 NSString *timeString;
 NSString *movieYear;
 NSString *movieTitle;
@@ -45,14 +43,9 @@ NSDictionary *json;
 NSArray *ratingsArray;
 NSData *moviePoster;
 CGFloat tableHeight;
+
 BOOL oneMovie = NO;
 BOOL movieInfoFetched = NO;
-
-UILabel *movieTitleLabel;
-UILabel *userLabel;
-UITextView *commentView;
-UILabel *ratingLabel;
-UIImageView *posterView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,8 +53,6 @@ UIImageView *posterView;
     if (self) {
         [self retrieveUserRatings];
         
-        dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
         
         scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
         activityTable = [[UITableView alloc]init];
@@ -237,7 +228,7 @@ UIImageView *posterView;
             activityTableCell.userImageView.image = [UIImage imageNamed:@"profilePicPlaceHolder"];
             
             //Tid
-            activityTableCell.timeLabel.text = timeString;
+            activityTableCell.timeLabel.text = [self formatTime:timeStamp];
             activityTableCell.posterView.image = [UIImage imageWithData:[posterArray objectAtIndex:indexPath.row]];
             
             //Buttons anpassas efter stjärna och betyg
@@ -368,7 +359,7 @@ UIImageView *posterView;
     if(seconds > 0)
         return [NSString stringWithFormat:@"%ld %@", (long)seconds, @" seconds ago"];
     
-    return timeString;
+    return @"0";
 }
 
 /*
