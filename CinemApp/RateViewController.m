@@ -26,6 +26,7 @@ static CGFloat backdropImageWidth  = 320.0;
     UILabel *movieTitleLabel, *movieGenresLabel, *movieRuntimeLabel;
     UIImage *movieBackgroundImage;
     MovieView *movieView;
+    CGFloat yOffset;
     //UITableViewCell *cell;
 }
 
@@ -301,7 +302,7 @@ UITapGestureRecognizer *tap;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     [rateView.commentField resignFirstResponder];
     CGRect f;
-    CGFloat yOffset = self.scrollView.contentOffset.y;
+    yOffset = self.scrollView.contentOffset.y;
     CGFloat enlargmentFactor = ((ABS(yOffset)+backdropImageHeight)*backdropImageWidth)/backdropImageHeight;
     float blurAlpha = (yOffset/70.0)+1.1;
     
@@ -337,7 +338,7 @@ UITapGestureRecognizer *tap;
     movieGenresLabel.alpha = blurAlpha;
     
     //Log för debug
-    //NSLog(@"YOFFSET: %f", yOffset);
+    NSLog(@"YOFFSET: %f", yOffset);
     //NSLog(@"BLUR ALPHA: %f", blurAlpha);
 }
 
@@ -426,9 +427,9 @@ UITapGestureRecognizer *tap;
     
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
     if (screenRect.size.height == 548)
-        [self.view setFrame:CGRectMake (0,-62,self.view.frame.size.width,self.view.frame.size.height)];
+        [self.view setFrame:CGRectMake (0,-62+yOffset,self.view.frame.size.width,self.view.frame.size.height)];
     else
-        [self.view setFrame:CGRectMake (0,-155,self.view.frame.size.width,self.view.frame.size.height)];
+        [self.view setFrame:CGRectMake (0,-155+yOffset,self.view.frame.size.width,self.view.frame.size.height)];
     
     
 
@@ -469,5 +470,9 @@ UITapGestureRecognizer *tap;
     self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, movieView.frame.size.height+backdropImageHeight+addedHeight);
 }
 
+- (void)view:(UIView *)view savedRating:(UIView *)subview
+{
+        NSLog(@"his view is in the process of being removed");
+}
 
 @end
