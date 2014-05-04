@@ -12,7 +12,6 @@
 
 @interface ProfileSettingsViewController (){
     PFUser *currentUser;
-    NSString *fullName;
 }
 
 @end
@@ -38,7 +37,7 @@
     
     [self setTitle:@"Profile settings"];
 	
-	self.personalSection = @[@"Full name", @"Profile picture", @"Cover photo"];
+	self.personalSection = @[@"Profile picture", @"Cover photo"];
     
     self.privateProfileSection = @[@"Private profile"];
 	
@@ -54,22 +53,6 @@
                                                                     action:@selector(save:)];
     
     self.navigationItem.rightBarButtonItem = barButtonItem;
-    
-    PFUser *user = [PFUser currentUser];
-    PFQuery *query = [PFUser query];
-    [query whereKey:@"objectId" equalTo:user.objectId];
-    query.limit = 1;
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            if (objects.count > 0) {
-                PFObject *_user = [objects objectAtIndex:0];
-                fullName = [_user objectForKey:@"fullname"];
-            }
-        }
-    }];
-    
-    NSLog(@"%@", fullName);
 
 
 }
@@ -86,7 +69,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0)
-        return @"User information";
+        return @"Profile data";
     else
         return nil;
 }
@@ -110,42 +93,9 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Identifier];
 	
     if(indexPath.section == 0){
-        if(indexPath.row == 0){
-        
-            UITextField *playerTextField = [[UITextField alloc] initWithFrame:CGRectMake(52, 8, 260, 30)];
-            playerTextField.adjustsFontSizeToFitWidth = YES;
-            playerTextField.textColor = [UIColor blackColor];
-            playerTextField.backgroundColor = [UIColor whiteColor];
-            playerTextField.autocorrectionType = UITextAutocorrectionTypeNo; //stäng av autocorrect
-            playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; //stäng av autoversaler
-            playerTextField.clearButtonMode = UITextFieldViewModeWhileEditing; //'x'-knappen
-            playerTextField.tag = 0;
-            [playerTextField setEnabled: YES];
-            playerTextField.keyboardType = UIKeyboardTypeEmailAddress;
-            playerTextField.returnKeyType = UIReturnKeyNext;
-            playerTextField.placeholder = self.personalSection[indexPath.row];
-            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-            
-            if ([indexPath row] == 0){
-                imgView.image = [UIImage imageNamed:@"settings_username"];
-                if(![fullName  isEqual: [NSNull null]])
-                    playerTextField.text = fullName;
-                
-                playerTextField.returnKeyType = UIReturnKeyNext;
-            }
-            
-            [playerTextField setTag:[indexPath row]];
-            playerTextField.delegate = self;
-            
-            cell.imageView.image = imgView.image;
-            playerTextField.secureTextEntry = NO;
-            [cell.contentView addSubview:playerTextField];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }else{
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.userInteractionEnabled = NO;
             cell.textLabel.text = self.personalSection[indexPath.row];
-        }
     }
     
     else if(indexPath.section == 1){
@@ -155,7 +105,7 @@
         [switchView addTarget:self action:@selector(updateSwitchAtIndexPath:) forControlEvents:UIControlEventTouchUpInside];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *privateProfile = [defaults objectForKey:@"privateProfile"];
-        
+        [switchView setEnabled:NO];
         if([privateProfile isEqual: @"ON"])
             [switchView setOn:YES animated:YES];
         else

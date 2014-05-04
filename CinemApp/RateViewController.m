@@ -296,7 +296,69 @@ UITapGestureRecognizer *tap;
     
     self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     
+    NSMutableDictionary* sendingObject;
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(receiveData:)
+     name:[NSString stringWithFormat:@"%@%@", [PFUser currentUser].objectId, movieID]
+     object:sendingObject];
+    
 }
+
+- (void)receiveData:(NSNotification *)notification {
+    
+    [DejalBezelActivityView activityViewForView:self.view];
+    
+    if ([notification.name isEqualToString:[NSString stringWithFormat:@"%@%@", [PFUser currentUser].objectId, movieID]])
+    {
+        NSDictionary* userInfo = notification.userInfo;
+        NSString *user = [userInfo objectForKey:@"user"];
+        NSString *movie = [userInfo objectForKey:@"movie"];
+        NSString *comment = [userInfo objectForKey:@"comment"];
+        NSNumber *myRating = [userInfo objectForKey:@"rating"];
+        NSLog (@"Successfully received test notification! %@", user);
+        
+        
+        PFUser *currentUser = [PFUser currentUser];
+        if (currentUser) {
+            
+            PFQuery *query = [PFQuery queryWithClassName:@"Rating"];
+            [query whereKey:@"user" equalTo:currentUser.username];
+            [query whereKey:@"movieId" equalTo:movie];
+            [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                if (object){
+                    [object deleteInBackground];
+                } else {
+                    PFObject *rating = [PFObject objectWithClassName:@"Rating"];
+                    
+                    rating[@"user"] = currentUser.username;
+                    if([comment isEqualToString:@"How was it? Leave a note..."]) //Skickar in en tom string om man inte skriver nåt.
+                        rating[@"comment"] = @"";
+                    else
+                        rating[@"comment"] = comment;
+                    rating[@"rating"] = myRating;
+                    rating[@"movieId"] = [NSString stringWithFormat:@"%@", self.movieID];
+                    [rating saveInBackground];
+                    [DejalBezelActivityView removeViewAnimated:YES];
+                    [self.tabBarController setSelectedIndex:0];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshFeed" object:nil];
+
+                }
+            }];
+            
+            NSLog(@"Rating sparas...");
+            
+        }else{
+            NSLog(@"Inte inloggad!");
+        }
+
+        
+    }
+    
+    
+}
+
 
 //SCROLLVIEW
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

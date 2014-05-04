@@ -60,7 +60,9 @@
         UISwitch *feedSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(258, 200, 40, 20)];
         feedSwitch.onTintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
         [feedSwitch setOn:YES];
+        [feedSwitch setEnabled:NO];
         [self addSubview:feedSwitch];
+        
         
         //commentLabel
         //UILabel *commentLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 150, 100, 44)];
@@ -132,43 +134,20 @@
 
 -(void)saveRating:(id)sender {
     
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"PassData"
-     object:nil];
+    NSString *movie = [NSString stringWithFormat:@"%@",self.movieID];
+    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber *myNumber = [f numberFromString:sliderLabel.text];
     
-    [DejalBezelActivityView activityViewForView:self];
     
-    PFUser *currentUser = [PFUser currentUser];
-    if (currentUser) {
-        NSString *test = [NSString stringWithFormat:@"%@",self.movieID];
-        NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-        [f setNumberStyle:NSNumberFormatterDecimalStyle];
-        NSNumber *myNumber = [f numberFromString:sliderLabel.text];
-        
-        PFQuery *query = [PFQuery queryWithClassName:@"Rating"];
-        [query whereKey:@"user" equalTo:currentUser.username];
-        [query whereKey:@"movieId" equalTo:test];
-        [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-            if (object){
-                [object deleteInBackground];
-            } else {
-                PFObject *rating = [PFObject objectWithClassName:@"Rating"];
-                rating[@"user"] = currentUser.username;
-                if([commentField.text isEqualToString:placeholder]) //Skickar in en tom string om man inte skriver nåt.
-                    rating[@"comment"] = @"";
-                else
-                    rating[@"comment"] = commentField.text;
-                rating[@"rating"] = myNumber;
-                rating[@"movieId"] = [NSString stringWithFormat:@"%@", self.movieID];
-                [rating saveInBackground];
-            }
-            [DejalBezelActivityView removeViewAnimated:YES];
-        }];
-        NSLog(@"Rating sparas...");
-    }else{
-        NSLog(@"Inte inloggad!");
-    }
+    NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
+    [userInfo setObject:[PFUser currentUser].objectId forKey:@"user"];
+    [userInfo setObject:movie forKey:@"movie"];
+    [userInfo setObject:commentField.text forKey:@"comment"];
+    [userInfo setObject:myNumber forKey:@"rating"];
     
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:[NSString stringWithFormat:@"%@%@", [PFUser currentUser].objectId, movie] object:self userInfo:userInfo];
 }
 
 - (void)sliderAction:(id)sender {
