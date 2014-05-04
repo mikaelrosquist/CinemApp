@@ -39,7 +39,7 @@
         NSString *userId = [notificationPayload objectForKey:@"userId"];
         PFQuery *query = [PFUser query];
         [query whereKey:@"objectId" equalTo:userId];
-        PFUser *user = (PFUser*)[query getFirstObject];
+        //PFUser *user = (PFUser*)[query getFirstObject];
         
         NSLog(@"hej");
         

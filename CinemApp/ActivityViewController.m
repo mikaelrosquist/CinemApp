@@ -7,6 +7,7 @@
 //
 
 #import "ActivityViewController.h"
+#import "DejalActivityView.h"
 
 #define getDataURL @"http://api.themoviedb.org/3/movie/"
 #define api_key @"?api_key=2da45d86a9897bdf7e7eab86aa0485e3"
@@ -62,7 +63,7 @@ UIImageView *posterView;
         dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
         
-        scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, 520)];
+        scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
         activityTable = [[UITableView alloc]init];
         activityTable.dataSource = self;
         activityTable.delegate = self;
@@ -71,8 +72,11 @@ UIImageView *posterView;
         [scrollView addSubview:activityTable];
         [self.view addSubview:scrollView];
         
-        self.activityTable.ScrollIndicatorInsets = UIEdgeInsetsMake(64.0f, 0.0f, 0.0f, 0.0f);
-        self.activityTable.contentInset = UIEdgeInsetsMake(64.0f, 0.0f, 0.0f, 0.0f);
+        [activityTable setHidden:YES];
+        [DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
+        self.activityTable.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
+        self.activityTable.ScrollIndicatorInsets = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
+        self.activityTable.contentInset = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
         CGRect bounds = self.scrollView.bounds;
         self.activityTable.frame = bounds;
     }
@@ -320,8 +324,9 @@ UIImageView *posterView;
         if ([movieYear isEqualToString:@""])
             movieYear = @"xxxx-xx-xx";
         [yearArray addObject:movieYear];
-        
         movieInfoFetched = YES;
+        [activityTable setHidden:NO];
+        [DejalActivityView removeView];
 
     }
 }
