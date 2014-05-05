@@ -77,6 +77,11 @@
         commentField.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
         commentField.textAlignment = 0;
         commentField.clipsToBounds = YES;
+        
+        /* Stänger av scrollen och minskar marginalerna i kanterna på textviewn
+        commentField.scrollEnabled = NO;
+        [commentField setContentInset:UIEdgeInsetsMake(-10, -5, 10, 5)];
+        */
         commentField.layer.cornerRadius = 2.0f;
         [self addSubview:commentField];
         

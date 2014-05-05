@@ -333,7 +333,7 @@ BOOL movieInfoFetched = NO;
             ratingsArray = (NSMutableArray *)objects;
             tableHeight = [ratingsArray count];
             
-            NSLog(@"HÄMTAT: %@", ratingsArray);
+            //NSLog(@"HÄMTAT: %@", ratingsArray);
             
             //Hämtar filminfo och laddar om viewn när ratings hämtats.
             activityTableCell = nil;
@@ -372,7 +372,7 @@ BOOL movieInfoFetched = NO;
     //NSLog(@"RETRIEVED MOVIE ID: %@", movieID);
     for(int i=0; i < [ratingsArray count]; i++){
         
-        NSLog(@"RETRIEVING MOVIE");
+        //NSLog(@"RETRIEVING MOVIE");
         
         url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, [[ratingsArray objectAtIndex:i] objectForKey:@"movieId"], api_key]];
         data = [NSData dataWithContentsOfURL:url];
