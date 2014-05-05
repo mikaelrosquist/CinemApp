@@ -23,7 +23,6 @@
 NSDate *timeStamp;
 NSDate *now;
 NSCalendar *gregorian;
-int timePassed;
 NSInteger months, days, hours, minutes, seconds;
 
 NSMutableArray *posterArray;
@@ -53,7 +52,6 @@ BOOL movieInfoFetched = NO;
     if (self) {
         [self retrieveUserRatings];
         
-        
         scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
         activityTable = [[UITableViewController alloc]init];
         activityTable.tableView.dataSource = self;
@@ -67,6 +65,7 @@ BOOL movieInfoFetched = NO;
         self.activityTable.tableView.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
         self.activityTable.tableView.ScrollIndicatorInsets = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
         self.activityTable.tableView.contentInset = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
+
         CGRect bounds = self.scrollView.bounds;
         self.activityTable.tableView.frame = bounds;
         
@@ -91,6 +90,8 @@ BOOL movieInfoFetched = NO;
         activityTable.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, yParameter+50, 320, tableHeight*148+20)];
         activityTable.tableView.dataSource = self;
         activityTable.tableView.delegate = self;
+        NSLog(@"TableHeight: %f", tableHeight);
+
         
         [self.view addSubview:activityTable.tableView];
     }
@@ -118,13 +119,6 @@ BOOL movieInfoFetched = NO;
     posterArray = [[NSMutableArray alloc]init];
     titleArray = [[NSMutableArray alloc]init];
     yearArray = [[NSMutableArray alloc]init];
-    
-    for(int i=0; i < [ratingsArray count]; i++){
-        NSLog(@"FORLOOP");
-        //[self retrieveMovieInfo:[[ratingsArray objectAtIndex:i] objectForKey:@"movieId"]];
-        
-    }
-    
     
     // Do any additional setup after loading the view.
 }
@@ -155,6 +149,8 @@ BOOL movieInfoFetched = NO;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"CELLHEIGHT: %f", activityTableCell.commentButton.frame.origin.y+activityTableCell.commentButton.frame.size.height+40);
+    //return activityTableCell.commentButton.frame.origin.y+activityTableCell.commentButton.frame.size.height+40;
     return 240;
 }
 /*
@@ -169,7 +165,7 @@ BOOL movieInfoFetched = NO;
 
 - (ActivityTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSLog(@"cellForRowAtIndexPath");
+    NSLog(@"cellForRowAtIndexPath");
     static NSString *cellIdentifier = @"activityTableCell";
     
     activityTableCell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -196,7 +192,6 @@ BOOL movieInfoFetched = NO;
         timeStamp = [[ratingsArray objectAtIndex:indexPath.row] createdAt];
         
         [self formatTime:timeStamp];
-        
         
         //if(!oneMovie)
           //  [self retrieveMovieInfo];
@@ -237,7 +232,7 @@ BOOL movieInfoFetched = NO;
             [rateOfTen addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 14.0] range: NSMakeRange([rateString length], 3)];
             [activityTableCell.ratingLabel setAttributedText: rateOfTen];
             
-            NSLog(@"%@", activityTableCell.movieTitleLabel);
+            //NSLog(@"%@", activityTableCell.movieTitleLabel);
             
             //Användare
             activityTableCell.userLabel.text = username;
@@ -280,7 +275,7 @@ BOOL movieInfoFetched = NO;
     PFQuery *movieQuery = [PFQuery queryWithClassName:@"Rating"];
     movieQuery.limit = 10;
     
-    if(movieID != NULL) //Måste avkommenteras för att newsfeed ska funka
+    if(oneMovie) //Måste avkommenteras för att newsfeed ska funka
         [movieQuery whereKey:@"movieId" equalTo:[NSString stringWithFormat:@"%@", movieID]];
     
     [movieQuery orderByDescending:@"createdAt"];
@@ -306,6 +301,10 @@ BOOL movieInfoFetched = NO;
 
 -(void)retrieveMovieInfo{
     
+    NSString *posterPath;
+    NSString *posterString;
+    NSURL *posterURL;
+    
     //NSLog(@"RETRIEVED MOVIE ID: %@", movieID);
     for(int i=0; i < [ratingsArray count]; i++){
         
@@ -315,9 +314,9 @@ BOOL movieInfoFetched = NO;
         NSData *data = [NSData dataWithContentsOfURL:url];
         json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         
-        NSString *posterPath = [json valueForKey:@"poster_path"];
-        NSString *posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w90%@", posterPath];
-        NSURL *posterURL = [NSURL URLWithString:posterString];
+        posterPath = [json valueForKey:@"poster_path"];
+        posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w90%@", posterPath];
+        posterURL = [NSURL URLWithString:posterString];
         [posterArray addObject:[NSData dataWithContentsOfURL:posterURL]];
         
         [titleArray addObject:[json valueForKey:@"original_title"]];

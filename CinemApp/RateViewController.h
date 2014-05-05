@@ -23,7 +23,7 @@
 @property (nonatomic, strong) RateView *rateView;
 @property (nonatomic, strong) UIView *movieTableView; //viewn med skådisar i movieTVC
 @property (nonatomic, strong) MovieTableViewController *movieTVC;
-@property (nonatomic, strong) ActivityViewController *activityView;
+@property (nonatomic, strong) ActivityViewController *oneMovieActivityView;
 
 @property (nonatomic, strong) NSString *movieID;
 @property (nonatomic, strong) NSString *movieName;
