@@ -186,7 +186,7 @@ UITapGestureRecognizer *tap;
             rateView.commentField.delegate = self;
             [rateView.commentField setReturnKeyType:UIReturnKeyDone];
             oneMovieActivityView = [[ActivityViewController alloc]initWithOneMovie:movieID:movieName:moviePoster:backdropImageHeight];
-            oneMovieActivityView.view.frame = CGRectMake(0, backdropImageHeight+45, 320, 600);
+            oneMovieActivityView.view.frame = CGRectMake(0, backdropImageHeight+45, 320, 0);
             
             //Kollar om tengentbordet visas
             [[NSNotificationCenter defaultCenter] addObserver:self
@@ -399,7 +399,7 @@ UITapGestureRecognizer *tap;
     movieGenresLabel.alpha = blurAlpha;
     
     //Log för debug
-    NSLog(@"YOFFSET: %f", yOffset);
+    //NSLog(@"YOFFSET: %f", yOffset);
     //NSLog(@"BLUR ALPHA: %f", blurAlpha);
 }
 

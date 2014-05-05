@@ -17,12 +17,17 @@
     LikeModel *likeModel;
 }
 
-@property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) UITableViewController *activityTable;
-@property (nonatomic, strong) ActivityTableViewCell *activityTableCell;
+@property (retain, strong) UIScrollView *scrollView;
+@property (retain, strong) UITableViewController *activityTable;
+@property (retain, strong) ActivityTableViewCell *activityTableCell;
 @property (nonatomic, strong) NSString *movieTitle;
 @property (nonatomic, retain) LikeModel *likeModel;
 
+
+@property (retain, strong) NSMutableArray *posterArray;
+@property (retain, strong) NSMutableArray *titleArray;
+@property (retain, strong) NSMutableArray *yearArray;
+@property (retain, strong) NSMutableArray *ratingsArray;
 
 - (id)initWithOneMovie:(NSString *)incomingID :(NSString *) incomingTitle :(NSData *)incomingPoster :(CGFloat)backDropImageHeight;
 - (void)retrieveUserRatings;
