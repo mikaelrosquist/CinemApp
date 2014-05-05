@@ -52,7 +52,6 @@ BOOL movieInfoFetched = NO;
     if (self) {
         [self retrieveUserRatings];
         
-        
         scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
         activityTable = [[UITableView alloc]init];
         activityTable.dataSource = self;
@@ -85,6 +84,7 @@ BOOL movieInfoFetched = NO;
         [self retrieveUserRatings];
         NSLog(@"initWithOneMovie MOVIEID: %@", movieID);
         activityTable = [[UITableView alloc]initWithFrame:CGRectMake(0, yParameter+50, 320, tableHeight*148+20)];
+        NSLog(@"TableHeight: %f", tableHeight);
         activityTable.dataSource = self;
         activityTable.delegate = self;
         
@@ -110,13 +110,6 @@ BOOL movieInfoFetched = NO;
     posterArray = [[NSMutableArray alloc]init];
     titleArray = [[NSMutableArray alloc]init];
     yearArray = [[NSMutableArray alloc]init];
-    
-    for(int i=0; i < [ratingsArray count]; i++){
-        NSLog(@"FORLOOP");
-        //[self retrieveMovieInfo:[[ratingsArray objectAtIndex:i] objectForKey:@"movieId"]];
-        
-    }
-    
     
     // Do any additional setup after loading the view.
 }
@@ -263,7 +256,7 @@ BOOL movieInfoFetched = NO;
     PFQuery *movieQuery = [PFQuery queryWithClassName:@"Rating"];
     movieQuery.limit = 10;
     
-    if(movieID != NULL) //Måste avkommenteras för att newsfeed ska funka
+    if(oneMovie) //Måste avkommenteras för att newsfeed ska funka
         [movieQuery whereKey:@"movieId" equalTo:[NSString stringWithFormat:@"%@", movieID]];
     
     [movieQuery orderByDescending:@"createdAt"];
