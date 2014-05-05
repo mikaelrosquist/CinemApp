@@ -318,8 +318,6 @@ UITapGestureRecognizer *tap;
         NSString *movie = [userInfo objectForKey:@"movie"];
         NSString *comment = [userInfo objectForKey:@"comment"];
         NSNumber *myRating = [userInfo objectForKey:@"rating"];
-        NSLog (@"Successfully received test notification! %@", user);
-        
         
         PFUser *currentUser = [PFUser currentUser];
         if (currentUser) {
@@ -333,7 +331,8 @@ UITapGestureRecognizer *tap;
                 } else {
                     PFObject *rating = [PFObject objectWithClassName:@"Rating"];
                     
-                    rating[@"user"] = currentUser.username;
+                    rating[@"user"] = [PFUser currentUser].username;
+                    rating[@"userId"] = user;
                     if([comment isEqualToString:@"How was it? Leave a note..."]) //Skickar in en tom string om man inte skriver nåt.
                         rating[@"comment"] = @"";
                     else

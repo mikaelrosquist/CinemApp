@@ -7,16 +7,16 @@
 //
 
 #import "ActivityTableViewCell.h"
+#import "Parse/Parse.h"
 
 @implementation ActivityTableViewCell
 
-@synthesize movieTitleLabel, userLabel, ratingLabel, commentLabel, posterView, rateStar, userImageView, timeLabel, commentButton, likeButton;
+@synthesize movieTitleLabel, userLabel, ratingLabel, commentLabel, posterView, rateStar, userImageView, timeLabel, commentButton, likeButton, rateID;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
         //Labels och Views
         posterView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 50, 67.5, 101.25)];
         userImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 30, 30)];
@@ -30,6 +30,9 @@
         //Buttons
         commentButton = [[UIButton alloc]init];
         likeButton = [[UIButton alloc]init];
+        [likeButton addTarget:self action:@selector(likePost) forControlEvents:UIControlEventTouchUpInside];
+        [likeButton addTarget:self action:@selector(setBgColorForButton:) forControlEvents:UIControlEventTouchDown];
+        [likeButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchDragExit];
         
         [commentButton setTitle:@"Comment" forState:UIControlStateNormal];
         commentButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
@@ -67,9 +70,23 @@
       //  [self.contentView addSubview:commentView];
         [self.contentView addSubview:posterView];
         */
+        
+        
     }
     return self;
 }
+
+- (void) likePost{
+
+    
+    NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
+    [userInfo setObject:[PFUser currentUser].objectId forKey:@"user"];
+    [userInfo setObject:rateID forKey:@"rating"];
+    
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    [nc postNotificationName:[NSString stringWithFormat:@"test"] object:self userInfo:userInfo];
+}
+
 
 - (void)awakeFromNib
 {
@@ -81,6 +98,16 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(void)setBgColorForButton:(UIButton*)sender
+{
+    [sender setAlpha:0.5];
+}
+
+-(void)clearBgColorForButton:(UIButton*)sender
+{
+    [sender setAlpha:1.0];
 }
 
 @end

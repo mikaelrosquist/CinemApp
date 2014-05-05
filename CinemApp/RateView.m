@@ -166,7 +166,7 @@
         
         NSString *test = [NSString stringWithFormat:@"%@",self.movieID];
         PFQuery *query = [PFQuery queryWithClassName:@"Rating"];
-        [query whereKey:@"user" equalTo:currentUser.username];
+        [query whereKey:@"userId" equalTo:currentUser.objectId];
         [query whereKey:@"movieId" equalTo:test];
         [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             if (object){
