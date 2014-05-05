@@ -55,20 +55,24 @@ BOOL movieInfoFetched = NO;
         
         
         scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-        activityTable = [[UITableView alloc]init];
-        activityTable.dataSource = self;
-        activityTable.delegate = self;
-        activityTable.scrollEnabled=YES;
-        [scrollView addSubview:activityTable];
+        activityTable = [[UITableViewController alloc]init];
+        activityTable.tableView.dataSource = self;
+        activityTable.tableView.delegate = self;
+        activityTable.tableView.scrollEnabled=YES;
+        [scrollView addSubview:activityTable.tableView];
         [self.view addSubview:scrollView];
         
-        [activityTable setHidden:YES];
+        [activityTable.tableView setHidden:YES];
         [DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
-        self.activityTable.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
-        self.activityTable.ScrollIndicatorInsets = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
-        self.activityTable.contentInset = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
+        self.activityTable.tableView.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
+        self.activityTable.tableView.ScrollIndicatorInsets = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
+        self.activityTable.tableView.contentInset = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
         CGRect bounds = self.scrollView.bounds;
-        self.activityTable.frame = bounds;
+        self.activityTable.tableView.frame = bounds;
+        
+        self.activityTable.refreshControl = [[UIRefreshControl alloc] init];
+        [self.activityTable.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+        
     }
     return self;
 }
@@ -84,13 +88,17 @@ BOOL movieInfoFetched = NO;
         
         [self retrieveUserRatings];
         NSLog(@"initWithOneMovie MOVIEID: %@", movieID);
-        activityTable = [[UITableView alloc]initWithFrame:CGRectMake(0, yParameter+50, 320, tableHeight*148+20)];
-        activityTable.dataSource = self;
-        activityTable.delegate = self;
+        activityTable.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, yParameter+50, 320, tableHeight*148+20)];
+        activityTable.tableView.dataSource = self;
+        activityTable.tableView.delegate = self;
         
-        [self.view addSubview:activityTable];
+        [self.view addSubview:activityTable.tableView];
     }
     return self;
+}
+
+-(void)refresh {
+    [self retrieveUserRatings];
 }
 
 - (void)viewDidLoad
@@ -99,10 +107,10 @@ BOOL movieInfoFetched = NO;
     gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     now = [NSDate date];
     [super viewDidLoad];
-    [self.activityTable reloadData];
+    [self.activityTable.tableView reloadData];
    // [activityTable setFrame:CGRectMake(activityTable.frame.origin.x, activityTable.frame.origin.y, 320, activityTable.contentSize.height)];
-    activityTable.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
-    activityTable.separatorColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
+    activityTable.tableView.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
+    activityTable.tableView.separatorColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     self.edgesForExtendedLayout = UIRectEdgeAll;
     self.extendedLayoutIncludesOpaqueBars=YES;
     self.automaticallyAdjustsScrollViewInsets=YES;
@@ -122,9 +130,9 @@ BOOL movieInfoFetched = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    [self.activityTable reloadData];
+    [self.activityTable.tableView reloadData];
     [self.scrollView reloadInputViews];
-    self.activityTable.frame = CGRectMake(0, 0, 320, tableHeight*148);
+    self.activityTable.tableView.frame = CGRectMake(0, 0, 320, tableHeight*148);
 }
 
 - (void)didReceiveMemoryWarning
@@ -149,6 +157,15 @@ BOOL movieInfoFetched = NO;
 {
     return 240;
 }
+/*
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 50;
+}
+
+ //Hit kan vi flytta användarnamn och tidsstämpel till sedan, som i Instagram.
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @"ANVÄNDARINFO";
+}*/
 
 - (ActivityTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -160,7 +177,7 @@ BOOL movieInfoFetched = NO;
     if(activityTableCell == nil) {
         activityTableCell = [[ActivityTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                                          reuseIdentifier:cellIdentifier];
-        activityTableCell.backgroundColor = activityTable.backgroundColor;
+        activityTableCell.backgroundColor = activityTable.tableView.backgroundColor;
         //NSLog(@"ny cell");
     }
     
@@ -254,17 +271,12 @@ BOOL movieInfoFetched = NO;
     return activityTableCell;
 }
 
-
-- (void)prepareForReuse
-{
-    
-}
-
-
 - (void)retrieveUserRatings{
-    
     ratingsArray = [[NSArray alloc]init];
-    
+    ratingsArray = nil;
+    posterArray = nil;
+    titleArray = nil;
+    yearArray = nil;
     PFQuery *movieQuery = [PFQuery queryWithClassName:@"Rating"];
     movieQuery.limit = 10;
     
@@ -282,7 +294,8 @@ BOOL movieInfoFetched = NO;
             
             //Hämtar filminfo och laddar om viewn när ratings hämtats.
             [self retrieveMovieInfo];
-            [[self activityTable] reloadData];
+            [[self activityTable].tableView reloadData];
+            [self.activityTable.refreshControl endRefreshing];
             
         } else {
             // Log details of the failure
@@ -302,8 +315,6 @@ BOOL movieInfoFetched = NO;
         NSData *data = [NSData dataWithContentsOfURL:url];
         json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         
-        //NSLog(@"%@", json);
-        
         NSString *posterPath = [json valueForKey:@"poster_path"];
         NSString *posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w90%@", posterPath];
         NSURL *posterURL = [NSURL URLWithString:posterString];
@@ -315,7 +326,7 @@ BOOL movieInfoFetched = NO;
             movieYear = @"xxxx-xx-xx";
         [yearArray addObject:movieYear];
         movieInfoFetched = YES;
-        [activityTable setHidden:NO];
+        [activityTable.tableView setHidden:NO];
         [DejalActivityView removeView];
 
     }

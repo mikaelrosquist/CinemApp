@@ -340,10 +340,10 @@ UITapGestureRecognizer *tap;
                     rating[@"rating"] = myRating;
                     rating[@"movieId"] = [NSString stringWithFormat:@"%@", self.movieID];
                     [rating saveInBackground];
-                    [DejalBezelActivityView removeViewAnimated:YES];
-                    [self.tabBarController setSelectedIndex:0];
-                    [self.navigationController popViewControllerAnimated:YES];
                 }
+                [DejalBezelActivityView removeViewAnimated:YES];
+                [self.tabBarController setSelectedIndex:0];
+                [self.navigationController popViewControllerAnimated:YES];
             }];
             
             NSLog(@"Rating sparas...");
@@ -428,7 +428,7 @@ UITapGestureRecognizer *tap;
         movieView.hidden = TRUE;
         rateView.hidden = TRUE;
         activityView.view.hidden = FALSE;
-        [[activityView activityTable] reloadData];
+        [[activityView activityTable].tableView reloadData];
         self.scrollView.contentSize = CGSizeMake(320, activityView.view.frame.size.height+backdropImageHeight);
     }
 }
