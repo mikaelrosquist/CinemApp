@@ -100,13 +100,16 @@ BOOL movieInfoFetched = NO;
 
 -(void)refresh {
     [self retrieveUserRatings];
+    posterArray = [[NSMutableArray alloc]init];
+    titleArray = [[NSMutableArray alloc]init];
+    yearArray = [[NSMutableArray alloc]init];
 }
 
 - (void)viewDidLoad
 {
     
     gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    now = [NSDate date];
+    
     [super viewDidLoad];
     [self.activityTable.tableView reloadData];
    // [activityTable setFrame:CGRectMake(activityTable.frame.origin.x, activityTable.frame.origin.y, 320, activityTable.contentSize.height)];
@@ -269,9 +272,6 @@ BOOL movieInfoFetched = NO;
 - (void)retrieveUserRatings{
     ratingsArray = [[NSArray alloc]init];
     ratingsArray = nil;
-    posterArray = nil;
-    titleArray = nil;
-    yearArray = nil;
     PFQuery *movieQuery = [PFQuery queryWithClassName:@"Rating"];
     movieQuery.limit = 10;
     
@@ -291,6 +291,7 @@ BOOL movieInfoFetched = NO;
             [self retrieveMovieInfo];
             [[self activityTable].tableView reloadData];
             [self.activityTable.refreshControl endRefreshing];
+            [DejalActivityView removeView];
             
         } else {
             // Log details of the failure
@@ -304,14 +305,16 @@ BOOL movieInfoFetched = NO;
     NSString *posterPath;
     NSString *posterString;
     NSURL *posterURL;
+    NSURL *url;
+    NSData *data;
     
     //NSLog(@"RETRIEVED MOVIE ID: %@", movieID);
     for(int i=0; i < [ratingsArray count]; i++){
         
         NSLog(@"RETRIEVING MOVIE");
         
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, [[ratingsArray objectAtIndex:i] objectForKey:@"movieId"], api_key]];
-        NSData *data = [NSData dataWithContentsOfURL:url];
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, [[ratingsArray objectAtIndex:i] objectForKey:@"movieId"], api_key]];
+        data = [NSData dataWithContentsOfURL:url];
         json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         
         posterPath = [json valueForKey:@"poster_path"];
@@ -326,13 +329,12 @@ BOOL movieInfoFetched = NO;
         [yearArray addObject:movieYear];
         movieInfoFetched = YES;
         [activityTable.tableView setHidden:NO];
-        [DejalActivityView removeView];
-
     }
+    
 }
 
 - (NSString *)formatTime:(NSDate *)timeStamp{
-    
+    now = [NSDate date];
     unsigned int unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
     NSDateComponents *comps = [gregorian components:unitFlags fromDate:timeStamp  toDate:now  options:0];
     
