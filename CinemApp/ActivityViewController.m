@@ -59,7 +59,6 @@ BOOL movieInfoFetched = NO;
         activityTable.dataSource = self;
         activityTable.delegate = self;
         activityTable.scrollEnabled=YES;
-        self.scrollView.alwaysBounceVertical = YES;
         [scrollView addSubview:activityTable];
         [self.view addSubview:scrollView];
         
