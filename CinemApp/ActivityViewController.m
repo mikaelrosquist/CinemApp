@@ -18,7 +18,9 @@
 
 @implementation ActivityViewController
 
-@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray;
+
+@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray, likeModel;
+
 
 NSDate *timeStamp;
 NSDate *now;
@@ -26,6 +28,7 @@ NSCalendar *gregorian;
 NSInteger months, days, hours, minutes, seconds;
 
 NSString *ten = @"/10";
+NSString *rateID;
 NSString *rateString;
 NSString *timeString;
 NSString *movieYear;
@@ -38,6 +41,8 @@ NSDictionary *json;
 
 NSData *moviePoster;
 CGFloat tableHeight;
+
+ NSMutableDictionary* sendingObject;
 
 BOOL oneMovie = NO;
 BOOL movieInfoFetched = NO;
@@ -125,6 +130,16 @@ BOOL movieInfoFetched = NO;
     yearArray = [[NSMutableArray alloc]init];
     ratingsArray = [[NSMutableArray alloc]init];
     
+    likeModel = [[LikeModel alloc]init];
+    
+   
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(likePost:)
+     name:[NSString stringWithFormat:@"test"]
+     object:sendingObject];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -194,24 +209,25 @@ BOOL movieInfoFetched = NO;
     NSLog(@"YearArray: %d", yearArray.count);
     if(indexPath.row <= ratingsArray.count){
         
+        rateID = [[ratingsArray objectAtIndex:indexPath.row] valueForKey:@"objectId"];
         username = [[ratingsArray objectAtIndex:indexPath.row] valueForKey:@"user"];
         comment = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"comment"];
         rating = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"rating"];
         movieID = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"movieId"];
         timeStamp = [[ratingsArray objectAtIndex:indexPath.row] createdAt];
-        
         [self formatTime:timeStamp];
+        activityTableCell.rateID = rateID;
         
         //if(!oneMovie)
           //  [self retrieveMovieInfo];
         
         if (titleArray.count > 0){
             
-            NSLog(@"Betyg: %@",rating);
-            NSLog(@"IndexPath.row: %ld", (long)indexPath.row);
-            
             movieTitle = [titleArray objectAtIndex:indexPath.row];
             movieYear = [yearArray objectAtIndex:indexPath.row];
+            activityTableCell.rateID = rateID;
+            
+             NSLog(@"%@", activityTableCell.rateID);
             
             //Filmtiteln
             activityTableCell.movieTitleLabel.text = [NSString stringWithFormat:@"%@ %@ ", movieTitle, movieYear];
@@ -381,6 +397,12 @@ BOOL movieInfoFetched = NO;
         return [NSString stringWithFormat:@"%ld %@", (long)seconds, @" seconds ago"];
     
     return @"0";
+}
+
+- (void) likePost:(NSNotification *)notification{
+    NSDictionary* userInfo = notification.userInfo;
+    NSString *ratingID = [userInfo objectForKey:@"rating"];
+    [likeModel addLike:[PFUser currentUser] :[NSString stringWithFormat:@"%@", ratingID]];
 }
 
 /*

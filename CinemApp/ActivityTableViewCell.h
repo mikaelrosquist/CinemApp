@@ -10,6 +10,8 @@
 
 @interface ActivityTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) NSString *rateID;
+
 @property (nonatomic, strong) UILabel *userLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *movieTitleLabel;

@@ -11,13 +11,18 @@
 #import "HomeViewController.h"
 #import "ActivityTableView.h"
 #import "ActivityTableViewCell.h"
+#import "LikeModel.h"
 
-@interface ActivityViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ActivityViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+    LikeModel *likeModel;
+}
 
 @property (retain, strong) UIScrollView *scrollView;
 @property (retain, strong) UITableViewController *activityTable;
 @property (retain, strong) ActivityTableViewCell *activityTableCell;
 @property (nonatomic, strong) NSString *movieTitle;
+@property (nonatomic, retain) LikeModel *likeModel;
+
 
 @property (retain, strong) NSMutableArray *posterArray;
 @property (retain, strong) NSMutableArray *titleArray;
@@ -26,5 +31,6 @@
 
 - (id)initWithOneMovie:(NSString *)incomingID :(NSString *) incomingTitle :(NSData *)incomingPoster :(CGFloat)backDropImageHeight;
 - (void)retrieveUserRatings;
+- (void) likePost: (NSString *)rateID;
 
 @end
