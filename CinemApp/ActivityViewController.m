@@ -18,19 +18,13 @@
 
 @implementation ActivityViewController
 
-
-@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray, likeModel;
+@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray, likedArray, likeModel;
 
 
 NSDate *timeStamp;
 NSDate *now;
 NSCalendar *gregorian;
 NSInteger months, days, hours, minutes, seconds;
-
-NSMutableArray *posterArray;
-NSMutableArray *titleArray;
-NSMutableArray *yearArray;
-NSMutableArray *likedArray;
 
 NSString *ten = @"/10";
 NSString *rateID;
@@ -255,14 +249,15 @@ BOOL movieInfoFetched = NO;
             
             //Stjärnan anpassas efter poster och kommentar
             if(activityTableCell.commentLabel.frame.origin.y+activityTableCell.commentLabel.frame.size.height < activityTableCell.posterView.frame.origin.y+activityTableCell.posterView.frame.size.height)
-                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+20, activityTableCell.posterView.frame.origin.y+activityTableCell.posterView.frame.size.height+10, 30, 30);
+                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+10, activityTableCell.posterView.frame.origin.y+activityTableCell.posterView.frame.size.height+10, 37.5, 37.5);
             else
-                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+20, activityTableCell.commentLabel.frame.origin.y+activityTableCell.commentLabel.frame.size.height+10, 30, 30);
+                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+10, activityTableCell.commentLabel.frame.origin.y+activityTableCell.commentLabel.frame.size.height+10, 37.5, 37.5);
             
             //Betyget anpassas efter stjärnan
             rateString = [NSString stringWithFormat:@"%@", rating];
             activityTableCell.ratingLabel.text = [NSString stringWithFormat:@"%@%@ ", rateString, ten];
-            activityTableCell.ratingLabel.frame = CGRectMake(activityTableCell.rateStar.frame.origin.x+activityTableCell.rateStar.frame.size.width+5, activityTableCell.rateStar.frame.origin.y+5, 55, 22);
+            activityTableCell.ratingLabel.frame = CGRectMake(activityTableCell.rateStar.frame.origin.x+activityTableCell.rateStar.frame.size.width+5, activityTableCell.rateStar.frame.origin.y+5, 0, 0);
+            [activityTableCell.ratingLabel sizeToFit];
             NSMutableAttributedString *rateOfTen = [[NSMutableAttributedString alloc] initWithAttributedString: activityTableCell.ratingLabel.attributedText];
             [rateOfTen addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([rateString length]+1, 3)];
             [rateOfTen addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 14.0] range: NSMakeRange([rateString length], 3)];
@@ -279,8 +274,8 @@ BOOL movieInfoFetched = NO;
             activityTableCell.posterView.image = [UIImage imageWithData:[posterArray objectAtIndex:indexPath.row]];
             
             //Buttons anpassas efter stjärna och betyg
-            activityTableCell.likeButton.frame = CGRectMake(activityTableCell.ratingLabel.frame.origin.x+activityTableCell.ratingLabel.frame.size.width+5, activityTableCell.ratingLabel.frame.origin.y, 50, 25);
-            activityTableCell.commentButton.frame = CGRectMake(activityTableCell.likeButton.frame.origin.x+activityTableCell.likeButton.frame.size.width+10, activityTableCell.ratingLabel.frame.origin.y, 90, 25);
+            activityTableCell.likeButton.frame = CGRectMake(activityTableCell.ratingLabel.frame.origin.x+70, activityTableCell.ratingLabel.frame.origin.y+5, 25, 25);
+            activityTableCell.commentButton.frame = CGRectMake(activityTableCell.likeButton.frame.origin.x+activityTableCell.likeButton.frame.size.width+30, activityTableCell.ratingLabel.frame.origin.y+5, 25, 25);
             
             //Vet inte om detta bidrar till bättre performance..
             //activityTableCell.layer.shouldRasterize = YES;
