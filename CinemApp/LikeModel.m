@@ -11,6 +11,9 @@
 @implementation LikeModel
 
 - (BOOL) isLiking: (PFUser *)user :(NSString *) ratingID{
+    
+    __block BOOL temp = NO;
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Like"];
     [query whereKey:@"userId" equalTo:user.objectId];
     [query whereKey:@"ratingId" equalTo:ratingID];
@@ -20,6 +23,16 @@
         return YES;
     else
         return NO;
+    
+    /*
+     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+     if (objects.count > 0)
+     temp = YES;
+     
+     NSLog(@"%hhd", temp);
+     }];
+     */
+    
 }
 
 - (void) addLike: (PFUser *)user :(NSString *) ratingID{

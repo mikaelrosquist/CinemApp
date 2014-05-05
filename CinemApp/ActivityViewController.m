@@ -28,6 +28,7 @@ NSInteger months, days, hours, minutes, seconds;
 NSMutableArray *posterArray;
 NSMutableArray *titleArray;
 NSMutableArray *yearArray;
+NSMutableArray *likedArray;
 
 NSString *ten = @"/10";
 NSString *rateID;
@@ -209,11 +210,22 @@ BOOL movieInfoFetched = NO;
         timeStamp = [[ratingsArray objectAtIndex:indexPath.row] createdAt];
         [self formatTime:timeStamp];
         activityTableCell.rateID = rateID;
+
         
         //if(!oneMovie)
           //  [self retrieveMovieInfo];
         
         if (titleArray.count > 0){
+            //if([likeModel isLiking:[PFUser currentUser] :rateID])
+            //    activityTableCell.isLiked = YES;
+            if([likedArray[indexPath.row]  isEqual: @"ja"]){
+                [self.activityTableCell.likeButton setTitle:@"Liked" forState:UIControlStateNormal];
+                self.activityTableCell.likeButton.backgroundColor = [UIColor greenColor];
+            }
+            NSLog(@"%i", indexPath.row);
+            NSLog(@"%@", likedArray[indexPath.row]);
+
+            
             
             movieTitle = [titleArray objectAtIndex:indexPath.row];
             movieYear = [yearArray objectAtIndex:indexPath.row];
@@ -255,7 +267,7 @@ BOOL movieInfoFetched = NO;
             //Användare
             activityTableCell.userLabel.text = username;
             activityTableCell.userImageView.image = [UIImage imageNamed:@"profilePicPlaceHolder"];
-            
+            activityTableCell.tag = indexPath.row;
             //Tid
             activityTableCell.timeLabel.text = [self formatTime:timeStamp];
             activityTableCell.posterView.image = [UIImage imageWithData:[posterArray objectAtIndex:indexPath.row]];
@@ -278,9 +290,12 @@ BOOL movieInfoFetched = NO;
             [self.activityTableCell.contentView addSubview:activityTableCell.posterView];
             [self.activityTableCell.contentView addSubview:activityTableCell.commentButton];
             [self.activityTableCell.contentView addSubview:activityTableCell.likeButton];
+            
         }
     }
     self.activityTableCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    
     
     return activityTableCell;
 }
@@ -310,11 +325,25 @@ BOOL movieInfoFetched = NO;
             [self.activityTable.refreshControl endRefreshing];
             [DejalActivityView removeView];
             
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
+        likedArray = [[NSMutableArray alloc]init];
+        for(int i = 0; i < ratingsArray.count; i++){
+            BOOL tmp = [likeModel isLiking:[PFUser currentUser] :[[ratingsArray objectAtIndex:i] valueForKey:@"objectId"]];
+            if(tmp)
+                [likedArray addObject:[NSString stringWithFormat:@"ja"]];
+            else
+                [likedArray addObject:[NSString stringWithFormat:@"nej"]];
+            
+            
+            //[likedArray addObject:[NSNumber numberWithBool:tmp]];
+        }
+        [self checkLiked];
     }];
+}
+
+- (void)checkLiked{
+    NSLog(@"%@", likedArray);
+    
 }
 
 -(void)retrieveMovieInfo{

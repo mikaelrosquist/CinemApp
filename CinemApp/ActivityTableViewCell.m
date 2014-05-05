@@ -29,10 +29,12 @@
         
         //Buttons
         commentButton = [[UIButton alloc]init];
+        
         likeButton = [[UIButton alloc]init];
         [likeButton addTarget:self action:@selector(likePost) forControlEvents:UIControlEventTouchUpInside];
         [likeButton addTarget:self action:@selector(setBgColorForButton:) forControlEvents:UIControlEventTouchDown];
         [likeButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchDragExit];
+        [likeButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         [commentButton setTitle:@"Comment" forState:UIControlStateNormal];
         commentButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
@@ -108,6 +110,11 @@
 -(void)clearBgColorForButton:(UIButton*)sender
 {
     [sender setAlpha:1.0];
+}
+
+-(void)buttonPressed:(UIButton*)sender
+{
+    [sender setBackgroundColor:[UIColor greenColor]];
 }
 
 @end
