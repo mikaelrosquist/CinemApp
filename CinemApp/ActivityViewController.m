@@ -18,19 +18,13 @@
 
 @implementation ActivityViewController
 
-
-@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray, likeModel;
+@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray, likedArray, likeModel;
 
 
 NSDate *timeStamp;
 NSDate *now;
 NSCalendar *gregorian;
 NSInteger months, days, hours, minutes, seconds;
-
-NSMutableArray *posterArray;
-NSMutableArray *titleArray;
-NSMutableArray *yearArray;
-NSMutableArray *likedArray;
 
 NSString *ten = @"/10";
 NSString *rateID;
@@ -59,6 +53,7 @@ BOOL movieInfoFetched = NO;
         [self commonInit];
         [self retrieveUserRatings];
         likeModel = [[LikeModel alloc]init];
+
         activityTable.tableView.scrollEnabled=YES;
         [activityTable.tableView setHidden:YES];
         [DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
@@ -81,14 +76,12 @@ BOOL movieInfoFetched = NO;
         movieID = incomingID;
         movieTitle = incomingTitle;
         moviePoster = incomingPoster;
-        CGFloat yParameter = backDropImageHeight;
+        //CGFloat yParameter = backDropImageHeight;
         [self commonInit];
-        [self retrieveUserRatings];
         
         NSLog(@"initWithOneMovie MOVIEID: %@", movieID);
-        NSLog(@"BackdropHeight: %f", yParameter);
-        NSLog(@"TableHeight: %f", tableHeight);
-        NSLog(@"Scroll Height: %f", scrollView.frame.size.height);
+//        NSLog(@"TableHeight: %f", tableHeight);
+//        NSLog(@"Scroll Height: %f", scrollView.frame.size.height);
         
     }
     return self;
@@ -97,6 +90,7 @@ BOOL movieInfoFetched = NO;
 //Gemensam init
 - (void) commonInit {
     
+    [self retrieveUserRatings];
     scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     activityTable = [[UITableViewController alloc]init];
     activityTable.tableView.dataSource = self;
@@ -148,7 +142,7 @@ BOOL movieInfoFetched = NO;
 - (void)viewDidAppear:(BOOL)animated{
     [self.activityTable.tableView reloadData];
     [self.scrollView reloadInputViews];
-    self.activityTable.tableView.frame = CGRectMake(0, 0, 320, tableHeight*148);
+    //self.activityTable.tableView.frame = CGRectMake(0, 0, 320, tableHeight*148);
 }
 
 - (void)didReceiveMemoryWarning
@@ -253,14 +247,15 @@ BOOL movieInfoFetched = NO;
             
             //Stjärnan anpassas efter poster och kommentar
             if(activityTableCell.commentLabel.frame.origin.y+activityTableCell.commentLabel.frame.size.height < activityTableCell.posterView.frame.origin.y+activityTableCell.posterView.frame.size.height)
-                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+20, activityTableCell.posterView.frame.origin.y+activityTableCell.posterView.frame.size.height+10, 30, 30);
+                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+10, activityTableCell.posterView.frame.origin.y+activityTableCell.posterView.frame.size.height+10, 37.5, 37.5);
             else
-                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+20, activityTableCell.commentLabel.frame.origin.y+activityTableCell.commentLabel.frame.size.height+10, 30, 30);
+                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+10, activityTableCell.commentLabel.frame.origin.y+activityTableCell.commentLabel.frame.size.height+10, 37.5, 37.5);
             
             //Betyget anpassas efter stjärnan
             rateString = [NSString stringWithFormat:@"%@", rating];
             activityTableCell.ratingLabel.text = [NSString stringWithFormat:@"%@%@ ", rateString, ten];
-            activityTableCell.ratingLabel.frame = CGRectMake(activityTableCell.rateStar.frame.origin.x+activityTableCell.rateStar.frame.size.width+5, activityTableCell.rateStar.frame.origin.y+5, 55, 22);
+            activityTableCell.ratingLabel.frame = CGRectMake(activityTableCell.rateStar.frame.origin.x+activityTableCell.rateStar.frame.size.width+5, activityTableCell.rateStar.frame.origin.y+5, 0, 0);
+            [activityTableCell.ratingLabel sizeToFit];
             NSMutableAttributedString *rateOfTen = [[NSMutableAttributedString alloc] initWithAttributedString: activityTableCell.ratingLabel.attributedText];
             [rateOfTen addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([rateString length]+1, 3)];
             [rateOfTen addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 14.0] range: NSMakeRange([rateString length], 3)];
@@ -276,8 +271,9 @@ BOOL movieInfoFetched = NO;
             activityTableCell.posterView.image = [UIImage imageWithData:[posterArray objectAtIndex:indexPath.row]];
             
             //Buttons anpassas efter stjärna och betyg
-            activityTableCell.likeButton.frame = CGRectMake(activityTableCell.ratingLabel.frame.origin.x+activityTableCell.ratingLabel.frame.size.width+5, activityTableCell.ratingLabel.frame.origin.y, 70, 25);
-            activityTableCell.commentButton.frame = CGRectMake(activityTableCell.likeButton.frame.origin.x+activityTableCell.likeButton.frame.size.width+10, activityTableCell.ratingLabel.frame.origin.y, 90, 25);
+
+            activityTableCell.likeButton.frame = CGRectMake(activityTableCell.ratingLabel.frame.origin.x+70, activityTableCell.ratingLabel.frame.origin.y+5, 25, 25);
+            activityTableCell.commentButton.frame = CGRectMake(activityTableCell.likeButton.frame.origin.x+activityTableCell.likeButton.frame.size.width+30, activityTableCell.ratingLabel.frame.origin.y+5, 25, 25);
             
             //Vet inte om detta bidrar till bättre performance..
             //activityTableCell.layer.shouldRasterize = YES;
@@ -330,6 +326,7 @@ BOOL movieInfoFetched = NO;
     likedArray = [[NSMutableArray alloc]init];
     
     if(oneMovie) //Måste avkommenteras för att newsfeed ska funka
+
         [movieQuery whereKey:@"movieId" equalTo:[NSString stringWithFormat:@"%@", movieID]];
     
     [movieQuery orderByDescending:@"createdAt"];
@@ -346,7 +343,6 @@ BOOL movieInfoFetched = NO;
             [self retrieveMovieInfo];
             [[self activityTable].tableView reloadData];
             [self.activityTable.refreshControl endRefreshing];
-            
             [DejalActivityView removeView];
             [self getLikes];
         }

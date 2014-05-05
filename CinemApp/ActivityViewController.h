@@ -28,6 +28,7 @@
 @property (retain, strong) NSMutableArray *titleArray;
 @property (retain, strong) NSMutableArray *yearArray;
 @property (retain, strong) NSMutableArray *ratingsArray;
+@property (retain, strong) NSMutableArray *likedArray;
 
 - (id)initWithOneMovie:(NSString *)incomingID :(NSString *) incomingTitle :(NSData *)incomingPoster :(CGFloat)backDropImageHeight;
 - (void)retrieveUserRatings;
