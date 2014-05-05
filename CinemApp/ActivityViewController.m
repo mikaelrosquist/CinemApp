@@ -57,7 +57,6 @@ BOOL movieInfoFetched = NO;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self commonInit];
-        [self retrieveUserRatings];
         
         activityTable.tableView.scrollEnabled=YES;
         [activityTable.tableView setHidden:YES];
@@ -81,14 +80,12 @@ BOOL movieInfoFetched = NO;
         movieID = incomingID;
         movieTitle = incomingTitle;
         moviePoster = incomingPoster;
-        CGFloat yParameter = backDropImageHeight;
+        //CGFloat yParameter = backDropImageHeight;
         [self commonInit];
-        [self retrieveUserRatings];
         
         NSLog(@"initWithOneMovie MOVIEID: %@", movieID);
-        NSLog(@"BackdropHeight: %f", yParameter);
-        NSLog(@"TableHeight: %f", tableHeight);
-        NSLog(@"Scroll Height: %f", scrollView.frame.size.height);
+//        NSLog(@"TableHeight: %f", tableHeight);
+//        NSLog(@"Scroll Height: %f", scrollView.frame.size.height);
         
     }
     return self;
@@ -97,6 +94,7 @@ BOOL movieInfoFetched = NO;
 //Gemensam init
 - (void) commonInit {
     
+    [self retrieveUserRatings];
     scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     activityTable = [[UITableViewController alloc]init];
     activityTable.tableView.dataSource = self;
@@ -151,7 +149,7 @@ BOOL movieInfoFetched = NO;
 - (void)viewDidAppear:(BOOL)animated{
     [self.activityTable.tableView reloadData];
     [self.scrollView reloadInputViews];
-    self.activityTable.tableView.frame = CGRectMake(0, 0, 320, tableHeight*148);
+    //self.activityTable.tableView.frame = CGRectMake(0, 0, 320, tableHeight*148);
 }
 
 - (void)didReceiveMemoryWarning
@@ -208,10 +206,6 @@ BOOL movieInfoFetched = NO;
     //else
     //    activityTableCell.backgroundColor = [UIColor lightGrayColor];
     
-    NSLog(@"RatingsArray: %d", ratingsArray.count);
-    NSLog(@"TitleArray: %d", titleArray.count);
-    NSLog(@"PosterArray: %d", posterArray.count);
-    NSLog(@"YearArray: %d", yearArray.count);
     if(indexPath.row <= ratingsArray.count){
         
         rateID = [[ratingsArray objectAtIndex:indexPath.row] valueForKey:@"objectId"];
@@ -310,12 +304,11 @@ BOOL movieInfoFetched = NO;
 }
 
 - (void)retrieveUserRatings{
-//    ratingsArray = [[NSArray alloc]init];
-//    ratingsArray = nil;
+
     PFQuery *movieQuery = [PFQuery queryWithClassName:@"Rating"];
     movieQuery.limit = 10;
     
-    if(oneMovie) //Måste avkommenteras för att newsfeed ska funka
+    if(oneMovie)
         [movieQuery whereKey:@"movieId" equalTo:[NSString stringWithFormat:@"%@", movieID]];
     
     [movieQuery orderByDescending:@"createdAt"];
@@ -332,7 +325,6 @@ BOOL movieInfoFetched = NO;
             [self retrieveMovieInfo];
             [[self activityTable].tableView reloadData];
             [self.activityTable.refreshControl endRefreshing];
-            
             [DejalActivityView removeView];
             
         }

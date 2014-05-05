@@ -186,7 +186,7 @@ UITapGestureRecognizer *tap;
             rateView.commentField.delegate = self;
             [rateView.commentField setReturnKeyType:UIReturnKeyDone];
             oneMovieActivityView = [[ActivityViewController alloc]initWithOneMovie:movieID:movieName:moviePoster:backdropImageHeight];
-            oneMovieActivityView.view.frame = CGRectMake(0, backdropImageHeight+45, 320, 0);
+            oneMovieActivityView.view.frame = CGRectMake(0, backdropImageHeight+20, 320, 0);
             
             //Kollar om tengentbordet visas
             [[NSNotificationCenter defaultCenter] addObserver:self
@@ -429,7 +429,13 @@ UITapGestureRecognizer *tap;
         rateView.hidden = TRUE;
         oneMovieActivityView.view.hidden = FALSE;
         [[oneMovieActivityView activityTable].tableView reloadData];
-        self.scrollView.contentSize = CGSizeMake(320, oneMovieActivityView.view.frame.size.height+backdropImageHeight);
+        self.scrollView.contentSize = CGSizeMake(320, oneMovieActivityView.activityTable.tableView.contentSize.height+backdropImageHeight+40);
+        oneMovieActivityView.scrollView.frame = CGRectMake(0, 0, 320, oneMovieActivityView.activityTable.tableView.contentSize.height+backdropImageHeight);
+        if(oneMovieActivityView.scrollView.frame.size.height <= 220)//Hårdkodat utav bara helvete
+            oneMovieActivityView.scrollView.frame = CGRectMake(0, 0, 320, 0);
+        NSLog(@"tableView.contentSize.height: %f", oneMovieActivityView.activityTable.tableView.contentSize.height);
+        NSLog(@"tableView.view.height: %f", oneMovieActivityView.view.frame.size.height);
+        NSLog(@"oneMovieActivityView.scrollView.frame.size.height: %f", oneMovieActivityView.scrollView.frame.size.height);
     }
 }
 
