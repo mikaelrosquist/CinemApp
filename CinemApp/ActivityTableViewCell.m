@@ -37,7 +37,6 @@
         
 
         //[[likeButton layer] setBorderColor:[UIColor grayColor].CGColor];
-        [likeButton setTitle:@"Loading" forState:UIControlStateNormal];
         likeButton.backgroundColor = [UIColor lightGrayColor];
         
         /*
@@ -137,7 +136,6 @@
 {
     [sender setAlpha:1.0];
     [sender setBackgroundColor:[UIColor greenColor]];
-    [sender setTitle:@"Liked" forState:UIControlStateNormal];
 }
 
 @end

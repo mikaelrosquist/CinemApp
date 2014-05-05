@@ -51,7 +51,6 @@ BOOL movieInfoFetched = NO;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self commonInit];
-        [self retrieveUserRatings];
         likeModel = [[LikeModel alloc]init];
 
         activityTable.tableView.scrollEnabled=YES;
@@ -210,10 +209,8 @@ BOOL movieInfoFetched = NO;
         activityTableCell.toUserID = [[ratingsArray objectAtIndex:indexPath.row] valueForKey:@"userId"];;
         
         if(likedArray.count > 0 && [likedArray objectAtIndex:indexPath.row] == [NSNumber numberWithBool:1]){
-            [activityTableCell.likeButton setTitle:@"Liked" forState:UIControlStateNormal];
             activityTableCell.likeButton.backgroundColor = [UIColor greenColor];
         }else{
-            [activityTableCell.likeButton setTitle:@"Like" forState:UIControlStateNormal];
             activityTableCell.likeButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
         }
         
