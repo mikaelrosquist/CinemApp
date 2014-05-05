@@ -13,7 +13,7 @@
 
 - (BOOL) isLiking: (PFUser *)user :(NSString *) movieID;
 
-- (void) addLike: (PFUser *)user :(NSString *) movieID;
+- (void) addLike: (PFUser *)user :(NSString *) movieID :(NSString *)toUser;
 
 - (void) delLike: (PFUser *)user :(NSString *) movieID;
 

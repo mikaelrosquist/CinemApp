@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LikeModel.h"
 
-@interface ActivityTableViewCell : UITableViewCell
+@interface ActivityTableViewCell : UITableViewCell{
+    LikeModel *likeModel;
+}
 
-@property (nonatomic, strong) NSString *rateID;
+
+@property (nonatomic, retain) NSString *rateID;
+@property (nonatomic, retain) NSString *toUserID;
 
 @property (nonatomic, strong) UILabel *userLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
@@ -24,5 +29,10 @@
 
 @property (nonatomic, strong) UIButton *commentButton;
 @property (nonatomic, strong) UIButton *likeButton;
+
+@property (nonatomic, retain) LikeModel *likeModel;
+
+//- (void)updateButton;
+
 
 @end

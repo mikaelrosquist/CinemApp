@@ -305,12 +305,14 @@ UITapGestureRecognizer *tap;
      name:[NSString stringWithFormat:@"%@%@", [PFUser currentUser].objectId, movieID]
      object:sendingObject];
     
+    
+    
 }
 
 - (void)receiveData:(NSNotification *)notification {
     
     [DejalBezelActivityView activityViewForView:self.view];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:[NSString stringWithFormat:@"%@%@", [PFUser currentUser].objectId, movieID] object:nil];
     if ([notification.name isEqualToString:[NSString stringWithFormat:@"%@%@", [PFUser currentUser].objectId, movieID]])
     {
         NSDictionary* userInfo = notification.userInfo;

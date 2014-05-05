@@ -12,36 +12,50 @@
 
 - (BOOL) isLiking: (PFUser *)user :(NSString *) ratingID{
     
-    __block BOOL temp = NO;
     
     PFQuery *query = [PFQuery queryWithClassName:@"Like"];
     [query whereKey:@"userId" equalTo:user.objectId];
     [query whereKey:@"ratingId" equalTo:ratingID];
-    [query getFirstObject];
-    
+
     if([query getFirstObject] != nil)
         return YES;
     else
         return NO;
-    
-    /*
-     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-     if (objects.count > 0)
-     temp = YES;
-     
-     NSLog(@"%hhd", temp);
-     }];
-     */
-    
 }
 
-- (void) addLike: (PFUser *)user :(NSString *) ratingID{
+- (void) addLike: (PFUser *)user :(NSString *) ratingID :(NSString *)toUser{
     PFObject *like = [PFObject objectWithClassName:@"Like"];
     like[@"userId"] = user.objectId;
     like[@"ratingId"] = ratingID;
     [like saveInBackground];
     
     NSLog(@"Like sparad");
+    
+    
+    PFQuery *innerQuery = [PFUser query];
+    [innerQuery whereKey:@"objectId" equalTo:toUser];
+    [innerQuery whereKey:@"notifications" equalTo:@YES];
+    NSLog(@"%i", [innerQuery countObjects]);
+    PFQuery *pushQuery = [PFInstallation query];
+    [pushQuery whereKey:@"user" matchesQuery:innerQuery];
+    
+    
+    NSDictionary *data = @{
+                           @"alert": [NSString stringWithFormat:@"%@ has liked one of your ratings!", user.username],
+                           @"userId": user.objectId,
+                           @"badge": @"Increment",
+                           @"sound": @""
+                           };
+    
+    // Send push notification to query
+    PFPush *push = [[PFPush alloc] init];
+    [push setQuery:pushQuery]; // Set our Installation query
+    [push setMessage:[NSString stringWithFormat:@"%@ has liked one of your ratings!", user.username]];
+    [push setData:data];
+    [push sendPushInBackground];
+
+    
+    
     
     /* HAR MED NOTIFIKATIONER ATT GÖRA. FIXA SEN
     

@@ -11,7 +11,7 @@
 
 @implementation ActivityTableViewCell
 
-@synthesize movieTitleLabel, userLabel, ratingLabel, commentLabel, posterView, rateStar, userImageView, timeLabel, commentButton, likeButton, rateID;
+@synthesize movieTitleLabel, userLabel, ratingLabel, commentLabel, posterView, rateStar, userImageView, timeLabel, commentButton, likeButton, rateID, toUserID, likeModel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -36,11 +36,23 @@
         [likeButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchDragExit];
         [likeButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
+        
+        
+        //[[likeButton layer] setBorderColor:[UIColor grayColor].CGColor];
+        [likeButton setTitle:@"Loading" forState:UIControlStateNormal];
+        likeButton.backgroundColor = [UIColor lightGrayColor];
+        
+        /*
+            if([likedArray objectAtIndex:indexPath.row] == [NSNumber numberWithBool:YES]){
+                [activityTableCell.likeButton setTitle:@"Liked" forState:UIControlStateNormal];
+                activityTableCell.likeButton.backgroundColor = [UIColor greenColor];
+            }else{
+                [activityTableCell.likeButton setTitle:@"Like" forState:UIControlStateNormal];
+                activityTableCell.likeButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
+            }
+        */
         [commentButton setTitle:@"Comment" forState:UIControlStateNormal];
         commentButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
-        
-        [likeButton setTitle:@"Like" forState:UIControlStateNormal];
-        likeButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
         
         rateStar.image = [UIImage imageNamed:@"rate_star"];
         
@@ -64,29 +76,35 @@
         movieTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [movieTitleLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 20.0]];
         
-        /*
-        [self.contentView addSubview:userLabel];
-        [self.contentView addSubview:movieTitleLabel];
-        [self.contentView addSubview:rateStar];
-        [self.contentView addSubview:ratingLabel];
-      //  [self.contentView addSubview:commentView];
-        [self.contentView addSubview:posterView];
-        */
-        
-        
     }
     return self;
 }
+/*
+- (void)updateButton{
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Like"];
+    [query whereKey:@"userId" equalTo:[PFUser currentUser].objectId];
+    [query whereKey:@"ratingId" equalTo:rateID];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (objects.count > 0){
+            [likeButton setTitle:@"Liked" forState:UIControlStateNormal];
+            likeButton.backgroundColor = [UIColor greenColor];
+        }else{
+            [likeButton setTitle:@"Like" forState:UIControlStateNormal];
+            likeButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
+        }
+    }];
+}*/
 
 - (void) likePost{
-
     
     NSMutableDictionary* userInfo = [NSMutableDictionary dictionary];
     [userInfo setObject:[PFUser currentUser].objectId forKey:@"user"];
     [userInfo setObject:rateID forKey:@"rating"];
+    [userInfo setObject:toUserID forKey:@"toUser"];
     
-    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
-    [nc postNotificationName:[NSString stringWithFormat:@"test"] object:self userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"test"] object:self userInfo:userInfo];
 }
 
 
@@ -114,7 +132,9 @@
 
 -(void)buttonPressed:(UIButton*)sender
 {
+    [sender setAlpha:1.0];
     [sender setBackgroundColor:[UIColor greenColor]];
+    [sender setTitle:@"Liked" forState:UIControlStateNormal];
 }
 
 @end
