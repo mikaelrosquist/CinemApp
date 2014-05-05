@@ -199,6 +199,7 @@ BOOL movieInfoFetched = NO;
         if (titleArray.count > 0){
             
             NSLog(@"Betyg: %@",rating);
+            NSLog(@"IndexPath.row: %ld", (long)indexPath.row);
             
             movieTitle = [titleArray objectAtIndex:indexPath.row];
             movieYear = [yearArray objectAtIndex:indexPath.row];
@@ -247,8 +248,8 @@ BOOL movieInfoFetched = NO;
             activityTableCell.commentButton.frame = CGRectMake(activityTableCell.likeButton.frame.origin.x+activityTableCell.likeButton.frame.size.width+10, activityTableCell.ratingLabel.frame.origin.y, 90, 25);
             
             //Vet inte om detta bidrar till bättre performance..
-            activityTableCell.layer.shouldRasterize = YES;
-            activityTableCell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+            //activityTableCell.layer.shouldRasterize = YES;
+            //activityTableCell.layer.rasterizationScale = [UIScreen mainScreen].scale;
             
             [self.activityTableCell.contentView addSubview:activityTableCell.userImageView];
             [self.activityTableCell.contentView addSubview:activityTableCell.userLabel];
@@ -288,6 +289,7 @@ BOOL movieInfoFetched = NO;
             NSLog(@"HÄMTAT: %@", ratingsArray);
             
             //Hämtar filminfo och laddar om viewn när ratings hämtats.
+            activityTableCell = nil;
             [self retrieveMovieInfo];
             [[self activityTable].tableView reloadData];
             [self.activityTable.refreshControl endRefreshing];
@@ -304,14 +306,16 @@ BOOL movieInfoFetched = NO;
     NSString *posterPath;
     NSString *posterString;
     NSURL *posterURL;
+    NSURL *url;
+    NSData *data;
     
     //NSLog(@"RETRIEVED MOVIE ID: %@", movieID);
     for(int i=0; i < [ratingsArray count]; i++){
         
         NSLog(@"RETRIEVING MOVIE");
         
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, [[ratingsArray objectAtIndex:i] objectForKey:@"movieId"], api_key]];
-        NSData *data = [NSData dataWithContentsOfURL:url];
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, [[ratingsArray objectAtIndex:i] objectForKey:@"movieId"], api_key]];
+        data = [NSData dataWithContentsOfURL:url];
         json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         
         posterPath = [json valueForKey:@"poster_path"];
@@ -327,7 +331,6 @@ BOOL movieInfoFetched = NO;
         movieInfoFetched = YES;
         [activityTable.tableView setHidden:NO];
         [DejalActivityView removeView];
-
     }
 }
 
