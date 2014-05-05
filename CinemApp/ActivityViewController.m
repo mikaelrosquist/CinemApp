@@ -18,16 +18,12 @@
 
 @implementation ActivityViewController
 
-@synthesize scrollView, activityTable, activityTableCell, movieTitle;
+@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray;
 
 NSDate *timeStamp;
 NSDate *now;
 NSCalendar *gregorian;
 NSInteger months, days, hours, minutes, seconds;
-
-NSMutableArray *posterArray;
-NSMutableArray *titleArray;
-NSMutableArray *yearArray;
 
 NSString *ten = @"/10";
 NSString *rateString;
@@ -39,7 +35,7 @@ NSString *username;
 NSString *comment;
 NSNumber *rating;
 NSDictionary *json;
-NSArray *ratingsArray;
+
 NSData *moviePoster;
 CGFloat tableHeight;
 
@@ -50,25 +46,17 @@ BOOL movieInfoFetched = NO;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        [self commonInit];
         [self retrieveUserRatings];
         
-        scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-        activityTable = [[UITableViewController alloc]init];
-        activityTable.tableView.dataSource = self;
-        activityTable.tableView.delegate = self;
         activityTable.tableView.scrollEnabled=YES;
-        [scrollView addSubview:activityTable.tableView];
-        [self.view addSubview:scrollView];
-        
         [activityTable.tableView setHidden:YES];
         [DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
-        self.activityTable.tableView.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
-        self.activityTable.tableView.ScrollIndicatorInsets = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
-        self.activityTable.tableView.contentInset = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
-
+        
         CGRect bounds = self.scrollView.bounds;
         self.activityTable.tableView.frame = bounds;
-        
+        self.activityTable.tableView.contentInset = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
+        self.activityTable.tableView.ScrollIndicatorInsets = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
         self.activityTable.refreshControl = [[UIRefreshControl alloc] init];
         [self.activityTable.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
         
@@ -84,32 +72,45 @@ BOOL movieInfoFetched = NO;
         movieTitle = incomingTitle;
         moviePoster = incomingPoster;
         CGFloat yParameter = backDropImageHeight;
-        
+        [self commonInit];
         [self retrieveUserRatings];
-        NSLog(@"initWithOneMovie MOVIEID: %@", movieID);
-        activityTable.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, yParameter+50, 320, tableHeight*148+20)];
-        activityTable.tableView.dataSource = self;
-        activityTable.tableView.delegate = self;
-        NSLog(@"TableHeight: %f", tableHeight);
-
         
-        [self.view addSubview:activityTable.tableView];
+        NSLog(@"initWithOneMovie MOVIEID: %@", movieID);
+        NSLog(@"BackdropHeight: %f", yParameter);
+        NSLog(@"TableHeight: %f", tableHeight);
+        NSLog(@"Scroll Height: %f", scrollView.frame.size.height);
+        
     }
     return self;
 }
 
+//Gemensam init
+- (void) commonInit {
+    
+    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    activityTable = [[UITableViewController alloc]init];
+    activityTable.tableView.dataSource = self;
+    activityTable.tableView.delegate = self;
+    self.activityTable.tableView.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
+    
+    [scrollView addSubview:activityTable.tableView];
+    [self.view addSubview:scrollView];
+    
+}
+
 -(void)refresh {
+    oneMovie = NO;
     [self retrieveUserRatings];
-    posterArray = [[NSMutableArray alloc]init];
-    titleArray = [[NSMutableArray alloc]init];
-    yearArray = [[NSMutableArray alloc]init];
+    [posterArray removeAllObjects];
+    [titleArray removeAllObjects];
+    [yearArray removeAllObjects];
+    [ratingsArray removeAllObjects];
 }
 
 - (void)viewDidLoad
 {
-    
+    NSLog(@"ViewDidLoad");
     gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    
     [super viewDidLoad];
     [self.activityTable.tableView reloadData];
    // [activityTable setFrame:CGRectMake(activityTable.frame.origin.x, activityTable.frame.origin.y, 320, activityTable.contentSize.height)];
@@ -122,6 +123,7 @@ BOOL movieInfoFetched = NO;
     posterArray = [[NSMutableArray alloc]init];
     titleArray = [[NSMutableArray alloc]init];
     yearArray = [[NSMutableArray alloc]init];
+    ratingsArray = [[NSMutableArray alloc]init];
     
     // Do any additional setup after loading the view.
 }
@@ -186,7 +188,11 @@ BOOL movieInfoFetched = NO;
     //else
     //    activityTableCell.backgroundColor = [UIColor lightGrayColor];
     
-    if(ratingsArray != 0){
+    NSLog(@"RatingsArray: %d", ratingsArray.count);
+    NSLog(@"TitleArray: %d", titleArray.count);
+    NSLog(@"PosterArray: %d", posterArray.count);
+    NSLog(@"YearArray: %d", yearArray.count);
+    if(indexPath.row <= ratingsArray.count){
         
         username = [[ratingsArray objectAtIndex:indexPath.row] valueForKey:@"user"];
         comment = [[ratingsArray objectAtIndex:indexPath.row] objectForKey:@"comment"];
@@ -266,13 +272,13 @@ BOOL movieInfoFetched = NO;
             [self.activityTableCell.contentView addSubview:activityTableCell.likeButton];
         }
     }
-    self.activityTableCell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return activityTableCell;
 }
 
 - (void)retrieveUserRatings{
-    ratingsArray = [[NSArray alloc]init];
-    ratingsArray = nil;
+//    ratingsArray = [[NSArray alloc]init];
+//    ratingsArray = nil;
     PFQuery *movieQuery = [PFQuery queryWithClassName:@"Rating"];
     movieQuery.limit = 10;
     
@@ -293,6 +299,7 @@ BOOL movieInfoFetched = NO;
             [self retrieveMovieInfo];
             [[self activityTable].tableView reloadData];
             [self.activityTable.refreshControl endRefreshing];
+            
             [DejalActivityView removeView];
             
         } else {

@@ -17,6 +17,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         //Labels och Views
         posterView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 50, 67.5, 101.25)];
         userImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 30, 30)];
@@ -29,16 +31,17 @@
         
         //Buttons
         commentButton = [[UIButton alloc]init];
-        likeButton = [[UIButton alloc]init];
-        
         [commentButton setTitle:@"Comment" forState:UIControlStateNormal];
         commentButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
         
+        likeButton = [[UIButton alloc]init];
         [likeButton setTitle:@"Like" forState:UIControlStateNormal];
         likeButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
         
+        //Stjärna
         rateStar.image = [UIImage imageNamed:@"rate_star"];
         
+        //Labels
         [userLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14]];
         userLabel.textColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
         
@@ -59,14 +62,6 @@
         movieTitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [movieTitleLabel setFont:[UIFont fontWithName: @"HelveticaNeue-Light" size: 20.0]];
         
-        /*
-        [self.contentView addSubview:userLabel];
-        [self.contentView addSubview:movieTitleLabel];
-        [self.contentView addSubview:rateStar];
-        [self.contentView addSubview:ratingLabel];
-      //  [self.contentView addSubview:commentView];
-        [self.contentView addSubview:posterView];
-        */
     }
     return self;
 }
