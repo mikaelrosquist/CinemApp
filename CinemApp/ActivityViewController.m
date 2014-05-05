@@ -202,6 +202,7 @@ BOOL movieInfoFetched = NO;
         if (titleArray.count > 0){
             
             NSLog(@"Betyg: %@",rating);
+            NSLog(@"IndexPath.row: %ld", (long)indexPath.row);
             
             movieTitle = [titleArray objectAtIndex:indexPath.row];
             movieYear = [yearArray objectAtIndex:indexPath.row];
@@ -250,8 +251,8 @@ BOOL movieInfoFetched = NO;
             activityTableCell.commentButton.frame = CGRectMake(activityTableCell.likeButton.frame.origin.x+activityTableCell.likeButton.frame.size.width+10, activityTableCell.ratingLabel.frame.origin.y, 90, 25);
             
             //Vet inte om detta bidrar till bättre performance..
-            activityTableCell.layer.shouldRasterize = YES;
-            activityTableCell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+            //activityTableCell.layer.shouldRasterize = YES;
+            //activityTableCell.layer.rasterizationScale = [UIScreen mainScreen].scale;
             
             [self.activityTableCell.contentView addSubview:activityTableCell.userImageView];
             [self.activityTableCell.contentView addSubview:activityTableCell.userLabel];
@@ -288,6 +289,7 @@ BOOL movieInfoFetched = NO;
             NSLog(@"HÄMTAT: %@", ratingsArray);
             
             //Hämtar filminfo och laddar om viewn när ratings hämtats.
+            activityTableCell = nil;
             [self retrieveMovieInfo];
             [[self activityTable].tableView reloadData];
             [self.activityTable.refreshControl endRefreshing];
@@ -329,6 +331,7 @@ BOOL movieInfoFetched = NO;
         [yearArray addObject:movieYear];
         movieInfoFetched = YES;
         [activityTable.tableView setHidden:NO];
+        [DejalActivityView removeView];
     }
     
 }
