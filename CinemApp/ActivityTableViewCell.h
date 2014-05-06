@@ -16,6 +16,7 @@
 
 @property (nonatomic, retain) NSString *rateID;
 @property (nonatomic, retain) NSString *toUserID;
+@property (nonatomic, retain) NSString *cellID;
 
 @property (nonatomic, strong) UILabel *userLabel;
 @property (nonatomic, strong) UILabel *timeLabel;

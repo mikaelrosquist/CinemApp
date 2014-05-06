@@ -49,10 +49,10 @@ NSMutableDictionary* sendingObject;
     if (self) {
         oneMovie = NO;
         userSet = NO;
-        
+         NSLog(@"Init feed");
         [self commonInit];
-        likeModel = [[LikeModel alloc]init];
-
+        
+        
         activityTable.tableView.scrollEnabled=YES;
         [activityTable.tableView setHidden:YES];
         [DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
@@ -63,6 +63,12 @@ NSMutableDictionary* sendingObject;
         self.activityTable.tableView.ScrollIndicatorInsets = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
         self.activityTable.refreshControl = [[UIRefreshControl alloc] init];
         [self.activityTable.refreshControl addTarget:self action:@selector(retrieveUserRatings) forControlEvents:UIControlEventValueChanged];
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(likePost:)
+         name:[NSString stringWithFormat:@"test"]
+         object:sendingObject];
         
     }
     return self;
@@ -80,8 +86,15 @@ NSMutableDictionary* sendingObject;
         [self commonInit];
         
         NSLog(@"initWithOneMovie MOVIEID: %@", movieID);
-//        NSLog(@"TableHeight: %f", tableHeight);
-//        NSLog(@"Scroll Height: %f", scrollView.frame.size.height);
+        //        NSLog(@"TableHeight: %f", tableHeight);
+        //        NSLog(@"Scroll Height: %f", scrollView.frame.size.height);
+        
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(likePost:)
+         name:[NSString stringWithFormat:@"test2"]
+         object:sendingObject];
         
     }
     return self;
@@ -93,17 +106,28 @@ NSMutableDictionary* sendingObject;
         oneMovie = NO;
         userSet = YES;
         [self commonInit];
+        [activityTable.tableView setHidden:YES];
         activityTable.tableView.scrollEnabled=NO;
         NSLog(@"initWithUser");
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(likePost:)
+         name:[NSString stringWithFormat:@"test3"]
+         object:sendingObject];
+        
     }
     return self;
 }
 
 //Gemensam init
 - (void) commonInit {
+    likeModel = [[LikeModel alloc]init];
     
     movieInfoFetched = NO;
+    NSLog(@"Hämtar user ratings");
     [self retrieveUserRatings];
+    NSLog(@"User ratings hämtat");
     scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     activityTable = [[UITableViewController alloc]init];
     activityTable.tableView.dataSource = self;
@@ -134,11 +158,6 @@ NSMutableDictionary* sendingObject;
     ratingsArray = [[NSMutableArray alloc]init];
     
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(likePost:)
-     name:[NSString stringWithFormat:@"test"]
-     object:sendingObject];
     
     // Do any additional setup after loading the view.
 }
@@ -211,22 +230,34 @@ NSMutableDictionary* sendingObject;
         timeStamp = [[ratingsArray objectAtIndex:indexPath.row] createdAt];
         [self formatTime:timeStamp];
         activityTableCell.rateID = rateID;
-        activityTableCell.toUserID = [[ratingsArray objectAtIndex:indexPath.row] valueForKey:@"userId"];;
+        activityTableCell.toUserID = [[ratingsArray objectAtIndex:indexPath.row] valueForKey:@"userId"];
         
-        
-        if(likedArray.count > 0 && [likedArray objectAtIndex:indexPath.row] == [NSNumber numberWithBool:1]){
-            [activityTableCell.likeButton setTitle:@"Liked" forState:UIControlStateNormal];
-            [activityTableCell.likeButton setImage: [UIImage imageNamed:@"likeBtn-1"] forState:UIControlStateNormal];
-            [activityTableCell.likeButton setBackgroundColor:[UIColor colorWithRed:0.769 green:0.769 blue:0.769 alpha:1]];
-            [activityTableCell.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -30.0, 0.0, 0.0)];
-
-        }else{
-            
-
+        @try {
+            if([likedArray objectAtIndex:indexPath.row] == [NSNumber numberWithBool:1]){
+                [activityTableCell.likeButton setTitle:@"Liked" forState:UIControlStateNormal];
+                [activityTableCell.likeButton setImage: [UIImage imageNamed:@"likeBtn-1"] forState:UIControlStateNormal];
+                [activityTableCell.likeButton setBackgroundColor:[UIColor colorWithRed:0.769 green:0.769 blue:0.769 alpha:1]];
+                [activityTableCell.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -30.0, 0.0, 0.0)];
+            }else{
+                [activityTableCell.likeButton setTitle:@"Like" forState:UIControlStateNormal];
+                [activityTableCell.likeButton setImage: [UIImage imageNamed:@"likeBtn-0"] forState:UIControlStateNormal];
+                activityTableCell.likeButton.backgroundColor = [UIColor colorWithRed:0.867 green:0.867 blue:0.867 alpha:1];
+                [activityTableCell.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -13.0, 0.0, 0.0)];
+            }
+        }
+        @catch (NSException *exception) {
+            NSLog(@"FELLLLLL");
+        }
+        @finally {
+            // do something to keep the program still running properly
         }
         
         
         
+        
+        activityTableCell.cellID = [NSString stringWithFormat:@"%i", indexPath.row];
+        
+        //NSLog(@"%@", activityTableCell.cellID);
         //if(!oneMovie)
         //  [self retrieveMovieInfo];
         
@@ -265,11 +296,11 @@ NSMutableDictionary* sendingObject;
             activityTableCell.ratingLabel.frame = CGRectMake(activityTableCell.rateStar.frame.origin.x+activityTableCell.rateStar.frame.size.width+5, activityTableCell.rateStar.frame.origin.y+5, 0, 0);
             [activityTableCell.ratingLabel sizeToFit];
             /*
-            NSMutableAttributedString *rateOfTen = [[NSMutableAttributedString alloc] initWithAttributedString: activityTableCell.ratingLabel.attributedText];
-            [rateOfTen addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([rateString length]+1, 3)];
-            [rateOfTen addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 14.0] range: NSMakeRange([rateString length], 3)];
-            [activityTableCell.ratingLabel setAttributedText: rateOfTen];
-            */
+             NSMutableAttributedString *rateOfTen = [[NSMutableAttributedString alloc] initWithAttributedString: activityTableCell.ratingLabel.attributedText];
+             [rateOfTen addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([rateString length]+1, 3)];
+             [rateOfTen addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 14.0] range: NSMakeRange([rateString length], 3)];
+             [activityTableCell.ratingLabel setAttributedText: rateOfTen];
+             */
             
             //Användare
             activityTableCell.userLabel.text = username;
@@ -281,7 +312,7 @@ NSMutableDictionary* sendingObject;
             activityTableCell.posterView.image = [UIImage imageWithData:[posterArray objectAtIndex:indexPath.row]];
             
             //Buttons anpassas efter stjärna och betyg
-
+            
             activityTableCell.likeButton.frame = CGRectMake(activityTableCell.ratingLabel.frame.origin.x+45, activityTableCell.ratingLabel.frame.origin.y+5, 65, 25);
             activityTableCell.commentButton.frame = CGRectMake(activityTableCell.likeButton.frame.origin.x+activityTableCell.likeButton.frame.size.width+10, activityTableCell.ratingLabel.frame.origin.y+5, 90, 25);
             
@@ -304,35 +335,13 @@ NSMutableDictionary* sendingObject;
     self.activityTableCell.selectionStyle = UITableViewCellSelectionStyleNone;
     return activityTableCell;
 }
-/*
- - (void)updateButtons{
- 
- for(int i = 0; i < ratingsArray.count; i++){
- BOOL tmp = [likeModel isLiking:[PFUser currentUser] :[[ratingsArray objectAtIndex:i] valueForKey:@"objectId"]];
- [likedArray addObject:[NSNumber numberWithBool:tmp]];
- }
- 
- PFQuery *query = [PFQuery queryWithClassName:@"Like"];
- [query whereKey:@"userId" equalTo:[PFUser currentUser].objectId];
- [query whereKey:@"ratingId" equalTo:rateID];
- 
- [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
- if (objects.count > 0){
- [activityTableCelllikeButton setTitle:@"Liked" forState:UIControlStateNormal];
- likeButton.backgroundColor = [UIColor greenColor];
- }else{
- [likeButton setTitle:@"Like" forState:UIControlStateNormal];
- likeButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
- }
- }];
- }
- */
+
 - (void)retrieveUserRatings{
     //    ratingsArray = [[NSArray alloc]init];
     //    ratingsArray = nil;
     PFQuery *movieQuery = [PFQuery queryWithClassName:@"Rating"];
     movieQuery.limit = 10;
-    
+    likedArray = nil;
     likedArray = [[NSMutableArray alloc]init];
     
     if(oneMovie){
@@ -344,6 +353,7 @@ NSMutableDictionary* sendingObject;
         NSLog(@"userQuery");
     }
     [movieQuery orderByDescending:@"createdAt"];
+    NSLog(@"Förbererder hämta film-info");
     [movieQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
@@ -355,65 +365,71 @@ NSMutableDictionary* sendingObject;
             //Hämtar filminfo och laddar om viewn när ratings hämtats.
             activityTableCell = nil;
             [self retrieveMovieInfo];
-            [[self activityTable].tableView reloadData];
-            [self.activityTable.refreshControl endRefreshing];
-            [DejalActivityView removeView];
-            [self getLikes];
         }
-        
     }];
-    
-    
-    
-    
 }
 
 -(void)getLikes{
-    
-    for(int i = 0; i < ratingsArray.count; i++){
-        BOOL tmp = [likeModel isLiking:[PFUser currentUser] :[[ratingsArray objectAtIndex:i] valueForKey:@"objectId"]];
-        [likedArray addObject:[NSNumber numberWithBool:tmp]];
-        [[self activityTable].tableView reloadData];
-    }
-    NSLog(@"%@", likedArray);
+
+        for(int i = 0; i < ratingsArray.count; i++){
+            BOOL tmp = [likeModel isLiking:[PFUser currentUser] :[[ratingsArray objectAtIndex:i] valueForKey:@"objectId"]];
+            [likedArray addObject:[NSNumber numberWithBool:tmp]];
+        }
+        NSLog(@"Gillar-array%@", likedArray);
+
 }
 
 -(void)retrieveMovieInfo{
     
-    NSString *posterPath;
-    NSString *posterString;
-    NSURL *posterURL;
-    NSURL *url;
-    NSData *data;
-    
-    //NSLog(@"RETRIEVED MOVIE ID: %@", movieID);
-    for(int i=0; i < [ratingsArray count]; i++){
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+    dispatch_async(queue, ^{
+        NSLog(@"Hämtar likes");
+        [self getLikes];
+        NSLog(@"Likes hämtat");
+    });
+    dispatch_async(queue, ^{
         
-        //NSLog(@"RETRIEVING MOVIE");
+        NSString *posterPath;
+        NSString *posterString;
+        NSURL *posterURL;
+        NSURL *url;
+        NSData *data;
         
-        url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, [[ratingsArray objectAtIndex:i] objectForKey:@"movieId"], api_key]];
-        data = [NSData dataWithContentsOfURL:url];
-        json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        
-        posterPath = [json valueForKey:@"poster_path"];
-        posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w90%@", posterPath];
-        posterURL = [NSURL URLWithString:posterString];
-        [posterArray insertObject:[NSData dataWithContentsOfURL:posterURL] atIndex:i];
-        
-        [titleArray insertObject:[json valueForKey:@"original_title"] atIndex:i];
-        movieYear = [NSString stringWithFormat:@"(%@)", [[json valueForKey:@"release_date"] substringToIndex:4]];
-        if ([movieYear isEqualToString:@""])
-            movieYear = @"xxxx-xx-xx";
-        [yearArray insertObject:movieYear atIndex:i];
-        movieInfoFetched = YES;
-        if (titleArray.count > ratingsArray.count) {
-            [titleArray removeLastObject];
-            [posterArray removeLastObject];
-            [yearArray removeLastObject];
+        //NSLog(@"RETRIEVED MOVIE ID: %@", movieID);
+        for(int i=0; i < [ratingsArray count]; i++){
+            NSLog(@"Hämtar film-info");
+            //NSLog(@"RETRIEVING MOVIE");
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", getDataURL, [[ratingsArray objectAtIndex:i] objectForKey:@"movieId"], api_key]];
+            data = [NSData dataWithContentsOfURL:url];
+            json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+            
+            posterPath = [json valueForKey:@"poster_path"];
+            posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w90%@", posterPath];
+            posterURL = [NSURL URLWithString:posterString];
+            NSLog(@"Hämtar poster");
+            [posterArray insertObject:[NSData dataWithContentsOfURL:posterURL] atIndex:i];
+            NSLog(@"Poster hämtad");
+            [titleArray insertObject:[json valueForKey:@"original_title"] atIndex:i];
+            movieYear = [NSString stringWithFormat:@"(%@)", [[json valueForKey:@"release_date"] substringToIndex:4]];
+            if ([movieYear isEqualToString:@""])
+                movieYear = @"xxxx-xx-xx";
+            [yearArray insertObject:movieYear atIndex:i];
+            movieInfoFetched = YES;
+            if (titleArray.count > ratingsArray.count) {
+                [titleArray removeLastObject];
+                [posterArray removeLastObject];
+                [yearArray removeLastObject];
+            }
+            
         }
-    }
-    [activityTable.tableView setHidden:NO];
-    [DejalActivityView removeView];
+        NSLog(@"Alla filmer hämtade");
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [activityTable.tableView setHidden:NO];
+            [[self activityTable].tableView reloadData];
+            [self.activityTable.refreshControl endRefreshing];
+            [DejalActivityView removeView];
+        });
+    });
 }
 
 - (NSString *)formatTime:(NSDate *)timeStamp{
@@ -457,8 +473,17 @@ NSMutableDictionary* sendingObject;
 }
 
 - (void) likePost:(NSNotification *)notification{
+    
     NSDictionary* userInfo = notification.userInfo;
     NSString *ratingID = [userInfo objectForKey:@"rating"];
+    NSString *cellID = [userInfo objectForKey:@"cellID"];
+    int cellIDValue = [cellID intValue];
+    NSLog(@"LIKED ARRAY: %@", likedArray);
+    NSLog(@"Cell-ID: %i", cellIDValue);
+    NSLog(@"HALLÅÅÅÅÅ");
+    
+    [likedArray replaceObjectAtIndex:cellIDValue withObject:[NSNumber numberWithBool:1]];
+    NSLog(@"ÄNDRAD LIKED ARRAY: %@", likedArray);
     [likeModel addLike:[PFUser currentUser] :[NSString stringWithFormat:@"%@", ratingID]:[userInfo objectForKey:@"toUser"]];
 }
 

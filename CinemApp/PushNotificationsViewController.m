@@ -90,7 +90,10 @@
 	
     cell.textLabel.text = self.notificationsSection[indexPath.row];
     UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-    cell.accessoryView = switchView;
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    spinner.frame = CGRectMake(0, 0, 24, 24);
+    [spinner startAnimating];
+    cell.accessoryView = spinner;
     switchView.tag = indexPath.row;
     [switchView addTarget:self action:@selector(updateSwitchAtIndexPath:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -98,12 +101,22 @@
     {
         case 0:
             ([likeNotification isEqual: @"ON"]) ? [switchView setOn:YES] : [switchView setOn:NO];
+            [switchView setOn:YES];
+            [switchView setEnabled:NO];
+            cell.accessoryView = switchView;
             break;
         case 1:
             ([commentNotification isEqual: @"ON"]) ? [switchView setOn:YES] : [switchView setOn:NO];
+            [switchView setEnabled:NO];
+            cell.accessoryView = switchView;
             break;
         case 2:
-            ([followerNotification isEqual: @"ON"]) ? [switchView setOn:YES] : [switchView setOn:NO];
+            if ([followerNotification isEqual: @"ON"]){
+                [switchView setOn:YES];
+                cell.accessoryView = switchView;
+            }else{
+                [switchView setOn:NO];
+            }
             break;
         default:
             NSLog(@"Error!");

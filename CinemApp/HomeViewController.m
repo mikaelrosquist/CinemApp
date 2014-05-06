@@ -26,6 +26,7 @@
         self.title = @"News";
         if([PFUser currentUser])
             activityTable = [[ActivityViewController alloc]initWithNibName:nil bundle:nil];
+        
         [self.view addSubview:activityTable.view];
 
     }

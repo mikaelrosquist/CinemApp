@@ -81,7 +81,7 @@
     playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
     playerTextField.tag = 0;
     playerTextField.clearButtonMode = UITextFieldViewModeWhileEditing; // no clear 'x' button to the right
-    [playerTextField setEnabled: YES];
+    [playerTextField setEnabled: NO]; //SÄTT TILL YES SEN
     playerTextField.keyboardType = UIKeyboardTypeEmailAddress;
     playerTextField.returnKeyType = UIReturnKeyNext;
     if(indexPath.section == 0){
@@ -101,7 +101,7 @@
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     imgView.image = [UIImage imageNamed:@"settings_password"];
     cell.imageView.image = imgView.image;
-
+    cell.userInteractionEnabled = NO;
     [cell.contentView addSubview:playerTextField];
     
 	return cell;

@@ -67,7 +67,7 @@
     playerTextField.autocapitalizationType = UITextAutocapitalizationTypeNone; // no auto capitalization support
     playerTextField.tag = 0;
     playerTextField.clearButtonMode = UITextFieldViewModeWhileEditing; // no clear 'x' button to the right
-    [playerTextField setEnabled: YES];
+    [playerTextField setEnabled: NO]; //SÄTT TILL YES SEN
     playerTextField.keyboardType = UIKeyboardTypeEmailAddress;
     playerTextField.returnKeyType = UIReturnKeyNext;
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
@@ -85,7 +85,7 @@
     playerTextField.secureTextEntry = YES;
     cell.imageView.image = imgView.image;
     [cell.contentView addSubview:playerTextField];
-    
+    cell.userInteractionEnabled = NO;
 	return cell;
 }
 

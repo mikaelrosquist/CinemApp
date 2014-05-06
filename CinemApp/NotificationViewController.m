@@ -30,6 +30,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    UILabel *underConstruction;
+    underConstruction = [[UILabel alloc] initWithFrame:CGRectMake(0, 120, 320, 40)];
+    underConstruction.text = @"This function is under construction";
+    underConstruction.textAlignment = NSTextAlignmentCenter;
+    underConstruction.textColor=[UIColor lightGrayColor];
+    [underConstruction setFont:[UIFont fontWithName: @"AvenirNext-Medium" size: 14.0f]];
+    [self.view addSubview:underConstruction];
 }
 
 - (void)viewDidAppear:(BOOL)animated{

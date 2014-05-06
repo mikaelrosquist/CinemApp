@@ -11,7 +11,7 @@
 
 @implementation ActivityTableViewCell
 
-@synthesize movieTitleLabel, userLabel, ratingLabel, commentLabel, posterView, rateStar, userImageView, timeLabel, commentButton, likeButton, rateID, toUserID, likeModel;
+@synthesize movieTitleLabel, userLabel, ratingLabel, commentLabel, posterView, rateStar, userImageView, timeLabel, commentButton, likeButton, rateID, toUserID, likeModel, cellID;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -26,6 +26,7 @@
         rateStar = [[UIImageView alloc]init];
         ratingLabel = [[UILabel alloc]init];
         commentLabel = [[UILabel alloc]init];
+        cellID = [[NSString alloc]init];
         
         //Buttons
         commentButton = [[UIButton alloc]init];
@@ -63,6 +64,7 @@
         [likeButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0]];
         [likeButton addTarget:self action:@selector(setBgColorForButton:) forControlEvents:UIControlEventTouchDown];
         [likeButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchDragExit];
+        [likeButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [likeButton setTitleColor:[UIColor colorWithRed:0.482 green:0.482 blue:0.482 alpha:1] forState:UIControlStateNormal];
         [[likeButton layer] setCornerRadius:3.0f];
         likeButton.backgroundColor = [UIColor colorWithRed:0.867 green:0.867 blue:0.867 alpha:1];
@@ -120,6 +122,7 @@
     [userInfo setObject:[PFUser currentUser].objectId forKey:@"user"];
     [userInfo setObject:rateID forKey:@"rating"];
     [userInfo setObject:toUserID forKey:@"toUser"];
+    [userInfo setObject:cellID forKey:@"cellID"];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:[NSString stringWithFormat:@"test"] object:self userInfo:userInfo];
 }
