@@ -7,6 +7,8 @@
 //
 
 #import "NotificationViewController.h"
+#import "AppDelegate.h"
+
 
 @interface NotificationViewController ()
 
@@ -28,6 +30,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[[[[self tabBarController] tabBar] items]
+      objectAtIndex:3] setBadgeValue:nil];
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    app.badge = 0;
+    
 }
 
 - (void)didReceiveMemoryWarning

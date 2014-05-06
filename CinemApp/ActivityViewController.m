@@ -439,6 +439,7 @@ BOOL movieInfoFetched = NO;
     NSDictionary* userInfo = notification.userInfo;
     NSString *ratingID = [userInfo objectForKey:@"rating"];
     [likeModel addLike:[PFUser currentUser] :[NSString stringWithFormat:@"%@", ratingID]:[userInfo objectForKey:@"toUser"]];
+    //[self getLikes];
 }
 
 /*

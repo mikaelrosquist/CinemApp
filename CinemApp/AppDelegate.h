@@ -8,6 +8,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UITabBarController *tabBarController;
 @property (nonatomic, strong) NotLoggedInViewController* loginView;
+@property int badge;
 
 - (void)setupTabBarController;
 

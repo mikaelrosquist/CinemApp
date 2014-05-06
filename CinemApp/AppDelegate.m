@@ -16,12 +16,11 @@
 #import "Parse/Parse.h"
 #import "GTScrollNavigationBar.h"
 
-@implementation AppDelegate{
-    ;
-}
+@implementation AppDelegate
 
 @synthesize tabBarController;
 @synthesize window;
+@synthesize badge;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -190,8 +189,15 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
     
     if ([PFUser currentUser]){
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+        currentInstallation[@"installationUser"] = [[PFUser currentUser]objectId];
+
+        badge++;
         
+        [[[[[self tabBarController] tabBar] items]
+          objectAtIndex:3] setBadgeValue:[NSString stringWithFormat:@"%i", badge]];
         
+        /*
         // Create a pointer to the Photo object
         NSString *userId = [userInfo objectForKey:@"userId"];
         PFQuery *query = [PFUser query];
@@ -204,8 +210,10 @@
         
         //ProfileViewController *viewController = [[ProfileViewController alloc] initWithUser:user];
         //[home.navigationController pushViewController:viewController animated:YES];
+         */
         
     }
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
