@@ -205,14 +205,12 @@ static CGFloat backdropImageWidth  = 320.0;
     self.extendedLayoutIncludesOpaqueBars=YES;
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.scrollView.contentSize = CGSizeMake(320, self.view.frame.size.height);
-    self.scrollView.delaysContentTouches = YES;
+    self.scrollView.delaysContentTouches = NO;
+    self.scrollView.canCancelContentTouches = NO;
     
     //[self setAutomaticallyAdjustsScrollViewInsets:YES];
     CGRect bounds = self.view.bounds;
     self.scrollView.frame = bounds;
-    
-    
-    
     
     return self;
 }
@@ -253,10 +251,38 @@ static CGFloat backdropImageWidth  = 320.0;
     if(segment.selectedSegmentIndex == 0) {
         recentActivityView.view.hidden = FALSE;
         [[recentActivityView activityTable].tableView reloadData];
-        self.scrollView.contentSize = CGSizeMake(320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight+40);
-        recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight);
-        if(recentActivityView.scrollView.frame.size.height <= 220)//Hårdkodat utav bara helvete
-            recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, 0);
+        
+        NSLog(@"INNAN:");
+        NSLog(@"Self scrollView content: %f", self.scrollView.contentSize.height);
+        NSLog(@"Self scrollView frame: %f", self.scrollView.frame.size.height);
+        NSLog(@"-----------------------");
+        NSLog(@"TableView content: %f", recentActivityView.activityTable.tableView.contentSize.height);
+        NSLog(@"TableView frame: %f", recentActivityView.activityTable.tableView.frame.size.height);
+        NSLog(@"-----------------------");
+        NSLog(@"RecentActivity scrollView content: %f", recentActivityView.scrollView.contentSize.height);
+        NSLog(@"RecentActivity scrollView frame: %f", recentActivityView.scrollView.frame.size.height);
+        
+        
+        self.scrollView.contentSize = CGSizeMake(320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight+80);
+        
+        
+        
+        recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight-50);
+        //recentActivityView.scrollView.contentSize = recentActivityView.activityTable.tableView.contentSize;
+        
+        //if(recentActivityView.scrollView.frame.size.height <= 220)//Hårdkodat utav bara helvete
+          //  recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, 0);
+        
+        NSLog(@"EFTER:");
+        NSLog(@"Self scrollView content: %f", self.scrollView.contentSize.height);
+        NSLog(@"Self scrollView frame: %f", self.scrollView.frame.size.height);
+        NSLog(@"-----------------------");
+        NSLog(@"TableView content: %f", recentActivityView.activityTable.tableView.contentSize.height);
+        NSLog(@"TableView frame: %f", recentActivityView.activityTable.tableView.frame.size.height);
+        NSLog(@"-----------------------");
+        NSLog(@"RecentActivity scrollView content: %f", recentActivityView.scrollView.contentSize.height);
+        NSLog(@"RecentActivity scrollView frame: %f", recentActivityView.scrollView.frame.size.height);
+        
 
     }else if(segment.selectedSegmentIndex == 1){
         //visar highest

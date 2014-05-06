@@ -237,6 +237,7 @@ UITapGestureRecognizer *tap;
             self.scrollView.contentSize = CGSizeMake(320, movieView.frame.size.height+backdropImageHeight);
             [self.scrollView addSubview:movieView];
             [self.scrollView addSubview:rateView];
+            [self.scrollView addSubview:self.oneMovieActivityView.view];
             [self.scrollView addSubview:movieGenresLabel];
             [self.scrollView addSubview:movieRuntimeLabel];
             
@@ -267,7 +268,6 @@ UITapGestureRecognizer *tap;
             //Lägger till alla subviews i den här vyn
             [self.view addSubview:self.backdropImageView];
             [self.view addSubview:self.backdropWithBlurImageView];
-            [self.scrollView addSubview:self.oneMovieActivityView.view];
             [self.scrollView addSubview:movieTitleLabel];
             [self.scrollView addSubview:segmentedControl];
             [self.view addSubview:self.scrollView];
@@ -283,8 +283,8 @@ UITapGestureRecognizer *tap;
     
     //Ska göra det enklare att använda slidern, vet ej om det funkar
     self.scrollView.canCancelContentTouches = YES;
-    self.scrollView.delaysContentTouches = YES;
-    
+    self.scrollView.delaysContentTouches = NO;
+
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     //Tar bort "Back"-texten på filmsidorna
@@ -435,7 +435,7 @@ UITapGestureRecognizer *tap;
             oneMovieActivityView.scrollView.frame = CGRectMake(0, 0, 320, 0);
         NSLog(@"tableView.contentSize.height: %f", oneMovieActivityView.activityTable.tableView.contentSize.height);
         NSLog(@"tableView.view.height: %f", oneMovieActivityView.view.frame.size.height);
-        NSLog(@"oneMovieActivityView.scrollView.frame.size.height: %f", oneMovieActivityView.scrollView.frame.size.height);
+        NSLog(@"oneMovieActivityView.scrollView.contentSize.height: %f", oneMovieActivityView.scrollView.contentSize.height);
     }
 }
 
@@ -451,7 +451,6 @@ UITapGestureRecognizer *tap;
     creditsJson = [NSJSONSerialization JSONObjectWithData:creditsData options:kNilOptions error:nil];
     //NSLog(@"%@", creditsJson);
 }
-
 
 //Placeholder till commentFiled i rateView.
 - (void)textViewDidBeginEditing:(UITextView *)textView
@@ -507,7 +506,6 @@ UITapGestureRecognizer *tap;
 {
     keyboardVisible = NO;
     
-    
     [UIView beginAnimations:nil context:nil];
     
     [self.view setFrame:CGRectMake (0,0,self.view.frame.size.width,self.view.frame.size.height)];
@@ -539,7 +537,7 @@ UITapGestureRecognizer *tap;
 
 - (void)view:(UIView *)view savedRating:(UIView *)subview
 {
-        NSLog(@"his view is in the process of being removed");
+        NSLog(@"This view is in the process of being removed");
 }
 
 @end
