@@ -11,13 +11,12 @@
 @implementation LikeModel
 
 - (BOOL) isLiking: (PFUser *)user :(NSString *) ratingID{
-    
-    
+
     PFQuery *query = [PFQuery queryWithClassName:@"Like"];
     [query whereKey:@"userId" equalTo:user.objectId];
     [query whereKey:@"ratingId" equalTo:ratingID];
 
-    if([query getFirstObject] != nil)
+    if([query countObjects] != 0)
         return YES;
     else
         return NO;

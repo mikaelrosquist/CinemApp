@@ -67,7 +67,7 @@ static CGFloat backdropImageWidth  = 320.0;
         [followButton setTitle:@"Loading..." forState:UIControlStateNormal];
         
         
-        dispatch_queue_t queue= dispatch_queue_create("Parse data", 0);
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
         dispatch_async(queue, ^{ // to get all data from server and parsing
             followModel = [[FollowModel alloc]init];
             following = [followModel isFollowing:[PFUser currentUser] :user];
@@ -173,21 +173,17 @@ static CGFloat backdropImageWidth  = 320.0;
     //self.scrollView.backgroundColor = [UIColor clearColor];
     self.scrollView.alwaysBounceVertical = YES;
     
-    recentActivityView = [[ActivityViewController alloc]initWithUser:thisUser];
-    recentActivityView.view.frame = CGRectMake(0, backdropImageHeight+20, 320, 0);
-    
-    
-    [[recentActivityView activityTable].tableView reloadData];
     self.scrollView.contentSize = CGSizeMake(320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight+80);
     recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight);
     if(recentActivityView.scrollView.frame.size.height <= 220)//Hårdkodat utav bara helvete
         recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, 0);
+    recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight);
     
     //Lägger till alla subviews i vår vy
     [self.view addSubview:self.backdropImageView];
     [self.view addSubview:self.backdropWithBlurImageView];
     [self.scrollView addSubview:self.profilePictureImageView];
-    [self.scrollView addSubview:self.recentActivityView.view];
+    
     [self.scrollView addSubview:nameLabel];
     [self.scrollView addSubview:noOfRatingsLabel];
     [self.scrollView addSubview:ratingsLabel];
@@ -285,7 +281,16 @@ static CGFloat backdropImageWidth  = 320.0;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [recentActivityView retrieveUserRatings];
+    if (recentActivityView == nil){
+        recentActivityView = [[ActivityViewController alloc]initWithUser:thisUser];
+        recentActivityView.view.frame = CGRectMake(0, backdropImageHeight+20, 320, 0);
+        [self.scrollView addSubview:self.recentActivityView.view];
+    }else
+        [recentActivityView retrieveUserRatings];
+    
+    [[recentActivityView activityTable].tableView reloadData];
+
+    
 }
 
 - (void)showSettings:(id)sender {
