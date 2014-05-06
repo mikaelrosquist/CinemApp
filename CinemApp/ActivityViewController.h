@@ -23,6 +23,10 @@
 @property (nonatomic, strong) NSString *movieTitle;
 @property (nonatomic, retain) LikeModel *likeModel;
 
+@property BOOL oneMovie;
+@property BOOL userSet;
+@property BOOL movieInfoFetched;
+
 
 @property (retain, strong) NSMutableArray *posterArray;
 @property (retain, strong) NSMutableArray *titleArray;

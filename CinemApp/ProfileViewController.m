@@ -170,11 +170,18 @@ static CGFloat backdropImageWidth  = 320.0;
     //Skapar scrollView
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.delegate = self;
-    self.scrollView.backgroundColor = [UIColor clearColor];
+    //self.scrollView.backgroundColor = [UIColor clearColor];
     self.scrollView.alwaysBounceVertical = YES;
     
     recentActivityView = [[ActivityViewController alloc]initWithUser:thisUser];
     recentActivityView.view.frame = CGRectMake(0, backdropImageHeight+20, 320, 0);
+    
+    
+    [[recentActivityView activityTable].tableView reloadData];
+    self.scrollView.contentSize = CGSizeMake(320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight+80);
+    recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight);
+    if(recentActivityView.scrollView.frame.size.height <= 220)//Hårdkodat utav bara helvete
+        recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, 0);
     
     //Lägger till alla subviews i vår vy
     [self.view addSubview:self.backdropImageView];
@@ -193,15 +200,20 @@ static CGFloat backdropImageWidth  = 320.0;
     [self.scrollView addSubview:segmentedControl];
     [self.view addSubview:self.scrollView];
     
+    
     self.edgesForExtendedLayout=UIRectEdgeAll;
     self.extendedLayoutIncludesOpaqueBars=YES;
-    self.automaticallyAdjustsScrollViewInsets=YES;
+    self.automaticallyAdjustsScrollViewInsets=NO;
     self.scrollView.contentSize = CGSizeMake(320, self.view.frame.size.height);
     self.scrollView.delaysContentTouches = YES;
     
     //[self setAutomaticallyAdjustsScrollViewInsets:YES];
     CGRect bounds = self.view.bounds;
     self.scrollView.frame = bounds;
+    
+    
+    
+    
     return self;
 }
 

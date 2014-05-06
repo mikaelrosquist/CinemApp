@@ -18,7 +18,7 @@
 
 @implementation ActivityViewController
 
-@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray, likedArray, likeModel, user;
+@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray, likedArray, likeModel, user, oneMovie, userSet, movieInfoFetched;
 
 
 NSDate *timeStamp;
@@ -43,18 +43,19 @@ CGFloat tableHeight;
 
 NSMutableDictionary* sendingObject;
 
-BOOL oneMovie = NO;
-BOOL userSet = NO;
-BOOL movieInfoFetched = NO;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        oneMovie = NO;
+        userSet = NO;
+        
         [self commonInit];
         likeModel = [[LikeModel alloc]init];
 
         activityTable.tableView.scrollEnabled=YES;
+        [activityTable.tableView setHidden:YES];
+        [DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
         
         CGRect bounds = self.scrollView.bounds;
         self.activityTable.tableView.frame = bounds;
@@ -70,7 +71,8 @@ BOOL movieInfoFetched = NO;
 - (id)initWithOneMovie:(NSString *)incomingID :(NSString *)incomingTitle :(NSData *)incomingPoster :(CGFloat)backDropImageHeight
 {
     if (self) {
-        oneMovie = TRUE;
+        oneMovie = YES;
+        userSet = NO;
         movieID = incomingID;
         movieTitle = incomingTitle;
         moviePoster = incomingPoster;
@@ -88,8 +90,10 @@ BOOL movieInfoFetched = NO;
 - (id)initWithUser:(PFUser *)incomingUser{
     if(self){
         user = incomingUser;
+        oneMovie = NO;
         userSet = YES;
         [self commonInit];
+        activityTable.tableView.scrollEnabled=NO;
         NSLog(@"initWithUser");
     }
     return self;
@@ -98,8 +102,7 @@ BOOL movieInfoFetched = NO;
 //Gemensam init
 - (void) commonInit {
     
-    [activityTable.tableView setHidden:YES];
-    [DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
+    movieInfoFetched = NO;
     [self retrieveUserRatings];
     scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     activityTable = [[UITableViewController alloc]init];
@@ -114,6 +117,7 @@ BOOL movieInfoFetched = NO;
 
 -(void)refresh {
     oneMovie = NO;
+    userSet = NO;
     [self retrieveUserRatings];
     [posterArray removeAllObjects];
     [titleArray removeAllObjects];
@@ -341,12 +345,14 @@ BOOL movieInfoFetched = NO;
     
     likedArray = [[NSMutableArray alloc]init];
     
-    if(oneMovie) //Måste avkommenteras för att newsfeed ska funka
+    if(oneMovie){
         [movieQuery whereKey:@"movieId" equalTo:[NSString stringWithFormat:@"%@", movieID]];
-    
-    if(userSet)
+        NSLog(@"oneMovieQuery");
+    }
+    else if(userSet){
         [movieQuery whereKey:@"userId" equalTo:[NSString stringWithFormat:@"%@", user.objectId]];
-    
+        NSLog(@"userQuery");
+    }
     [movieQuery orderByDescending:@"createdAt"];
     [movieQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -410,10 +416,10 @@ BOOL movieInfoFetched = NO;
             movieYear = @"xxxx-xx-xx";
         [yearArray addObject:movieYear];
         movieInfoFetched = YES;
-        [activityTable.tableView setHidden:NO];
-        [DejalActivityView removeView];
+        
     }
-    
+    [activityTable.tableView setHidden:NO];
+    [DejalActivityView removeView];
 }
 
 - (NSString *)formatTime:(NSDate *)timeStamp{
