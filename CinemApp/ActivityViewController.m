@@ -64,6 +64,12 @@ NSMutableDictionary* sendingObject;
         self.activityTable.refreshControl = [[UIRefreshControl alloc] init];
         [self.activityTable.refreshControl addTarget:self action:@selector(retrieveUserRatings) forControlEvents:UIControlEventValueChanged];
         
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(likePost:)
+         name:[NSString stringWithFormat:@"test"]
+         object:sendingObject];
+
     }
     return self;
 }
@@ -83,6 +89,13 @@ NSMutableDictionary* sendingObject;
 //        NSLog(@"TableHeight: %f", tableHeight);
 //        NSLog(@"Scroll Height: %f", scrollView.frame.size.height);
         
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(likePost:)
+         name:[NSString stringWithFormat:@"test2"]
+         object:sendingObject];
+        
     }
     return self;
 }
@@ -95,6 +108,13 @@ NSMutableDictionary* sendingObject;
         [self commonInit];
         activityTable.tableView.scrollEnabled=NO;
         NSLog(@"initWithUser");
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(likePost:)
+         name:[NSString stringWithFormat:@"test3"]
+         object:sendingObject];
+        
     }
     return self;
 }
@@ -134,11 +154,6 @@ NSMutableDictionary* sendingObject;
     ratingsArray = [[NSMutableArray alloc]init];
     
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(likePost:)
-     name:[NSString stringWithFormat:@"test"]
-     object:sendingObject];
     
     // Do any additional setup after loading the view.
 }
@@ -211,7 +226,7 @@ NSMutableDictionary* sendingObject;
         timeStamp = [[ratingsArray objectAtIndex:indexPath.row] createdAt];
         [self formatTime:timeStamp];
         activityTableCell.rateID = rateID;
-        activityTableCell.toUserID = [[ratingsArray objectAtIndex:indexPath.row] valueForKey:@"userId"];;
+        activityTableCell.toUserID = [[ratingsArray objectAtIndex:indexPath.row] valueForKey:@"userId"];
         
         
         if(likedArray.count > 0 && [likedArray objectAtIndex:indexPath.row] == [NSNumber numberWithBool:1]){
@@ -221,12 +236,15 @@ NSMutableDictionary* sendingObject;
             [activityTableCell.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -30.0, 0.0, 0.0)];
 
         }else{
-            
-
+            [activityTableCell.likeButton setTitle:@"Like" forState:UIControlStateNormal];
+            [activityTableCell.likeButton setImage: [UIImage imageNamed:@"likeBtn-0"] forState:UIControlStateNormal];
+            activityTableCell.likeButton.backgroundColor = [UIColor colorWithRed:0.867 green:0.867 blue:0.867 alpha:1];
+            [activityTableCell.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -13.0, 0.0, 0.0)];
         }
         
+        activityTableCell.cellID = [NSString stringWithFormat:@"%i", indexPath.row];
         
-        
+        //NSLog(@"%@", activityTableCell.cellID);
         //if(!oneMovie)
         //  [self retrieveMovieInfo];
         
@@ -457,8 +475,17 @@ NSMutableDictionary* sendingObject;
 }
 
 - (void) likePost:(NSNotification *)notification{
+    
     NSDictionary* userInfo = notification.userInfo;
     NSString *ratingID = [userInfo objectForKey:@"rating"];
+    NSString *cellID = [userInfo objectForKey:@"cellID"];
+    int cellIDValue = [cellID intValue];
+    NSLog(@"LIKED ARRAY: %@", likedArray);
+    NSLog(@"Cell-ID: %i", cellIDValue);
+    NSLog(@"HALLÅÅÅÅÅ");
+    
+    [likedArray replaceObjectAtIndex:cellIDValue withObject:[NSNumber numberWithBool:1]];
+    NSLog(@"ÄNDRAD LIKED ARRAY: %@", likedArray);
     [likeModel addLike:[PFUser currentUser] :[NSString stringWithFormat:@"%@", ratingID]:[userInfo objectForKey:@"toUser"]];
 }
 
