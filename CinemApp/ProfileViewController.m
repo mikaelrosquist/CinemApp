@@ -284,6 +284,9 @@ static CGFloat backdropImageWidth  = 320.0;
     [self calculateFollowers];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [recentActivityView retrieveUserRatings];
+}
 
 - (void)showSettings:(id)sender {
     

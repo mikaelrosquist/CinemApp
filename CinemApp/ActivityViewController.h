@@ -38,6 +38,6 @@
 - (id)initWithOneMovie:(NSString *)incomingID :(NSString *) incomingTitle :(NSData *)incomingPoster :(CGFloat)backDropImageHeight;
 - (id)initWithUser:(PFUser *)incomingUser;
 - (void)retrieveUserRatings;
-- (void) likePost: (NSString *)rateID;
+- (void)likePost: (NSString *)rateID;
 
 @end

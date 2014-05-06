@@ -62,7 +62,7 @@ NSMutableDictionary* sendingObject;
         self.activityTable.tableView.contentInset = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
         self.activityTable.tableView.ScrollIndicatorInsets = UIEdgeInsetsMake(64.0f, 0.0f, 50.0f, 0.0f);
         self.activityTable.refreshControl = [[UIRefreshControl alloc] init];
-        [self.activityTable.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+        [self.activityTable.refreshControl addTarget:self action:@selector(retrieveUserRatings) forControlEvents:UIControlEventValueChanged];
         
     }
     return self;
@@ -113,16 +113,6 @@ NSMutableDictionary* sendingObject;
     [scrollView addSubview:activityTable.tableView];
     [self.view addSubview:scrollView];
     
-}
-
--(void)refresh {
-    oneMovie = NO;
-    userSet = NO;
-    [self retrieveUserRatings];
-    [posterArray removeAllObjects];
-    [titleArray removeAllObjects];
-    [yearArray removeAllObjects];
-    [ratingsArray removeAllObjects];
 }
 
 - (void)viewDidLoad
@@ -408,15 +398,19 @@ NSMutableDictionary* sendingObject;
         posterPath = [json valueForKey:@"poster_path"];
         posterString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w90%@", posterPath];
         posterURL = [NSURL URLWithString:posterString];
-        [posterArray addObject:[NSData dataWithContentsOfURL:posterURL]];
+        [posterArray insertObject:[NSData dataWithContentsOfURL:posterURL] atIndex:i];
         
-        [titleArray addObject:[json valueForKey:@"original_title"]];
+        [titleArray insertObject:[json valueForKey:@"original_title"] atIndex:i];
         movieYear = [NSString stringWithFormat:@"(%@)", [[json valueForKey:@"release_date"] substringToIndex:4]];
         if ([movieYear isEqualToString:@""])
             movieYear = @"xxxx-xx-xx";
-        [yearArray addObject:movieYear];
+        [yearArray insertObject:movieYear atIndex:i];
         movieInfoFetched = YES;
-        
+        if (titleArray.count > ratingsArray.count) {
+            [titleArray removeLastObject];
+            [posterArray removeLastObject];
+            [yearArray removeLastObject];
+        }
     }
     [activityTable.tableView setHidden:NO];
     [DejalActivityView removeView];
