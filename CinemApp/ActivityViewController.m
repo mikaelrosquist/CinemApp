@@ -18,7 +18,7 @@
 
 @implementation ActivityViewController
 
-@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray, likedArray, likeModel;
+@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray, likedArray, likeModel, user;
 
 
 NSDate *timeStamp;
@@ -36,14 +36,15 @@ NSString *movieID;
 NSString *username;
 NSString *comment;
 NSNumber *rating;
-NSDictionary *json;
 
+NSDictionary *json;
 NSData *moviePoster;
 CGFloat tableHeight;
 
 NSMutableDictionary* sendingObject;
 
 BOOL oneMovie = NO;
+BOOL userSet = NO;
 BOOL movieInfoFetched = NO;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -54,8 +55,6 @@ BOOL movieInfoFetched = NO;
         likeModel = [[LikeModel alloc]init];
 
         activityTable.tableView.scrollEnabled=YES;
-        [activityTable.tableView setHidden:YES];
-        [DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
         
         CGRect bounds = self.scrollView.bounds;
         self.activityTable.tableView.frame = bounds;
@@ -86,9 +85,21 @@ BOOL movieInfoFetched = NO;
     return self;
 }
 
+- (id)initWithUser:(PFUser *)incomingUser{
+    if(self){
+        user = incomingUser;
+        userSet = YES;
+        [self commonInit];
+        NSLog(@"initWithUser");
+    }
+    return self;
+}
+
 //Gemensam init
 - (void) commonInit {
     
+    [activityTable.tableView setHidden:YES];
+    [DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
     [self retrieveUserRatings];
     scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     activityTable = [[UITableViewController alloc]init];
@@ -250,13 +261,15 @@ BOOL movieInfoFetched = NO;
             
             //Betyget anpassas efter stjärnan
             rateString = [NSString stringWithFormat:@"%@", rating];
-            activityTableCell.ratingLabel.text = [NSString stringWithFormat:@"%@%@ ", rateString, ten];
+            activityTableCell.ratingLabel.text = [NSString stringWithFormat:@"%@", rateString]; //lägg till stringen "ten" för att få "[betyg]/10".
             activityTableCell.ratingLabel.frame = CGRectMake(activityTableCell.rateStar.frame.origin.x+activityTableCell.rateStar.frame.size.width+5, activityTableCell.rateStar.frame.origin.y+5, 0, 0);
             [activityTableCell.ratingLabel sizeToFit];
+            /*
             NSMutableAttributedString *rateOfTen = [[NSMutableAttributedString alloc] initWithAttributedString: activityTableCell.ratingLabel.attributedText];
             [rateOfTen addAttribute: NSForegroundColorAttributeName value: [UIColor grayColor] range: NSMakeRange([rateString length]+1, 3)];
             [rateOfTen addAttribute: NSFontAttributeName value: [UIFont fontWithName: @"HelveticaNeue-Light" size: 14.0] range: NSMakeRange([rateString length], 3)];
             [activityTableCell.ratingLabel setAttributedText: rateOfTen];
+            */
             
             //Användare
             activityTableCell.userLabel.text = username;
@@ -323,8 +336,10 @@ BOOL movieInfoFetched = NO;
     likedArray = [[NSMutableArray alloc]init];
     
     if(oneMovie) //Måste avkommenteras för att newsfeed ska funka
-
         [movieQuery whereKey:@"movieId" equalTo:[NSString stringWithFormat:@"%@", movieID]];
+    
+    if(userSet)
+        [movieQuery whereKey:@"userId" equalTo:[NSString stringWithFormat:@"%@", user.objectId]];
     
     [movieQuery orderByDescending:@"createdAt"];
     [movieQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

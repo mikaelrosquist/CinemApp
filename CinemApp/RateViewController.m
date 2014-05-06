@@ -305,8 +305,6 @@ UITapGestureRecognizer *tap;
      name:[NSString stringWithFormat:@"%@%@", [PFUser currentUser].objectId, movieID]
      object:sendingObject];
     
-    
-    
 }
 
 - (void)receiveData:(NSNotification *)notification {

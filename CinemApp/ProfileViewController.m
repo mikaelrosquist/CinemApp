@@ -27,7 +27,7 @@ static CGFloat backdropImageWidth  = 320.0;
     PFUser *thisUser;
 }
 
-@synthesize settingsView, followModel;
+@synthesize settingsView, followModel, segmentedControl, recentActivityView, highestActivityView;
 
 -(id)initWithUser:(PFUser *)user
 {
@@ -161,7 +161,7 @@ static CGFloat backdropImageWidth  = 320.0;
     [self.backdropWithBlurImageView setClipsToBounds:YES];
     
     //Allokerar, initierar och konfiguerar segmented kontroll
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Most recent ratings", @"Highest ratings", nil]];
+    segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Most recent ratings", @"Highest ratings", nil]];
     segmentedControl.frame = CGRectMake(10, backdropImageHeight+10, 300, 29);
     segmentedControl.selectedSegmentIndex = 0;
     segmentedControl.tintColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
@@ -173,10 +173,14 @@ static CGFloat backdropImageWidth  = 320.0;
     self.scrollView.backgroundColor = [UIColor clearColor];
     self.scrollView.alwaysBounceVertical = YES;
     
+    recentActivityView = [[ActivityViewController alloc]initWithUser:thisUser];
+    recentActivityView.view.frame = CGRectMake(0, backdropImageHeight+20, 320, 0);
+    
     //Lägger till alla subviews i vår vy
     [self.view addSubview:self.backdropImageView];
     [self.view addSubview:self.backdropWithBlurImageView];
     [self.scrollView addSubview:self.profilePictureImageView];
+    [self.scrollView addSubview:self.recentActivityView.view];
     [self.scrollView addSubview:nameLabel];
     [self.scrollView addSubview:noOfRatingsLabel];
     [self.scrollView addSubview:ratingsLabel];
@@ -235,9 +239,16 @@ static CGFloat backdropImageWidth  = 320.0;
 //SEGMENTED CONTROLL
 - (void)valueChanged:(UISegmentedControl *)segment {
     if(segment.selectedSegmentIndex == 0) {
-        //visar recent
+        recentActivityView.view.hidden = FALSE;
+        [[recentActivityView activityTable].tableView reloadData];
+        self.scrollView.contentSize = CGSizeMake(320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight+40);
+        recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight);
+        if(recentActivityView.scrollView.frame.size.height <= 220)//Hårdkodat utav bara helvete
+            recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, 0);
+
     }else if(segment.selectedSegmentIndex == 1){
-        
+        //visar highest
+        recentActivityView.view.hidden = TRUE;
     }
 }
 

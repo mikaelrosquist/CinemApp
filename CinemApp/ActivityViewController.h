@@ -29,8 +29,10 @@
 @property (retain, strong) NSMutableArray *yearArray;
 @property (retain, strong) NSMutableArray *ratingsArray;
 @property (retain, strong) NSMutableArray *likedArray;
+@property (nonatomic, retain) PFUser *user;
 
 - (id)initWithOneMovie:(NSString *)incomingID :(NSString *) incomingTitle :(NSData *)incomingPoster :(CGFloat)backDropImageHeight;
+- (id)initWithUser:(PFUser *)incomingUser;
 - (void)retrieveUserRatings;
 - (void) likePost: (NSString *)rateID;
 

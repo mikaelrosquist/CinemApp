@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MovieView.h"
 #import "SettingsRootViewController.h"
+#import "ActivityViewController.h"
 #import "Parse/Parse.h"
 #import "FollowModel.h"
 
@@ -22,8 +23,11 @@
 @property (nonatomic, retain) UIImageView *backdropImageView;
 @property (nonatomic, retain) UIImageView *backdropWithBlurImageView;
 @property (nonatomic, retain) UIImageView *profilePictureImageView;
+@property (nonatomic, retain) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) SettingsRootViewController *settingsView;
 @property (nonatomic, retain) FollowModel *followModel;
+@property (nonatomic, retain) ActivityViewController *recentActivityView;
+@property (nonatomic, retain) ActivityViewController *highestActivityView;
 
 - (void)followMethod:(id)sender;
 
