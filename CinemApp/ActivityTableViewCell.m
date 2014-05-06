@@ -31,24 +31,12 @@
         //Buttons
         commentButton = [[UIButton alloc]init];
         likeButton = [[UIButton alloc]init];
-        [likeButton addTarget:self action:@selector(likePost) forControlEvents:UIControlEventTouchUpInside];
-        [likeButton addTarget:self action:@selector(setBgColorForButton:) forControlEvents:UIControlEventTouchDown];
-        [likeButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchDragExit];
-        [likeButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
         
 
         //[[likeButton layer] setBorderColor:[UIColor grayColor].CGColor];
         likeButton.backgroundColor = [UIColor lightGrayColor];
         
-        /*
-            if([likedArray objectAtIndex:indexPath.row] == [NSNumber numberWithBool:YES]){
-                [activityTableCell.likeButton setTitle:@"Liked" forState:UIControlStateNormal];
-                activityTableCell.likeButton.backgroundColor = [UIColor greenColor];
-            }else{
-                [activityTableCell.likeButton setTitle:@"Like" forState:UIControlStateNormal];
-                activityTableCell.likeButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
-            }
-        */
         [commentButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0]];
         [commentButton addTarget:self action:@selector(setBgColorForButton:) forControlEvents:UIControlEventTouchDown];
         [commentButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchDragExit];
@@ -98,23 +86,6 @@
     }
     return self;
 }
-/*
-- (void)updateButton{
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"Like"];
-    [query whereKey:@"userId" equalTo:[PFUser currentUser].objectId];
-    [query whereKey:@"ratingId" equalTo:rateID];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (objects.count > 0){
-            [likeButton setTitle:@"Liked" forState:UIControlStateNormal];
-            likeButton.backgroundColor = [UIColor greenColor];
-        }else{
-            [likeButton setTitle:@"Like" forState:UIControlStateNormal];
-            likeButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
-        }
-    }];
-}*/
 
 - (void) likePost{
     
@@ -153,10 +124,18 @@
 -(void)buttonPressed:(UIButton*)sender
 {
     [sender setAlpha:1.0];
-    [sender setTitle:@"Liked" forState:UIControlStateNormal];
-    [sender setImage: [UIImage imageNamed:@"likeBtn-1"] forState:UIControlStateNormal];
-    [sender setBackgroundColor:[UIColor colorWithRed:0.769 green:0.769 blue:0.769 alpha:1]];
-    [likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -30.0, 0.0, 0.0)];
+    if([[sender currentTitle]  isEqual: @"Like"]){
+        [sender setTitle:@"Liked" forState:UIControlStateNormal];
+        [sender setImage: [UIImage imageNamed:@"likeBtn-1"] forState:UIControlStateNormal];
+        [sender setBackgroundColor:[UIColor colorWithRed:0.769 green:0.769 blue:0.769 alpha:1]];
+        [sender setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -30.0, 0.0, 0.0)];
+    }else if([[sender currentTitle]  isEqual: @"Liked"]){
+        [sender setTitle:@"Like" forState:UIControlStateNormal];
+        [sender setImage: [UIImage imageNamed:@"likeBtn-0"] forState:UIControlStateNormal];
+        [sender setBackgroundColor:[UIColor colorWithRed:0.867 green:0.867 blue:0.867 alpha:1]];
+        [sender setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -13.0, 0.0, 0.0)];
+    }
+    [self likePost];
 }
 
 @end

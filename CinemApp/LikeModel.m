@@ -54,10 +54,10 @@
     [push sendPushInBackground];
 }
 
-- (void) delLike: (PFUser *)user :(NSString *) movieID{
+- (void) delLike: (PFUser *)user :(NSString *) ratingID{
     PFQuery *query = [PFQuery queryWithClassName:@"Like"];
     [query whereKey:@"userId" equalTo:user.objectId];
-    [query whereKey:@"movieId" equalTo:movieID];
+    [query whereKey:@"ratingId" equalTo:ratingID];
     [[query getFirstObject] deleteInBackground];
     
     NSLog(@"Like är borttagen");

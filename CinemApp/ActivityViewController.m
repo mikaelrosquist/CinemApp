@@ -253,7 +253,7 @@ NSMutableDictionary* sendingObject;
         }
         
         
-        
+            
         
         activityTableCell.cellID = [NSString stringWithFormat:@"%i", indexPath.row];
         
@@ -479,23 +479,19 @@ NSMutableDictionary* sendingObject;
     NSString *cellID = [userInfo objectForKey:@"cellID"];
     int cellIDValue = [cellID intValue];
     NSLog(@"LIKED ARRAY: %@", likedArray);
-    NSLog(@"Cell-ID: %i", cellIDValue);
-    NSLog(@"HALLÅÅÅÅÅ");
     
-    [likedArray replaceObjectAtIndex:cellIDValue withObject:[NSNumber numberWithBool:1]];
+    if([likedArray objectAtIndex:cellIDValue] == [NSNumber numberWithBool:0]){
+        [likedArray replaceObjectAtIndex:cellIDValue withObject:[NSNumber numberWithBool:1]];
+        [likeModel addLike:[PFUser currentUser] :[NSString stringWithFormat:@"%@", ratingID]:[userInfo objectForKey:@"toUser"]];
+    }else{
+        [likedArray replaceObjectAtIndex:cellIDValue withObject:[NSNumber numberWithBool:0]];
+        [likeModel delLike:[PFUser currentUser] :[NSString stringWithFormat:@"%@", ratingID]];
+    }
+    
+    
     NSLog(@"ÄNDRAD LIKED ARRAY: %@", likedArray);
-    [likeModel addLike:[PFUser currentUser] :[NSString stringWithFormat:@"%@", ratingID]:[userInfo objectForKey:@"toUser"]];
+    NSLog(@"Cell-ID: %i", cellIDValue);
+    
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
