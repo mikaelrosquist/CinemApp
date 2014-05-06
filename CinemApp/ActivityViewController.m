@@ -219,10 +219,16 @@ BOOL movieInfoFetched = NO;
         activityTableCell.rateID = rateID;
         activityTableCell.toUserID = [[ratingsArray objectAtIndex:indexPath.row] valueForKey:@"userId"];;
         
+        
         if(likedArray.count > 0 && [likedArray objectAtIndex:indexPath.row] == [NSNumber numberWithBool:1]){
-            activityTableCell.likeButton.backgroundColor = [UIColor greenColor];
+            [activityTableCell.likeButton setTitle:@"Liked" forState:UIControlStateNormal];
+            [activityTableCell.likeButton setImage: [UIImage imageNamed:@"likeBtn-1"] forState:UIControlStateNormal];
+            [activityTableCell.likeButton setBackgroundColor:[UIColor colorWithRed:0.769 green:0.769 blue:0.769 alpha:1]];
+            [activityTableCell.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -30.0, 0.0, 0.0)];
+
         }else{
-            activityTableCell.likeButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
+            
+
         }
         
         
@@ -282,8 +288,8 @@ BOOL movieInfoFetched = NO;
             
             //Buttons anpassas efter stjärna och betyg
 
-            activityTableCell.likeButton.frame = CGRectMake(activityTableCell.ratingLabel.frame.origin.x+70, activityTableCell.ratingLabel.frame.origin.y+5, 25, 25);
-            activityTableCell.commentButton.frame = CGRectMake(activityTableCell.likeButton.frame.origin.x+activityTableCell.likeButton.frame.size.width+30, activityTableCell.ratingLabel.frame.origin.y+5, 25, 25);
+            activityTableCell.likeButton.frame = CGRectMake(activityTableCell.ratingLabel.frame.origin.x+45, activityTableCell.ratingLabel.frame.origin.y+5, 65, 25);
+            activityTableCell.commentButton.frame = CGRectMake(activityTableCell.likeButton.frame.origin.x+activityTableCell.likeButton.frame.size.width+10, activityTableCell.ratingLabel.frame.origin.y+5, 90, 25);
             
             //Vet inte om detta bidrar till bättre performance..
             //activityTableCell.layer.shouldRasterize = YES;
@@ -454,7 +460,6 @@ BOOL movieInfoFetched = NO;
     NSDictionary* userInfo = notification.userInfo;
     NSString *ratingID = [userInfo objectForKey:@"rating"];
     [likeModel addLike:[PFUser currentUser] :[NSString stringWithFormat:@"%@", ratingID]:[userInfo objectForKey:@"toUser"]];
-    //[self getLikes];
 }
 
 /*

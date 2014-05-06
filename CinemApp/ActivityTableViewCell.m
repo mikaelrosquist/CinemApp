@@ -48,13 +48,28 @@
                 activityTableCell.likeButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
             }
         */
+        [commentButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0]];
+        [commentButton addTarget:self action:@selector(setBgColorForButton:) forControlEvents:UIControlEventTouchDown];
+        [commentButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchDragExit];
+        [commentButton setTitleColor:[UIColor colorWithRed:0.482 green:0.482 blue:0.482 alpha:1] forState:UIControlStateNormal];
+        [[commentButton layer] setCornerRadius:3.0f];
+        commentButton.backgroundColor = [UIColor colorWithRed:0.867 green:0.867 blue:0.867 alpha:1];
         [commentButton setTitle:@"Comment" forState:UIControlStateNormal];
-        commentButton.backgroundColor = [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1];
+        [commentButton setImage: [UIImage imageNamed:@"commentBtn"] forState:UIControlStateNormal];
+        [commentButton setImageEdgeInsets:UIEdgeInsetsMake(3.0, 3.0, 3.0, 69.0)];
+        [commentButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -10.0, 0.0, 0.0)];
         
 
-        [commentButton setBackgroundImage:[UIImage imageNamed:@"speech_bubble-50"] forState:UIControlStateNormal];
-        
-        [likeButton setBackgroundImage:[UIImage imageNamed:@"like-50"] forState:UIControlStateNormal];
+        [likeButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0]];
+        [likeButton addTarget:self action:@selector(setBgColorForButton:) forControlEvents:UIControlEventTouchDown];
+        [likeButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchDragExit];
+        [likeButton setTitleColor:[UIColor colorWithRed:0.482 green:0.482 blue:0.482 alpha:1] forState:UIControlStateNormal];
+        [[likeButton layer] setCornerRadius:3.0f];
+        likeButton.backgroundColor = [UIColor colorWithRed:0.867 green:0.867 blue:0.867 alpha:1];
+        [likeButton setTitle:@"Like" forState:UIControlStateNormal];
+        [likeButton setImage: [UIImage imageNamed:@"likeBtn-0"] forState:UIControlStateNormal];
+        [likeButton setImageEdgeInsets:UIEdgeInsetsMake(3.0, 3.0, 3.0, 44.0)];
+        [likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -13.0, 0.0, 0.0)];
         
         rateStar.image = [UIImage imageNamed:@"star-75"];
         
@@ -135,7 +150,10 @@
 -(void)buttonPressed:(UIButton*)sender
 {
     [sender setAlpha:1.0];
-    [sender setBackgroundColor:[UIColor greenColor]];
+    [sender setTitle:@"Liked" forState:UIControlStateNormal];
+    [sender setImage: [UIImage imageNamed:@"likeBtn-1"] forState:UIControlStateNormal];
+    [sender setBackgroundColor:[UIColor colorWithRed:0.769 green:0.769 blue:0.769 alpha:1]];
+    [likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -30.0, 0.0, 0.0)];
 }
 
 @end
