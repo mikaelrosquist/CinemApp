@@ -286,14 +286,14 @@ NSMutableDictionary* sendingObject;
             
             //Stjärnan anpassas efter poster och kommentar
             if(activityTableCell.commentLabel.frame.origin.y+activityTableCell.commentLabel.frame.size.height < activityTableCell.posterView.frame.origin.y+activityTableCell.posterView.frame.size.height)
-                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+10, activityTableCell.posterView.frame.origin.y+activityTableCell.posterView.frame.size.height+10, 37.5, 37.5);
+                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+10, activityTableCell.posterView.frame.origin.y+activityTableCell.posterView.frame.size.height+15, 30, 30);
             else
-                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+10, activityTableCell.commentLabel.frame.origin.y+activityTableCell.commentLabel.frame.size.height+10, 37.5, 37.5);
+                activityTableCell.rateStar.frame = CGRectMake(activityTableCell.posterView.frame.origin.x+10, activityTableCell.commentLabel.frame.origin.y+activityTableCell.commentLabel.frame.size.height+15, 30, 30);
             
             //Betyget anpassas efter stjärnan
             rateString = [NSString stringWithFormat:@"%@", rating];
             activityTableCell.ratingLabel.text = [NSString stringWithFormat:@"%@", rateString]; //lägg till stringen "ten" för att få "[betyg]/10".
-            activityTableCell.ratingLabel.frame = CGRectMake(activityTableCell.rateStar.frame.origin.x+activityTableCell.rateStar.frame.size.width+5, activityTableCell.rateStar.frame.origin.y+5, 0, 0);
+            activityTableCell.ratingLabel.frame = CGRectMake(activityTableCell.rateStar.frame.origin.x+activityTableCell.rateStar.frame.size.width+5, activityTableCell.rateStar.frame.origin.y, 0, 0);
             [activityTableCell.ratingLabel sizeToFit];
             /*
              NSMutableAttributedString *rateOfTen = [[NSMutableAttributedString alloc] initWithAttributedString: activityTableCell.ratingLabel.attributedText];

@@ -462,6 +462,12 @@ UITapGestureRecognizer *tap;
     [rateView.commentField becomeFirstResponder];
 }
 
+- (void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+}
+
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     if ([rateView.commentField.text isEqualToString:@""]) {
