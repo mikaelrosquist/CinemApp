@@ -18,7 +18,7 @@
 
 @implementation ActivityViewController
 
-@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray, likedArray, likeModel, user, oneMovie, userSet, movieInfoFetched;
+@synthesize scrollView, activityTable, activityTableCell, movieTitle, posterArray, titleArray, yearArray, ratingsArray, likedArray, followsArray, likeModel, user, oneMovie, userSet, movieInfoFetched;
 
 
 NSDate *timeStamp;
@@ -337,8 +337,9 @@ NSMutableDictionary* sendingObject;
 }
 
 - (void)retrieveUserRatings{
-    //    ratingsArray = [[NSArray alloc]init];
-    //    ratingsArray = nil;
+    
+    //PFQuery *followsQuery = [PFQuery queryWithClassName:@"Follow"];
+    
     PFQuery *movieQuery = [PFQuery queryWithClassName:@"Rating"];
     movieQuery.limit = 10;
     likedArray = nil;
@@ -352,12 +353,14 @@ NSMutableDictionary* sendingObject;
         [movieQuery whereKey:@"userId" equalTo:[NSString stringWithFormat:@"%@", user.objectId]];
         NSLog(@"userQuery");
     }
+    
+    
     [movieQuery orderByDescending:@"createdAt"];
     NSLog(@"Förbererder hämta film-info");
-    [movieQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
+    [movieQuery findObjectsInBackgroundWithBlock:^(NSArray *array2, NSError *error2) {
+        if (!error2) {
             
-            ratingsArray = (NSMutableArray *)objects;
+            ratingsArray = (NSMutableArray *)array2;
             tableHeight = [ratingsArray count];
             
             //NSLog(@"HÄMTAT: %@", ratingsArray);
@@ -367,6 +370,7 @@ NSMutableDictionary* sendingObject;
             [self retrieveMovieInfo];
         }
     }];
+
 }
 
 -(void)getLikes{

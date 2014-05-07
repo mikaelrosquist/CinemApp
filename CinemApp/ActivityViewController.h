@@ -26,6 +26,7 @@
 @property BOOL oneMovie;
 @property BOOL userSet;
 @property BOOL movieInfoFetched;
+@property BOOL likesFetched;
 
 
 @property (retain, strong) NSMutableArray *posterArray;
@@ -33,6 +34,7 @@
 @property (retain, strong) NSMutableArray *yearArray;
 @property (retain, strong) NSMutableArray *ratingsArray;
 @property (retain, strong) NSMutableArray *likedArray;
+@property (retain, strong) NSMutableArray *followsArray;
 @property (nonatomic, retain) PFUser *user;
 
 - (id)initWithOneMovie:(NSString *)incomingID :(NSString *) incomingTitle :(NSData *)incomingPoster :(CGFloat)backDropImageHeight;

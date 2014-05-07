@@ -63,8 +63,8 @@
     [signUpButton.titleLabel setFont: [UIFont fontWithName: @"HelveticaNeue-Medium" size: 14.0]];
     [logInButton.titleLabel setFont: [UIFont fontWithName: @"HelveticaNeue-Medium" size: 14.0]];
     
-    [signUpButton setTitle:@"Register with Email" forState:UIControlStateNormal];
-    [logInButton setTitle:@"Sign In" forState:UIControlStateNormal];
+    [signUpButton setTitle:@"Sign Up" forState:UIControlStateNormal];
+    [logInButton setTitle:@"Log In" forState:UIControlStateNormal];
 
     [signUpButton setBackgroundColor:[UIColor colorWithRed:1.000 green:1.000 blue:1.000 alpha:0.3]];
     [logInButton setBackgroundColor:[UIColor colorWithRed:0.000 green:1.000 blue:0.494 alpha:0.5]];

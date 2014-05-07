@@ -30,6 +30,7 @@
 @property (nonatomic, retain) ActivityViewController *highestActivityView;
 
 - (void)followMethod:(id)sender;
+- (void)updateScrollView;
 
 
 @end

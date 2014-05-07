@@ -23,7 +23,7 @@ static CGFloat backdropImageWidth  = 320.0;
 @implementation ProfileViewController{
     UILabel *nameLabel, *noOfRatingsLabel, *ratingsLabel, *noOfFollowersLabel, *followersLabel, *noOfFollowingLabel, *followingLabel;
     UIButton *settingsButton, *followButton;
-    BOOL ownUser, following;
+    BOOL ownUser, following, scrollViewUpdated;
     PFUser *thisUser;
 }
 
@@ -31,6 +31,7 @@ static CGFloat backdropImageWidth  = 320.0;
 
 -(id)initWithUser:(PFUser *)user
 {
+    scrollViewUpdated = NO;
     UIImage *profileBackgroundImage;
     thisUser = user;
     self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
@@ -66,13 +67,12 @@ static CGFloat backdropImageWidth  = 320.0;
         [[followButton layer] setCornerRadius:5.0f];
         [followButton setTitle:@"Loading..." forState:UIControlStateNormal];
         
-        
         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
         dispatch_async(queue, ^{ // to get all data from server and parsing
             followModel = [[FollowModel alloc]init];
             following = [followModel isFollowing:[PFUser currentUser] :user];
 
-            dispatch_sync(dispatch_get_main_queue(), ^{ // share data to other view controllers in main thread
+            dispatch_sync(dispatch_get_main_queue(), ^{// share data to other view controllers in main thread
                 if(following){
                     [followButton setTitle:@"✓ Following" forState:UIControlStateNormal];
                     [followButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -237,6 +237,8 @@ static CGFloat backdropImageWidth  = 320.0;
     self.profilePictureImageView.alpha = blurAlpha;
     nameLabel.alpha = blurAlpha;
     
+    if(self.scrollView.contentSize.height < recentActivityView.activityTable.tableView.contentSize.height && recentActivityView.view.hidden == FALSE)
+        [self updateScrollView];
     //Log för debug
     //NSLog(@"YOFFSET: %f", yOffset);
     //NSLog(@"BLUR ALPHA: %f", blurAlpha);
@@ -258,10 +260,7 @@ static CGFloat backdropImageWidth  = 320.0;
         NSLog(@"RecentActivity scrollView content: %f", recentActivityView.scrollView.contentSize.height);
         NSLog(@"RecentActivity scrollView frame: %f", recentActivityView.scrollView.frame.size.height);
         
-        
         self.scrollView.contentSize = CGSizeMake(320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight+80);
-        
-        
         
         recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight-50);
         //recentActivityView.scrollView.contentSize = recentActivityView.activityTable.tableView.contentSize;
@@ -282,8 +281,18 @@ static CGFloat backdropImageWidth  = 320.0;
 
     }else if(segment.selectedSegmentIndex == 1){
         //visar highest
+        scrollViewUpdated = NO;
+        self.scrollView.contentSize = CGSizeMake(320, 568);
         recentActivityView.view.hidden = TRUE;
     }
+}
+
+- (void)updateScrollView{
+    NSLog(@"updateScrollView");
+    NSLog(recentActivityView.movieInfoFetched ? @"Yes" : @"No");
+    [[recentActivityView activityTable].tableView reloadData];
+    self.scrollView.contentSize = CGSizeMake(320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight+80);
+    recentActivityView.scrollView.frame = CGRectMake(0, 0, 320, recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight-50);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -315,7 +324,7 @@ static CGFloat backdropImageWidth  = 320.0;
         [recentActivityView retrieveUserRatings];
     
     [[recentActivityView activityTable].tableView reloadData];
-
+    
     
 }
 
