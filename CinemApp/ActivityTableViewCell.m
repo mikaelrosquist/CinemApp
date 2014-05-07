@@ -38,8 +38,6 @@
         likeButton.backgroundColor = [UIColor lightGrayColor];
         
         [commentButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0]];
-        [commentButton addTarget:self action:@selector(setBgColorForButton:) forControlEvents:UIControlEventTouchDown];
-        [commentButton addTarget:self action:@selector(clearBgColorForButton:) forControlEvents:UIControlEventTouchDragExit];
         [commentButton setTitleColor:[UIColor colorWithRed:0.482 green:0.482 blue:0.482 alpha:1] forState:UIControlStateNormal];
         [[commentButton layer] setCornerRadius:3.0f];
         commentButton.backgroundColor = [UIColor colorWithRed:0.867 green:0.867 blue:0.867 alpha:1];
@@ -47,6 +45,7 @@
         [commentButton setImage: [UIImage imageNamed:@"commentBtn"] forState:UIControlStateNormal];
         [commentButton setImageEdgeInsets:UIEdgeInsetsMake(3.0, 3.0, 3.0, 69.0)];
         [commentButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -10.0, 0.0, 0.0)];
+        [commentButton setAlpha:0.3];
         
 
         [likeButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0]];
