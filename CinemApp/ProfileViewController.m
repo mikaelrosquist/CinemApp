@@ -237,7 +237,7 @@ static CGFloat backdropImageWidth  = 320.0;
     self.profilePictureImageView.alpha = blurAlpha;
     nameLabel.alpha = blurAlpha;
     
-    if(self.scrollView.contentSize.height < recentActivityView.activityTable.tableView.contentSize.height && recentActivityView.view.hidden == FALSE)
+    if(self.scrollView.contentSize.height < recentActivityView.activityTable.tableView.contentSize.height+backdropImageHeight+80 && recentActivityView.view.hidden == FALSE)
         [self updateScrollView];
     //Log för debug
     //NSLog(@"YOFFSET: %f", yOffset);
