@@ -444,34 +444,34 @@ NSMutableDictionary* sendingObject;
     months = [comps month];
     if(months > 0){
         if (months == 1)
-            return [NSString stringWithFormat:@"%ld %@", (long)months, @" month ago"];
+            return [NSString stringWithFormat:@"%ld %@", (long)months, @"month ago"];
         else
-            return [NSString stringWithFormat:@"%ld %@", (long)months, @" months ago"];
+            return [NSString stringWithFormat:@"%ld %@", (long)months, @"months ago"];
     }
     days = [comps day];
     if(days > 0){
         if (days == 1)
-            return [NSString stringWithFormat:@"%ld %@", (long)days, @" day ago"];
+            return [NSString stringWithFormat:@"%ld %@", (long)days, @"day ago"];
         else
-            return [NSString stringWithFormat:@"%ld %@", (long)days, @" days ago"];
+            return [NSString stringWithFormat:@"%ld %@", (long)days, @"days ago"];
     }
     hours = [comps hour];
     if(hours > 0){
         if (hours == 1)
-            return [NSString stringWithFormat:@"%ld %@", (long)hours, @" hour ago"];
+            return [NSString stringWithFormat:@"%ld %@", (long)hours, @"hour ago"];
         else
-            return [NSString stringWithFormat:@"%ld %@", (long)hours, @" hours ago"];
+            return [NSString stringWithFormat:@"%ld %@", (long)hours, @"hours ago"];
     }
     minutes = [comps minute];
     if(minutes > 0){
         if (minutes == 1)
-            return [NSString stringWithFormat:@"%ld %@", (long)minutes, @" minute ago"];
+            return [NSString stringWithFormat:@"%ld %@", (long)minutes, @"minute ago"];
         else
-            return [NSString stringWithFormat:@"%ld %@", (long)minutes, @" minutes ago"];
+            return [NSString stringWithFormat:@"%ld %@", (long)minutes, @"minutes ago"];
     }
     seconds = [comps second];
     if(seconds > 0)
-        return [NSString stringWithFormat:@"%ld %@", (long)seconds, @" seconds ago"];
+        return [NSString stringWithFormat:@"%ld %@", (long)seconds, @"seconds ago"];
     
     return @"0";
 }
