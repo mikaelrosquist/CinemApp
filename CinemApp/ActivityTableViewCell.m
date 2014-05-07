@@ -45,7 +45,7 @@
         [commentButton setImage: [UIImage imageNamed:@"commentBtn"] forState:UIControlStateNormal];
         [commentButton setImageEdgeInsets:UIEdgeInsetsMake(3.0, 3.0, 3.0, 69.0)];
         [commentButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -10.0, 0.0, 0.0)];
-        [commentButton setAlpha:0.3];
+        [commentButton setAlpha:0.3]; 
         
 
         [likeButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0]];
