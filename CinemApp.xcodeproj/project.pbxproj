@@ -40,9 +40,9 @@
 		6F46492B18F4052800A85584 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492A18F4052800A85584 /* Security.framework */; };
 		6F46492F18F4053300A85584 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492E18F4053300A85584 /* SystemConfiguration.framework */; };
 		6F5AF01E190FA5F10000B23D /* GTScrollNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AF01D190FA5F10000B23D /* GTScrollNavigationBar.m */; };
+		6F6B77A3192E8CB8009CE7EF /* SecuritySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B77A2192E8CB8009CE7EF /* SecuritySettingsViewController.m */; };
 		6F6D3DDA18F81FFB00D53B66 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */; };
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
-		6F98FF951910EB19003BD3F3 /* SecuritySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F98FF941910EB19003BD3F3 /* SecuritySettingsViewController.m */; };
 		6F98FF981910F246003BD3F3 /* EmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F98FF971910F246003BD3F3 /* EmailViewController.m */; };
 		6F9F75A918B79D7B00B69308 /* NotLoggedInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9F75A818B79D7B00B69308 /* NotLoggedInViewController.m */; };
 		6FC0C82B18B6D59300F737EC /* SettingsRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */; };
@@ -123,12 +123,12 @@
 		6F46492E18F4053300A85584 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6F5AF01C190FA5F10000B23D /* GTScrollNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTScrollNavigationBar.h; sourceTree = "<group>"; };
 		6F5AF01D190FA5F10000B23D /* GTScrollNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTScrollNavigationBar.m; sourceTree = "<group>"; };
+		6F6B77A1192E8CB8009CE7EF /* SecuritySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecuritySettingsViewController.h; sourceTree = "<group>"; };
+		6F6B77A2192E8CB8009CE7EF /* SecuritySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecuritySettingsViewController.m; sourceTree = "<group>"; };
 		6F6D3DD818F81FFB00D53B66 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
 		6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
 		6F955AFF18B397A7004C4B70 /* MovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieView.h; sourceTree = "<group>"; };
 		6F955B0018B397A7004C4B70 /* MovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieView.m; sourceTree = "<group>"; };
-		6F98FF931910EB19003BD3F3 /* SecuritySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecuritySettingsViewController.h; path = ../SecuritySettingsViewController.h; sourceTree = "<group>"; };
-		6F98FF941910EB19003BD3F3 /* SecuritySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecuritySettingsViewController.m; path = ../SecuritySettingsViewController.m; sourceTree = "<group>"; };
 		6F98FF961910F246003BD3F3 /* EmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailViewController.h; sourceTree = "<group>"; };
 		6F98FF971910F246003BD3F3 /* EmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailViewController.m; sourceTree = "<group>"; };
 		6F9F75A718B79D7B00B69308 /* NotLoggedInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotLoggedInViewController.h; sourceTree = "<group>"; };
@@ -287,8 +287,8 @@
 				6FC0C82A18B6D59300F737EC /* SettingsRootViewController.m */,
 				6F0F9B4618F6B909002FFFF2 /* ProfileSettingsViewController.h */,
 				6F0F9B4718F6B909002FFFF2 /* ProfileSettingsViewController.m */,
-				6F98FF931910EB19003BD3F3 /* SecuritySettingsViewController.h */,
-				6F98FF941910EB19003BD3F3 /* SecuritySettingsViewController.m */,
+				6F6B77A1192E8CB8009CE7EF /* SecuritySettingsViewController.h */,
+				6F6B77A2192E8CB8009CE7EF /* SecuritySettingsViewController.m */,
 				6F0F9B4D18F6D1E0002FFFF2 /* PushNotificationsViewController.h */,
 				6F0F9B4E18F6D1E0002FFFF2 /* PushNotificationsViewController.m */,
 				6F98FF961910F246003BD3F3 /* EmailViewController.h */,
@@ -507,6 +507,7 @@
 				6F0CAA4418B3709200AE42F9 /* ImageEffects.m in Sources */,
 				6F98FF981910F246003BD3F3 /* EmailViewController.m in Sources */,
 				731C8693190FE95300E34C33 /* UserSearchViewController.m in Sources */,
+				6F6B77A3192E8CB8009CE7EF /* SecuritySettingsViewController.m in Sources */,
 				6F9F75A918B79D7B00B69308 /* NotLoggedInViewController.m in Sources */,
 				73C7E73118B37A1A00453123 /* RateView.m in Sources */,
 				6FDF6A9C19126AE800F0FAE4 /* FollowModel.m in Sources */,
@@ -526,7 +527,6 @@
 				6F5AF01E190FA5F10000B23D /* GTScrollNavigationBar.m in Sources */,
 				6F0CAA1A18B3705400AE42F9 /* AppDelegate.m in Sources */,
 				6FD5598F190E62DA00BB0424 /* SignUpWithEmailViewController.m in Sources */,
-				6F98FF951910EB19003BD3F3 /* SecuritySettingsViewController.m in Sources */,
 				6F0CAA1618B3705400AE42F9 /* main.m in Sources */,
 				6F0CAA4818B3709200AE42F9 /* NotificationViewController.m in Sources */,
 				6FEE84541917A52A00B2CC8C /* LikeModel.m in Sources */,
