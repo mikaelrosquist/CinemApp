@@ -14,7 +14,6 @@
 #import "ProfileViewController.h"
 #import "RateSearchViewController.h"
 #import "Parse/Parse.h"
-#import "GTScrollNavigationBar.h"
 
 @implementation AppDelegate
 

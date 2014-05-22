@@ -39,7 +39,6 @@
 		6F46492918F4052400A85584 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492818F4052400A85584 /* QuartzCore.framework */; };
 		6F46492B18F4052800A85584 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492A18F4052800A85584 /* Security.framework */; };
 		6F46492F18F4053300A85584 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46492E18F4053300A85584 /* SystemConfiguration.framework */; };
-		6F5AF01E190FA5F10000B23D /* GTScrollNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5AF01D190FA5F10000B23D /* GTScrollNavigationBar.m */; };
 		6F6B77A3192E8CB8009CE7EF /* SecuritySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6B77A2192E8CB8009CE7EF /* SecuritySettingsViewController.m */; };
 		6F6D3DDA18F81FFB00D53B66 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */; };
 		6F955B0118B397A7004C4B70 /* MovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F955B0018B397A7004C4B70 /* MovieView.m */; };
@@ -49,9 +48,6 @@
 		6FD5598F190E62DA00BB0424 /* SignUpWithEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD5598E190E62DA00BB0424 /* SignUpWithEmailViewController.m */; };
 		6FD55992190E62FD00BB0424 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD55991190E62FD00BB0424 /* LogInViewController.m */; };
 		6FDF6A9C19126AE800F0FAE4 /* FollowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF6A9B19126AE800F0FAE4 /* FollowModel.m */; };
-		6FDF6AA11913BA1900F0FAE4 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF6A9D1913B9ED00F0FAE4 /* Lato-Bold.ttf */; };
-		6FDF6AA21913BA1B00F0FAE4 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF6A9E1913B9ED00F0FAE4 /* Lato-Light.ttf */; };
-		6FDF6AA31913BA1D00F0FAE4 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF6A9F1913B9ED00F0FAE4 /* Lato-Regular.ttf */; };
 		6FEE84541917A52A00B2CC8C /* LikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEE84531917A52A00B2CC8C /* LikeModel.m */; };
 		7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7308FDE618B76D0000F93344 /* ActivityTableView.m */; };
 		730B80B4190FE41200FB9872 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 730B80B3190FE41200FB9872 /* ActivityViewController.m */; };
@@ -121,8 +117,6 @@
 		6F46492818F4052400A85584 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6F46492A18F4052800A85584 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6F46492E18F4053300A85584 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		6F5AF01C190FA5F10000B23D /* GTScrollNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTScrollNavigationBar.h; sourceTree = "<group>"; };
-		6F5AF01D190FA5F10000B23D /* GTScrollNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTScrollNavigationBar.m; sourceTree = "<group>"; };
 		6F6B77A1192E8CB8009CE7EF /* SecuritySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecuritySettingsViewController.h; sourceTree = "<group>"; };
 		6F6B77A2192E8CB8009CE7EF /* SecuritySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecuritySettingsViewController.m; sourceTree = "<group>"; };
 		6F6D3DD818F81FFB00D53B66 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
@@ -141,9 +135,6 @@
 		6FD55991190E62FD00BB0424 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		6FDF6A9A19126AE800F0FAE4 /* FollowModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowModel.h; sourceTree = "<group>"; };
 		6FDF6A9B19126AE800F0FAE4 /* FollowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowModel.m; sourceTree = "<group>"; };
-		6FDF6A9D1913B9ED00F0FAE4 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
-		6FDF6A9E1913B9ED00F0FAE4 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
-		6FDF6A9F1913B9ED00F0FAE4 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		6FEE84521917A52A00B2CC8C /* LikeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeModel.h; sourceTree = "<group>"; };
 		6FEE84531917A52A00B2CC8C /* LikeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeModel.m; sourceTree = "<group>"; };
 		7308FDE518B76D0000F93344 /* ActivityTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableView.h; sourceTree = "<group>"; };
@@ -313,9 +304,6 @@
 		6F68D7BA18BCC38000457BA4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6FDF6AA01913B9F100F0FAE4 /* Fonts */,
-				6F5AF01C190FA5F10000B23D /* GTScrollNavigationBar.h */,
-				6F5AF01D190FA5F10000B23D /* GTScrollNavigationBar.m */,
 				6F6D3DD818F81FFB00D53B66 /* DejalActivityView.h */,
 				6F6D3DD918F81FFB00D53B66 /* DejalActivityView.m */,
 				6F0CAA3818B3709200AE42F9 /* ImageEffects.h */,
@@ -337,16 +325,6 @@
 				6FD5598E190E62DA00BB0424 /* SignUpWithEmailViewController.m */,
 			);
 			name = LogInViewControllers;
-			sourceTree = "<group>";
-		};
-		6FDF6AA01913B9F100F0FAE4 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				6FDF6A9D1913B9ED00F0FAE4 /* Lato-Bold.ttf */,
-				6FDF6A9E1913B9ED00F0FAE4 /* Lato-Light.ttf */,
-				6FDF6A9F1913B9ED00F0FAE4 /* Lato-Regular.ttf */,
-			);
-			name = Fonts;
 			sourceTree = "<group>";
 		};
 		73C7E73218B37A4F00453123 /* Views */ = {
@@ -479,9 +457,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F0CAA1418B3705400AE42F9 /* InfoPlist.strings in Resources */,
-				6FDF6AA21913BA1B00F0FAE4 /* Lato-Light.ttf in Resources */,
-				6FDF6AA31913BA1D00F0FAE4 /* Lato-Regular.ttf in Resources */,
-				6FDF6AA11913BA1900F0FAE4 /* Lato-Bold.ttf in Resources */,
 				6F0CAA1C18B3705400AE42F9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,7 +499,6 @@
 				73C8444418F401060022AF1E /* MovieTableViewController.m in Sources */,
 				7308FDE718B76D0000F93344 /* ActivityTableView.m in Sources */,
 				6F955B0118B397A7004C4B70 /* MovieView.m in Sources */,
-				6F5AF01E190FA5F10000B23D /* GTScrollNavigationBar.m in Sources */,
 				6F0CAA1A18B3705400AE42F9 /* AppDelegate.m in Sources */,
 				6FD5598F190E62DA00BB0424 /* SignUpWithEmailViewController.m in Sources */,
 				6F0CAA1618B3705400AE42F9 /* main.m in Sources */,
