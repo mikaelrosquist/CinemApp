@@ -1,7 +1,7 @@
 CinemApp
 ========
 
-For my bachelor's exam me and a friend developed and wrote a thesis about a social network on the iPhone for cineasts. Users could register new accounts, search for other users and movies, read about the movies and also rate them. The app was developed from scratch in Objective-C and Xcode. We used API from TMDb for movie information and Parse as a database to store user information and their activity.
+CinemApp is a social network for cineasts, where users can register new accounts, search for other users and movies, read about the movies and also rate them. The app is developed from scratch by me and a friend as part of our bachelor thesis. It's written in Objcetive-C using Xcode. We use TMDb's API and database for movie info and Parse as a database to store user data and activity.
 
 Screenshots
 ========
