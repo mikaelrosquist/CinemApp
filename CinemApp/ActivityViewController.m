@@ -49,7 +49,7 @@ NSMutableDictionary* sendingObject;
     if (self) {
         oneMovie = NO;
         userSet = NO;
-         NSLog(@"Init feed");
+        NSLog(@"Init feed");
         [self commonInit];
         
         
@@ -252,10 +252,7 @@ NSMutableDictionary* sendingObject;
             // do something to keep the program still running properly
         }
         
-        
-            
-        
-        activityTableCell.cellID = [NSString stringWithFormat:@"%i", indexPath.row];
+        activityTableCell.cellID = [NSString stringWithFormat:@"%li", (long)indexPath.row];
         
         //NSLog(@"%@", activityTableCell.cellID);
         //if(!oneMovie)

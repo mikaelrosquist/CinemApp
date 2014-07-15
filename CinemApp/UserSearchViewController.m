@@ -11,7 +11,6 @@
 #import "Parse/Parse.h"
 #import "ProfileViewController.h"
 
-
 @interface UserSearchViewController ()
 
 @end
@@ -34,7 +33,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     
 	[self.tableView setDelegate:self];
 	[self.tableView setDataSource:self];
@@ -92,6 +90,7 @@
         [self.tableView setHidden:NO];
     }
 }
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     
 }

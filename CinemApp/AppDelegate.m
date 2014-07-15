@@ -32,7 +32,6 @@
     
     if ([PFUser currentUser] && notificationPayload != nil){
         
-        
         // Create a pointer to the Photo object
         NSString *userId = [notificationPayload objectForKey:@"userId"];
         PFQuery *query = [PFUser query];
@@ -46,8 +45,6 @@
         
     }
 
-    
-
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.94 alpha:1];
     [self.window makeKeyAndVisible];
@@ -55,8 +52,6 @@
     //[[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]}];
     [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.855 green:0.243 blue:0.251 alpha:1]];
 
-
-    
     [self setupTabBarController];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
